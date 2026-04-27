@@ -1,6 +1,6 @@
 # Vendra Product
 
-Tenant-aware product management for Laravel + Filament.
+Tenant-aware product management for Vendra applications.
 
 ## Features
 
@@ -12,8 +12,11 @@ Tenant-aware product management for Laravel + Filament.
 ## Requirements
 
 - PHP 8.2+
-- Laravel 11 or 12
-- Filament 4
+- Laravel 12
+- Filament 5
+- Livewire 4
+- Pest 4
+- Tailwind CSS 4
 - `misaf/vendra-tenant`
 - `misaf/vendra-user`
 - `misaf/vendra-currency`
