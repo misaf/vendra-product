@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\VendraProduct;
+namespace Misaf\VendraProduct\Providers;
 
 use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
+use Misaf\VendraProduct\ProductPlugin;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
