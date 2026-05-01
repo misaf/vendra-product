@@ -59,7 +59,8 @@ final class ProductCategoryForm
                     ->columnSpanFull()
                     ->image()
                     ->label(__('vendra-product::attributes.image'))
-                    ->panelLayout('grid'),
+                    ->panelLayout('grid')
+                    ->responsiveImages(),
 
                 Toggle::make('status')
                     ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.status"))
