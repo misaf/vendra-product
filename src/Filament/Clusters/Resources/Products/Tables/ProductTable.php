@@ -36,6 +36,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Concerns\HasDefaultAvatarIma
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 
@@ -240,6 +241,8 @@ final class ProductTable
                     OutOfStockAction::make(),
 
                     SetPriceAction::make(),
+
+                    SetPriceByPercentageAction::make(),
 
                     DeleteBulkAction::make(),
                 ]),
