@@ -36,7 +36,7 @@
 		"misaf/vendra-user": "dev-master",
 		"mokhosh/filament-jalali": "5.1",
 		"spatie/eloquent-sortable": "^5.0",
-		"spatie/laravel-package-tools": "^1.92",
+		"spatie/laravel-package-tools": "^1.0",
 		"spatie/laravel-sluggable": "^3.0",
 		"staudenmeir/laravel-adjacency-list": "^1.0"
 	},
