@@ -32,7 +32,7 @@
 		"lara-zeus/spatie-translatable": "^2.0",
 		"misaf/vendra-activity-log": "dev-master",
 		"misaf/vendra-currency": "dev-master",
-		"misaf/vendra-tenant": "^12.0",
+		"misaf/vendra-tenant": "dev-master",
 		"misaf/vendra-user": "dev-master",
 		"mokhosh/filament-jalali": "5.1",
 		"spatie/eloquent-sortable": "^5.0",
