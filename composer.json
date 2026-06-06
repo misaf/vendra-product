@@ -1,91 +1,93 @@
 {
-	"name": "misaf/vendra-product",
-	"description": "The product module for the Vendra framework.",
-	"license": "MIT",
-	"type": "vendra-module",
-	"keywords": [
-		"laravel",
-		"filamentphp",
-		"misaf",
-		"vendra",
-		"product"
-	],
-	"authors": [
-		{
-			"name": "Ehsan Mahmoodi",
-			"email": "misaf.1990@gmail.com",
-			"role": "Developer"
-		}
-	],
-	"homepage": "https://github.com/misaf/vendra-product",
-	"support": {
-		"issues": "https://github.com/misaf/vendra-product/issues",
-		"source": "https://github.com/misaf/vendra-product"
-	},
-	"require": {
-		"php": "^8.2",
-		"awcodes/filament-badgeable-column": "^4.0",
-		"cknow/laravel-money": "^8.0",
-		"filament/filament": "^5.0",
-		"filament/spatie-laravel-media-library-plugin": "^5.0",
-		"illuminate/support": "^12.0 || ^13.0",
-		"lara-zeus/spatie-translatable": "^2.0",
-		"misaf/vendra-activity-log": "dev-master",
-		"misaf/vendra-currency": "dev-master",
-		"misaf/vendra-tenant": "dev-master",
-		"misaf/vendra-user": "dev-master",
-		"mokhosh/filament-jalali": "5.0",
-		"spatie/eloquent-sortable": "^5.0",
-		"spatie/laravel-package-tools": "^1.0",
-		"spatie/laravel-sluggable": "^4.0",
-		"staudenmeir/laravel-adjacency-list": "^1.0"
-	},
-	"require-dev": {
-		"fakerphp/faker": "^1.0",
-		"larastan/larastan": "^3.0",
-		"laravel/boost": "^2.0",
-		"laravel/pint": "^1.0",
-		"misaf/vendra-testing": "dev-master",
-		"mockery/mockery": "^1.0",
-		"nunomaduro/collision": "^8.0",
-		"orchestra/testbench": "^10.0",
-		"pestphp/pest": "^4.0",
-		"pestphp/pest-plugin-arch": "^4.0",
-		"pestphp/pest-plugin-laravel": "^4.0",
-		"pestphp/pest-plugin-profanity": "^4.0",
-		"pestphp/pest-plugin-type-coverage": "^4.0"
-	},
-	"minimum-stability": "stable",
-	"prefer-stable": true,
-	"autoload": {
-		"psr-4": {
-			"Misaf\\VendraProduct\\": "src/",
-			"Misaf\\VendraProduct\\Database\\Factories\\": "database/factories/",
-			"Misaf\\VendraProduct\\Database\\Seeders\\": "database/seeders/",
-			"Misaf\\VendraProduct\\Tests\\": "tests/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"pestphp/pest-plugin": true,
-			"php-http/discovery": true
-		},
-		"optimize-autoloader": true,
-		"preferred-install": "dist",
-		"sort-packages": true
-	},
-	"extra": {
-		"laravel": {
-			"providers": [
-				"Misaf\\VendraProduct\\Providers\\ProductServiceProvider"
-			]
-		}
-	},
-	"scripts": {
-		"analyse": "vendor/bin/phpstan analyse",
-		"format": "vendor/bin/pint",
-		"test": "vendor/bin/pest",
-		"test-coverage": "vendor/bin/pest --coverage"
-	},
-	"$schema": "https://getcomposer.org/schema.json"
+    "name": "misaf/vendra-product",
+    "description": "The product module for the Vendra framework.",
+    "license": "MIT",
+    "type": "vendra-module",
+    "keywords": [
+        "laravel",
+        "filamentphp",
+        "misaf",
+        "vendra",
+        "product"
+    ],
+    "authors": [
+        {
+            "name": "Ehsan Mahmoodi",
+            "email": "misaf.1990@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/misaf/vendra-product",
+    "support": {
+        "issues": "https://github.com/misaf/vendra-product/issues",
+        "source": "https://github.com/misaf/vendra-product"
+    },
+    "require": {
+        "awcodes/filament-badgeable-column": "^4.0",
+        "cknow/laravel-money": "^8.0",
+        "filament/filament": "^5.0",
+        "filament/spatie-laravel-media-library-plugin": "^5.0",
+        "illuminate/support": "^12.0 || ^13.0",
+		"misaf/vendra-support": "dev-master",
+        "lara-zeus/spatie-translatable": "^2.0",
+        "misaf/vendra-activity-log": "dev-master",
+        "misaf/vendra-currency": "dev-master",
+        "misaf/vendra-multimedia": "dev-master",
+        "misaf/vendra-tenant": "dev-master",
+        "misaf/vendra-user": "dev-master",
+        "mokhosh/filament-jalali": "5.0",
+        "php": "^8.2",
+        "spatie/eloquent-sortable": "^5.0",
+        "spatie/laravel-package-tools": "^1.0",
+        "spatie/laravel-sluggable": "^4.0",
+        "staudenmeir/laravel-adjacency-list": "^1.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.0",
+        "larastan/larastan": "^3.0",
+        "laravel/boost": "^2.0",
+        "laravel/pint": "^1.0",
+        "misaf/vendra-testing": "dev-master",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^8.0",
+        "orchestra/testbench": "^10.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-arch": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-profanity": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Misaf\\VendraProduct\\": "src/",
+            "Misaf\\VendraProduct\\Database\\Factories\\": "database/factories/",
+            "Misaf\\VendraProduct\\Database\\Seeders\\": "database/seeders/",
+            "Misaf\\VendraProduct\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Misaf\\VendraProduct\\Providers\\ProductServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    },
+    "$schema": "https://getcomposer.org/schema.json"
 }
