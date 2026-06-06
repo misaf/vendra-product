@@ -9,9 +9,11 @@ use Filament\Panel;
 
 final class ProductPlugin implements Plugin
 {
+    public const string ID = 'vendra-product';
+
     public function getId(): string
     {
-        return 'vendra-product';
+        return self::ID;
     }
 
     public static function make(): static
