@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,10 +16,11 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
+use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
+use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Observers\ProductObserver;
 use Misaf\VendraTenant\Traits\BelongsToTenant;
-use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -45,16 +48,21 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  */
+#[Fillable(['product_category_id', 'name', 'description', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
+#[Hidden(['tenant_id'])]
 #[ObservedBy([ProductObserver::class])]
 final class Product extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
+    use HasDefaultActivityLogOptions;
+
+    use HasDefaultMediaConversions, InteractsWithMedia {
+        HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
+    }
 
     /** @use HasFactory<ProductFactory> */
     use HasFactory;
-
     use HasTranslations;
-    use InteractsWithMedia;
     use LogsActivity;
     use SoftDeletes;
     use SortableTrait;
@@ -64,38 +72,27 @@ final class Product extends Model implements HasMedia, Sortable
      */
     public array $translatable = ['name', 'description', 'slug'];
 
-    protected $casts = [
-        'id'                  => 'integer',
-        'tenant_id'           => 'integer',
-        'product_category_id' => 'integer',
-        'name'                => 'array',
-        'description'         => 'array',
-        'slug'                => 'array',
-        'token'               => 'string',
-        'quantity'            => 'integer',
-        'stock_threshold'     => 'integer',
-        'in_stock'            => 'boolean',
-        'position'            => 'integer',
-        'available_soon'      => 'boolean',
-        'availability_date'   => 'datetime',
-    ];
-
-    protected $fillable = [
-        'product_category_id',
-        'name',
-        'description',
-        'slug',
-        'quantity',
-        'stock_threshold',
-        'in_stock',
-        'position',
-        'available_soon',
-        'availability_date',
-    ];
-
-    protected $hidden = [
-        'tenant_id',
-    ];
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id'                  => 'integer',
+            'tenant_id'           => 'integer',
+            'product_category_id' => 'integer',
+            'name'                => 'array',
+            'description'         => 'array',
+            'slug'                => 'array',
+            'token'               => 'string',
+            'quantity'            => 'integer',
+            'stock_threshold'     => 'integer',
+            'in_stock'            => 'boolean',
+            'position'            => 'integer',
+            'available_soon'      => 'boolean',
+            'availability_date'   => 'datetime',
+        ];
+    }
 
     protected static function booted(): void
     {
@@ -173,39 +170,11 @@ final class Product extends Model implements HasMedia, Sortable
         return $this->media();
     }
 
-    public function registerMediaConversions(?Media $media = null): void
-    {
-        $this->addMediaConversion('thumb-table')
-            ->width(48)
-            ->format('webp');
-
-        $this->addMediaConversion('small')
-            ->width(300)
-            ->format('webp');
-
-        $this->addMediaConversion('medium')
-            ->width(500)
-            ->format('webp');
-
-        $this->addMediaConversion('large')
-            ->width(800)
-            ->format('webp');
-
-        $this->addMediaConversion('extra-large')
-            ->width(1200)
-            ->format('webp');
-    }
-
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
             ->preventOverwrite();
-    }
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logFillable()->logExcept(['id']);
     }
 }

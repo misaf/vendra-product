@@ -6,6 +6,7 @@ namespace Misaf\VendraProduct\Models;
 
 use Cknow\Money\Casts\MoneyIntegerCast;
 use Cknow\Money\Money;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,8 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
-use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Znck\Eloquent\Relations;
 use Znck\Eloquent\Traits;
@@ -28,8 +29,10 @@ use Znck\Eloquent\Traits;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  */
+#[Fillable(['product_id', 'currency_code', 'price'])]
 final class ProductPrice extends Model
 {
+    use HasDefaultActivityLogOptions;
     /** @use HasFactory<ProductPriceFactory> */
     use HasFactory;
 
@@ -37,18 +40,18 @@ final class ProductPrice extends Model
     use SoftDeletes;
     use Traits\BelongsToThrough;
 
-    protected $casts = [
-        'id'            => 'integer',
-        'product_id'    => 'integer',
-        'currency_code' => 'string',
-        'price'         => MoneyIntegerCast::class . ':currency_code',
-    ];
-
-    protected $fillable = [
-        'product_id',
-        'currency_code',
-        'price',
-    ];
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id'            => 'integer',
+            'product_id'    => 'integer',
+            'currency_code' => 'string',
+            'price'         => MoneyIntegerCast::class . ':currency_code',
+        ];
+    }
 
     protected function currencyCode(): Attribute
     {
@@ -73,8 +76,4 @@ final class ProductPrice extends Model
         return $this->belongsToThrough(ProductCategory::class, Product::class);
     }
 
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logFillable()->logExcept(['id']);
-    }
 }
