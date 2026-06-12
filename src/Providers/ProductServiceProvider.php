@@ -6,6 +6,7 @@ namespace Misaf\VendraProduct\Providers;
 
 use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
+use Misaf\VendraProduct\Console\Commands\SeedCommand;
 use Misaf\VendraProduct\ProductPlugin;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -22,6 +23,7 @@ final class ProductServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_products_table'
             ])
+            ->hasCommands(SeedCommand::class)
             ->hasInstallCommand(function (InstallCommand $command): void {
                 $command->askToStarRepoOnGitHub('misaf/vendra-product');
             });
