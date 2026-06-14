@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct\Models;
 use Cknow\Money\Casts\MoneyIntegerCast;
 use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,7 @@ use Znck\Eloquent\Traits;
  * @property Carbon|null $deleted_at
  */
 #[Fillable(['product_id', 'currency_code', 'price'])]
+#[UseFactory(ProductPriceFactory::class)]
 final class ProductPrice extends Model
 {
     use HasDefaultActivityLogOptions;
