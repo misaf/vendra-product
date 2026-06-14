@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraProduct\Models\Product;
@@ -12,10 +13,9 @@ use Misaf\VendraProduct\Models\ProductPrice;
 /**
  * @extends Factory<ProductPrice>
  */
+#[UseModel(ProductPrice::class)]
 final class ProductPriceFactory extends Factory
 {
-    protected $model = ProductPrice::class;
-
     public function definition(): array
     {
         return [
