@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Misaf\VendraProduct\Models\ProductCategory;
@@ -12,10 +13,9 @@ use Misaf\VendraTenant\Models\Tenant;
 /**
  * @extends Factory<ProductCategory>
  */
+#[UseModel(ProductCategory::class)]
 final class ProductCategoryFactory extends Factory
 {
-    protected $model = ProductCategory::class;
-
     public function definition(): array
     {
         return [
