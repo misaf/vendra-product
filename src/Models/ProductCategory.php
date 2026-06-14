@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,6 +45,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 #[Fillable(['name', 'description', 'slug', 'position', 'status'])]
 #[Hidden(['tenant_id'])]
 #[ObservedBy([ProductCategoryObserver::class])]
+#[UseFactory(ProductCategoryFactory::class)]
 final class ProductCategory extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
