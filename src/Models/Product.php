@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -51,6 +52,7 @@ use Spatie\Translatable\HasTranslations;
 #[Fillable(['product_category_id', 'name', 'description', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
 #[Hidden(['tenant_id'])]
 #[ObservedBy([ProductObserver::class])]
+#[UseFactory(ProductFactory::class)]
 final class Product extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
