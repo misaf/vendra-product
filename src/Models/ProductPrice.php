@@ -35,9 +35,9 @@ use Znck\Eloquent\Traits;
 final class ProductPrice extends Model
 {
     use HasDefaultActivityLogOptions;
+
     /** @use HasFactory<ProductPriceFactory> */
     use HasFactory;
-
     use LogsActivity;
     use SoftDeletes;
     use Traits\BelongsToThrough;
