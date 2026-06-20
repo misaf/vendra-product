@@ -1,0 +1,358 @@
+[
+    {
+        "name": {
+            "en": "Laptops",
+            "de": "Notebooks",
+            "fa": "لپ‌تاپ‌ها"
+        },
+        "slug": {
+            "en": "laptops",
+            "de": "notebooks",
+            "fa": "لپ-تاپ-ها"
+        },
+        "description": {
+            "en": "Portable computers for personal and professional use",
+            "de": "Tragbare Computer für private und berufliche Nutzung",
+            "fa": "کامپیوترهای قابل حمل برای استفاده شخصی و حرفه‌ای"
+        },
+        "status": true,
+        "products": [
+            {
+                "name": {
+                    "en": "Dell XPS 13",
+                    "de": "Dell XPS 13 Notebook",
+                    "fa": "دل XPS 13"
+                },
+                "slug": {
+                    "en": "dell-xps-13",
+                    "de": "dell-xps-13-notebook",
+                    "fa": "دل-xps-13"
+                },
+                "description": {
+                    "en": "Compact and powerful ultrabook with Intel i7 processor and 16GB RAM",
+                    "de": "Kompaktes und leistungsstarkes Ultrabook mit Intel-i7-Prozessor und 16 GB RAM",
+                    "fa": "اولترابوک جمع‌وجور و قدرتمند با پردازنده Intel i7 و رم 16 گیگابایت"
+                },
+                "in_stock": true,
+                "available_soon": false,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 120000
+                }
+            },
+            {
+                "name": {
+                    "en": "MacBook Pro 16\"",
+                    "de": "MacBook Pro 16\" Notebook",
+                    "fa": "مک‌بوک پرو 16 اینچ"
+                },
+                "slug": {
+                    "en": "macbook-pro-16",
+                    "de": "macbook-pro-16-notebook",
+                    "fa": "مک-بوک-پرو-16-اینچ"
+                },
+                "description": {
+                    "en": "High-performance laptop with Apple M2 Max chip, ideal for creative professionals",
+                    "de": "Leistungsstarkes Notebook mit Apple M2 Max Chip, ideal für Kreativprofis",
+                    "fa": "لپ‌تاپ با عملکرد بالا و تراشه Apple M2 Max، مناسب برای حرفه‌ای‌های خلاق"
+                },
+                "in_stock": true,
+                "available_soon": true,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 145000
+                }
+            },
+            {
+                "name": {
+                    "en": "Lenovo ThinkPad X1 Carbon",
+                    "de": "Lenovo ThinkPad X1 Carbon Notebook",
+                    "fa": "لنوو ThinkPad X1 Carbon"
+                },
+                "slug": {
+                    "en": "lenovo-thinkpad-x1-carbon",
+                    "de": "lenovo-thinkpad-x1-carbon-notebook",
+                    "fa": "لنوو-thinkpad-x1-carbon"
+                },
+                "description": {
+                    "en": "Lightweight business laptop with durable chassis, long battery life, and enterprise security features",
+                    "de": "Leichtes Business-Notebook mit robustem Gehäuse, langer Akkulaufzeit und Sicherheitsfunktionen für Unternehmen",
+                    "fa": "لپ‌تاپ سبک تجاری با بدنه مقاوم، عمر باتری طولانی و قابلیت‌های امنیتی سازمانی"
+                },
+                "in_stock": true,
+                "available_soon": false,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 118000
+                }
+            }
+        ]
+    },
+    {
+        "name": {
+            "en": "Desktops",
+            "de": "Desktop-Computer",
+            "fa": "کامپیوتر رومیزی"
+        },
+        "slug": {
+            "en": "desktops",
+            "de": "desktop-computer",
+            "fa": "کامپیوتر-رومیزی"
+        },
+        "description": {
+            "en": "Stationary computers suitable for home and office use",
+            "de": "Stationäre Computer für Zuhause und Büro",
+            "fa": "کامپیوترهای ثابت مناسب استفاده خانگی و اداری"
+        },
+        "status": true,
+        "products": [
+            {
+                "name": {
+                    "en": "HP Pavilion Gaming Desktop",
+                    "de": "HP Pavilion Gaming-Desktop",
+                    "fa": "اچ‌پی پاویلیون گیمینگ دسکتاپ"
+                },
+                "slug": {
+                    "en": "hp-pavilion-gaming-desktop",
+                    "de": "hp-pavilion-gaming-desktop-pc",
+                    "fa": "اچ-پی-پاویلیون-گیمینگ-دسکتاپ"
+                },
+                "description": {
+                    "en": "Gaming desktop with NVIDIA RTX 3060 and Intel i5 processor",
+                    "de": "Gaming-Desktop mit NVIDIA RTX 3060 und Intel-i5-Prozessor",
+                    "fa": "کامپیوتر رومیزی مخصوص بازی با کارت گرافیک NVIDIA RTX 3060 و پردازنده Intel i5"
+                },
+                "in_stock": true,
+                "available_soon": true,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 98000
+                }
+            },
+            {
+                "name": {
+                    "en": "Apple iMac 24\"",
+                    "de": "Apple iMac 24\" Desktop",
+                    "fa": "اپل آی‌مک 24 اینچ"
+                },
+                "slug": {
+                    "en": "apple-imac-24",
+                    "de": "apple-imac-24-desktop",
+                    "fa": "اپل-آی-مک-24-اینچ"
+                },
+                "description": {
+                    "en": "All-in-one desktop with M1 chip and 4.5K Retina display",
+                    "de": "All-in-One-Desktop mit M1-Chip und 4,5K-Retina-Display",
+                    "fa": "کامپیوتر رومیزی همه‌کاره با تراشه M1 و نمایشگر Retina با رزولوشن 4.5K"
+                },
+                "in_stock": false,
+                "available_soon": true,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 132000
+                }
+            },
+            {
+                "name": {
+                    "en": "Lenovo ThinkCentre M70q",
+                    "de": "Lenovo ThinkCentre M70q Mini-PC",
+                    "fa": "لنوو ThinkCentre M70q"
+                },
+                "slug": {
+                    "en": "lenovo-thinkcentre-m70q",
+                    "de": "lenovo-thinkcentre-m70q-mini-pc",
+                    "fa": "لنوو-thinkcentre-m70q"
+                },
+                "description": {
+                    "en": "Compact desktop PC for office workstations, reception desks, and space-limited environments",
+                    "de": "Kompakter Desktop-PC für Büroarbeitsplätze, Empfangsbereiche und Umgebungen mit wenig Platz",
+                    "fa": "کامپیوتر رومیزی جمع‌وجور برای میزهای اداری، بخش پذیرش و محیط‌هایی با فضای محدود"
+                },
+                "in_stock": true,
+                "available_soon": false,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 64000
+                }
+            }
+        ]
+    },
+    {
+        "name": {
+            "en": "Computer Components",
+            "de": "Computerkomponenten",
+            "fa": "قطعات کامپیوتر"
+        },
+        "slug": {
+            "en": "computer-components",
+            "de": "computerkomponenten",
+            "fa": "قطعات-کامپیوتر"
+        },
+        "description": {
+            "en": "Individual components for building or upgrading PCs",
+            "de": "Einzelne Komponenten zum Zusammenstellen oder Aufrüsten von PCs",
+            "fa": "قطعات جداگانه برای ساخت یا ارتقای کامپیوتر"
+        },
+        "status": true,
+        "products": [
+            {
+                "name": {
+                    "en": "NVIDIA GeForce RTX 4070",
+                    "de": "NVIDIA GeForce RTX 4070 Grafikkarte",
+                    "fa": "ان‌ویدیا GeForce RTX 4070"
+                },
+                "slug": {
+                    "en": "nvidia-geforce-rtx-4070",
+                    "de": "nvidia-geforce-rtx-4070-grafikkarte",
+                    "fa": "ان-ویدیا-geforce-rtx-4070"
+                },
+                "description": {
+                    "en": "High-end graphics card for gaming and rendering",
+                    "de": "High-End-Grafikkarte für Gaming und Rendering",
+                    "fa": "کارت گرافیک رده بالا برای بازی و رندرینگ"
+                },
+                "in_stock": true,
+                "available_soon": true,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 87000
+                }
+            },
+            {
+                "name": {
+                    "en": "Corsair Vengeance 32GB RAM",
+                    "de": "Corsair Vengeance 32 GB Arbeitsspeicher",
+                    "fa": "کورسیر Vengeance 32 گیگابایت رم"
+                },
+                "slug": {
+                    "en": "corsair-vengeance-32gb-ram",
+                    "de": "corsair-vengeance-32gb-arbeitsspeicher",
+                    "fa": "کورسیر-vengeance-32-گیگابایت-رم"
+                },
+                "description": {
+                    "en": "High-speed memory module for desktops and gaming PCs",
+                    "de": "Hochgeschwindigkeits-Speichermodul für Desktop- und Gaming-PCs",
+                    "fa": "ماژول حافظه پرسرعت برای کامپیوترهای رومیزی و گیمینگ"
+                },
+                "in_stock": true,
+                "available_soon": false,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 36000
+                }
+            },
+            {
+                "name": {
+                    "en": "Samsung 980 Pro 1TB SSD",
+                    "de": "Samsung 980 Pro 1 TB SSD",
+                    "fa": "سامسونگ 980 Pro SSD یک ترابایت"
+                },
+                "slug": {
+                    "en": "samsung-980-pro-1tb-ssd",
+                    "de": "samsung-980-pro-1tb-ssd",
+                    "fa": "سامسونگ-980-pro-ssd-یک-ترابایت"
+                },
+                "description": {
+                    "en": "Fast NVMe storage drive for operating systems, applications, and large project files",
+                    "de": "Schnelles NVMe-Speicherlaufwerk für Betriebssysteme, Anwendungen und große Projektdateien",
+                    "fa": "درایو ذخیره‌سازی سریع NVMe برای سیستم‌عامل، برنامه‌ها و فایل‌های حجیم پروژه"
+                },
+                "in_stock": true,
+                "available_soon": false,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 29000
+                }
+            }
+        ]
+    },
+    {
+        "name": {
+            "en": "Peripherals",
+            "de": "Peripheriegeräte",
+            "fa": "لوازم جانبی"
+        },
+        "slug": {
+            "en": "peripherals",
+            "de": "peripheriegeraete",
+            "fa": "لوازم-جانبی"
+        },
+        "description": {
+            "en": "External devices such as keyboards, mice, and monitors",
+            "de": "Externe Geräte wie Tastaturen, Mäuse und Monitore",
+            "fa": "دستگاه‌های جانبی مانند کیبورد، ماوس و مانیتورها"
+        },
+        "status": true,
+        "products": [
+            {
+                "name": {
+                    "en": "Logitech MX Master 3 Mouse",
+                    "de": "Logitech MX Master 3 Maus",
+                    "fa": "لوجیتک MX Master 3 ماوس"
+                },
+                "slug": {
+                    "en": "logitech-mx-master-3-mouse",
+                    "de": "logitech-mx-master-3-maus",
+                    "fa": "لوجیتک-mx-master-3-ماوس"
+                },
+                "description": {
+                    "en": "Ergonomic wireless mouse with customizable buttons",
+                    "de": "Ergonomische kabellose Maus mit anpassbaren Tasten",
+                    "fa": "ماوس بی‌سیم ارگونومیک با دکمه‌های قابل تنظیم"
+                },
+                "in_stock": true,
+                "available_soon": true,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 15000
+                }
+            },
+            {
+                "name": {
+                    "en": "Dell UltraSharp 27\" Monitor",
+                    "de": "Dell UltraSharp 27\" Bildschirm",
+                    "fa": "دل UltraSharp مانیتور 27 اینچ"
+                },
+                "slug": {
+                    "en": "dell-ultrasharp-27-monitor",
+                    "de": "dell-ultrasharp-27-bildschirm",
+                    "fa": "دل-ultrasharp-مانیتور-27-اینچ"
+                },
+                "description": {
+                    "en": "High-resolution monitor with vibrant colors and wide viewing angles",
+                    "de": "Hochauflösender Monitor mit kräftigen Farben und großen Betrachtungswinkeln",
+                    "fa": "مانیتور با رزولوشن بالا، رنگ‌های زنده و زاویه دید گسترده"
+                },
+                "in_stock": true,
+                "available_soon": false,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 47000
+                }
+            },
+            {
+                "name": {
+                    "en": "Keychron K8 Wireless Keyboard",
+                    "de": "Keychron K8 kabellose Tastatur",
+                    "fa": "کیبورد بی‌سیم Keychron K8"
+                },
+                "slug": {
+                    "en": "keychron-k8-wireless-keyboard",
+                    "de": "keychron-k8-kabellose-tastatur",
+                    "fa": "کیبورد-بی-سیم-keychron-k8"
+                },
+                "description": {
+                    "en": "Tenkeyless mechanical keyboard with wireless connectivity and comfortable typing feel",
+                    "de": "Tenkeyless-Mechaniktastatur mit kabelloser Verbindung und angenehmem Tippgefühl",
+                    "fa": "کیبورد مکانیکال بدون بخش عددی با اتصال بی‌سیم و حس تایپ راحت"
+                },
+                "in_stock": true,
+                "available_soon": true,
+                "productPrices": {
+                    "currency_code": "IRR",
+                    "price": 18000
+                }
+            }
+        ]
+    }
+]
