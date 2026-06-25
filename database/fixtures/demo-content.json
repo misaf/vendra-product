@@ -1,358 +1,2709 @@
 [
-    {
-        "name": {
-            "en": "Laptops",
-            "de": "Notebooks",
-            "fa": "لپ‌تاپ‌ها"
-        },
-        "slug": {
-            "en": "laptops",
-            "de": "notebooks",
-            "fa": "لپ-تاپ-ها"
-        },
-        "description": {
-            "en": "Portable computers for personal and professional use",
-            "de": "Tragbare Computer für private und berufliche Nutzung",
-            "fa": "کامپیوترهای قابل حمل برای استفاده شخصی و حرفه‌ای"
-        },
-        "status": true,
-        "products": [
-            {
-                "name": {
-                    "en": "Dell XPS 13",
-                    "de": "Dell XPS 13 Notebook",
-                    "fa": "دل XPS 13"
-                },
-                "slug": {
-                    "en": "dell-xps-13",
-                    "de": "dell-xps-13-notebook",
-                    "fa": "دل-xps-13"
-                },
-                "description": {
-                    "en": "Compact and powerful ultrabook with Intel i7 processor and 16GB RAM",
-                    "de": "Kompaktes und leistungsstarkes Ultrabook mit Intel-i7-Prozessor und 16 GB RAM",
-                    "fa": "اولترابوک جمع‌وجور و قدرتمند با پردازنده Intel i7 و رم 16 گیگابایت"
-                },
-                "in_stock": true,
-                "available_soon": false,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 120000
-                }
-            },
-            {
-                "name": {
-                    "en": "MacBook Pro 16\"",
-                    "de": "MacBook Pro 16\" Notebook",
-                    "fa": "مک‌بوک پرو 16 اینچ"
-                },
-                "slug": {
-                    "en": "macbook-pro-16",
-                    "de": "macbook-pro-16-notebook",
-                    "fa": "مک-بوک-پرو-16-اینچ"
-                },
-                "description": {
-                    "en": "High-performance laptop with Apple M2 Max chip, ideal for creative professionals",
-                    "de": "Leistungsstarkes Notebook mit Apple M2 Max Chip, ideal für Kreativprofis",
-                    "fa": "لپ‌تاپ با عملکرد بالا و تراشه Apple M2 Max، مناسب برای حرفه‌ای‌های خلاق"
-                },
-                "in_stock": true,
-                "available_soon": true,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 145000
-                }
-            },
-            {
-                "name": {
-                    "en": "Lenovo ThinkPad X1 Carbon",
-                    "de": "Lenovo ThinkPad X1 Carbon Notebook",
-                    "fa": "لنوو ThinkPad X1 Carbon"
-                },
-                "slug": {
-                    "en": "lenovo-thinkpad-x1-carbon",
-                    "de": "lenovo-thinkpad-x1-carbon-notebook",
-                    "fa": "لنوو-thinkpad-x1-carbon"
-                },
-                "description": {
-                    "en": "Lightweight business laptop with durable chassis, long battery life, and enterprise security features",
-                    "de": "Leichtes Business-Notebook mit robustem Gehäuse, langer Akkulaufzeit und Sicherheitsfunktionen für Unternehmen",
-                    "fa": "لپ‌تاپ سبک تجاری با بدنه مقاوم، عمر باتری طولانی و قابلیت‌های امنیتی سازمانی"
-                },
-                "in_stock": true,
-                "available_soon": false,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 118000
-                }
-            }
-        ]
+  {
+    "name": {
+      "en": "Laptops",
+      "de": "Notebooks",
+      "fa": "لپ‌تاپ‌ها"
     },
-    {
-        "name": {
-            "en": "Desktops",
-            "de": "Desktop-Computer",
-            "fa": "کامپیوتر رومیزی"
-        },
-        "slug": {
-            "en": "desktops",
-            "de": "desktop-computer",
-            "fa": "کامپیوتر-رومیزی"
-        },
-        "description": {
-            "en": "Stationary computers suitable for home and office use",
-            "de": "Stationäre Computer für Zuhause und Büro",
-            "fa": "کامپیوترهای ثابت مناسب استفاده خانگی و اداری"
-        },
-        "status": true,
-        "products": [
-            {
-                "name": {
-                    "en": "HP Pavilion Gaming Desktop",
-                    "de": "HP Pavilion Gaming-Desktop",
-                    "fa": "اچ‌پی پاویلیون گیمینگ دسکتاپ"
-                },
-                "slug": {
-                    "en": "hp-pavilion-gaming-desktop",
-                    "de": "hp-pavilion-gaming-desktop-pc",
-                    "fa": "اچ-پی-پاویلیون-گیمینگ-دسکتاپ"
-                },
-                "description": {
-                    "en": "Gaming desktop with NVIDIA RTX 3060 and Intel i5 processor",
-                    "de": "Gaming-Desktop mit NVIDIA RTX 3060 und Intel-i5-Prozessor",
-                    "fa": "کامپیوتر رومیزی مخصوص بازی با کارت گرافیک NVIDIA RTX 3060 و پردازنده Intel i5"
-                },
-                "in_stock": true,
-                "available_soon": true,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 98000
-                }
-            },
-            {
-                "name": {
-                    "en": "Apple iMac 24\"",
-                    "de": "Apple iMac 24\" Desktop",
-                    "fa": "اپل آی‌مک 24 اینچ"
-                },
-                "slug": {
-                    "en": "apple-imac-24",
-                    "de": "apple-imac-24-desktop",
-                    "fa": "اپل-آی-مک-24-اینچ"
-                },
-                "description": {
-                    "en": "All-in-one desktop with M1 chip and 4.5K Retina display",
-                    "de": "All-in-One-Desktop mit M1-Chip und 4,5K-Retina-Display",
-                    "fa": "کامپیوتر رومیزی همه‌کاره با تراشه M1 و نمایشگر Retina با رزولوشن 4.5K"
-                },
-                "in_stock": false,
-                "available_soon": true,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 132000
-                }
-            },
-            {
-                "name": {
-                    "en": "Lenovo ThinkCentre M70q",
-                    "de": "Lenovo ThinkCentre M70q Mini-PC",
-                    "fa": "لنوو ThinkCentre M70q"
-                },
-                "slug": {
-                    "en": "lenovo-thinkcentre-m70q",
-                    "de": "lenovo-thinkcentre-m70q-mini-pc",
-                    "fa": "لنوو-thinkcentre-m70q"
-                },
-                "description": {
-                    "en": "Compact desktop PC for office workstations, reception desks, and space-limited environments",
-                    "de": "Kompakter Desktop-PC für Büroarbeitsplätze, Empfangsbereiche und Umgebungen mit wenig Platz",
-                    "fa": "کامپیوتر رومیزی جمع‌وجور برای میزهای اداری، بخش پذیرش و محیط‌هایی با فضای محدود"
-                },
-                "in_stock": true,
-                "available_soon": false,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 64000
-                }
-            }
-        ]
+    "slug": {
+      "en": "laptops",
+      "de": "notebooks",
+      "fa": "لپ-تاپ-ها"
     },
-    {
-        "name": {
-            "en": "Computer Components",
-            "de": "Computerkomponenten",
-            "fa": "قطعات کامپیوتر"
-        },
-        "slug": {
-            "en": "computer-components",
-            "de": "computerkomponenten",
-            "fa": "قطعات-کامپیوتر"
-        },
-        "description": {
-            "en": "Individual components for building or upgrading PCs",
-            "de": "Einzelne Komponenten zum Zusammenstellen oder Aufrüsten von PCs",
-            "fa": "قطعات جداگانه برای ساخت یا ارتقای کامپیوتر"
-        },
-        "status": true,
-        "products": [
-            {
-                "name": {
-                    "en": "NVIDIA GeForce RTX 4070",
-                    "de": "NVIDIA GeForce RTX 4070 Grafikkarte",
-                    "fa": "ان‌ویدیا GeForce RTX 4070"
-                },
-                "slug": {
-                    "en": "nvidia-geforce-rtx-4070",
-                    "de": "nvidia-geforce-rtx-4070-grafikkarte",
-                    "fa": "ان-ویدیا-geforce-rtx-4070"
-                },
-                "description": {
-                    "en": "High-end graphics card for gaming and rendering",
-                    "de": "High-End-Grafikkarte für Gaming und Rendering",
-                    "fa": "کارت گرافیک رده بالا برای بازی و رندرینگ"
-                },
-                "in_stock": true,
-                "available_soon": true,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 87000
-                }
-            },
-            {
-                "name": {
-                    "en": "Corsair Vengeance 32GB RAM",
-                    "de": "Corsair Vengeance 32 GB Arbeitsspeicher",
-                    "fa": "کورسیر Vengeance 32 گیگابایت رم"
-                },
-                "slug": {
-                    "en": "corsair-vengeance-32gb-ram",
-                    "de": "corsair-vengeance-32gb-arbeitsspeicher",
-                    "fa": "کورسیر-vengeance-32-گیگابایت-رم"
-                },
-                "description": {
-                    "en": "High-speed memory module for desktops and gaming PCs",
-                    "de": "Hochgeschwindigkeits-Speichermodul für Desktop- und Gaming-PCs",
-                    "fa": "ماژول حافظه پرسرعت برای کامپیوترهای رومیزی و گیمینگ"
-                },
-                "in_stock": true,
-                "available_soon": false,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 36000
-                }
-            },
-            {
-                "name": {
-                    "en": "Samsung 980 Pro 1TB SSD",
-                    "de": "Samsung 980 Pro 1 TB SSD",
-                    "fa": "سامسونگ 980 Pro SSD یک ترابایت"
-                },
-                "slug": {
-                    "en": "samsung-980-pro-1tb-ssd",
-                    "de": "samsung-980-pro-1tb-ssd",
-                    "fa": "سامسونگ-980-pro-ssd-یک-ترابایت"
-                },
-                "description": {
-                    "en": "Fast NVMe storage drive for operating systems, applications, and large project files",
-                    "de": "Schnelles NVMe-Speicherlaufwerk für Betriebssysteme, Anwendungen und große Projektdateien",
-                    "fa": "درایو ذخیره‌سازی سریع NVMe برای سیستم‌عامل، برنامه‌ها و فایل‌های حجیم پروژه"
-                },
-                "in_stock": true,
-                "available_soon": false,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 29000
-                }
-            }
-        ]
+    "description": {
+      "en": "Portable computers for personal and professional use",
+      "de": "Tragbare Computer für private und berufliche Nutzung",
+      "fa": "کامپیوترهای قابل حمل برای استفاده شخصی و حرفه‌ای"
     },
-    {
+    "status": true,
+    "products": [
+      {
         "name": {
-            "en": "Peripherals",
-            "de": "Peripheriegeräte",
-            "fa": "لوازم جانبی"
+          "en": "Dell XPS 13",
+          "de": "Dell XPS 13 Notebook",
+          "fa": "دل XPS 13"
         },
         "slug": {
-            "en": "peripherals",
-            "de": "peripheriegeraete",
-            "fa": "لوازم-جانبی"
+          "en": "dell-xps-13",
+          "de": "dell-xps-13-notebook",
+          "fa": "دل-xps-13"
         },
         "description": {
-            "en": "External devices such as keyboards, mice, and monitors",
-            "de": "Externe Geräte wie Tastaturen, Mäuse und Monitore",
-            "fa": "دستگاه‌های جانبی مانند کیبورد، ماوس و مانیتورها"
+          "en": "Compact and powerful ultrabook with Intel i7 processor and 16GB RAM",
+          "de": "Kompaktes und leistungsstarkes Ultrabook mit Intel-i7-Prozessor und 16 GB RAM",
+          "fa": "اولترابوک جمع‌وجور و قدرتمند با پردازنده Intel i7 و رم 16 گیگابایت"
         },
-        "status": true,
-        "products": [
-            {
-                "name": {
-                    "en": "Logitech MX Master 3 Mouse",
-                    "de": "Logitech MX Master 3 Maus",
-                    "fa": "لوجیتک MX Master 3 ماوس"
-                },
-                "slug": {
-                    "en": "logitech-mx-master-3-mouse",
-                    "de": "logitech-mx-master-3-maus",
-                    "fa": "لوجیتک-mx-master-3-ماوس"
-                },
-                "description": {
-                    "en": "Ergonomic wireless mouse with customizable buttons",
-                    "de": "Ergonomische kabellose Maus mit anpassbaren Tasten",
-                    "fa": "ماوس بی‌سیم ارگونومیک با دکمه‌های قابل تنظیم"
-                },
-                "in_stock": true,
-                "available_soon": true,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 15000
-                }
-            },
-            {
-                "name": {
-                    "en": "Dell UltraSharp 27\" Monitor",
-                    "de": "Dell UltraSharp 27\" Bildschirm",
-                    "fa": "دل UltraSharp مانیتور 27 اینچ"
-                },
-                "slug": {
-                    "en": "dell-ultrasharp-27-monitor",
-                    "de": "dell-ultrasharp-27-bildschirm",
-                    "fa": "دل-ultrasharp-مانیتور-27-اینچ"
-                },
-                "description": {
-                    "en": "High-resolution monitor with vibrant colors and wide viewing angles",
-                    "de": "Hochauflösender Monitor mit kräftigen Farben und großen Betrachtungswinkeln",
-                    "fa": "مانیتور با رزولوشن بالا، رنگ‌های زنده و زاویه دید گسترده"
-                },
-                "in_stock": true,
-                "available_soon": false,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 47000
-                }
-            },
-            {
-                "name": {
-                    "en": "Keychron K8 Wireless Keyboard",
-                    "de": "Keychron K8 kabellose Tastatur",
-                    "fa": "کیبورد بی‌سیم Keychron K8"
-                },
-                "slug": {
-                    "en": "keychron-k8-wireless-keyboard",
-                    "de": "keychron-k8-kabellose-tastatur",
-                    "fa": "کیبورد-بی-سیم-keychron-k8"
-                },
-                "description": {
-                    "en": "Tenkeyless mechanical keyboard with wireless connectivity and comfortable typing feel",
-                    "de": "Tenkeyless-Mechaniktastatur mit kabelloser Verbindung und angenehmem Tippgefühl",
-                    "fa": "کیبورد مکانیکال بدون بخش عددی با اتصال بی‌سیم و حس تایپ راحت"
-                },
-                "in_stock": true,
-                "available_soon": true,
-                "productPrices": {
-                    "currency_code": "IRR",
-                    "price": 18000
-                }
-            }
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 1200
+          },
+          {
+            "currency_code": "EUR",
+            "price": 1020
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.03
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.48
+          }
         ]
-    }
+      },
+      {
+        "name": {
+          "en": "MacBook Pro 16\"",
+          "de": "MacBook Pro 16\" Notebook",
+          "fa": "مک‌بوک پرو 16 اینچ"
+        },
+        "slug": {
+          "en": "macbook-pro-16",
+          "de": "macbook-pro-16-notebook",
+          "fa": "مک-بوک-پرو-16-اینچ"
+        },
+        "description": {
+          "en": "High-performance laptop with Apple M2 Max chip, ideal for creative professionals",
+          "de": "Leistungsstarkes Notebook mit Apple M2 Max Chip, ideal für Kreativprofis",
+          "fa": "لپ‌تاپ با عملکرد بالا و تراشه Apple M2 Max، مناسب برای حرفه‌ای‌های خلاق"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 1450
+          },
+          {
+            "currency_code": "EUR",
+            "price": 1232.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.03625
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.58
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Lenovo ThinkPad X1 Carbon",
+          "de": "Lenovo ThinkPad X1 Carbon Notebook",
+          "fa": "لنوو ThinkPad X1 Carbon"
+        },
+        "slug": {
+          "en": "lenovo-thinkpad-x1-carbon",
+          "de": "lenovo-thinkpad-x1-carbon-notebook",
+          "fa": "لنوو-thinkpad-x1-carbon"
+        },
+        "description": {
+          "en": "Lightweight business laptop with durable chassis, long battery life, and enterprise security features",
+          "de": "Leichtes Business-Notebook mit robustem Gehäuse, langer Akkulaufzeit und Sicherheitsfunktionen für Unternehmen",
+          "fa": "لپ‌تاپ سبک تجاری با بدنه مقاوم، عمر باتری طولانی و قابلیت‌های امنیتی سازمانی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 1180
+          },
+          {
+            "currency_code": "EUR",
+            "price": 1003
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0295
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.472
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": {
+      "en": "Desktops",
+      "de": "Desktop-Computer",
+      "fa": "کامپیوتر رومیزی"
+    },
+    "slug": {
+      "en": "desktops",
+      "de": "desktop-computer",
+      "fa": "کامپیوتر-رومیزی"
+    },
+    "description": {
+      "en": "Stationary computers suitable for home and office use",
+      "de": "Stationäre Computer für Zuhause und Büro",
+      "fa": "کامپیوترهای ثابت مناسب استفاده خانگی و اداری"
+    },
+    "status": true,
+    "products": [
+      {
+        "name": {
+          "en": "HP Pavilion Gaming Desktop",
+          "de": "HP Pavilion Gaming-Desktop",
+          "fa": "اچ‌پی پاویلیون گیمینگ دسکتاپ"
+        },
+        "slug": {
+          "en": "hp-pavilion-gaming-desktop",
+          "de": "hp-pavilion-gaming-desktop-pc",
+          "fa": "اچ-پی-پاویلیون-گیمینگ-دسکتاپ"
+        },
+        "description": {
+          "en": "Gaming desktop with NVIDIA RTX 3060 and Intel i5 processor",
+          "de": "Gaming-Desktop mit NVIDIA RTX 3060 und Intel-i5-Prozessor",
+          "fa": "کامپیوتر رومیزی مخصوص بازی با کارت گرافیک NVIDIA RTX 3060 و پردازنده Intel i5"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 980
+          },
+          {
+            "currency_code": "EUR",
+            "price": 833
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0245
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.392
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Apple iMac 24\"",
+          "de": "Apple iMac 24\" Desktop",
+          "fa": "اپل آی‌مک 24 اینچ"
+        },
+        "slug": {
+          "en": "apple-imac-24",
+          "de": "apple-imac-24-desktop",
+          "fa": "اپل-آی-مک-24-اینچ"
+        },
+        "description": {
+          "en": "All-in-one desktop with M1 chip and 4.5K Retina display",
+          "de": "All-in-One-Desktop mit M1-Chip und 4,5K-Retina-Display",
+          "fa": "کامپیوتر رومیزی همه‌کاره با تراشه M1 و نمایشگر Retina با رزولوشن 4.5K"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 1320
+          },
+          {
+            "currency_code": "EUR",
+            "price": 1122
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.033
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.528
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Lenovo ThinkCentre M70q",
+          "de": "Lenovo ThinkCentre M70q Mini-PC",
+          "fa": "لنوو ThinkCentre M70q"
+        },
+        "slug": {
+          "en": "lenovo-thinkcentre-m70q",
+          "de": "lenovo-thinkcentre-m70q-mini-pc",
+          "fa": "لنوو-thinkcentre-m70q"
+        },
+        "description": {
+          "en": "Compact desktop PC for office workstations, reception desks, and space-limited environments",
+          "de": "Kompakter Desktop-PC für Büroarbeitsplätze, Empfangsbereiche und Umgebungen mit wenig Platz",
+          "fa": "کامپیوتر رومیزی جمع‌وجور برای میزهای اداری، بخش پذیرش و محیط‌هایی با فضای محدود"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 640
+          },
+          {
+            "currency_code": "EUR",
+            "price": 544
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.016
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.256
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": {
+      "en": "Computer Components",
+      "de": "Computerkomponenten",
+      "fa": "قطعات کامپیوتر"
+    },
+    "slug": {
+      "en": "computer-components",
+      "de": "computerkomponenten",
+      "fa": "قطعات-کامپیوتر"
+    },
+    "description": {
+      "en": "Individual components for building or upgrading PCs",
+      "de": "Einzelne Komponenten zum Zusammenstellen oder Aufrüsten von PCs",
+      "fa": "قطعات جداگانه برای ساخت یا ارتقای کامپیوتر"
+    },
+    "status": true,
+    "products": [
+      {
+        "name": {
+          "en": "NVIDIA GeForce RTX 4070",
+          "de": "NVIDIA GeForce RTX 4070 Grafikkarte",
+          "fa": "ان‌ویدیا GeForce RTX 4070"
+        },
+        "slug": {
+          "en": "nvidia-geforce-rtx-4070",
+          "de": "nvidia-geforce-rtx-4070-grafikkarte",
+          "fa": "ان-ویدیا-geforce-rtx-4070"
+        },
+        "description": {
+          "en": "High-end graphics card for gaming and rendering",
+          "de": "High-End-Grafikkarte für Gaming und Rendering",
+          "fa": "کارت گرافیک رده بالا برای بازی و رندرینگ"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 870
+          },
+          {
+            "currency_code": "EUR",
+            "price": 739.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.02175
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.348
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Corsair Vengeance 32GB RAM",
+          "de": "Corsair Vengeance 32 GB Arbeitsspeicher",
+          "fa": "کورسیر Vengeance 32 گیگابایت رم"
+        },
+        "slug": {
+          "en": "corsair-vengeance-32gb-ram",
+          "de": "corsair-vengeance-32gb-arbeitsspeicher",
+          "fa": "کورسیر-vengeance-32-گیگابایت-رم"
+        },
+        "description": {
+          "en": "High-speed memory module for desktops and gaming PCs",
+          "de": "Hochgeschwindigkeits-Speichermodul für Desktop- und Gaming-PCs",
+          "fa": "ماژول حافظه پرسرعت برای کامپیوترهای رومیزی و گیمینگ"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 360
+          },
+          {
+            "currency_code": "EUR",
+            "price": 306
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.009
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.144
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Samsung 980 Pro 1TB SSD",
+          "de": "Samsung 980 Pro 1 TB SSD",
+          "fa": "سامسونگ 980 Pro SSD یک ترابایت"
+        },
+        "slug": {
+          "en": "samsung-980-pro-1tb-ssd",
+          "de": "samsung-980-pro-1tb-ssd",
+          "fa": "سامسونگ-980-pro-ssd-یک-ترابایت"
+        },
+        "description": {
+          "en": "Fast NVMe storage drive for operating systems, applications, and large project files",
+          "de": "Schnelles NVMe-Speicherlaufwerk für Betriebssysteme, Anwendungen und große Projektdateien",
+          "fa": "درایو ذخیره‌سازی سریع NVMe برای سیستم‌عامل، برنامه‌ها و فایل‌های حجیم پروژه"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 290
+          },
+          {
+            "currency_code": "EUR",
+            "price": 246.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00725
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.116
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": {
+      "en": "Peripherals",
+      "de": "Peripheriegeräte",
+      "fa": "لوازم جانبی"
+    },
+    "slug": {
+      "en": "peripherals",
+      "de": "peripheriegeraete",
+      "fa": "لوازم-جانبی"
+    },
+    "description": {
+      "en": "External devices such as keyboards, mice, and monitors",
+      "de": "Externe Geräte wie Tastaturen, Mäuse und Monitore",
+      "fa": "دستگاه‌های جانبی مانند کیبورد، ماوس و مانیتورها"
+    },
+    "status": true,
+    "products": [
+      {
+        "name": {
+          "en": "Logitech MX Master 3 Mouse",
+          "de": "Logitech MX Master 3 Maus",
+          "fa": "لوجیتک MX Master 3 ماوس"
+        },
+        "slug": {
+          "en": "logitech-mx-master-3-mouse",
+          "de": "logitech-mx-master-3-maus",
+          "fa": "لوجیتک-mx-master-3-ماوس"
+        },
+        "description": {
+          "en": "Ergonomic wireless mouse with customizable buttons",
+          "de": "Ergonomische kabellose Maus mit anpassbaren Tasten",
+          "fa": "ماوس بی‌سیم ارگونومیک با دکمه‌های قابل تنظیم"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 150
+          },
+          {
+            "currency_code": "EUR",
+            "price": 127.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00375
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.06
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Dell UltraSharp 27\" Monitor",
+          "de": "Dell UltraSharp 27\" Bildschirm",
+          "fa": "دل UltraSharp مانیتور 27 اینچ"
+        },
+        "slug": {
+          "en": "dell-ultrasharp-27-monitor",
+          "de": "dell-ultrasharp-27-bildschirm",
+          "fa": "دل-ultrasharp-مانیتور-27-اینچ"
+        },
+        "description": {
+          "en": "High-resolution monitor with vibrant colors and wide viewing angles",
+          "de": "Hochauflösender Monitor mit kräftigen Farben und großen Betrachtungswinkeln",
+          "fa": "مانیتور با رزولوشن بالا، رنگ‌های زنده و زاویه دید گسترده"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 470
+          },
+          {
+            "currency_code": "EUR",
+            "price": 399.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.01175
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.188
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Keychron K8 Wireless Keyboard",
+          "de": "Keychron K8 kabellose Tastatur",
+          "fa": "کیبورد بی‌سیم Keychron K8"
+        },
+        "slug": {
+          "en": "keychron-k8-wireless-keyboard",
+          "de": "keychron-k8-kabellose-tastatur",
+          "fa": "کیبورد-بی-سیم-keychron-k8"
+        },
+        "description": {
+          "en": "Tenkeyless mechanical keyboard with wireless connectivity and comfortable typing feel",
+          "de": "Tenkeyless-Mechaniktastatur mit kabelloser Verbindung und angenehmem Tippgefühl",
+          "fa": "کیبورد مکانیکال بدون بخش عددی با اتصال بی‌سیم و حس تایپ راحت"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 180
+          },
+          {
+            "currency_code": "EUR",
+            "price": 153
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0045
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.072
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Anker 7-in-1 USB-C Hub",
+          "de": "Anker 7-in-1 USB-C-Hub",
+          "fa": "هاب USB-C هفت‌کاره انکر"
+        },
+        "slug": {
+          "en": "anker-7-in-1-usb-c-hub",
+          "de": "anker-7-in-1-usb-c-hub",
+          "fa": "هاب-usb-c-هفت-کاره-انکر"
+        },
+        "description": {
+          "en": "Portable USB-C hub with HDMI, USB ports, card reader, and power delivery support",
+          "de": "Tragbarer USB-C-Hub mit HDMI, USB-Anschlüssen, Kartenleser und Power-Delivery-Unterstützung",
+          "fa": "هاب USB-C قابل حمل با HDMI، درگاه‌های USB، کارت‌خوان و پشتیبانی از شارژ Power Delivery"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 125
+          },
+          {
+            "currency_code": "EUR",
+            "price": 106.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.003125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.05
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Logitech C920 HD Webcam",
+          "de": "Logitech C920 HD-Webcam",
+          "fa": "وب‌کم HD لاجیتک C920"
+        },
+        "slug": {
+          "en": "logitech-c920-hd-webcam",
+          "de": "logitech-c920-hd-webcam",
+          "fa": "وب-کم-hd-لاجیتک-c920"
+        },
+        "description": {
+          "en": "Full HD webcam with autofocus and stereo microphones for meetings and streaming",
+          "de": "Full-HD-Webcam mit Autofokus und Stereomikrofonen für Meetings und Streaming",
+          "fa": "وب‌کم Full HD با فوکوس خودکار و میکروفون استریو برای جلسات و استریم"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 220
+          },
+          {
+            "currency_code": "EUR",
+            "price": 187
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0055
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.088
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Razer DeathAdder V3 Mouse",
+          "de": "Razer DeathAdder V3 Maus",
+          "fa": "ماوس Razer DeathAdder V3"
+        },
+        "slug": {
+          "en": "razer-deathadder-v3-mouse",
+          "de": "razer-deathadder-v3-maus",
+          "fa": "ماوس-razer-deathadder-v3"
+        },
+        "description": {
+          "en": "Lightweight gaming mouse with precise optical sensor and ergonomic shape",
+          "de": "Leichte Gaming-Maus mit präzisem optischem Sensor und ergonomischer Form",
+          "fa": "ماوس گیمینگ سبک با حسگر نوری دقیق و طراحی ارگونومیک"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 165
+          },
+          {
+            "currency_code": "EUR",
+            "price": 140.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.004125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.066
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "SteelSeries QcK Mouse Pad",
+          "de": "SteelSeries QcK Mauspad",
+          "fa": "ماوس‌پد SteelSeries QcK"
+        },
+        "slug": {
+          "en": "steelseries-qck-mouse-pad",
+          "de": "steelseries-qck-mauspad",
+          "fa": "ماوس-پد-steelseries-qck"
+        },
+        "description": {
+          "en": "Smooth cloth mouse pad optimized for precise tracking and everyday desktop use",
+          "de": "Glattes Stoff-Mauspad für präzises Tracking und den täglichen Einsatz am Schreibtisch",
+          "fa": "ماوس‌پد پارچه‌ای نرم برای ردیابی دقیق و استفاده روزمره روی میز"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 45
+          },
+          {
+            "currency_code": "EUR",
+            "price": 38.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.001125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.018
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Samsung T7 1TB Portable SSD",
+          "de": "Samsung T7 1 TB externe SSD",
+          "fa": "اس‌اس‌دی قابل حمل Samsung T7 یک ترابایت"
+        },
+        "slug": {
+          "en": "samsung-t7-1tb-portable-ssd",
+          "de": "samsung-t7-1tb-externe-ssd",
+          "fa": "اس-اس-دی-قابل-حمل-samsung-t7-یک-ترابایت"
+        },
+        "description": {
+          "en": "Compact external SSD for fast backups, file transfers, and portable project storage",
+          "de": "Kompakte externe SSD für schnelle Backups, Dateiübertragungen und mobile Projektspeicherung",
+          "fa": "اس‌اس‌دی اکسترنال جمع‌وجور برای بکاپ سریع، انتقال فایل و ذخیره پروژه‌ها"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 315
+          },
+          {
+            "currency_code": "EUR",
+            "price": 267.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.007875
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.126
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "SanDisk Extreme 128GB SD Card",
+          "de": "SanDisk Extreme 128 GB SD-Karte",
+          "fa": "کارت حافظه SD سن‌دیسک Extreme ظرفیت 128 گیگابایت"
+        },
+        "slug": {
+          "en": "sandisk-extreme-128gb-sd-card",
+          "de": "sandisk-extreme-128gb-sd-karte",
+          "fa": "کارت-حافظه-sd-سن-دیسک-extreme-128-گیگابایت"
+        },
+        "description": {
+          "en": "High-speed memory card for cameras, content creation, and reliable media storage",
+          "de": "Schnelle Speicherkarte für Kameras, Content-Erstellung und zuverlässige Medienspeicherung",
+          "fa": "کارت حافظه پرسرعت برای دوربین‌ها، تولید محتوا و ذخیره مطمئن رسانه"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 98
+          },
+          {
+            "currency_code": "EUR",
+            "price": 83.3
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00245
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0392
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Belkin Thunderbolt 4 Cable",
+          "de": "Belkin Thunderbolt-4-Kabel",
+          "fa": "کابل Thunderbolt 4 بلکین"
+        },
+        "slug": {
+          "en": "belkin-thunderbolt-4-cable",
+          "de": "belkin-thunderbolt-4-kabel",
+          "fa": "کابل-thunderbolt-4-بلکین"
+        },
+        "description": {
+          "en": "High-bandwidth cable for displays, docks, external drives, and fast charging",
+          "de": "Kabel mit hoher Bandbreite für Displays, Docks, externe Laufwerke und schnelles Laden",
+          "fa": "کابل پرسرعت برای نمایشگرها، داک‌ها، درایوهای اکسترنال و شارژ سریع"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 79
+          },
+          {
+            "currency_code": "EUR",
+            "price": 67.15
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.001975
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0316
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "CalDigit TS4 Thunderbolt Dock",
+          "de": "CalDigit TS4 Thunderbolt-Dock",
+          "fa": "داک Thunderbolt کلدیجیت TS4"
+        },
+        "slug": {
+          "en": "caldigit-ts4-thunderbolt-dock",
+          "de": "caldigit-ts4-thunderbolt-dock",
+          "fa": "داک-thunderbolt-کلدیجیت-ts4"
+        },
+        "description": {
+          "en": "Professional docking station with multiple display, network, audio, and USB connections",
+          "de": "Professionelle Dockingstation mit mehreren Display-, Netzwerk-, Audio- und USB-Anschlüssen",
+          "fa": "داک حرفه‌ای با چندین اتصال نمایشگر، شبکه، صدا و USB"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 620
+          },
+          {
+            "currency_code": "EUR",
+            "price": 527
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0155
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.248
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Sony WH-1000XM5 Headphones",
+          "de": "Sony WH-1000XM5 Kopfhörer",
+          "fa": "هدفون Sony WH-1000XM5"
+        },
+        "slug": {
+          "en": "sony-wh-1000xm5-headphones",
+          "de": "sony-wh-1000xm5-kopfhoerer",
+          "fa": "هدفون-sony-wh-1000xm5"
+        },
+        "description": {
+          "en": "Wireless noise-canceling headphones for focused work, travel, and high-quality audio",
+          "de": "Kabellose Kopfhörer mit Geräuschunterdrückung für konzentriertes Arbeiten, Reisen und hochwertigen Klang",
+          "fa": "هدفون بی‌سیم با حذف نویز برای تمرکز، سفر و صدای باکیفیت"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 540
+          },
+          {
+            "currency_code": "EUR",
+            "price": 459
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0135
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.216
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Jabra Speak 750 Speakerphone",
+          "de": "Jabra Speak 750 Konferenzlautsprecher",
+          "fa": "اسپیکرفون کنفرانسی Jabra Speak 750"
+        },
+        "slug": {
+          "en": "jabra-speak-750-speakerphone",
+          "de": "jabra-speak-750-konferenzlautsprecher",
+          "fa": "اسپیکرفون-کنفرانسی-jabra-speak-750"
+        },
+        "description": {
+          "en": "Portable speakerphone with clear voice pickup for meeting rooms and remote calls",
+          "de": "Tragbarer Konferenzlautsprecher mit klarer Sprachaufnahme für Besprechungsräume und Remote-Anrufe",
+          "fa": "اسپیکرفون قابل حمل با دریافت صدای شفاف برای جلسات و تماس‌های کاری"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 260
+          },
+          {
+            "currency_code": "EUR",
+            "price": 221
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0065
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.104
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Elgato Stream Deck MK.2",
+          "de": "Elgato Stream Deck MK.2",
+          "fa": "استریم دک Elgato MK.2"
+        },
+        "slug": {
+          "en": "elgato-stream-deck-mk2",
+          "de": "elgato-stream-deck-mk2",
+          "fa": "استریم-دک-elgato-mk2"
+        },
+        "description": {
+          "en": "Customizable control pad for streaming, shortcuts, automation, and content workflows",
+          "de": "Anpassbares Steuerpad für Streaming, Tastenkürzel, Automatisierung und Content-Workflows",
+          "fa": "کنترل‌پد قابل تنظیم برای استریم، میانبرها، اتوماسیون و فرایندهای تولید محتوا"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 240
+          },
+          {
+            "currency_code": "EUR",
+            "price": 204
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.006
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.096
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Wacom Intuos S Drawing Tablet",
+          "de": "Wacom Intuos S Grafiktablett",
+          "fa": "تبلت طراحی Wacom Intuos S"
+        },
+        "slug": {
+          "en": "wacom-intuos-s-drawing-tablet",
+          "de": "wacom-intuos-s-grafiktablett",
+          "fa": "تبلت-طراحی-wacom-intuos-s"
+        },
+        "description": {
+          "en": "Compact drawing tablet for illustration, retouching, notes, and creative work",
+          "de": "Kompaktes Grafiktablett für Illustration, Retusche, Notizen und kreative Arbeit",
+          "fa": "تبلت طراحی جمع‌وجور برای تصویرسازی، ویرایش، یادداشت و کارهای خلاقانه"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 210
+          },
+          {
+            "currency_code": "EUR",
+            "price": 178.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00525
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.084
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "BenQ ScreenBar Monitor Light",
+          "de": "BenQ ScreenBar Monitorleuchte",
+          "fa": "چراغ مانیتور BenQ ScreenBar"
+        },
+        "slug": {
+          "en": "benq-screenbar-monitor-light",
+          "de": "benq-screenbar-monitorleuchte",
+          "fa": "چراغ-مانیتور-benq-screenbar"
+        },
+        "description": {
+          "en": "Desk light mounted on a monitor to reduce glare and improve workspace lighting",
+          "de": "Am Monitor befestigte Schreibtischleuchte zur Reduzierung von Blendung und Verbesserung der Arbeitsplatzbeleuchtung",
+          "fa": "چراغ رومیزی نصب‌شونده روی مانیتور برای کاهش بازتاب نور و بهبود روشنایی محیط کار"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 135
+          },
+          {
+            "currency_code": "EUR",
+            "price": 114.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.003375
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.054
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Ergotron LX Monitor Arm",
+          "de": "Ergotron LX Monitorarm",
+          "fa": "بازوی مانیتور Ergotron LX"
+        },
+        "slug": {
+          "en": "ergotron-lx-monitor-arm",
+          "de": "ergotron-lx-monitorarm",
+          "fa": "بازوی-مانیتور-ergotron-lx"
+        },
+        "description": {
+          "en": "Adjustable monitor arm for ergonomic positioning and cleaner desk layouts",
+          "de": "Verstellbarer Monitorarm für ergonomische Positionierung und aufgeräumtere Schreibtische",
+          "fa": "بازوی قابل تنظیم مانیتور برای موقعیت ارگونومیک و میز کار مرتب‌تر"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 198
+          },
+          {
+            "currency_code": "EUR",
+            "price": 168.3
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00495
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0792
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "APC Back-UPS 900VA",
+          "de": "APC Back-UPS 900VA",
+          "fa": "یوپی‌اس APC Back-UPS 900VA"
+        },
+        "slug": {
+          "en": "apc-back-ups-900va",
+          "de": "apc-back-ups-900va",
+          "fa": "یوپی-اس-apc-back-ups-900va"
+        },
+        "description": {
+          "en": "Backup power supply for protecting desktops, network gear, and peripherals from outages",
+          "de": "Notstromversorgung zum Schutz von Desktop-PCs, Netzwerkgeräten und Peripherie vor Stromausfällen",
+          "fa": "منبع برق پشتیبان برای محافظت از کامپیوتر، تجهیزات شبکه و لوازم جانبی در برابر قطعی برق"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 385
+          },
+          {
+            "currency_code": "EUR",
+            "price": 327.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.009625
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.154
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "TP-Link Archer AX55 Router",
+          "de": "TP-Link Archer AX55 Router",
+          "fa": "روتر TP-Link Archer AX55"
+        },
+        "slug": {
+          "en": "tp-link-archer-ax55-router",
+          "de": "tp-link-archer-ax55-router",
+          "fa": "روتر-tp-link-archer-ax55"
+        },
+        "description": {
+          "en": "Wi-Fi 6 router for faster wireless networking across home and small office spaces",
+          "de": "Wi-Fi-6-Router für schnellere drahtlose Netzwerke in Zuhause und kleinen Büros",
+          "fa": "روتر Wi-Fi 6 برای شبکه بی‌سیم سریع‌تر در خانه و دفاتر کوچک"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 230
+          },
+          {
+            "currency_code": "EUR",
+            "price": 195.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00575
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.092
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Netgear GS108 Gigabit Switch",
+          "de": "Netgear GS108 Gigabit-Switch",
+          "fa": "سوئیچ گیگابیتی Netgear GS108"
+        },
+        "slug": {
+          "en": "netgear-gs108-gigabit-switch",
+          "de": "netgear-gs108-gigabit-switch",
+          "fa": "سوئیچ-گیگابیتی-netgear-gs108"
+        },
+        "description": {
+          "en": "Eight-port unmanaged gigabit switch for stable wired network expansion",
+          "de": "Unmanaged Gigabit-Switch mit acht Ports zur stabilen Erweiterung kabelgebundener Netzwerke",
+          "fa": "سوئیچ گیگابیتی هشت پورت بدون مدیریت برای توسعه پایدار شبکه کابلی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 115
+          },
+          {
+            "currency_code": "EUR",
+            "price": 97.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.002875
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.046
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Ubiquiti UniFi U6 Lite Access Point",
+          "de": "Ubiquiti UniFi U6 Lite Access Point",
+          "fa": "اکسس پوینت Ubiquiti UniFi U6 Lite"
+        },
+        "slug": {
+          "en": "ubiquiti-unifi-u6-lite-access-point",
+          "de": "ubiquiti-unifi-u6-lite-access-point",
+          "fa": "اکسس-پوینت-ubiquiti-unifi-u6-lite"
+        },
+        "description": {
+          "en": "Compact Wi-Fi access point for reliable wireless coverage in offices and stores",
+          "de": "Kompakter WLAN-Access-Point für zuverlässige Funkabdeckung in Büros und Geschäften",
+          "fa": "اکسس پوینت وای‌فای جمع‌وجور برای پوشش بی‌سیم پایدار در دفاتر و فروشگاه‌ها"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 255
+          },
+          {
+            "currency_code": "EUR",
+            "price": 216.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.006375
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.102
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Blue Yeti USB Microphone",
+          "de": "Blue Yeti USB-Mikrofon",
+          "fa": "میکروفون USB Blue Yeti"
+        },
+        "slug": {
+          "en": "blue-yeti-usb-microphone",
+          "de": "blue-yeti-usb-mikrofon",
+          "fa": "میکروفون-usb-blue-yeti"
+        },
+        "description": {
+          "en": "USB microphone with multiple pickup patterns for podcasts, meetings, and voice recording",
+          "de": "USB-Mikrofon mit mehreren Richtcharakteristiken für Podcasts, Meetings und Sprachaufnahmen",
+          "fa": "میکروفون USB با چند الگوی دریافت صدا برای پادکست، جلسه و ضبط صدا"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 195
+          },
+          {
+            "currency_code": "EUR",
+            "price": 165.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.004875
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.078
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Shure MV7 Podcast Microphone",
+          "de": "Shure MV7 Podcast-Mikrofon",
+          "fa": "میکروفون پادکست Shure MV7"
+        },
+        "slug": {
+          "en": "shure-mv7-podcast-microphone",
+          "de": "shure-mv7-podcast-mikrofon",
+          "fa": "میکروفون-پادکست-shure-mv7"
+        },
+        "description": {
+          "en": "Hybrid USB and XLR microphone for high-quality spoken audio and studio workflows",
+          "de": "Hybridmikrofon mit USB und XLR für hochwertige Sprachaufnahmen und Studio-Workflows",
+          "fa": "میکروفون ترکیبی USB و XLR برای صدای گفتاری باکیفیت و فرایندهای استودیویی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 420
+          },
+          {
+            "currency_code": "EUR",
+            "price": 357
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0105
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.168
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Focusrite Scarlett Solo Interface",
+          "de": "Focusrite Scarlett Solo Audiointerface",
+          "fa": "کارت صدای Focusrite Scarlett Solo"
+        },
+        "slug": {
+          "en": "focusrite-scarlett-solo-interface",
+          "de": "focusrite-scarlett-solo-audiointerface",
+          "fa": "کارت-صدای-focusrite-scarlett-solo"
+        },
+        "description": {
+          "en": "Compact audio interface for microphones, instruments, streaming, and recording",
+          "de": "Kompaktes Audiointerface für Mikrofone, Instrumente, Streaming und Aufnahmen",
+          "fa": "کارت صدای جمع‌وجور برای میکروفون، ساز، استریم و ضبط"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 275
+          },
+          {
+            "currency_code": "EUR",
+            "price": 233.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.006875
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.11
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Rode PSA1 Studio Boom Arm",
+          "de": "Rode PSA1 Studio-Gelenkarm",
+          "fa": "بازوی میکروفون Rode PSA1"
+        },
+        "slug": {
+          "en": "rode-psa1-studio-boom-arm",
+          "de": "rode-psa1-studio-gelenkarm",
+          "fa": "بازوی-میکروفون-rode-psa1"
+        },
+        "description": {
+          "en": "Adjustable studio boom arm for microphones in streaming and recording setups",
+          "de": "Verstellbarer Studio-Gelenkarm für Mikrofone in Streaming- und Aufnahme-Setups",
+          "fa": "بازوی قابل تنظیم استودیویی برای میکروفون در چیدمان‌های استریم و ضبط"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 142
+          },
+          {
+            "currency_code": "EUR",
+            "price": 120.7
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00355
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0568
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Corsair MM700 RGB Desk Mat",
+          "de": "Corsair MM700 RGB-Schreibtischmatte",
+          "fa": "زیرانداز میز RGB کورسیر MM700"
+        },
+        "slug": {
+          "en": "corsair-mm700-rgb-desk-mat",
+          "de": "corsair-mm700-rgb-schreibtischmatte",
+          "fa": "زیرانداز-میز-rgb-کورسیر-mm700"
+        },
+        "description": {
+          "en": "Large RGB desk mat with smooth surface for keyboard, mouse, and workspace protection",
+          "de": "Große RGB-Schreibtischmatte mit glatter Oberfläche für Tastatur, Maus und Schutz des Arbeitsplatzes",
+          "fa": "زیرانداز بزرگ RGB با سطح نرم برای کیبورد، ماوس و محافظت از میز کار"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 110
+          },
+          {
+            "currency_code": "EUR",
+            "price": 93.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00275
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.044
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Logitech Brio 4K Webcam",
+          "de": "Logitech Brio 4K-Webcam",
+          "fa": "وب‌کم 4K لاجیتک Brio"
+        },
+        "slug": {
+          "en": "logitech-brio-4k-webcam",
+          "de": "logitech-brio-4k-webcam",
+          "fa": "وب-کم-4k-لاجیتک-brio"
+        },
+        "description": {
+          "en": "4K webcam with HDR, Windows Hello support, and professional video quality",
+          "de": "4K-Webcam mit HDR, Windows-Hello-Unterstützung und professioneller Videoqualität",
+          "fa": "وب‌کم 4K با HDR، پشتیبانی از Windows Hello و کیفیت ویدیویی حرفه‌ای"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 330
+          },
+          {
+            "currency_code": "EUR",
+            "price": 280.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00825
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.132
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "ASUS ProArt 27\" Monitor",
+          "de": "ASUS ProArt 27\" Monitor",
+          "fa": "مانیتور ASUS ProArt 27 اینچ"
+        },
+        "slug": {
+          "en": "asus-proart-27-monitor",
+          "de": "asus-proart-27-monitor",
+          "fa": "مانیتور-asus-proart-27-اینچ"
+        },
+        "description": {
+          "en": "Color-accurate monitor for designers, editors, and professional creative teams",
+          "de": "Farbgenauer Monitor für Designer, Editoren und professionelle Kreativteams",
+          "fa": "مانیتور با دقت رنگ بالا برای طراحان، تدوین‌گران و تیم‌های خلاق حرفه‌ای"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 690
+          },
+          {
+            "currency_code": "EUR",
+            "price": 586.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.01725
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.276
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "LG UltraWide 34\" Monitor",
+          "de": "LG UltraWide 34\" Monitor",
+          "fa": "مانیتور فوق عریض LG UltraWide 34 اینچ"
+        },
+        "slug": {
+          "en": "lg-ultrawide-34-monitor",
+          "de": "lg-ultrawide-34-monitor",
+          "fa": "مانیتور-فوق-عریض-lg-ultrawide-34-اینچ"
+        },
+        "description": {
+          "en": "Ultra-wide display for multitasking, timelines, dashboards, and productivity workflows",
+          "de": "Ultrawide-Display für Multitasking, Timelines, Dashboards und produktive Workflows",
+          "fa": "نمایشگر فوق عریض برای چندوظیفگی، تایم‌لاین‌ها، داشبوردها و کارهای بهره‌وری"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 760
+          },
+          {
+            "currency_code": "EUR",
+            "price": 646
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.019
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.304
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Philips Hue Play Light Bar",
+          "de": "Philips Hue Play Lightbar",
+          "fa": "نوار نور Philips Hue Play"
+        },
+        "slug": {
+          "en": "philips-hue-play-light-bar",
+          "de": "philips-hue-play-lightbar",
+          "fa": "نوار-نور-philips-hue-play"
+        },
+        "description": {
+          "en": "Smart light bar for ambient workspace lighting and screen-side illumination",
+          "de": "Smarte Lightbar für stimmungsvolle Arbeitsplatzbeleuchtung und Beleuchtung neben dem Bildschirm",
+          "fa": "نوار نور هوشمند برای نورپردازی محیط کار و روشنایی کنار نمایشگر"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 175
+          },
+          {
+            "currency_code": "EUR",
+            "price": 148.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.004375
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.07
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Logitech Craft Keyboard",
+          "de": "Logitech Craft Tastatur",
+          "fa": "کیبورد Logitech Craft"
+        },
+        "slug": {
+          "en": "logitech-craft-keyboard",
+          "de": "logitech-craft-tastatur",
+          "fa": "کیبورد-logitech-craft"
+        },
+        "description": {
+          "en": "Premium wireless keyboard with creative input dial and comfortable low-profile keys",
+          "de": "Premium-Funktastatur mit Kreativ-Drehregler und komfortablen flachen Tasten",
+          "fa": "کیبورد بی‌سیم پریمیوم با کنترل چرخشی خلاقانه و کلیدهای کم‌ارتفاع راحت"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 285
+          },
+          {
+            "currency_code": "EUR",
+            "price": 242.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.007125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.114
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Apple Magic Trackpad",
+          "de": "Apple Magic Trackpad",
+          "fa": "ترک‌پد Apple Magic"
+        },
+        "slug": {
+          "en": "apple-magic-trackpad",
+          "de": "apple-magic-trackpad",
+          "fa": "ترک-پد-apple-magic"
+        },
+        "description": {
+          "en": "Wireless multi-touch trackpad for gesture navigation and precise desktop control",
+          "de": "Kabelloses Multi-Touch-Trackpad für Gestennavigation und präzise Desktop-Steuerung",
+          "fa": "ترک‌پد بی‌سیم چندلمسی برای کنترل دقیق دسکتاپ و ناوبری حرکتی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 245
+          },
+          {
+            "currency_code": "EUR",
+            "price": 208.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.006125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.098
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Microsoft Surface Dock 2",
+          "de": "Microsoft Surface Dock 2",
+          "fa": "داک Microsoft Surface Dock 2"
+        },
+        "slug": {
+          "en": "microsoft-surface-dock-2",
+          "de": "microsoft-surface-dock-2",
+          "fa": "داک-microsoft-surface-dock-2"
+        },
+        "description": {
+          "en": "Docking station for Surface devices with display, USB, Ethernet, and charging ports",
+          "de": "Dockingstation für Surface-Geräte mit Display-, USB-, Ethernet- und Ladeanschlüssen",
+          "fa": "داک مخصوص دستگاه‌های Surface با درگاه‌های نمایشگر، USB، اترنت و شارژ"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 360
+          },
+          {
+            "currency_code": "EUR",
+            "price": 306
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.009
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.144
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Satechi Aluminum Laptop Stand",
+          "de": "Satechi Aluminium-Laptopständer",
+          "fa": "پایه لپ‌تاپ آلومینیومی Satechi"
+        },
+        "slug": {
+          "en": "satechi-aluminum-laptop-stand",
+          "de": "satechi-aluminium-laptopstaender",
+          "fa": "پایه-لپ-تاپ-آلومینیومی-satechi"
+        },
+        "description": {
+          "en": "Aluminum laptop stand for improved posture, airflow, and desk organization",
+          "de": "Aluminium-Laptopständer für bessere Haltung, Luftzirkulation und Schreibtischorganisation",
+          "fa": "پایه آلومینیومی لپ‌تاپ برای وضعیت بهتر بدن، تهویه و نظم میز کار"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 96
+          },
+          {
+            "currency_code": "EUR",
+            "price": 81.6
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0024
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0384
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Rain Design mStand",
+          "de": "Rain Design mStand",
+          "fa": "پایه لپ‌تاپ Rain Design mStand"
+        },
+        "slug": {
+          "en": "rain-design-mstand",
+          "de": "rain-design-mstand",
+          "fa": "پایه-لپ-تاپ-rain-design-mstand"
+        },
+        "description": {
+          "en": "Minimal laptop stand that raises the screen and helps create an ergonomic workspace",
+          "de": "Minimalistischer Laptopständer, der den Bildschirm erhöht und einen ergonomischen Arbeitsplatz unterstützt",
+          "fa": "پایه مینیمال لپ‌تاپ که نمایشگر را بالاتر می‌آورد و محیط کار ارگونومیک‌تری ایجاد می‌کند"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 112
+          },
+          {
+            "currency_code": "EUR",
+            "price": 95.2
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0028
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0448
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Kensington Privacy Screen 14\"",
+          "de": "Kensington Blickschutzfilter 14\"",
+          "fa": "فیلتر حریم خصوصی Kensington چهارده اینچ"
+        },
+        "slug": {
+          "en": "kensington-privacy-screen-14",
+          "de": "kensington-blickschutzfilter-14",
+          "fa": "فیلتر-حریم-خصوصی-kensington-14-اینچ"
+        },
+        "description": {
+          "en": "Privacy filter that limits side viewing angles for laptops in public or shared spaces",
+          "de": "Blickschutzfilter, der seitliche Sichtwinkel bei Laptops in öffentlichen oder gemeinsam genutzten Bereichen begrenzt",
+          "fa": "فیلتر حریم خصوصی برای محدود کردن زاویه دید جانبی لپ‌تاپ در فضاهای عمومی یا مشترک"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 74
+          },
+          {
+            "currency_code": "EUR",
+            "price": 62.9
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00185
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0296
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Yubico YubiKey 5C NFC",
+          "de": "Yubico YubiKey 5C NFC",
+          "fa": "کلید امنیتی Yubico YubiKey 5C NFC"
+        },
+        "slug": {
+          "en": "yubico-yubikey-5c-nfc",
+          "de": "yubico-yubikey-5c-nfc",
+          "fa": "کلید-امنیتی-yubico-yubikey-5c-nfc"
+        },
+        "description": {
+          "en": "Hardware security key for stronger account protection and multi-factor authentication",
+          "de": "Hardware-Sicherheitsschlüssel für stärkeren Kontoschutz und Multi-Faktor-Authentifizierung",
+          "fa": "کلید امنیتی سخت‌افزاری برای محافظت قوی‌تر از حساب و احراز هویت چندمرحله‌ای"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 128
+          },
+          {
+            "currency_code": "EUR",
+            "price": 108.8
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0032
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0512
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Epson EcoTank L3250 Printer",
+          "de": "Epson EcoTank L3250 Drucker",
+          "fa": "پرینتر Epson EcoTank L3250"
+        },
+        "slug": {
+          "en": "epson-ecotank-l3250-printer",
+          "de": "epson-ecotank-l3250-drucker",
+          "fa": "پرینتر-epson-ecotank-l3250"
+        },
+        "description": {
+          "en": "Ink tank printer for economical document printing, scanning, and home office use",
+          "de": "Tintentankdrucker für wirtschaftlichen Dokumentendruck, Scannen und Homeoffice-Nutzung",
+          "fa": "پرینتر مخزن‌دار برای چاپ اقتصادی اسناد، اسکن و استفاده در دفتر خانگی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 410
+          },
+          {
+            "currency_code": "EUR",
+            "price": 348.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.01025
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.164
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Brother ADS-1700W Scanner",
+          "de": "Brother ADS-1700W Scanner",
+          "fa": "اسکنر Brother ADS-1700W"
+        },
+        "slug": {
+          "en": "brother-ads-1700w-scanner",
+          "de": "brother-ads-1700w-scanner",
+          "fa": "اسکنر-brother-ads-1700w"
+        },
+        "description": {
+          "en": "Compact wireless document scanner for receipts, contracts, and office paperwork",
+          "de": "Kompakter kabelloser Dokumentenscanner für Belege, Verträge und Büro unterlagen",
+          "fa": "اسکنر اسناد بی‌سیم و جمع‌وجور برای رسیدها، قراردادها و مدارک اداری"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 345
+          },
+          {
+            "currency_code": "EUR",
+            "price": 293.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.008625
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.138
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Canon LiDE 400 Scanner",
+          "de": "Canon LiDE 400 Scanner",
+          "fa": "اسکنر Canon LiDE 400"
+        },
+        "slug": {
+          "en": "canon-lide-400-scanner",
+          "de": "canon-lide-400-scanner",
+          "fa": "اسکنر-canon-lide-400"
+        },
+        "description": {
+          "en": "Slim flatbed scanner for documents, photos, and everyday digitization tasks",
+          "de": "Flacher schlanker Scanner für Dokumente, Fotos und alltägliche Digitalisierungsaufgaben",
+          "fa": "اسکنر تخت باریک برای اسناد، عکس‌ها و کارهای روزمره دیجیتال‌سازی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 184
+          },
+          {
+            "currency_code": "EUR",
+            "price": 156.4
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0046
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0736
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Synology DS224+ NAS",
+          "de": "Synology DS224+ NAS",
+          "fa": "ذخیره‌ساز تحت شبکه Synology DS224+"
+        },
+        "slug": {
+          "en": "synology-ds224-plus-nas",
+          "de": "synology-ds224-plus-nas",
+          "fa": "ذخیره-ساز-تحت-شبکه-synology-ds224-plus"
+        },
+        "description": {
+          "en": "Two-bay network storage for shared files, backups, and small business data workflows",
+          "de": "NAS mit zwei Einschüben für gemeinsame Dateien, Backups und Daten-Workflows kleiner Unternehmen",
+          "fa": "ذخیره‌ساز شبکه دو کشویی برای فایل‌های مشترک، بکاپ و جریان کاری داده در کسب‌وکارهای کوچک"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 585
+          },
+          {
+            "currency_code": "EUR",
+            "price": 497.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.014625
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.234
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Seagate IronWolf 4TB NAS Drive",
+          "de": "Seagate IronWolf 4 TB NAS-Festplatte",
+          "fa": "هارد NAS سیگیت IronWolf ظرفیت 4 ترابایت"
+        },
+        "slug": {
+          "en": "seagate-ironwolf-4tb-nas-drive",
+          "de": "seagate-ironwolf-4tb-nas-festplatte",
+          "fa": "هارد-nas-سیگیت-ironwolf-4-ترابایت"
+        },
+        "description": {
+          "en": "Reliable hard drive built for NAS systems, backups, and always-on storage workloads",
+          "de": "Zuverlässige Festplatte für NAS-Systeme, Backups und dauerhaft aktive Speicher-Workloads",
+          "fa": "هارد قابل اعتماد مخصوص سیستم‌های NAS، بکاپ و ذخیره‌سازی مداوم"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 390
+          },
+          {
+            "currency_code": "EUR",
+            "price": 331.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00975
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.156
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Western Digital My Passport 2TB",
+          "de": "Western Digital My Passport 2 TB",
+          "fa": "هارد اکسترنال Western Digital My Passport ظرفیت 2 ترابایت"
+        },
+        "slug": {
+          "en": "western-digital-my-passport-2tb",
+          "de": "western-digital-my-passport-2tb",
+          "fa": "هارد-اکسترنال-western-digital-my-passport-2-ترابایت"
+        },
+        "description": {
+          "en": "Portable hard drive for everyday backups, archives, and offline file storage",
+          "de": "Tragbare Festplatte für tägliche Backups, Archive und Offline-Dateispeicherung",
+          "fa": "هارد قابل حمل برای بکاپ روزمره، آرشیو و ذخیره‌سازی آفلاین فایل‌ها"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 225
+          },
+          {
+            "currency_code": "EUR",
+            "price": 191.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.005625
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.09
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "AOC 24G2 24\" Gaming Monitor",
+          "de": "AOC 24G2 24\" Gaming-Monitor",
+          "fa": "مانیتور گیمینگ AOC 24G2 سایز 24 اینچ"
+        },
+        "slug": {
+          "en": "aoc-24g2-24-gaming-monitor",
+          "de": "aoc-24g2-24-gaming-monitor",
+          "fa": "مانیتور-گیمینگ-aoc-24g2-24-اینچ"
+        },
+        "description": {
+          "en": "Fast refresh-rate gaming monitor suitable for competitive play and responsive desktop use",
+          "de": "Gaming-Monitor mit hoher Bildwiederholrate für kompetitives Spielen und reaktionsschnelle Desktop-Nutzung",
+          "fa": "مانیتور گیمینگ با نرخ نوسازی بالا مناسب بازی رقابتی و کاربری سریع دسکتاپ"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 435
+          },
+          {
+            "currency_code": "EUR",
+            "price": 369.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.010875
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.174
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "HyperX Cloud II Headset",
+          "de": "HyperX Cloud II Headset",
+          "fa": "هدست HyperX Cloud II"
+        },
+        "slug": {
+          "en": "hyperx-cloud-ii-headset",
+          "de": "hyperx-cloud-ii-headset",
+          "fa": "هدست-hyperx-cloud-ii"
+        },
+        "description": {
+          "en": "Comfortable gaming headset with virtual surround sound and detachable microphone",
+          "de": "Komfortables Gaming-Headset mit virtuellem Surround-Sound und abnehmbarem Mikrofon",
+          "fa": "هدست گیمینگ راحت با صدای فراگیر مجازی و میکروفون جداشدنی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 205
+          },
+          {
+            "currency_code": "EUR",
+            "price": 174.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.005125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.082
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Razer BlackShark V2 Headset",
+          "de": "Razer BlackShark V2 Headset",
+          "fa": "هدست Razer BlackShark V2"
+        },
+        "slug": {
+          "en": "razer-blackshark-v2-headset",
+          "de": "razer-blackshark-v2-headset",
+          "fa": "هدست-razer-blackshark-v2"
+        },
+        "description": {
+          "en": "Esports headset with clear microphone, lightweight frame, and immersive sound",
+          "de": "Esports-Headset mit klarem Mikrofon, leichtem Rahmen und immersivem Klang",
+          "fa": "هدست ورزش‌های الکترونیک با میکروفون شفاف، بدنه سبک و صدای فراگیر"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 235
+          },
+          {
+            "currency_code": "EUR",
+            "price": 199.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.005875
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.094
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Kensington Expert Trackball",
+          "de": "Kensington Expert Trackball",
+          "fa": "ترک‌بال Kensington Expert"
+        },
+        "slug": {
+          "en": "kensington-expert-trackball",
+          "de": "kensington-expert-trackball",
+          "fa": "ترک-بال-kensington-expert"
+        },
+        "description": {
+          "en": "Ergonomic trackball mouse for precise cursor control and reduced wrist movement",
+          "de": "Ergonomische Trackball-Maus für präzise Cursorsteuerung und weniger Handgelenkbewegung",
+          "fa": "ماوس ترک‌بال ارگونومیک برای کنترل دقیق نشانگر و کاهش حرکت مچ دست"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 174
+          },
+          {
+            "currency_code": "EUR",
+            "price": 147.9
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00435
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0696
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Logitech Lift Vertical Mouse",
+          "de": "Logitech Lift vertikale Maus",
+          "fa": "ماوس عمودی Logitech Lift"
+        },
+        "slug": {
+          "en": "logitech-lift-vertical-mouse",
+          "de": "logitech-lift-vertikale-maus",
+          "fa": "ماوس-عمودی-logitech-lift"
+        },
+        "description": {
+          "en": "Vertical ergonomic mouse designed for natural hand posture and daily comfort",
+          "de": "Vertikale ergonomische Maus für natürliche Handhaltung und täglichen Komfort",
+          "fa": "ماوس عمودی ارگونومیک برای حالت طبیعی دست و راحتی روزانه"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 132
+          },
+          {
+            "currency_code": "EUR",
+            "price": 112.2
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0033
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0528
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Dell USB-C 65W Charger",
+          "de": "Dell USB-C 65W Ladegerät",
+          "fa": "شارژر USB-C دل 65 وات"
+        },
+        "slug": {
+          "en": "dell-usb-c-65w-charger",
+          "de": "dell-usb-c-65w-ladegeraet",
+          "fa": "شارژر-usb-c-دل-65-وات"
+        },
+        "description": {
+          "en": "Compact USB-C power adapter for compatible laptops, tablets, and mobile workstations",
+          "de": "Kompaktes USB-C-Netzteil für kompatible Laptops, Tablets und mobile Workstations",
+          "fa": "آداپتور برق USB-C جمع‌وجور برای لپ‌تاپ‌ها، تبلت‌ها و ورک‌استیشن‌های سازگار"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 85
+          },
+          {
+            "currency_code": "EUR",
+            "price": 72.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.002125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.034
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Anker PowerPort 100W Charger",
+          "de": "Anker PowerPort 100W Ladegerät",
+          "fa": "شارژر Anker PowerPort 100 وات"
+        },
+        "slug": {
+          "en": "anker-powerport-100w-charger",
+          "de": "anker-powerport-100w-ladegeraet",
+          "fa": "شارژر-anker-powerport-100-وات"
+        },
+        "description": {
+          "en": "High-output charger for laptops, tablets, phones, and multiple USB-C devices",
+          "de": "Leistungsstarkes Ladegerät für Laptops, Tablets, Smartphones und mehrere USB-C-Geräte",
+          "fa": "شارژر پرقدرت برای لپ‌تاپ، تبلت، موبایل و چند دستگاه USB-C"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 148
+          },
+          {
+            "currency_code": "EUR",
+            "price": 125.8
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0037
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0592
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Amazon Basics HDMI Cable 2m",
+          "de": "Amazon Basics HDMI-Kabel 2 m",
+          "fa": "کابل HDMI آمازون بیسیکس دو متری"
+        },
+        "slug": {
+          "en": "amazon-basics-hdmi-cable-2m",
+          "de": "amazon-basics-hdmi-kabel-2m",
+          "fa": "کابل-hdmi-آمازون-بیسیکس-دو-متری"
+        },
+        "description": {
+          "en": "Reliable HDMI cable for monitors, projectors, media devices, and office displays",
+          "de": "Zuverlässiges HDMI-Kabel für Monitore, Projektoren, Mediengeräte und Bürodisplays",
+          "fa": "کابل HDMI مطمئن برای مانیتورها، پروژکتورها، دستگاه‌های رسانه‌ای و نمایشگرهای اداری"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 32
+          },
+          {
+            "currency_code": "EUR",
+            "price": 27.2
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0008
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0128
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Cable Matters DisplayPort Cable",
+          "de": "Cable Matters DisplayPort-Kabel",
+          "fa": "کابل DisplayPort کیبل مترز"
+        },
+        "slug": {
+          "en": "cable-matters-displayport-cable",
+          "de": "cable-matters-displayport-kabel",
+          "fa": "کابل-displayport-کیبل-مترز"
+        },
+        "description": {
+          "en": "DisplayPort cable for high-resolution monitors and multi-display workstations",
+          "de": "DisplayPort-Kabel für hochauflösende Monitore und Workstations mit mehreren Displays",
+          "fa": "کابل DisplayPort برای مانیتورهای با رزولوشن بالا و ایستگاه‌های کاری چندنمایشگره"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 47
+          },
+          {
+            "currency_code": "EUR",
+            "price": 39.95
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.001175
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0188
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "StarTech USB 3.0 Extension Cable",
+          "de": "StarTech USB-3.0-Verlängerungskabel",
+          "fa": "کابل افزایش طول USB 3.0 استارتک"
+        },
+        "slug": {
+          "en": "startech-usb-3-extension-cable",
+          "de": "startech-usb-3-verlaengerungskabel",
+          "fa": "کابل-افزایش-طول-usb-3-استارتک"
+        },
+        "description": {
+          "en": "USB extension cable for peripherals, webcams, external drives, and desktop setups",
+          "de": "USB-Verlängerungskabel für Peripheriegeräte, Webcams, externe Laufwerke und Desktop-Setups",
+          "fa": "کابل افزایش طول USB برای لوازم جانبی، وب‌کم‌ها، درایوهای اکسترنال و میز کار"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 39
+          },
+          {
+            "currency_code": "EUR",
+            "price": 33.15
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.000975
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0156
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Logitech Zone Wireless Headset",
+          "de": "Logitech Zone Wireless Headset",
+          "fa": "هدست بی‌سیم Logitech Zone"
+        },
+        "slug": {
+          "en": "logitech-zone-wireless-headset",
+          "de": "logitech-zone-wireless-headset",
+          "fa": "هدست-بی-سیم-logitech-zone"
+        },
+        "description": {
+          "en": "Business wireless headset with active noise cancellation and clear call controls",
+          "de": "Kabelloses Business-Headset mit aktiver Geräuschunterdrückung und klaren Anrufsteuerungen",
+          "fa": "هدست بی‌سیم تجاری با حذف نویز فعال و کنترل‌های شفاف تماس"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 310
+          },
+          {
+            "currency_code": "EUR",
+            "price": 263.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00775
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.124
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Poly Voyager 4320 Headset",
+          "de": "Poly Voyager 4320 Headset",
+          "fa": "هدست Poly Voyager 4320"
+        },
+        "slug": {
+          "en": "poly-voyager-4320-headset",
+          "de": "poly-voyager-4320-headset",
+          "fa": "هدست-poly-voyager-4320"
+        },
+        "description": {
+          "en": "Wireless office headset for clear calls, long meetings, and hybrid work",
+          "de": "Kabelloses Büro-Headset für klare Gespräche, lange Meetings und hybrides Arbeiten",
+          "fa": "هدست اداری بی‌سیم برای تماس‌های شفاف، جلسات طولانی و کار ترکیبی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 295
+          },
+          {
+            "currency_code": "EUR",
+            "price": 250.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.007375
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.118
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "AverMedia Live Gamer Mini",
+          "de": "AverMedia Live Gamer Mini",
+          "fa": "کارت کپچر AverMedia Live Gamer Mini"
+        },
+        "slug": {
+          "en": "avermedia-live-gamer-mini",
+          "de": "avermedia-live-gamer-mini",
+          "fa": "کارت-کپچر-avermedia-live-gamer-mini"
+        },
+        "description": {
+          "en": "Compact capture device for recording and streaming console or camera video",
+          "de": "Kompaktes Capture-Gerät zum Aufnehmen und Streamen von Konsolen- oder Kameravideo",
+          "fa": "دستگاه کپچر جمع‌وجور برای ضبط و استریم ویدیو از کنسول یا دوربین"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 265
+          },
+          {
+            "currency_code": "EUR",
+            "price": 225.25
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.006625
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.106
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Elgato Cam Link 4K",
+          "de": "Elgato Cam Link 4K",
+          "fa": "کارت کپچر Elgato Cam Link 4K"
+        },
+        "slug": {
+          "en": "elgato-cam-link-4k",
+          "de": "elgato-cam-link-4k",
+          "fa": "کارت-کپچر-elgato-cam-link-4k"
+        },
+        "description": {
+          "en": "HDMI capture adapter for turning cameras into high-quality webcams",
+          "de": "HDMI-Capture-Adapter, um Kameras in hochwertige Webcams zu verwandeln",
+          "fa": "آداپتور کپچر HDMI برای تبدیل دوربین‌ها به وب‌کم باکیفیت"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 220
+          },
+          {
+            "currency_code": "EUR",
+            "price": 187
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0055
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.088
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Nanoleaf Shapes Starter Kit",
+          "de": "Nanoleaf Shapes Starter-Kit",
+          "fa": "کیت شروع Nanoleaf Shapes"
+        },
+        "slug": {
+          "en": "nanoleaf-shapes-starter-kit",
+          "de": "nanoleaf-shapes-starter-kit",
+          "fa": "کیت-شروع-nanoleaf-shapes"
+        },
+        "description": {
+          "en": "Modular smart lighting panels for creative workspaces, studios, and gaming rooms",
+          "de": "Modulare smarte Lichtpaneele für kreative Arbeitsplätze, Studios und Gaming-Räume",
+          "fa": "پنل‌های نور هوشمند ماژولار برای محیط‌های کاری خلاق، استودیوها و اتاق‌های بازی"
+        },
+        "in_stock": true,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 335
+          },
+          {
+            "currency_code": "EUR",
+            "price": 284.75
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.008375
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.134
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Loupedeck Live Console",
+          "de": "Loupedeck Live Konsole",
+          "fa": "کنسول Loupedeck Live"
+        },
+        "slug": {
+          "en": "loupedeck-live-console",
+          "de": "loupedeck-live-konsole",
+          "fa": "کنسول-loupedeck-live"
+        },
+        "description": {
+          "en": "Custom control console for editing, streaming, productivity, and creative applications",
+          "de": "Anpassbare Steuerkonsole für Schnitt, Streaming, Produktivität und kreative Anwendungen",
+          "fa": "کنسول کنترل قابل تنظیم برای تدوین، استریم، بهره‌وری و برنامه‌های خلاقانه"
+        },
+        "in_stock": false,
+        "available_soon": true,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 450
+          },
+          {
+            "currency_code": "EUR",
+            "price": 382.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.01125
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.18
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Razer Kiyo Pro Webcam",
+          "de": "Razer Kiyo Pro Webcam",
+          "fa": "وب‌کم Razer Kiyo Pro"
+        },
+        "slug": {
+          "en": "razer-kiyo-pro-webcam",
+          "de": "razer-kiyo-pro-webcam",
+          "fa": "وب-کم-razer-kiyo-pro"
+        },
+        "description": {
+          "en": "Adaptive light sensor webcam for clear video in changing lighting conditions",
+          "de": "Webcam mit adaptivem Lichtsensor für klares Video bei wechselnden Lichtverhältnissen",
+          "fa": "وب‌کم با حسگر نور تطبیقی برای تصویر شفاف در شرایط نوری متغیر"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 270
+          },
+          {
+            "currency_code": "EUR",
+            "price": 229.5
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.00675
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.108
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Dell Premier Rechargeable Mouse",
+          "de": "Dell Premier wiederaufladbare Maus",
+          "fa": "ماوس شارژی Dell Premier"
+        },
+        "slug": {
+          "en": "dell-premier-rechargeable-mouse",
+          "de": "dell-premier-wiederaufladbare-maus",
+          "fa": "ماوس-شارژی-dell-premier"
+        },
+        "description": {
+          "en": "Rechargeable wireless mouse with precise tracking and multi-device connectivity",
+          "de": "Wiederaufladbare kabellose Maus mit präzisem Tracking und Verbindung zu mehreren Geräten",
+          "fa": "ماوس بی‌سیم شارژی با ردیابی دقیق و اتصال چنددستگاهی"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 104
+          },
+          {
+            "currency_code": "EUR",
+            "price": 88.4
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.0026
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0416
+          }
+        ]
+      },
+      {
+        "name": {
+          "en": "Microsoft Designer Compact Keyboard",
+          "de": "Microsoft Designer Compact Tastatur",
+          "fa": "کیبورد جمع‌وجور Microsoft Designer"
+        },
+        "slug": {
+          "en": "microsoft-designer-compact-keyboard",
+          "de": "microsoft-designer-compact-tastatur",
+          "fa": "کیبورد-جمع-وجور-microsoft-designer"
+        },
+        "description": {
+          "en": "Slim Bluetooth keyboard for compact desks, tablets, and mobile workspaces",
+          "de": "Schlanke Bluetooth-Tastatur für kompakte Schreibtische, Tablets und mobile Arbeitsplätze",
+          "fa": "کیبورد بلوتوث باریک برای میزهای کوچک، تبلت‌ها و محیط‌های کاری قابل حمل"
+        },
+        "in_stock": true,
+        "available_soon": false,
+        "productPrices": [
+          {
+            "currency_code": "USD",
+            "price": 97
+          },
+          {
+            "currency_code": "EUR",
+            "price": 82.45
+          },
+          {
+            "currency_code": "BTC",
+            "price": 0.002425
+          },
+          {
+            "currency_code": "ETH",
+            "price": 0.0388
+          }
+        ]
+      }
+    ]
+  }
 ]
