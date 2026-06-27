@@ -164,6 +164,7 @@ final class ProductForm
                                     ->columnSpanFull()
                                     ->image()
                                     ->label(__('vendra-product::attributes.image'))
+                                    ->multiple()
                                     ->panelLayout('grid')
                                     ->responsiveImages(),
                             ]),

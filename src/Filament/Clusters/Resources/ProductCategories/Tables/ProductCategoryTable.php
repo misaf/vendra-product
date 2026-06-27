@@ -55,9 +55,9 @@ final class ProductCategoryTable
 
             BadgeableColumn::make('name')
                 ->alignStart()
-                ->description(function (Livewire $livewire, ProductCategory $record): string {
-                    return $record->getTranslation('description', $livewire->activeLocale);
-                })
+                // ->description(function (Livewire $livewire, ProductCategory $record): string {
+                //     return $record->getTranslation('description', $livewire->activeLocale);
+                // })
                 ->icon('heroicon-m-folder-plus')
                 ->label(__('vendra-product::attributes.name'))
                 ->suffixBadges([

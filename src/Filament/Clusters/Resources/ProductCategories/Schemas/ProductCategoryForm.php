@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas;
 
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -49,10 +50,11 @@ final class ProductCategoryForm
                     ->required()
                     ->unique(modifyRuleUsing: fn(Unique $rule) => $rule->withoutTrashed()),
 
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->columnSpanFull()
+                    ->json()
                     ->label(__('vendra-product::attributes.description'))
-                    ->rows(5),
+                    ->required(),
 
                 SpatieMediaLibraryFileUpload::make('image')
                     ->collection('products/categories')
