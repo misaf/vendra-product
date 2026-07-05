@@ -253,7 +253,7 @@ final class ProductTable
                 Group::make('productCategory.name')
                     ->label(__('vendra-product::navigation.product_category'))
                     ->getTitleFromRecordUsing(function (Product $record, Livewire $livewire) {
-                        return $record->productCategory->getTranslation('name', $livewire->activeLocale);
+                        return $record->productCategory?->getTranslation('name', $livewire->activeLocale);
                     })
             );
     }

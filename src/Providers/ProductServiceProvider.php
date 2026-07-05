@@ -8,6 +8,7 @@ use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
 use Misaf\VendraProduct\Console\Commands\SeedCommand;
 use Misaf\VendraProduct\ProductPlugin;
+use Misaf\VendraSupport\Support\TenantSeeders;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -42,6 +43,8 @@ final class ProductServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
+
         AboutCommand::add('Vendra Product', fn() => ['Version' => 'dev-master']);
     }
 }

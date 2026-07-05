@@ -10,8 +10,8 @@ use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Concerns\RequiresCurrentTenant;
 use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
-use Misaf\VendraTenant\Concerns\RequiresCurrentTenant;
 use Misaf\VendraTenant\Models\Tenant;
 
 final class DemoContentSeeder extends BaseDemoContentSeeder

@@ -21,7 +21,7 @@ use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Observers\ProductObserver;
-use Misaf\VendraTenant\Traits\BelongsToTenant;
+use Misaf\VendraSupport\Traits\BelongsToTenant;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
