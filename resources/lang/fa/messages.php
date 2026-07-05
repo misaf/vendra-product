@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-return  [
+return [
     'token_copied' => 'توکن در کلیپ بورد کپی شد',
 ];

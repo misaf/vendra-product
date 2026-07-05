@@ -19,7 +19,7 @@ final class ProductPlugin implements Plugin
     public static function make(): static
     {
         /** @var static $plugin */
-        $plugin = app(static::class);
+        $plugin = app(self::class);
 
         return $plugin;
     }

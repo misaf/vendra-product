@@ -126,7 +126,7 @@ final class ProductTable
                         ->action(function (Product $record, array $data): void {
                             $record->productPrices()->create([
                                 'currency_code' => $data['currency_code'],
-                                'price'         => $data['price']
+                                'price'         => $data['price'],
                             ]);
                         })
                 ),

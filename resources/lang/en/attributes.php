@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-return  [
+return [
     'availability_date' => 'Availability Date',
     'available_soon'    => 'Available Soon',
     'created_at'        => 'Created At',

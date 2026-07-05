@@ -57,13 +57,13 @@ final class Product extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
     use HasDefaultActivityLogOptions;
-
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
 
     /** @use HasFactory<ProductFactory> */
     use HasFactory;
+
     use HasTranslations;
     use LogsActivity;
     use SoftDeletes;
@@ -98,7 +98,7 @@ final class Product extends Model implements HasMedia, Sortable
 
     protected static function booted(): void
     {
-        static::creating(function (self $product): string {
+        self::creating(function (self $product): string {
             return $product->token = self::generateToken();
         });
     }

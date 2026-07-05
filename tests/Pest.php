@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Misaf\VendraProduct\Tests\TestCase;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ declare(strict_types=1);
 |
 */
 
-uses(Misaf\VendraProduct\Tests\TestCase::class)->in('Feature');
+uses(TestCase::class)->in('Feature');
 
-uses(Misaf\VendraProduct\Tests\TestCase::class)->in('Unit');
+uses(TestCase::class)->in('Unit');

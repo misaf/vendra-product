@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-return  [
+return [
     'product'                     => 'Produkte',
     'product_category'            => 'Produktkategorien',
     'product_category_management' => 'Produktkategorie-Verwaltung',

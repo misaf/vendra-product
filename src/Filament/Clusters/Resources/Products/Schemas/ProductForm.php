@@ -56,7 +56,7 @@ final class ProductForm
                                     ->required(),
 
                                 TextInput::make('slug')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.slug"))
+                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.slug'))
                                     ->columnSpan(['lg' => 1])
                                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                                     ->label(__('vendra-product::attributes.slug'))
@@ -104,19 +104,19 @@ final class ProductForm
                                     ->stripCharacters(','),
 
                                 TextInput::make('quantity')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.quantity"))
+                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.quantity'))
                                     ->columnSpan(['lg' => 1])
                                     ->label(__('vendra-product::attributes.quantity'))
                                     ->numeric(),
 
                                 TextInput::make('stock_threshold')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.stock_threshold"))
+                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.stock_threshold'))
                                     ->columnSpan(['lg' => 1])
                                     ->label(__('vendra-product::attributes.stock_threshold'))
                                     ->numeric(),
 
                                 Toggle::make('available_soon')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.available_soon"))
+                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.available_soon'))
                                     ->columnSpan(['lg' => 1])
                                     ->default(false)
                                     ->inline(false)
@@ -144,7 +144,7 @@ final class ProductForm
                                     ),
 
                                 Toggle::make('in_stock')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.in_stock"))
+                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.in_stock'))
                                     ->columnSpanFull()
                                     ->default(false)
                                     ->inline(false)
@@ -170,7 +170,7 @@ final class ProductForm
                             ]),
                     ])
                     ->contained(false)
-                    ->persistTabInQueryString('products-tab')
+                    ->persistTabInQueryString('products-tab'),
             ])
             ->columns(1);
     }

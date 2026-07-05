@@ -41,7 +41,7 @@ final class ProductCategoryForm
                     ),
 
                 TextInput::make('slug')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.slug"))
+                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.slug'))
                     ->columnSpan(['lg' => 1])
                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                     ->label(__('vendra-product::attributes.slug'))
@@ -64,7 +64,7 @@ final class ProductCategoryForm
                     ->responsiveImages(),
 
                 Toggle::make('status')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly("data.status"))
+                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.status'))
                     ->columnSpanFull()
                     ->default(false)
                     ->label(__('vendra-product::attributes.status'))

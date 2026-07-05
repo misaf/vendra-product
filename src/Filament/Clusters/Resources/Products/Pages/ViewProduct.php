@@ -29,7 +29,7 @@ final class ViewProduct extends ViewRecord
         return [
             EditAction::make(),
 
-            LocaleSwitcher::make()
+            LocaleSwitcher::make(),
         ];
     }
 

@@ -22,7 +22,7 @@ final class ProductServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations()
             ->hasMigrations([
-                'create_products_table'
+                'create_products_table',
             ])
             ->hasCommands(SeedCommand::class)
             ->hasInstallCommand(function (InstallCommand $command): void {

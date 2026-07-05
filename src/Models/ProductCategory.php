@@ -50,13 +50,13 @@ final class ProductCategory extends Model implements HasMedia, Sortable
 {
     use BelongsToTenant;
     use HasDefaultActivityLogOptions;
-
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
 
     /** @use HasFactory<ProductCategoryFactory> */
     use HasFactory;
+
     use HasRecursiveRelationships;
     use HasTranslations;
     use LogsActivity;

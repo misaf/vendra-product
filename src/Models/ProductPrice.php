@@ -38,6 +38,7 @@ final class ProductPrice extends Model
 
     /** @use HasFactory<ProductPriceFactory> */
     use HasFactory;
+
     use LogsActivity;
     use SoftDeletes;
     use Traits\BelongsToThrough;
@@ -77,5 +78,4 @@ final class ProductPrice extends Model
     {
         return $this->belongsToThrough(ProductCategory::class, Product::class);
     }
-
 }

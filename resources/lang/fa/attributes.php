@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-return  [
+return [
     'availability_date' => 'تاریخ موجودی',
     'available_soon'    => 'به زودی موجود',
     'created_at'        => 'تاریخ ایجاد',
