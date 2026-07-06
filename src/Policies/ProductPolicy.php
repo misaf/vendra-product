@@ -5,71 +5,71 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Misaf\VendraProduct\Enums\ProductPolicyEnum;
 use Misaf\VendraProduct\Models\Product;
-use Misaf\VendraUser\Models\User;
 
 final class ProductPolicy
 {
     use HandlesAuthorization;
 
-    public function create(User $user): bool
+    public function create(Authorizable $user): bool
     {
-        return $user->can(ProductPolicyEnum::CREATE);
+        return $user->can(ProductPolicyEnum::CREATE->value);
     }
 
-    public function delete(User $user, Product $product): bool
+    public function delete(Authorizable $user, Product $product): bool
     {
-        return $user->can(ProductPolicyEnum::DELETE);
+        return $user->can(ProductPolicyEnum::DELETE->value);
     }
 
-    public function deleteAny(User $user): bool
+    public function deleteAny(Authorizable $user): bool
     {
-        return $user->can(ProductPolicyEnum::DELETE_ANY);
+        return $user->can(ProductPolicyEnum::DELETE_ANY->value);
     }
 
-    public function forceDelete(User $user, Product $product): bool
+    public function forceDelete(Authorizable $user, Product $product): bool
     {
-        return $user->can(ProductPolicyEnum::FORCE_DELETE);
+        return $user->can(ProductPolicyEnum::FORCE_DELETE->value);
     }
 
-    public function forceDeleteAny(User $user): bool
+    public function forceDeleteAny(Authorizable $user): bool
     {
-        return $user->can(ProductPolicyEnum::FORCE_DELETE_ANY);
+        return $user->can(ProductPolicyEnum::FORCE_DELETE_ANY->value);
     }
 
-    public function reorder(User $user): bool
+    public function reorder(Authorizable $user): bool
     {
-        return $user->can(ProductPolicyEnum::REORDER);
+        return $user->can(ProductPolicyEnum::REORDER->value);
     }
 
-    public function replicate(User $user, Product $product): bool
+    public function replicate(Authorizable $user, Product $product): bool
     {
-        return $user->can(ProductPolicyEnum::REPLICATE);
+        return $user->can(ProductPolicyEnum::REPLICATE->value);
     }
 
-    public function restore(User $user, Product $product): bool
+    public function restore(Authorizable $user, Product $product): bool
     {
-        return $user->can(ProductPolicyEnum::RESTORE);
+        return $user->can(ProductPolicyEnum::RESTORE->value);
     }
 
-    public function restoreAny(User $user): bool
+    public function restoreAny(Authorizable $user): bool
     {
-        return $user->can(ProductPolicyEnum::RESTORE_ANY);
+        return $user->can(ProductPolicyEnum::RESTORE_ANY->value);
     }
 
-    public function update(User $user, Product $product): bool
+    public function update(Authorizable $user, Product $product): bool
     {
-        return $user->can(ProductPolicyEnum::UPDATE);
+        return $user->can(ProductPolicyEnum::UPDATE->value);
     }
 
-    public function view(User $user, Product $product): bool
+    public function view(Authorizable $user, Product $product): bool
     {
-        return $user->can(ProductPolicyEnum::VIEW);
+        return $user->can(ProductPolicyEnum::VIEW->value);
     }
 
-    public function viewAny(User $user): bool
+    public function viewAny(Authorizable $user): bool
     {
-        return $user->can(ProductPolicyEnum::VIEW_ANY);
+        return $user->can(ProductPolicyEnum::VIEW_ANY->value);
     }
 }
