@@ -30,7 +30,6 @@
 		"filament/spatie-laravel-media-library-plugin": "^5.0",
 		"illuminate/support": "^13.0",
 		"lara-zeus/spatie-translatable": "^2.0",
-		"misaf/vendra-activity-log": "dev-master",
 		"misaf/vendra-currency": "dev-master",
 		"misaf/vendra-multimedia": "dev-master",
 		"misaf/vendra-support": "dev-master",

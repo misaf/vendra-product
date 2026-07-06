@@ -15,9 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
-use Misaf\VendraActivityLog\Concerns\HasDefaultActivityLogOptions;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Misaf\VendraSupport\Contracts\ShouldLogActivity;
 use Znck\Eloquent\Relations;
 use Znck\Eloquent\Traits;
 
@@ -32,14 +31,11 @@ use Znck\Eloquent\Traits;
  */
 #[Fillable(['product_id', 'currency_code', 'price'])]
 #[UseFactory(ProductPriceFactory::class)]
-final class ProductPrice extends Model
+final class ProductPrice extends Model implements ShouldLogActivity
 {
-    use HasDefaultActivityLogOptions;
-
     /** @use HasFactory<ProductPriceFactory> */
     use HasFactory;
 
-    use LogsActivity;
     use SoftDeletes;
     use Traits\BelongsToThrough;
 
