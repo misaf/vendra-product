@@ -32,7 +32,7 @@ final class ProductForm
                         Tab::make('general')
                             ->columns(2)
                             ->icon(Heroicon::OutlinedCube)
-                            ->label(__('General'))
+                            ->label(__('vendra-product::attributes.general'))
                             ->schema([
                                 Select::make('product_category_id')
                                     ->columnSpanFull()
@@ -71,7 +71,7 @@ final class ProductForm
                         Tab::make('pricing')
                             ->columns(2)
                             ->icon(Heroicon::OutlinedCurrencyDollar)
-                            ->label(__('Pricing'))
+                            ->label(__('vendra-product::attributes.pricing'))
                             ->schema([
                                 Select::make('currency_code')
                                     ->columnSpan(['lg' => 1])
@@ -157,7 +157,7 @@ final class ProductForm
                             ]),
                         Tab::make('photos')
                             ->icon(Heroicon::OutlinedPhoto)
-                            ->label(__('Photos'))
+                            ->label(__('vendra-product::attributes.photos'))
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('image')
                                     ->collection('products')

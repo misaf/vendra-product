@@ -9,9 +9,9 @@ return [
     | Product Token Generator
     |--------------------------------------------------------------------------
     |
-    | Configure token generation for products.
-    | Example default logic:
-    | mb_substr(str_shuffle(str_repeat('123456789', 9)), 0, 9)
+    | Configure token generation for products. A token is built by drawing
+    | `token_generator_length` characters from `token_generator_characters`
+    | using a cryptographically secure random source (random_int).
     |
     */
 

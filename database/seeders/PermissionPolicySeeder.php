@@ -8,21 +8,11 @@ use Misaf\VendraProduct\Enums\ProductCategoryPolicyEnum;
 use Misaf\VendraProduct\Enums\ProductPolicyEnum;
 use Misaf\VendraProduct\Enums\ProductPricePolicyEnum;
 use Misaf\VendraProduct\ProductPlugin;
-use Misaf\VendraSupport\Concerns\RequiresCurrentTenant;
 use Misaf\VendraSupport\Database\Seeders\PermissionPolicySeeder as BasePermissionPolicySeeder;
 
 final class PermissionPolicySeeder extends BasePermissionPolicySeeder
 {
-    use RequiresCurrentTenant;
-
     protected const string MODULE_NAME = ProductPlugin::ID;
-
-    public function run(): void
-    {
-        $tenant = $this->currentTenant();
-
-        $this->seedPermissionPolicies($tenant->getKey());
-    }
 
     /**
      * @return list<string>
