@@ -32,13 +32,13 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
 use Misaf\VendraCurrency\Models\Currency;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 
 final class ProductTable
 {

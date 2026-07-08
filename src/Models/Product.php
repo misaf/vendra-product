@@ -104,9 +104,15 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     {
         $tokenCharacters = self::tokenCharacters();
         $tokenLength = self::tokenLength();
-        $tokenRepeatCount = self::tokenRepeatCount($tokenCharacters, $tokenLength);
+        $maxIndex = mb_strlen($tokenCharacters) - 1;
 
-        return mb_substr(str_shuffle(str_repeat($tokenCharacters, $tokenRepeatCount)), 0, $tokenLength);
+        $token = '';
+
+        for ($i = 0; $i < $tokenLength; $i++) {
+            $token .= $tokenCharacters[random_int(0, $maxIndex)];
+        }
+
+        return $token;
     }
 
     private static function tokenCharacters(): string
@@ -119,14 +125,6 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     private static function tokenLength(): int
     {
         return max(Config::integer('vendra-product.token_generator_length', 9), 9);
-    }
-
-    private static function tokenRepeatCount(string $tokenCharacters, int $tokenLength): int
-    {
-        $configuredRepeatCount = max(Config::integer('vendra-product.token_generator_repeat_count', 9), 1);
-        $minimumRepeatCount = (int) ceil($tokenLength / mb_strlen($tokenCharacters));
-
-        return max($configuredRepeatCount, $minimumRepeatCount);
     }
 
     /**

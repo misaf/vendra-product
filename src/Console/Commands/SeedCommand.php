@@ -14,8 +14,8 @@ final class SeedCommand extends TenantSeedCommand
     protected const string MODULE_NAME = ProductPlugin::ID;
 
     protected $signature = self::MODULE_NAME . ':seed
-        {tenant : Tenant ID or slug to seed blog data for}
-        {seeders* : Seeder keys to run. Use "all" or one or more of: permission-policies, demo-contents}';
+        {tenant? : Tenant ID or slug to seed blog data for}
+        {seeders?* : Seeder keys to run. Use "all" or one or more of: permission-policies, demo-contents}';
 
     protected $description = 'Seed blog module data for a tenant';
 

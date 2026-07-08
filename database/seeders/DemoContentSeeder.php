@@ -9,38 +9,17 @@ use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
+use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
-use Misaf\VendraSupport\Concerns\RequiresCurrentTenant;
 use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
-use Misaf\VendraTenant\Models\Tenant;
 
 final class DemoContentSeeder extends BaseDemoContentSeeder
 {
-    use RequiresCurrentTenant;
-
     protected function seedFactories(): void
     {
-        $tenant = $this->currentTenant();
+        $this->currentTenantOrNull();
 
-        $this->seedFactoryRecords($tenant);
-    }
-
-    /**
-     * @param  list<array<string, mixed>>  $records
-     */
-    protected function seedFixtures(array $records): void
-    {
-        $tenant = $this->currentTenant();
-
-        foreach ($records as $record) {
-            $this->seedFixtureRecord($tenant, $record);
-        }
-    }
-
-    protected function seedFactoryRecords(Tenant $tenant): void
-    {
         ProductCategoryFactory::new()
-            ->forTenant($tenant)
             ->enabled()
             ->count(4)
             ->create()
@@ -48,8 +27,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 ->forCategory($productCategory)
                 ->count(2)
                 ->create()
-                ->each(fn($product): mixed => Currency::query()
-                    ->where('tenant_id', $tenant->id)
+                ->each(fn(Product $product): mixed => Currency::query()
                     ->where('status', true)
                     ->get()
                     ->each(fn(Currency $currency): mixed => ProductPriceFactory::new()
@@ -58,11 +36,16 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                         ->create())));
     }
 
-    protected function seedFixtureRecord(Tenant $tenant, array $record): void
+    /**
+     * @param  list<array<string, mixed>>  $records
+     */
+    protected function seedFixtures(array $records): void
     {
-        $data = $this->validatedFixtureRecord($record);
+        $this->currentTenantOrNull();
 
-        $this->handleSeedFixtureRecord($tenant, $data);
+        foreach ($records as $record) {
+            $this->handleSeedFixtureRecord($this->validatedFixtureRecord($record));
+        }
     }
 
     /**
@@ -81,20 +64,17 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     }>
      * } $data
      */
-    private function handleSeedFixtureRecord(Tenant $tenant, array $data): void
+    private function handleSeedFixtureRecord(array $data): void
     {
-        $productCategory = new ProductCategory([
+        $productCategory = ProductCategory::create([
             'name'        => $data['name'],
             'description' => $data['description'],
             'slug'        => $data['slug'],
             'status'      => $data['status'],
         ]);
 
-        $productCategory->tenant_id = $tenant->id;
-        $productCategory->save();
-
         foreach ($data['products'] as $productRecord) {
-            $this->handleProductFixtureRecord($tenant, $productCategory, $productRecord);
+            $this->handleProductFixtureRecord($productCategory, $productRecord);
         }
     }
 
@@ -108,18 +88,15 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     productPrices: list<array{currency_code: string, price: int|float}>
      * } $productRecord
      */
-    private function handleProductFixtureRecord(Tenant $tenant, ProductCategory $productCategory, array $productRecord): void
+    private function handleProductFixtureRecord(ProductCategory $productCategory, array $productRecord): void
     {
-        $product = $productCategory->products()->make([
+        $product = $productCategory->products()->create([
             'name'           => $productRecord['name'],
             'description'    => $productRecord['description'],
             'slug'           => $productRecord['slug'],
             'in_stock'       => $productRecord['in_stock'],
             'available_soon' => $productRecord['available_soon'],
         ]);
-
-        $product->tenant_id = $tenant->id;
-        $product->save();
 
         $product->productPrices()->createMany($productRecord['productPrices']);
     }
