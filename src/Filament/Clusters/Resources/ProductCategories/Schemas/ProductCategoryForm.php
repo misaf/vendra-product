@@ -43,7 +43,6 @@ final class ProductCategoryForm
                     ->columnSpan(['lg' => 1])
                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                     ->label(__('vendra-product::attributes.slug'))
-                    ->label(__('vendra-product::attributes.slug'))
                     ->required()
                     ->unique(modifyRuleUsing: fn(Unique $rule) => $rule->withoutTrashed()),
 

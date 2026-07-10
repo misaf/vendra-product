@@ -1,6 +1,6 @@
 {
 	"name": "misaf/vendra-product",
-	"description": "The product module for the Vendra framework.",
+	"description": "The product module for the Vendra framework",
 	"license": "MIT",
 	"type": "vendra-module",
 	"keywords": [
