@@ -36,31 +36,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Product Specification Units
-    |--------------------------------------------------------------------------
-    |
-    | These options are used by the product specifications form. The array key
-    | is the stored unit value, and the array value is the label shown in the
-    | Filament select field.
-    |
-    */
-
-    'specification_units' => [
-        'kg'         => 'Kilogram (kg)',
-        'g'          => 'Gram (g)',
-        'm'          => 'Meter (m)',
-        'cm'         => 'Centimeter (cm)',
-        'l'          => 'Liter (l)',
-        'ml'         => 'Milliliter (ml)',
-        'item'       => 'Item',
-        'piece'      => 'Piece',
-        'pack'       => 'Pack',
-        'month'      => 'Month',
-        'year'       => 'Year',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Product Token Generator
     |--------------------------------------------------------------------------
     |

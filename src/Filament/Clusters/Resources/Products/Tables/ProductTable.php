@@ -40,6 +40,7 @@ use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
+use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 final class ProductTable
@@ -132,12 +133,6 @@ final class ProductTable
                 ->label(__('vendra-product::attributes.stock_threshold'))
                 ->numeric(),
 
-            TextColumn::make('specifications')
-                ->badge()
-                ->label(__('vendra-product::attributes.specifications'))
-                ->state(fn(Product $record): int => count($record->specifications ?? []))
-                ->toggleable(isToggledHiddenByDefault: true),
-
             ToggleColumn::make('in_stock')
                 ->label(__('vendra-product::attributes.in_stock'))
                 ->onIcon('heroicon-m-bolt'),
@@ -184,6 +179,14 @@ final class ProductTable
                     fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
         ];
+
+        if (AttributeIntegration::isAvailable()) {
+            $columns[] = TextColumn::make('attribute_values_count')
+                ->badge()
+                ->counts('attributeValues')
+                ->label(__('vendra-product::attributes.attributes'))
+                ->toggleable(isToggledHiddenByDefault: true);
+        }
 
         return $table
             ->columns($columns)

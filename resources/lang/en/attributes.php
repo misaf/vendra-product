@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 return [
-    'add_specification'   => 'Add Specification',
+    'add_attribute_value' => 'Add Attribute Value',
+    'attribute'           => 'Attribute',
+    'attribute_value'     => 'Attribute Value',
+    'attributes'          => 'Attributes',
     'availability_date'   => 'Availability Date',
     'available_soon'      => 'Available Soon',
     'created_at'          => 'Created At',
@@ -21,10 +24,6 @@ return [
     'quantity'            => 'Quantity',
     'slug'                => 'Slug',
     'slug_helper_text'    => 'A unique identifier for the URL. Leave empty to auto-generate from the name.',
-    'specification_name'  => 'Specification Name',
-    'specification_unit'  => 'Unit',
-    'specification_value' => 'Value',
-    'specifications'      => 'Specifications',
     'status'              => 'Status',
     'stock_threshold'     => 'Stock Threshold',
     'tenant_id'           => 'Tenant',

@@ -20,7 +20,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
-use Misaf\VendraProduct\Support\ProductSpecificationUnits;
+use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 final class ProductForm
@@ -147,39 +147,7 @@ final class ProductForm
                                         'boolean',
                                     ]),
                             ]),
-                        Tab::make('specifications')
-                            ->columns(1)
-                            ->icon(Heroicon::OutlinedListBullet)
-                            ->label(__('vendra-product::attributes.specifications'))
-                            ->schema([
-                                Repeater::make('specifications')
-                                    ->addActionLabel(__('vendra-product::attributes.add_specification'))
-                                    ->columnSpanFull()
-                                    ->columns(3)
-                                    ->defaultItems(0)
-                                    ->label(__('vendra-product::attributes.specifications'))
-                                    ->reorderable()
-                                    ->schema([
-                                        TextInput::make('name')
-                                            ->label(__('vendra-product::attributes.specification_name'))
-                                            ->maxLength(255)
-                                            ->required(),
-
-                                        TextInput::make('value')
-                                            ->label(__('vendra-product::attributes.specification_value'))
-                                            ->maxLength(255)
-                                            ->required(),
-
-                                        Select::make('unit')
-                                            ->label(__('vendra-product::attributes.specification_unit'))
-                                            ->getOptionLabelUsing(fn(?string $value): ?string => filled($value)
-                                                ? ProductSpecificationUnits::options()[$value] ?? $value
-                                                : null)
-                                            ->native(false)
-                                            ->options(fn(): array => ProductSpecificationUnits::options())
-                                            ->searchable(),
-                                    ]),
-                            ]),
+                        ...self::attributeTabs(),
                         Tab::make('photos')
                             ->icon(Heroicon::OutlinedPhoto)
                             ->label(__('vendra-product::attributes.photos'))
@@ -198,5 +166,46 @@ final class ProductForm
                     ->persistTabInQueryString('products-tab'),
             ])
             ->columns(1);
+    }
+
+    /** @return list<Tab> */
+    private static function attributeTabs(): array
+    {
+        if ( ! AttributeIntegration::isAvailable()) {
+            return [];
+        }
+
+        return [
+            Tab::make('attributes')
+                ->columns(1)
+                ->icon(Heroicon::OutlinedListBullet)
+                ->label(__('vendra-product::attributes.attributes'))
+                ->schema([
+                    Repeater::make('attributeValues')
+                        ->relationship()
+                        ->addActionLabel(__('vendra-product::attributes.add_attribute_value'))
+                        ->columnSpanFull()
+                        ->columns(3)
+                        ->defaultItems(0)
+                        ->label(__('vendra-product::attributes.attributes'))
+                        ->orderColumn('position')
+                        ->reorderable()
+                        ->schema([
+                            Select::make('attribute_id')
+                                ->label(__('vendra-product::attributes.attribute'))
+                                ->native(false)
+                                ->options(fn(): array => AttributeIntegration::options())
+                                ->preload()
+                                ->required()
+                                ->searchable(),
+
+                            TextInput::make('value')
+                                ->columnSpan(2)
+                                ->label(__('vendra-product::attributes.attribute_value'))
+                                ->maxLength(2048)
+                                ->required(),
+                        ]),
+                ]),
+        ];
     }
 }

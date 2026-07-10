@@ -22,6 +22,7 @@ Tenant-aware product management for Vendra applications.
 
 Optional:
 
+- `misaf/vendra-attribute` — enables reusable product attributes and values through the shared support resolver
 - `misaf/vendra-currency` — enables management of the active currencies used by pricing forms and demo seeders
 
 ## Installation

@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 return [
-    'add_specification'   => 'Spezifikation hinzufügen',
+    'add_attribute_value' => 'Attributwert hinzufügen',
+    'attribute'           => 'Attribut',
+    'attribute_value'     => 'Attributwert',
+    'attributes'          => 'Attribute',
     'availability_date'   => 'Verfügbarkeitsdatum',
     'available_soon'      => 'Bald verfügbar',
     'created_at'          => 'Erstellt am',
@@ -21,10 +24,6 @@ return [
     'quantity'            => 'Menge',
     'slug'                => 'Slug',
     'slug_helper_text'    => 'Eine eindeutige Kennung für die URL. Leer lassen, um sie automatisch aus dem Namen zu generieren.',
-    'specification_name'  => 'Spezifikationsname',
-    'specification_unit'  => 'Einheit',
-    'specification_value' => 'Wert',
-    'specifications'      => 'Spezifikationen',
     'status'              => 'Status',
     'stock_threshold'     => 'Lagerbestandsschwelle',
     'tenant_id'           => 'Mandant',

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+
 arch()->preset()->php();
 arch()->preset()->security();
 arch()->preset()->laravel();
@@ -13,3 +14,7 @@ arch('the product module derives tenancy from the support layer, never a concret
 arch('the product module derives currency support from the support layer, never the currency module')
     ->expect('Misaf\VendraProduct')
     ->not->toUse('Misaf\VendraCurrency');
+
+arch('the product module integrates attributes through support, never the attribute module')
+    ->expect('Misaf\VendraProduct')
+    ->not->toUse('Misaf\VendraAttribute');

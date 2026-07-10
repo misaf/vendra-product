@@ -17,10 +17,12 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
+use LogicException;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Observers\ProductObserver;
 use Misaf\VendraSupport\Contracts\ShouldLogActivity;
+use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Traits\BelongsToTenant;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -36,7 +38,6 @@ use Spatie\Translatable\HasTranslations;
  * @property int $product_category_id
  * @property array<string, string> $name
  * @property array<string, string> $description
- * @property list<array{name: string, value: string, unit?: string|null}>|null $specifications
  * @property array<string, string> $slug
  * @property string $token
  * @property int $quantity
@@ -49,20 +50,20 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  */
-#[Fillable(['product_category_id', 'name', 'description', 'specifications', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
+#[Fillable(['product_category_id', 'name', 'description', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
 #[Hidden(['tenant_id'])]
 #[ObservedBy([ProductObserver::class])]
 #[UseFactory(ProductFactory::class)]
 final class Product extends Model implements HasMedia, Sortable, ShouldLogActivity
 {
     use BelongsToTenant;
+
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
 
     /** @use HasFactory<ProductFactory> */
     use HasFactory;
-
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;
@@ -99,7 +100,6 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
             'product_category_id' => 'integer',
             'name'                => 'array',
             'description'         => 'array',
-            'specifications'      => 'array',
             'slug'                => 'array',
             'token'               => 'string',
             'quantity'            => 'integer',
@@ -183,6 +183,24 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     public function multimedia(): MorphMany
     {
         return $this->media();
+    }
+
+    /** @return MorphMany<Model, $this> */
+    public function attributeValues(): MorphMany
+    {
+        $attributeValueModel = AttributeIntegration::valueModel();
+
+        if (null === $attributeValueModel) {
+            throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
+        }
+
+        return $this->morphMany(
+            $attributeValueModel,
+            'attributable',
+            'attributable_type',
+            'attributable_id',
+            $this->getKeyName(),
+        );
     }
 
     public function getSlugOptions(): SlugOptions

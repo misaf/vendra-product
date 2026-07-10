@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 return [
-    'add_specification'   => 'افزودن مشخصه',
+    'add_attribute_value' => 'افزودن مقدار ویژگی',
+    'attribute'           => 'ویژگی',
+    'attribute_value'     => 'مقدار ویژگی',
+    'attributes'          => 'ویژگی‌ها',
     'availability_date'   => 'تاریخ موجودی',
     'available_soon'      => 'به زودی موجود',
     'created_at'          => 'تاریخ ایجاد',
@@ -21,10 +24,6 @@ return [
     'quantity'            => 'تعداد',
     'slug'                => 'نامک',
     'slug_helper_text'    => 'شناسه یکتای URL. برای تولید خودکار از نام، خالی بگذارید.',
-    'specification_name'  => 'نام مشخصه',
-    'specification_unit'  => 'واحد',
-    'specification_value' => 'مقدار',
-    'specifications'      => 'مشخصات',
     'status'              => 'وضعیت',
     'stock_threshold'     => 'حد آستانه موجودی',
     'tenant_id'           => 'مستاجر',
