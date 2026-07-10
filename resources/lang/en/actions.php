@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 return [
+    'duplicate'               => 'Duplicate',
+    'duplicate_product'       => 'Duplicate Product',
     'in_stock'                => 'In Stock',
     'out_of_stock'            => 'Out of Stock',
     'percentage'              => 'Percentage',

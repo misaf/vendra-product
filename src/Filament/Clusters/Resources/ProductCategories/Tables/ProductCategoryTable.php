@@ -27,10 +27,12 @@ use Illuminate\Support\Number;
 use Livewire\Component as Livewire;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 
 final class ProductCategoryTable
 {
     use HasDefaultAvatarImageUrl;
+    use InteractsWithTranslatedTableRecords;
 
     public static function configure(Table $table): Table
     {
@@ -47,7 +49,7 @@ final class ProductCategoryTable
                 ->collection('products/categories')
                 ->conversion('thumb-table')
                 ->defaultImageUrl(function (ProductCategory $record, Livewire $livewire): string {
-                    return static::defaultAvatarImageUrl($record->getTranslation('name', $livewire->activeLocale));
+                    return static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire));
                 })
                 ->extraImgAttributes(['class' => 'saturate-50', 'loading' => 'lazy'])
                 ->label(__('vendra-product::attributes.image'))

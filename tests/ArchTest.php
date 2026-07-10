@@ -9,3 +9,7 @@ arch()->preset()->laravel();
 arch('the product module derives tenancy from the support layer, never a concrete tenant provider')
     ->expect('Misaf\VendraProduct')
     ->not->toUse('Misaf\VendraTenant');
+
+arch('the product module derives currency support from the support layer, never the currency module')
+    ->expect('Misaf\VendraProduct')
+    ->not->toUse('Misaf\VendraCurrency');

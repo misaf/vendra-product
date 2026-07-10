@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -19,7 +20,8 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
-use Misaf\VendraCurrency\Models\Currency;
+use Misaf\VendraProduct\Support\ProductSpecificationUnits;
+use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 final class ProductForm
 {
@@ -75,20 +77,10 @@ final class ProductForm
                             ->schema([
                                 Select::make('currency_code')
                                     ->columnSpan(['lg' => 1])
-                                    ->default(
-                                        Currency::query()
-                                            ->where('status', true)
-                                            ->where('is_default', true)
-                                            ->value('iso_code')
-                                    )
-                                    ->label(__('vendra-currency::navigation.currency'))
+                                    ->default(fn(): string => CurrencyIntegration::defaultCode())
+                                    ->label(__('vendra-product::attributes.currency'))
                                     ->native(false)
-                                    ->options(
-                                        Currency::query()
-                                            ->where('status', true)
-                                            ->orderBy('position', 'desc')
-                                            ->pluck('name', 'iso_code')
-                                    )
+                                    ->options(fn(): array => CurrencyIntegration::options())
                                     ->preload()
                                     ->required()
                                     ->searchable(),
@@ -153,6 +145,39 @@ final class ProductForm
                                     ->required()
                                     ->rules([
                                         'boolean',
+                                    ]),
+                            ]),
+                        Tab::make('specifications')
+                            ->columns(1)
+                            ->icon(Heroicon::OutlinedListBullet)
+                            ->label(__('vendra-product::attributes.specifications'))
+                            ->schema([
+                                Repeater::make('specifications')
+                                    ->addActionLabel(__('vendra-product::attributes.add_specification'))
+                                    ->columnSpanFull()
+                                    ->columns(3)
+                                    ->defaultItems(0)
+                                    ->label(__('vendra-product::attributes.specifications'))
+                                    ->reorderable()
+                                    ->schema([
+                                        TextInput::make('name')
+                                            ->label(__('vendra-product::attributes.specification_name'))
+                                            ->maxLength(255)
+                                            ->required(),
+
+                                        TextInput::make('value')
+                                            ->label(__('vendra-product::attributes.specification_value'))
+                                            ->maxLength(255)
+                                            ->required(),
+
+                                        Select::make('unit')
+                                            ->label(__('vendra-product::attributes.specification_unit'))
+                                            ->getOptionLabelUsing(fn(?string $value): ?string => filled($value)
+                                                ? ProductSpecificationUnits::options()[$value] ?? $value
+                                                : null)
+                                            ->native(false)
+                                            ->options(fn(): array => ProductSpecificationUnits::options())
+                                            ->searchable(),
                                     ]),
                             ]),
                         Tab::make('photos')

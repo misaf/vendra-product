@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Misaf\VendraSupport\Support\TenantSchema;
 
-return new class () extends Migration {
+return new class extends Migration {
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
@@ -17,7 +17,7 @@ return new class () extends Migration {
         $this->createProductPricesTable();
         Schema::enableForeignKeyConstraints();
     }
-    
+
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
@@ -87,7 +87,7 @@ return new class () extends Migration {
         Schema::create('product_prices', function (Blueprint $table): void {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->char('currency_code', 3)
+            $table->string('currency_code', 16)
                 ->default(Config::string('app.currency'));
             $table->unsignedBigInteger('price')
                 ->default(0);

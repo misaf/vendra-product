@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraProduct\Support\ProductSpecificationUnits;
 use Misaf\VendraSupport\Support\TenantAwareness;
 
 /**
@@ -25,6 +26,13 @@ final class ProductFactory extends Factory
             'product_category_id' => ProductCategory::factory(),
             'name'                => ['en' => fake()->sentences(1, true)],
             'description'         => ['en' => fake()->realTextBetween(100, 200)],
+            'specifications'      => [
+                [
+                    'name'  => fake()->randomElement(['Weight', 'Material', 'Warranty']),
+                    'value' => fake()->randomElement(['1.2', 'Aluminum', '24']),
+                    'unit'  => fake()->randomElement([...array_keys(ProductSpecificationUnits::options()), null]),
+                ],
+            ],
             'slug'                => ['en' => fn(array $attributes) => Str::slug($attributes['name']['en'])],
             'quantity'            => fake()->numberBetween(1, 10),
             'stock_threshold'     => fake()->randomElement([null, 10, 20]),

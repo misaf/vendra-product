@@ -3,5 +3,6 @@
 declare(strict_types=1);
 
 return [
-    'token_copied' => 'Token copied to clipboard',
+    'product_duplicated' => 'Product duplicated successfully',
+    'token_copied'       => 'Token copied to clipboard',
 ];

@@ -6,6 +6,7 @@ namespace Misaf\VendraProduct\Tests;
 
 use Illuminate\Support\Facades\Http;
 use Misaf\VendraProduct\Providers\ProductServiceProvider;
+use Misaf\VendraSupport\Providers\SupportServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Override;
 
@@ -22,6 +23,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
+            SupportServiceProvider::class,
             ProductServiceProvider::class,
         ];
     }

@@ -54,16 +54,23 @@ final class SetPriceByPercentageAction extends BulkAction
                         continue;
                     }
 
-                    $latestProductPrice = $record->latestProductPrice->price;
+                    $latestProductPrice = $record->latestProductPrice;
+
+                    if (null === $latestProductPrice) {
+                        continue;
+                    }
+
+                    $latestPriceAmount = (int) $latestProductPrice->price->getAmount();
 
                     if ($percent < 0) {
-                        $newPrice = $latestProductPrice->getAmount()->__toString() * (1 - abs((int) $percent) / 100);
+                        $newPrice = $latestPriceAmount * (1 - abs((int) $percent) / 100);
                     } else {
-                        $newPrice = $latestProductPrice->getAmount()->__toString() * (1 + $percent / 100);
+                        $newPrice = $latestPriceAmount * (1 + (float) $percent / 100);
                     }
 
                     $record->productPrices()->create([
-                        'price' => $newPrice,
+                        'currency_code' => $latestProductPrice->currency_code,
+                        'price'         => (int) round($newPrice),
                     ]);
                 }
             });

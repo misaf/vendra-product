@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\ViewRecord\Concerns\Translatable;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
@@ -29,12 +30,18 @@ final class ViewProduct extends ViewRecord
         return [
             EditAction::make(),
 
+            DuplicateProductAction::make(),
+
             LocaleSwitcher::make(),
         ];
     }
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
+        if ( ! array_key_exists('product_category_id', $data)) {
+            return $data;
+        }
+
         /** @var Product $record */
         $record = $this->getRecord();
 

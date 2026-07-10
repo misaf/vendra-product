@@ -66,6 +66,22 @@ final class ProductCategory extends Model implements HasMedia, Sortable, ShouldL
     public array $translatable = ['name', 'description', 'slug'];
 
     /**
+     * Pin sortable behavior regardless of the global `eloquent-sortable`
+     * configuration values: order on the `position` column and always assign
+     * the next position when creating.
+     *
+     * Note: `ignore_timestamps` cannot be pinned here because the package reads
+     * it directly from config (no per-model override), and it already defaults
+     * to `false` both in config and in the package.
+     *
+     * @var array{order_column_name: string, sort_when_creating: bool}
+     */
+    public array $sortable = [
+        'order_column_name'  => 'position',
+        'sort_when_creating' => true,
+    ];
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array

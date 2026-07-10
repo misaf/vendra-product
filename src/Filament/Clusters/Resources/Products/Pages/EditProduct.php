@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
@@ -36,6 +37,8 @@ final class EditProduct extends EditRecord
         return [
             ViewAction::make(),
 
+            DuplicateProductAction::make(),
+
             DeleteAction::make(),
 
             LocaleSwitcher::make(),
@@ -44,6 +47,10 @@ final class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
+        if ( ! array_key_exists('product_category_id', $data)) {
+            return $data;
+        }
+
         /** @var Product $record */
         $record = $this->getRecord();
 
@@ -62,6 +69,10 @@ final class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
+        if ( ! array_key_exists('currency_code', $data) && ! array_key_exists('price', $data)) {
+            return $data;
+        }
+
         $currencyCode = $data['currency_code'] ?? null;
         $price = $data['price'] ?? null;
 

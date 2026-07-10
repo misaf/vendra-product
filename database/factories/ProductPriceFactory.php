@@ -6,9 +6,9 @@ namespace Misaf\VendraProduct\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
+use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 /**
  * @extends Factory<ProductPrice>
@@ -20,11 +20,8 @@ final class ProductPriceFactory extends Factory
     {
         return [
             'product_id'    => Product::factory(),
-            'currency_code' => Currency::query()
-                ->where('status', true)
-                ->inRandomOrder()
-                ->value('iso_code'),
-            'price' => fake()->randomElement([9900, 14900, 19900, 24900, 49900, 99900]),
+            'currency_code' => fake()->randomElement(array_keys(CurrencyIntegration::options())),
+            'price'         => fake()->randomElement([9900, 14900, 19900, 24900, 49900, 99900]),
         ];
     }
 
@@ -33,8 +30,16 @@ final class ProductPriceFactory extends Factory
         return $this->state(fn() => ['product_id' => $product->id]);
     }
 
-    public function forCurrency(Currency $currency): static
+    public function forCurrencyCode(string $currencyCode): static
     {
-        return $this->state(fn() => ['currency_code' => $currency->iso_code]);
+        return $this->state(fn() => ['currency_code' => $currencyCode]);
+    }
+
+    /**
+     * @param  object{iso_code: string}  $currency
+     */
+    public function forCurrency(object $currency): static
+    {
+        return $this->forCurrencyCode($currency->iso_code);
     }
 }

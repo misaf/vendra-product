@@ -36,6 +36,7 @@ use Spatie\Translatable\HasTranslations;
  * @property int $product_category_id
  * @property array<string, string> $name
  * @property array<string, string> $description
+ * @property list<array{name: string, value: string, unit?: string|null}>|null $specifications
  * @property array<string, string> $slug
  * @property string $token
  * @property int $quantity
@@ -48,7 +49,7 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  */
-#[Fillable(['product_category_id', 'name', 'description', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
+#[Fillable(['product_category_id', 'name', 'description', 'specifications', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
 #[Hidden(['tenant_id'])]
 #[ObservedBy([ProductObserver::class])]
 #[UseFactory(ProductFactory::class)]
@@ -72,6 +73,22 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     public array $translatable = ['name', 'description', 'slug'];
 
     /**
+     * Pin sortable behavior regardless of the global `eloquent-sortable`
+     * configuration values: order on the `position` column and always assign
+     * the next position when creating.
+     *
+     * Note: `ignore_timestamps` cannot be pinned here because the package reads
+     * it directly from config (no per-model override), and it already defaults
+     * to `false` both in config and in the package.
+     *
+     * @var array{order_column_name: string, sort_when_creating: bool}
+     */
+    public array $sortable = [
+        'order_column_name'  => 'position',
+        'sort_when_creating' => true,
+    ];
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
@@ -82,6 +99,7 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
             'product_category_id' => 'integer',
             'name'                => 'array',
             'description'         => 'array',
+            'specifications'      => 'array',
             'slug'                => 'array',
             'token'               => 'string',
             'quantity'            => 'integer',

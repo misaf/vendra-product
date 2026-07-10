@@ -31,7 +31,7 @@ use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
-use Misaf\VendraCurrency\Models\Currency;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAction;
@@ -39,10 +39,13 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByP
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
+use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 final class ProductTable
 {
     use HasDefaultAvatarImageUrl;
+    use InteractsWithTranslatedTableRecords;
 
     public static function configure(Table $table): Table
     {
@@ -59,7 +62,7 @@ final class ProductTable
                 ->collection('products')
                 ->conversion('thumb-table')
                 ->defaultImageUrl(function (Product $record, Livewire $livewire): string {
-                    return static::defaultAvatarImageUrl($record->getTranslation('name', $livewire->activeLocale));
+                    return static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire));
                 })
                 ->extraImgAttributes(['class' => 'saturate-50', 'loading' => 'lazy'])
                 ->label(__('vendra-product::attributes.image'))
@@ -95,20 +98,10 @@ final class ProductTable
                         ->schema([
                             Select::make('currency_code')
                                 ->columnSpanFull()
-                                ->default(
-                                    Currency::query()
-                                        ->where('status', true)
-                                        ->where('is_default', true)
-                                        ->value('iso_code')
-                                )
-                                ->label(__('vendra-currency::navigation.currency'))
+                                ->default(fn(): string => CurrencyIntegration::defaultCode())
+                                ->label(__('vendra-product::attributes.currency'))
                                 ->native(false)
-                                ->options(
-                                    Currency::query()
-                                        ->where('status', true)
-                                        ->orderBy('position', 'desc')
-                                        ->pluck('name', 'iso_code')
-                                )
+                                ->options(fn(): array => CurrencyIntegration::options())
                                 ->preload()
                                 ->required()
                                 ->searchable(),
@@ -138,6 +131,12 @@ final class ProductTable
             TextColumn::make('stock_threshold')
                 ->label(__('vendra-product::attributes.stock_threshold'))
                 ->numeric(),
+
+            TextColumn::make('specifications')
+                ->badge()
+                ->label(__('vendra-product::attributes.specifications'))
+                ->state(fn(Product $record): int => count($record->specifications ?? []))
+                ->toggleable(isToggledHiddenByDefault: true),
 
             ToggleColumn::make('in_stock')
                 ->label(__('vendra-product::attributes.in_stock'))
@@ -196,8 +195,8 @@ final class ProductTable
                                 ->label(__('vendra-product::navigation.product_category'))
                                 ->selectable(
                                     IsRelatedToOperator::make()
-                                        ->getOptionLabelFromRecordUsing(function (ProductCategory $record, Livewire $livewire) {
-                                            return $record->getTranslation('name', $livewire->activeLocale);
+                                        ->getOptionLabelFromRecordUsing(function (ProductCategory $record, Livewire $livewire): string {
+                                            return static::translatedAttribute($record, 'name', $livewire);
                                         })
                                         ->preload()
                                         ->searchable()
@@ -231,6 +230,8 @@ final class ProductTable
 
                     EditAction::make(),
 
+                    DuplicateProductAction::make(),
+
                     DeleteAction::make(),
                 ]),
             ])
@@ -252,8 +253,14 @@ final class ProductTable
             ->defaultGroup(
                 Group::make('productCategory.name')
                     ->label(__('vendra-product::navigation.product_category'))
-                    ->getTitleFromRecordUsing(function (Product $record, Livewire $livewire) {
-                        return $record->productCategory?->getTranslation('name', $livewire->activeLocale);
+                    ->getTitleFromRecordUsing(function (Product $record, Livewire $livewire): string {
+                        $productCategory = $record->productCategory;
+
+                        if (null === $productCategory) {
+                            return '';
+                        }
+
+                        return static::translatedAttribute($productCategory, 'name', $livewire);
                     })
             );
     }

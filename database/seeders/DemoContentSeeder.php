@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Database\Seeders;
 
 use Illuminate\Support\Facades\Validator;
-use Misaf\VendraCurrency\Models\Currency;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
+use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 final class DemoContentSeeder extends BaseDemoContentSeeder
 {
@@ -27,13 +28,13 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 ->forCategory($productCategory)
                 ->count(2)
                 ->create()
-                ->each(fn(Product $product): mixed => Currency::query()
-                    ->where('status', true)
-                    ->get()
-                    ->each(fn(Currency $currency): mixed => ProductPriceFactory::new()
+                ->each(fn(Product $product): array => array_map(
+                    fn(string $currencyCode): ProductPrice => ProductPriceFactory::new()
                         ->forProduct($product)
-                        ->forCurrency($currency)
-                        ->create())));
+                        ->forCurrencyCode($currencyCode)
+                        ->create(),
+                    CurrencyIntegration::activeCurrencyCodes(),
+                )));
     }
 
     /**
@@ -58,6 +59,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *         name: non-empty-array<string, string>,
      *         description: non-empty-array<string, string>,
      *         slug: non-empty-array<string, string>,
+     *         specifications?: list<array{name: string, value: string, unit?: string|null}>,
      *         in_stock: bool,
      *         available_soon: bool,
      *         productPrices: list<array{currency_code: string, price: int|float}>
@@ -83,6 +85,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     name: non-empty-array<string, string>,
      *     description: non-empty-array<string, string>,
      *     slug: non-empty-array<string, string>,
+     *     specifications?: list<array{name: string, value: string, unit?: string|null}>,
      *     in_stock: bool,
      *     available_soon: bool,
      *     productPrices: list<array{currency_code: string, price: int|float}>
@@ -93,6 +96,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
         $product = $productCategory->products()->create([
             'name'           => $productRecord['name'],
             'description'    => $productRecord['description'],
+            'specifications' => $productRecord['specifications'] ?? null,
             'slug'           => $productRecord['slug'],
             'in_stock'       => $productRecord['in_stock'],
             'available_soon' => $productRecord['available_soon'],
@@ -112,6 +116,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *         name: non-empty-array<string, string>,
      *         description: non-empty-array<string, string>,
      *         slug: non-empty-array<string, string>,
+     *         specifications?: list<array{name: string, value: string, unit?: string|null}>,
      *         in_stock: bool,
      *         available_soon: bool,
      *         productPrices: list<array{currency_code: string, price: int|float}>
@@ -129,6 +134,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
          *         name: non-empty-array<string, string>,
          *         description: non-empty-array<string, string>,
          *         slug: non-empty-array<string, string>,
+         *         specifications?: list<array{name: string, value: string, unit?: string|null}>,
          *         in_stock: bool,
          *         available_soon: bool,
          *         productPrices: list<array{currency_code: string, price: int|float}>
@@ -146,13 +152,18 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 'slug.*'                                   => ['required', 'string'],
                 'status'                                   => ['required', 'boolean'],
                 'products'                                 => ['required', 'array', 'list'],
-                'products.*'                               => ['required', 'array:name,description,slug,in_stock,available_soon,productPrices'],
+                'products.*'                               => ['required', 'array:name,description,slug,specifications,in_stock,available_soon,productPrices'],
                 'products.*.name'                          => ['required', 'array', 'min:1'],
                 'products.*.name.*'                        => ['required', 'string'],
                 'products.*.description'                   => ['required', 'array', 'min:1'],
                 'products.*.description.*'                 => ['required', 'string'],
                 'products.*.slug'                          => ['required', 'array', 'min:1'],
                 'products.*.slug.*'                        => ['required', 'string'],
+                'products.*.specifications'                => ['sometimes', 'array', 'list'],
+                'products.*.specifications.*'              => ['required', 'array:name,value,unit'],
+                'products.*.specifications.*.name'         => ['required', 'string', 'max:255'],
+                'products.*.specifications.*.value'        => ['required', 'string', 'max:255'],
+                'products.*.specifications.*.unit'         => ['nullable', 'string', 'max:64'],
                 'products.*.in_stock'                      => ['required', 'boolean'],
                 'products.*.available_soon'                => ['required', 'boolean'],
                 'products.*.productPrices'                 => ['required', 'array', 'list'],

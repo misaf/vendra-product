@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 return [
+    'duplicate'               => 'Duplizieren',
+    'duplicate_product'       => 'Produkt duplizieren',
     'in_stock'                => 'Auf Lager',
     'out_of_stock'            => 'Nicht auf Lager',
     'percentage'              => 'Prozentsatz',

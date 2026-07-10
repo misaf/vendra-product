@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 return [
+    'duplicate'               => 'تکثیر',
+    'duplicate_product'       => 'تکثیر محصول',
     'in_stock'                => 'موجود کردن',
     'out_of_stock'            => 'ناموجود کردن',
     'percentage'              => 'درصد',

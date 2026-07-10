@@ -74,7 +74,9 @@ final class ProductCategoryResource extends Resource
 
     public static function getDefaultTranslatableLocale(): string
     {
-        return app()->getLocale();
+        $locale = static::getTranslatableLocales()[0] ?? app()->getLocale();
+
+        return is_string($locale) && '' !== $locale ? $locale : 'en';
     }
 
     public static function form(Schema $schema): Schema

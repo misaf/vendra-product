@@ -6,6 +6,61 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Filament Panels
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the Filament panels that the product administration UI
+    | is registered on. The product navigation only appears within the panels
+    | listed here. You may provide a single panel ID or an array of IDs to
+    | mount the module across multiple panels.
+    |
+    | Supported: "admin" (string), ["admin", "vendor"] (array)
+    |
+    */
+
+    'panels' => ['admin'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Navigation Group
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the sidebar navigation group that the Products
+    | cluster is nested under. You may provide a translation key or a literal
+    | label, allowing you to file the product UI alongside a host application's
+    | own groups. When left empty, the module's default group is used.
+    |
+    */
+
+    'navigation_group' => 'vendra-product::navigation.content_management',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Product Specification Units
+    |--------------------------------------------------------------------------
+    |
+    | These options are used by the product specifications form. The array key
+    | is the stored unit value, and the array value is the label shown in the
+    | Filament select field.
+    |
+    */
+
+    'specification_units' => [
+        'kg'         => 'Kilogram (kg)',
+        'g'          => 'Gram (g)',
+        'm'          => 'Meter (m)',
+        'cm'         => 'Centimeter (cm)',
+        'l'          => 'Liter (l)',
+        'ml'         => 'Milliliter (ml)',
+        'item'       => 'Item',
+        'piece'      => 'Piece',
+        'pack'       => 'Pack',
+        'month'      => 'Month',
+        'year'       => 'Year',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Product Token Generator
     |--------------------------------------------------------------------------
     |
@@ -16,8 +71,6 @@ return [
     */
 
     'token_generator_characters' => env('VENDRA_PRODUCT_TOKEN_GENERATOR_CHARACTERS', '123456789'),
-
-    'token_generator_repeat_count' => (int) env('VENDRA_PRODUCT_TOKEN_GENERATOR_REPEAT_COUNT', 9),
 
     'token_generator_length' => (int) env('VENDRA_PRODUCT_TOKEN_GENERATOR_LENGTH', 9),
 ];

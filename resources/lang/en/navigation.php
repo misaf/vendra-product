@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'content_management'          => 'Content Management',
     'product'                     => 'Products',
     'product_category'            => 'Product Categories',
     'product_category_management' => 'Product Category Management',

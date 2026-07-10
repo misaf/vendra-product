@@ -52,6 +52,9 @@ final class ProductPrice extends Model implements ShouldLogActivity
         ];
     }
 
+    /**
+     * @return Attribute<string, string>
+     */
     protected function currencyCode(): Attribute
     {
         return Attribute::make(

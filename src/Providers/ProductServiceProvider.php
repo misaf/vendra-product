@@ -6,6 +6,7 @@ namespace Misaf\VendraProduct\Providers;
 
 use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\Facades\Config;
 use Misaf\VendraProduct\Console\Commands\SeedCommand;
 use Misaf\VendraProduct\ProductPlugin;
 use Misaf\VendraSupport\Support\TenantSeeders;
@@ -23,6 +24,7 @@ final class ProductServiceProvider extends PackageServiceProvider
             ->hasTranslations()
             ->hasMigrations([
                 'create_products_table',
+                'add_specifications_to_products_table',
             ])
             ->hasCommands(SeedCommand::class)
             ->hasInstallCommand(function (InstallCommand $command): void {
@@ -33,7 +35,7 @@ final class ProductServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         Panel::configureUsing(function (Panel $panel): void {
-            if ('admin' !== $panel->getId()) {
+            if ( ! in_array($panel->getId(), $this->configuredPanelIds(), true)) {
                 return;
             }
 
@@ -46,5 +48,42 @@ final class ProductServiceProvider extends PackageServiceProvider
         $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
 
         AboutCommand::add('Vendra Product', fn() => ['Version' => 'dev-master']);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function configuredPanelIds(): array
+    {
+        $panels = Config::get('vendra-product.panels');
+
+        if (is_string($panels)) {
+            return [Config::string('vendra-product.panels')];
+        }
+
+        if (is_array($panels)) {
+            return $this->filterPanelIds(Config::array('vendra-product.panels'));
+        }
+
+        $legacyPanel = Config::get('vendra-product.panel');
+
+        if (is_string($legacyPanel)) {
+            return [Config::string('vendra-product.panel')];
+        }
+
+        if (is_array($legacyPanel)) {
+            return $this->filterPanelIds(Config::array('vendra-product.panel'));
+        }
+
+        return ['admin'];
+    }
+
+    /**
+     * @param  array<mixed>  $panels
+     * @return array<int, string>
+     */
+    private function filterPanelIds(array $panels): array
+    {
+        return array_values(array_filter($panels, is_string(...)));
     }
 }

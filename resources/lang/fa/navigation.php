@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'content_management'          => 'مدیریت محتوا',
     'product'                     => 'محصولات',
     'product_category'            => 'دسته بندی محصولات',
     'product_category_management' => 'مدیریت دسته بندی محصولات',

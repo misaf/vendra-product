@@ -11,16 +11,18 @@ Tenant-aware product management for Vendra applications.
 
 ## Requirements
 
-- PHP 8.2+
-- Laravel 12
+- PHP 8.3+
+- Laravel 13
 - Filament 5
 - Livewire 4
 - Pest 4
 - Tailwind CSS 4
-- `misaf/vendra-tenant`
-- `misaf/vendra-user`
-- `misaf/vendra-currency`
-- `misaf/vendra-activity-log`
+- `misaf/vendra-support`
+- `misaf/vendra-multimedia`
+
+Optional:
+
+- `misaf/vendra-currency` — enables management of the active currencies used by pricing forms and demo seeders
 
 ## Installation
 
