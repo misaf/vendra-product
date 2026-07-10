@@ -1,5 +1,6 @@
 {
     "name": "misaf/vendra-product",
+    "version": "0.0.1",
     "description": "The product module for the Vendra framework",
     "keywords": [
         "laravel",
