@@ -29,6 +29,7 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
@@ -64,6 +65,8 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
 
     /** @use HasFactory<ProductFactory> */
     use HasFactory;
+
+    use HasTranslatableSlug;
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;

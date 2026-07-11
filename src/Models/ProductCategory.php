@@ -25,6 +25,7 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
@@ -48,14 +49,16 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 final class ProductCategory extends Model implements HasMedia, Sortable, ShouldLogActivity
 {
     use BelongsToTenant;
+
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
-
     /** @use HasFactory<ProductCategoryFactory> */
     use HasFactory;
 
     use HasRecursiveRelationships;
+
+    use HasTranslatableSlug;
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;
