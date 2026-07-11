@@ -7,6 +7,23 @@ use Misaf\VendraSupport\Contracts\AttributeResolver;
 use Misaf\VendraSupport\Support\AttributeIntegration;
 
 it('keeps attribute integration disabled without an attribute provider', function (): void {
+    app()->instance(AttributeResolver::class, new class () implements AttributeResolver {
+        public function available(): bool
+        {
+            return false;
+        }
+
+        public function valueModel(): ?string
+        {
+            return null;
+        }
+
+        public function options(): array
+        {
+            return [];
+        }
+    });
+
     expect(AttributeIntegration::isAvailable())->toBeFalse()
         ->and(fn() => (new Product())->attributeValues())
         ->toThrow(LogicException::class);
