@@ -4,7 +4,7 @@ The `misaf/vendra-product` package owns products, product categories, and pricin
 
 ### Standards
 
-- Keep product domain code inside `app-modules/vendra-product` using the `Misaf\VendraProduct` namespace.
+- Keep product domain code inside `packages/vendra-product` using the `Misaf\VendraProduct` namespace.
 - Use this package for models, migrations, factories, seeders, policies, permission enums, observers, Filament resources, translations, config, and package bootstrapping.
 - Keep JSON:API serialization and API routes in `misaf/vendra-product-api`.
 - Follow existing model conventions where they apply: tenant ownership, translated `name` / `description` / `slug`, soft deletes, sortable `position`, media collections, factories, and typed relationships.

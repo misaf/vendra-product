@@ -1,6 +1,5 @@
 {
     "name": "misaf/vendra-product",
-    "version": "0.0.7",
     "description": "The product module for the Vendra framework",
     "keywords": [
         "laravel",
@@ -65,13 +64,13 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        },
         "laravel": {
             "providers": [
                 "Misaf\\VendraProduct\\Providers\\ProductServiceProvider"
             ]
-        },
-        "branch-alias": {
-            "dev-master": "13.x-dev"
         }
     },
     "scripts": {
