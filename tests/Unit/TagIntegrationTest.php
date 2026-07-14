@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Tests\Unit;
 
-use Illuminate\Database\Eloquent\Model;
 use LogicException;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Contracts\TagResolver;
@@ -39,8 +38,3 @@ it('builds a typed polymorphic tag relation through the support contract', funct
             'boolean'  => 'and',
         ]);
 });
-
-final class ProductTestTag extends Model
-{
-    protected $table = 'tags';
-}
