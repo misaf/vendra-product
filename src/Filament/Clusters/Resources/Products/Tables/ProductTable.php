@@ -42,6 +42,7 @@ use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Support\CurrencyIntegration;
+use Misaf\VendraSupport\Support\TagIntegration;
 
 final class ProductTable
 {
@@ -186,6 +187,13 @@ final class ProductTable
                 ->counts('attributeValues')
                 ->label(__('vendra-product::attributes.attributes'))
                 ->toggleable(isToggledHiddenByDefault: true);
+        }
+
+        if (TagIntegration::isAvailable()) {
+            $columns[] = TextColumn::make('tags.name')
+                ->badge()
+                ->label(__('vendra-product::attributes.tags'))
+                ->toggleable();
         }
 
         return $table

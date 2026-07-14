@@ -26,6 +26,7 @@ return [
     'slug_helper_text'    => 'Eine eindeutige Kennung für die URL. Leer lassen, um sie automatisch aus dem Namen zu generieren.',
     'status'              => 'Status',
     'stock_threshold'     => 'Lagerbestandsschwelle',
+    'tags'                => 'Schlagwörter',
     'tenant_id'           => 'Mandant',
     'token'               => 'Token',
     'updated_at'          => 'Aktualisiert am',

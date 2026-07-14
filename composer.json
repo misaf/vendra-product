@@ -78,7 +78,8 @@
     },
     "suggest": {
         "misaf/vendra-attribute": "Install this in the host application to manage reusable attributes and product attribute values.",
-        "misaf/vendra-currency": "Install this in the host application to manage active currencies used by product pricing forms and demo seeders."
+        "misaf/vendra-currency": "Install this in the host application to manage active currencies used by product pricing forms and demo seeders.",
+        "misaf/vendra-tagger": "Install this in the host application to assign typed tags to products."
     },
     "config": {
         "allow-plugins": {

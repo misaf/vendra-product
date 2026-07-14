@@ -22,6 +22,7 @@ use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
 use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Support\CurrencyIntegration;
+use Misaf\VendraSupport\Support\TagIntegration;
 
 final class ProductForm
 {
@@ -148,6 +149,7 @@ final class ProductForm
                                     ]),
                             ]),
                         ...self::attributeTabs(),
+                        ...self::tagTabs(),
                         Tab::make('photos')
                             ->icon(Heroicon::OutlinedPhoto)
                             ->label(__('vendra-product::attributes.photos'))
@@ -205,6 +207,28 @@ final class ProductForm
                                 ->maxLength(2048)
                                 ->required(),
                         ]),
+                ]),
+        ];
+    }
+
+    /** @return list<Tab> */
+    private static function tagTabs(): array
+    {
+        if ( ! TagIntegration::isAvailable()) {
+            return [];
+        }
+
+        return [
+            Tab::make('tags')
+                ->icon(Heroicon::OutlinedTag)
+                ->label(__('vendra-product::attributes.tags'))
+                ->schema([
+                    Select::make('tags')
+                        ->columnSpanFull()
+                        ->label(__('vendra-product::attributes.tags'))
+                        ->multiple()
+                        ->preload()
+                        ->relationship('tags', 'name'),
                 ]),
         ];
     }

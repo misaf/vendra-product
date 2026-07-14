@@ -32,7 +32,7 @@ return [
     |
     */
 
-    'navigation_group' => 'vendra-product::navigation.content_management',
+    'navigation_group' => 'vendra-support::navigation.groups.Catalog',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,4 +48,5 @@ return [
     'token_generator_characters' => env('VENDRA_PRODUCT_TOKEN_GENERATOR_CHARACTERS', '123456789'),
 
     'token_generator_length' => (int) env('VENDRA_PRODUCT_TOKEN_GENERATOR_LENGTH', 9),
+
 ];

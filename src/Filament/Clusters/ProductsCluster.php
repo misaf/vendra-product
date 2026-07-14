@@ -12,11 +12,11 @@ use Misaf\VendraProduct\ProductPlugin;
 
 final class ProductsCluster extends Cluster
 {
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $slug = 'products';
 
-    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Start;
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 

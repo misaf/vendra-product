@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Providers;
 
+use Composer\InstalledVersions;
+
 use Filament\Panel;
 use Illuminate\Foundation\Console\AboutCommand;
 use Misaf\VendraProduct\Console\Commands\SeedCommand;
@@ -48,7 +50,7 @@ final class ProductServiceProvider extends PackageServiceProvider
     {
         $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
 
-        AboutCommand::add('Vendra Product', fn() => ['Version' => 'dev-master']);
+        AboutCommand::add('Vendra Product', fn() => ['Version' => InstalledVersions::getPrettyVersion('misaf/vendra-product')]);
     }
 
 

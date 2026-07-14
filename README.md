@@ -24,6 +24,7 @@ Optional:
 
 - `misaf/vendra-attribute` — enables reusable product attributes and values through the shared support resolver
 - `misaf/vendra-currency` — enables management of the active currencies used by pricing forms and demo seeders
+- `misaf/vendra-tagger` — enables assigning `product`-typed tags through the shared support resolver
 
 ## Installation
 
@@ -92,6 +93,22 @@ $products = Product::query()
     ->with(['productCategory', 'latestProductPrice'])
     ->get();
 ```
+
+### Optional tags
+
+Install `misaf/vendra-tagger` in the host application to enable the Tags tab and table column automatically. Product does not require or import Tagger or Spatie Tags; both packages communicate through the `TagResolver` contract in `misaf/vendra-support`.
+
+Create tags with the reserved `product` type in the Tagger resource, then assign them from the product form:
+
+```php
+use Misaf\VendraTagger\Models\Tagger;
+
+$tag = Tagger::findOrCreate('Featured', type: 'product', locale: 'en');
+
+$product->tags()->sync([$tag->getKey()]);
+```
+
+Without Tagger, Product continues working without tag queries or tag UI.
 
 ## Filament
 

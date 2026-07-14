@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct;
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Illuminate\Support\Facades\Config;
 
 final class ProductPlugin implements Plugin
 {
@@ -44,14 +45,14 @@ final class ProductPlugin implements Plugin
 
     public function getNavigationGroup(): string
     {
-        $group = $this->navigationGroup ?? config('vendra-product.navigation_group');
+        $group = $this->navigationGroup ?? Config::get('vendra-product.navigation_group');
 
         if ($group instanceof Closure) {
             $group = $group();
         }
 
         if ( ! is_string($group) || '' === $group) {
-            $group = 'vendra-product::navigation.content_management';
+            $group = 'vendra-support::navigation.groups.Catalog';
         }
 
         return (string) __($group);

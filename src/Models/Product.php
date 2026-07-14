@@ -24,6 +24,7 @@ use Misaf\VendraProduct\Observers\ProductObserver;
 use Misaf\VendraSupport\Contracts\ShouldLogActivity;
 use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Traits\BelongsToTenant;
+use Misaf\VendraSupport\Traits\HasOptionalTags;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -66,10 +67,12 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     /** @use HasFactory<ProductFactory> */
     use HasFactory;
 
+    use HasOptionalTags;
     use HasTranslatableSlug;
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;
+    public const string TAG_TYPE = 'product';
 
     /**
      * @var list<string>
@@ -204,6 +207,11 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
             'attributable_id',
             $this->getKeyName(),
         );
+    }
+
+    protected function tagType(): string
+    {
+        return self::TAG_TYPE;
     }
 
     public function getSlugOptions(): SlugOptions
