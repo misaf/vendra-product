@@ -14,13 +14,15 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductPrices\Tables\Product
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
 
+use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
+
 final class ProductPriceResource extends Resource
 {
     protected static ?string $model = ProductPrice::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCurrencyDollar;
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = NavigationPriority::ProductPrices->value;
 
     protected static ?string $slug = 'product-prices';
 
@@ -38,19 +40,14 @@ final class ProductPriceResource extends Resource
         return __('vendra-product::navigation.product_price');
     }
 
-    public static function getNavigationGroup(): string
-    {
-        return __('vendra-product::navigation.product_management');
-    }
-
     public static function getNavigationLabel(): string
     {
-        return __('vendra-product::navigation.product_price');
+        return __('vendra-product::navigation.product_prices');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('vendra-product::navigation.product_price');
+        return __('vendra-product::navigation.product_prices');
     }
 
     public static function form(Schema $schema): Schema

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 return [
     'content_management'          => 'مدیریت محتوا',
-    'product'                     => 'محصولات',
-    'product_category'            => 'دسته بندی محصولات',
-    'product_category_management' => 'مدیریت دسته بندی محصولات',
+    'product'                     => 'محصول',
+    'product_categories'          => 'دسته‌بندی‌های محصولات',
+    'product_category'            => 'دسته‌بندی محصول',
+    'product_category_management' => 'مدیریت دسته‌بندی محصولات',
     'product_management'          => 'مدیریت محصولات',
-    'product_price'               => 'قیمت محصولات',
+    'product_price'               => 'قیمت محصول',
     'product_price_management'    => 'مدیریت قیمت محصولات',
+    'product_prices'              => 'قیمت‌های محصولات',
+    'products'                    => 'محصولات',
 ];

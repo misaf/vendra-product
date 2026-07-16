@@ -20,6 +20,8 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\RelationManagers\Pr
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
 
+use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
+
 final class ProductCategoryResource extends Resource
 {
     use Translatable;
@@ -28,7 +30,7 @@ final class ProductCategoryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = NavigationPriority::ProductCategories->value;
 
     protected static ?string $slug = 'product-categories';
 
@@ -44,19 +46,14 @@ final class ProductCategoryResource extends Resource
         return __('vendra-product::navigation.product_category');
     }
 
-    public static function getNavigationGroup(): string
-    {
-        return __('vendra-product::navigation.product_management');
-    }
-
     public static function getNavigationLabel(): string
     {
-        return __('vendra-product::navigation.product_category');
+        return __('vendra-product::navigation.product_categories');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('vendra-product::navigation.product_category');
+        return __('vendra-product::navigation.product_categories');
     }
 
     public static function getRelations(): array
