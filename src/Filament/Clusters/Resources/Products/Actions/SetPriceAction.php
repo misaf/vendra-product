@@ -12,7 +12,7 @@ use Filament\Support\RawJs;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
 use Misaf\VendraProduct\Models\Product;
-use Misaf\VendraSupport\Support\CurrencyIntegration;
+use Misaf\VendraProduct\Models\ProductPrice;
 
 final class SetPriceAction extends BulkAction
 {
@@ -37,10 +37,10 @@ final class SetPriceAction extends BulkAction
         $this->schema([
             Select::make('currency_code')
                 ->columnSpanFull()
-                ->default(fn(): string => CurrencyIntegration::defaultCode())
+                ->default(fn(): string => ProductPrice::defaultCurrencyCode())
                 ->label(__('vendra-product::attributes.currency'))
                 ->native(false)
-                ->options(fn(): array => CurrencyIntegration::options())
+                ->options(fn(): array => ProductPrice::currencyOptions())
                 ->preload()
                 ->required()
                 ->searchable(),

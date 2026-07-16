@@ -14,9 +14,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
 use Misaf\VendraSupport\Contracts\ShouldLogActivity;
+use Misaf\VendraSupport\Support\CurrencyIntegration;
+use Money\Exception\UnknownCurrencyException;
+use Throwable;
 use Znck\Eloquent\Relations;
 use Znck\Eloquent\Traits;
 
@@ -50,6 +55,63 @@ final class ProductPrice extends Model implements ShouldLogActivity
             'currency_code' => 'string',
             'price'         => MoneyIntegerCast::class . ':currency_code',
         ];
+    }
+
+    public static function defaultCurrencyCode(): string
+    {
+        $defaultCurrencyCode = Str::upper(CurrencyIntegration::defaultCode());
+
+        if (self::supportsCurrencyCode($defaultCurrencyCode)) {
+            return $defaultCurrencyCode;
+        }
+
+        $configuredCurrencyCode = Str::upper(Config::string('app.currency', 'USD'));
+
+        return self::supportsCurrencyCode($configuredCurrencyCode) ? $configuredCurrencyCode : 'USD';
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function currencyOptions(): array
+    {
+        $options = [];
+
+        foreach (CurrencyIntegration::options() as $currencyCode => $label) {
+            $currencyCode = Str::upper($currencyCode);
+
+            if (self::supportsCurrencyCode($currencyCode)) {
+                $options[$currencyCode] = $label;
+            }
+        }
+
+        if ([] !== $options) {
+            return $options;
+        }
+
+        $defaultCurrencyCode = self::defaultCurrencyCode();
+
+        return [$defaultCurrencyCode => $defaultCurrencyCode];
+    }
+
+    public static function supportsCurrencyCode(string $currencyCode): bool
+    {
+        try {
+            return Money::isValidCurrency(Str::upper($currencyCode));
+        } catch (Throwable) {
+            return false;
+        }
+    }
+
+    public function formattedPrice(): string
+    {
+        try {
+            Money::getCurrencies()->subunitFor($this->price->getCurrency());
+
+            return $this->price->format();
+        } catch (UnknownCurrencyException) {
+            return Number::format((int) $this->price->getAmount(), locale: 'en') . ' ' . $this->currency_code;
+        }
     }
 
     /**

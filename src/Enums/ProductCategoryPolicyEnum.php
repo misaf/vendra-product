@@ -6,16 +6,16 @@ namespace Misaf\VendraProduct\Enums;
 
 enum ProductCategoryPolicyEnum: string
 {
-    case CREATE = 'create-product-category';
-    case DELETE = 'delete-product-category';
-    case DELETE_ANY = 'delete-any-product-category';
-    case FORCE_DELETE = 'force-delete-product-category';
-    case FORCE_DELETE_ANY = 'force-delete-any-product-category';
-    case REORDER = 'reorder-product-category';
-    case REPLICATE = 'replicate-product-category';
-    case RESTORE = 'restore-product-category';
-    case RESTORE_ANY = 'restore-any-product-category';
-    case UPDATE = 'update-product-category';
-    case VIEW = 'view-product-category';
-    case VIEW_ANY = 'view-any-product-category';
+    case Create = 'create-product-category';
+    case Delete = 'delete-product-category';
+    case DeleteAny = 'delete-any-product-category';
+    case ForceDelete = 'force-delete-product-category';
+    case ForceDeleteAny = 'force-delete-any-product-category';
+    case Reorder = 'reorder-product-category';
+    case Replicate = 'replicate-product-category';
+    case Restore = 'restore-product-category';
+    case RestoreAny = 'restore-any-product-category';
+    case Update = 'update-product-category';
+    case View = 'view-product-category';
+    case ViewAny = 'view-any-product-category';
 }

@@ -12,7 +12,6 @@ use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
-use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 final class DemoContentSeeder extends BaseDemoContentSeeder
 {
@@ -32,8 +31,8 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                     fn(string $currencyCode): ProductPrice => ProductPriceFactory::new()
                         ->forProduct($product)
                         ->forCurrencyCode($currencyCode)
-                        ->create(),
-                    CurrencyIntegration::activeCurrencyCodes(),
+                        ->createOne(),
+                    array_keys(ProductPrice::currencyOptions()),
                 )));
     }
 
@@ -158,7 +157,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 'products.*.available_soon'                => ['required', 'boolean'],
                 'products.*.productPrices'                 => ['required', 'array', 'list'],
                 'products.*.productPrices.*'               => ['required', 'array:currency_code,price'],
-                'products.*.productPrices.*.currency_code' => ['required', 'string'],
+                'products.*.productPrices.*.currency_code' => ['required', 'string', 'alpha:ascii', 'size:3'],
                 'products.*.productPrices.*.price'         => ['required', 'numeric'],
             ],
         )->validate();

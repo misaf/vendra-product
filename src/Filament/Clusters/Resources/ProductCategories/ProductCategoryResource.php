@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories;
 
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
-use Misaf\VendraProduct\Filament\Clusters\ProductsCluster;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\CreateProductCategory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\EditProductCategory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\ListProductCategories;
@@ -17,6 +18,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas\Pr
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Tables\ProductCategoryTable;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\RelationManagers\ProductRelationManager;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
 
 final class ProductCategoryResource extends Resource
 {
@@ -24,11 +26,13 @@ final class ProductCategoryResource extends Resource
 
     protected static ?string $model = ProductCategory::class;
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
+
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $slug = 'categories';
+    protected static ?string $slug = 'product-categories';
 
-    protected static ?string $cluster = ProductsCluster::class;
+    protected static ?string $cluster = CatalogCluster::class;
 
     public static function getBreadcrumb(): string
     {

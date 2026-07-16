@@ -8,6 +8,7 @@ use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Illuminate\Support\Facades\Config;
+use Misaf\VendraProduct\Filament\Widgets\ProductOverviewWidget;
 
 final class ProductPlugin implements Plugin
 {
@@ -60,10 +61,14 @@ final class ProductPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->discoverClusters(
-            in: __DIR__ . '/Filament/Clusters',
-            for: 'Misaf\\VendraProduct\\Filament\\Clusters',
+        $panel->discoverResources(
+            in: __DIR__ . '/Filament/Clusters/Resources',
+            for: 'Misaf\\VendraProduct\\Filament\\Clusters\\Resources',
         );
+
+        $panel->widgets([
+            ProductOverviewWidget::class,
+        ]);
     }
 
     public function boot(Panel $panel): void {}

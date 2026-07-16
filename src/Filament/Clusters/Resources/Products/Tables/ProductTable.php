@@ -38,10 +38,10 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAct
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\CurrencyIntegration;
 use Misaf\VendraSupport\Support\TagIntegration;
 
 final class ProductTable
@@ -94,16 +94,17 @@ final class ProductTable
 
             TextColumn::make('latestProductPrice.price')
                 ->label(__('vendra-product::attributes.price'))
+                ->state(fn(Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
                 ->action(
                     Action::make('setPrice')
                         ->requiresConfirmation()
                         ->schema([
                             Select::make('currency_code')
                                 ->columnSpanFull()
-                                ->default(fn(): string => CurrencyIntegration::defaultCode())
+                                ->default(fn(): string => ProductPrice::defaultCurrencyCode())
                                 ->label(__('vendra-product::attributes.currency'))
                                 ->native(false)
-                                ->options(fn(): array => CurrencyIntegration::options())
+                                ->options(fn(): array => ProductPrice::currencyOptions())
                                 ->preload()
                                 ->required()
                                 ->searchable(),

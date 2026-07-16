@@ -6,15 +6,15 @@ namespace Misaf\VendraProduct\Enums;
 
 enum ProductPricePolicyEnum: string
 {
-    case CREATE = 'create-product-price';
-    case DELETE = 'delete-product-price';
-    case DELETE_ANY = 'delete-any-product-price';
-    case FORCE_DELETE = 'force-delete-product-price';
-    case FORCE_DELETE_ANY = 'force-delete-any-product-price';
-    case REPLICATE = 'replicate-product-price';
-    case RESTORE = 'restore-product-price';
-    case RESTORE_ANY = 'restore-any-product-price';
-    case UPDATE = 'update-product-price';
-    case VIEW = 'view-product-price';
-    case VIEW_ANY = 'view-any-product-price';
+    case Create = 'create-product-price';
+    case Delete = 'delete-product-price';
+    case DeleteAny = 'delete-any-product-price';
+    case ForceDelete = 'force-delete-product-price';
+    case ForceDeleteAny = 'force-delete-any-product-price';
+    case Replicate = 'replicate-product-price';
+    case Restore = 'restore-product-price';
+    case RestoreAny = 'restore-any-product-price';
+    case Update = 'update-product-price';
+    case View = 'view-product-price';
+    case ViewAny = 'view-any-product-price';
 }

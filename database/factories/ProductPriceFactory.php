@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
-use Misaf\VendraSupport\Support\CurrencyIntegration;
 
 /**
  * @extends Factory<ProductPrice>
@@ -20,7 +19,7 @@ final class ProductPriceFactory extends Factory
     {
         return [
             'product_id'    => Product::factory(),
-            'currency_code' => fake()->randomElement(array_keys(CurrencyIntegration::options())),
+            'currency_code' => fake()->randomElement(array_keys(ProductPrice::currencyOptions())),
             'price'         => fake()->randomElement([9900, 14900, 19900, 24900, 49900, 99900]),
         ];
     }

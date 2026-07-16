@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products;
 
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
-use Misaf\VendraProduct\Filament\Clusters\ProductsCluster;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductPrices\RelationManagers\ProductPriceRelationManager;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\CreateProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\EditProduct;
@@ -17,6 +18,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ViewProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas\ProductForm;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Tables\ProductTable;
 use Misaf\VendraProduct\Models\Product;
+use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
 
 final class ProductResource extends Resource
 {
@@ -24,11 +26,13 @@ final class ProductResource extends Resource
 
     protected static ?string $model = Product::class;
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
+
     protected static ?int $navigationSort = 1;
 
     protected static ?string $slug = 'products';
 
-    protected static ?string $cluster = ProductsCluster::class;
+    protected static ?string $cluster = CatalogCluster::class;
 
     public static function getBreadcrumb(): string
     {

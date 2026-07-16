@@ -18,6 +18,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Filament\Tables\Table;
+use Misaf\VendraProduct\Models\ProductPrice;
 
 final class ProductPriceTable
 {
@@ -33,7 +34,8 @@ final class ProductPriceTable
 
             TextColumn::make('price')
                 ->alignStart()
-                ->label(__('vendra-product::attributes.price')),
+                ->label(__('vendra-product::attributes.price'))
+                ->state(fn(ProductPrice $record): string => $record->formattedPrice()),
 
             TextColumn::make('created_at')
                 ->alignCenter()

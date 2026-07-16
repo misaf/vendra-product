@@ -20,8 +20,8 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
+use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\CurrencyIntegration;
 use Misaf\VendraSupport\Support\TagIntegration;
 
 final class ProductForm
@@ -78,10 +78,10 @@ final class ProductForm
                             ->schema([
                                 Select::make('currency_code')
                                     ->columnSpan(['lg' => 1])
-                                    ->default(fn(): string => CurrencyIntegration::defaultCode())
+                                    ->default(fn(): string => ProductPrice::defaultCurrencyCode())
                                     ->label(__('vendra-product::attributes.currency'))
                                     ->native(false)
-                                    ->options(fn(): array => CurrencyIntegration::options())
+                                    ->options(fn(): array => ProductPrice::currencyOptions())
                                     ->preload()
                                     ->required()
                                     ->searchable(),
@@ -130,11 +130,7 @@ final class ProductForm
                                     ->maxDate(now())
                                     ->native(false)
                                     ->seconds(false)
-                                    ->visible(fn(Get $get): bool => true === $get->boolean('available_soon'))
-                                    ->unless(
-                                        app()->isLocale('fa'),
-                                        fn(DateTimePicker $column): DateTimePicker => $column->jalali(),
-                                    ),
+                                    ->visible(fn(Get $get): bool => true === $get->boolean('available_soon')),
 
                                 Toggle::make('in_stock')
                                     ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.in_stock'))
