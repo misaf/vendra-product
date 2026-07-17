@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
 use Misaf\VendraProduct\Models\Product;
@@ -25,11 +26,11 @@ final class SetPriceByPercentageAction extends BulkAction
 
         $this->color('primary');
 
-        $this->icon('heroicon-o-archive-box-arrow-down');
+        $this->icon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->requiresConfirmation();
 
-        $this->modalIcon('heroicon-o-archive-box-arrow-down');
+        $this->modalIcon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->schema([
             TextInput::make('percent')

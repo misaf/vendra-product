@@ -6,6 +6,7 @@ namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
 use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraProduct\Models\Product;
 
@@ -23,11 +24,11 @@ final class InStockAction extends BulkAction
 
         $this->color('primary');
 
-        $this->icon('heroicon-o-archive-box-arrow-down');
+        $this->icon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->requiresConfirmation();
 
-        $this->modalIcon('heroicon-o-archive-box-arrow-down');
+        $this->modalIcon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->action(function (): void {
             $this->process(static function (Collection $records): void {

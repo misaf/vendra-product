@@ -8,6 +8,7 @@ use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;
@@ -28,11 +29,11 @@ final class SetPriceAction extends BulkAction
 
         $this->color('primary');
 
-        $this->icon('heroicon-o-archive-box-arrow-down');
+        $this->icon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->requiresConfirmation();
 
-        $this->modalIcon('heroicon-o-archive-box-arrow-down');
+        $this->modalIcon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->schema([
             Select::make('currency_code')

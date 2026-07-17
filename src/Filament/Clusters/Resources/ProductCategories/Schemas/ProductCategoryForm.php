@@ -11,13 +11,18 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
+use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
 use Misaf\VendraSupport\Support\TenantAwareness;
 
 final class ProductCategoryForm
 {
+    use InteractsWithTranslatedFormFields;
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -34,6 +39,7 @@ final class ProductCategoryForm
                     ->live(onBlur: true)
                     ->required()
                     ->unique(
+                        column: fn(Livewire $livewire): string => 'name->' . self::activeFormLocale($livewire),
                         modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
                             ->withoutTrashed(),
                     ),
@@ -44,7 +50,11 @@ final class ProductCategoryForm
                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                     ->label(__('vendra-product::attributes.slug'))
                     ->required()
-                    ->unique(modifyRuleUsing: fn(Unique $rule) => $rule->withoutTrashed()),
+                    ->unique(
+                        column: fn(Livewire $livewire): string => 'slug->' . self::activeFormLocale($livewire),
+                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                            ->withoutTrashed(),
+                    ),
 
                 RichEditor::make('description')
                     ->columnSpanFull()
@@ -53,7 +63,7 @@ final class ProductCategoryForm
                     ->required(),
 
                 SpatieMediaLibraryFileUpload::make('image')
-                    ->collection('products/categories')
+                    ->collection(ProductCategory::MEDIA_COLLECTION)
                     ->columnSpanFull()
                     ->image()
                     ->label(__('vendra-product::attributes.image'))
@@ -65,11 +75,12 @@ final class ProductCategoryForm
                     ->columnSpanFull()
                     ->default(false)
                     ->label(__('vendra-product::attributes.status'))
-                    ->onIcon('heroicon-m-bolt')
+                    ->onIcon(Heroicon::Bolt)
                     ->required()
                     ->rules([
                         'boolean',
                     ]),
             ]);
     }
+
 }

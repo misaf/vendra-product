@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Tables;
 
-use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Support\RawJs;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\Layout\Component as LayoutComponent;
@@ -34,11 +31,11 @@ use Livewire\Component as Livewire;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetColumnPriceAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
-use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Support\AttributeIntegration;
@@ -57,11 +54,11 @@ final class ProductTable
         $columns = [
             TextColumn::make('row')
                 ->label('#')
-                ->rowIndex(),
+                ->rowIndex()->sortable(),
 
             SpatieMediaLibraryImageColumn::make('image')
                 ->alignCenter()
-                ->collection('products')
+                ->collection(Product::MEDIA_COLLECTION)
                 ->conversion('thumb-table')
                 ->defaultImageUrl(function (Product $record, Livewire $livewire): string {
                     return static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire));
@@ -95,37 +92,7 @@ final class ProductTable
             TextColumn::make('latestProductPrice.price')
                 ->label(__('vendra-product::attributes.price'))
                 ->state(fn(Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
-                ->action(
-                    Action::make('setPrice')
-                        ->requiresConfirmation()
-                        ->schema([
-                            Select::make('currency_code')
-                                ->columnSpanFull()
-                                ->default(fn(): string => ProductPrice::defaultCurrencyCode())
-                                ->label(__('vendra-product::attributes.currency'))
-                                ->native(false)
-                                ->options(fn(): array => ProductPrice::currencyOptions())
-                                ->preload()
-                                ->required()
-                                ->searchable(),
-
-                            TextInput::make('price')
-                                ->autofocus()
-                                ->columnSpanFull()
-                                ->label(__('vendra-product::attributes.price'))
-                                ->live(onBlur: true)
-                                ->mask(RawJs::make('$money($input)'))
-                                ->numeric()
-                                ->required()
-                                ->stripCharacters(','),
-                        ])
-                        ->action(function (Product $record, array $data): void {
-                            $record->productPrices()->create([
-                                'currency_code' => $data['currency_code'],
-                                'price'         => $data['price'],
-                            ]);
-                        })
-                ),
+                ->action(SetColumnPriceAction::make()),
 
             TextColumn::make('quantity')
                 ->label(__('vendra-product::attributes.quantity'))
@@ -137,11 +104,11 @@ final class ProductTable
 
             ToggleColumn::make('in_stock')
                 ->label(__('vendra-product::attributes.in_stock'))
-                ->onIcon('heroicon-m-bolt'),
+                ->onIcon(Heroicon::Bolt),
 
             ToggleColumn::make('available_soon')
                 ->label(__('vendra-product::attributes.available_soon'))
-                ->onIcon('heroicon-m-bolt'),
+                ->onIcon(Heroicon::Bolt),
 
             TextColumn::make('availability_date')
                 ->alignCenter()
@@ -149,7 +116,7 @@ final class ProductTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.availability_date'))
                 ->sinceTooltip()
-                ->unless(
+                ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
                     fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
@@ -162,7 +129,7 @@ final class ProductTable
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
                 ->toggleable(isToggledHiddenByDefault: true)
-                ->unless(
+                ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
                     fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
@@ -175,7 +142,7 @@ final class ProductTable
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()
                 ->toggleable(isToggledHiddenByDefault: true)
-                ->unless(
+                ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
                     fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
@@ -193,7 +160,7 @@ final class ProductTable
         if (TagIntegration::isAvailable()) {
             $columns[] = TextColumn::make('tags.name')
                 ->badge()
-                ->label(__('vendra-product::attributes.tags'))
+                ->label(__('vendra-support::attributes.tags'))
                 ->toggleable();
         }
 
@@ -232,6 +199,8 @@ final class ProductTable
 
                             BooleanConstraint::make('available_soon')
                                 ->label(__('vendra-product::attributes.available_soon')),
+
+                            NumberConstraint::make('position'),
                         ]),
                 ],
                 layout: FiltersLayout::AboveContentCollapsible,
@@ -260,7 +229,7 @@ final class ProductTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort(column: 'position', direction: 'desc')
+            ->defaultSort(column: 'id', direction: 'desc')
             ->reorderable(column: 'position', direction: 'desc')
             ->defaultGroup(
                 Group::make('productCategory.name')

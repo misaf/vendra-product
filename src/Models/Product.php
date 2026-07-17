@@ -73,6 +73,7 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     use SoftDeletes;
     use SortableTrait;
     public const string TAG_TYPE = 'product';
+    public const string MEDIA_COLLECTION = 'products';
 
     /**
      * @var list<string>

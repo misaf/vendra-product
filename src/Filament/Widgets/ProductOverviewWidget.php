@@ -51,21 +51,21 @@ final class ProductOverviewWidget extends StatsOverviewWidget
                 ->chart($this->chartValues($productTrend))
                 ->color('primary')
                 ->description(__('vendra-product::widgets.total_products_description'))
-                ->descriptionIcon('heroicon-m-cube', IconPosition::Before)
+                ->descriptionIcon(Heroicon::Cube, IconPosition::Before)
                 ->icon(Heroicon::OutlinedSquares2x2)
                 ->label(__('vendra-product::widgets.total_products')),
             Stat::make('in_stock_product_stats', Number::format($inStockProducts->count()))
                 ->chart($this->chartValues($inStockTrend))
                 ->color('success')
                 ->description(__('vendra-product::widgets.in_stock_products_description'))
-                ->descriptionIcon('heroicon-m-check-circle', IconPosition::Before)
+                ->descriptionIcon(Heroicon::CheckCircle, IconPosition::Before)
                 ->icon(Heroicon::OutlinedSquares2x2)
                 ->label(__('vendra-product::widgets.in_stock_products')),
             Stat::make('out_of_stock_product_stats', Number::format($outOfStockProducts->count()))
                 ->chart($this->chartValues($outOfStockTrend))
                 ->color('danger')
                 ->description(__('vendra-product::widgets.out_of_stock_products_description'))
-                ->descriptionIcon('heroicon-m-x-circle', IconPosition::Before)
+                ->descriptionIcon(Heroicon::XCircle, IconPosition::Before)
                 ->icon(Heroicon::OutlinedSquares2x2)
                 ->label(__('vendra-product::widgets.out_of_stock_products')),
         ];

@@ -19,13 +19,20 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
+use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTagFields;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
 use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\TagIntegration;
+use Misaf\VendraSupport\Support\TenantAwareness;
 
 final class ProductForm
 {
+    use InteractsWithTagFields;
+    use InteractsWithTranslatedFormFields;
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -56,14 +63,24 @@ final class ProductForm
                                     ->columnSpan(['lg' => 1])
                                     ->label(__('vendra-product::attributes.name'))
                                     ->live(onBlur: true)
-                                    ->required(),
+                                    ->required()
+                                    ->unique(
+                                        column: fn(Livewire $livewire): string => 'name->' . self::activeFormLocale($livewire),
+                                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                                            ->withoutTrashed(),
+                                    ),
 
                                 TextInput::make('slug')
                                     ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.slug'))
                                     ->columnSpan(['lg' => 1])
                                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                                     ->label(__('vendra-product::attributes.slug'))
-                                    ->required(),
+                                    ->required()
+                                    ->unique(
+                                        column: fn(Livewire $livewire): string => 'slug->' . self::activeFormLocale($livewire),
+                                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                                            ->withoutTrashed(),
+                                    ),
 
                                 RichEditor::make('description')
                                     ->columnSpanFull()
@@ -115,7 +132,7 @@ final class ProductForm
                                     ->inline(false)
                                     ->label(__('vendra-product::attributes.available_soon'))
                                     ->live()
-                                    ->onIcon('heroicon-m-bolt')
+                                    ->onIcon(Heroicon::Bolt)
                                     ->required()
                                     ->rules([
                                         'boolean',
@@ -138,7 +155,7 @@ final class ProductForm
                                     ->default(false)
                                     ->inline(false)
                                     ->label(__('vendra-product::attributes.in_stock'))
-                                    ->onIcon('heroicon-m-bolt')
+                                    ->onIcon(Heroicon::Bolt)
                                     ->required()
                                     ->rules([
                                         'boolean',
@@ -151,7 +168,7 @@ final class ProductForm
                             ->label(__('vendra-product::attributes.photos'))
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('image')
-                                    ->collection('products')
+                                    ->collection(Product::MEDIA_COLLECTION)
                                     ->columnSpanFull()
                                     ->image()
                                     ->label(__('vendra-product::attributes.image'))
@@ -210,22 +227,18 @@ final class ProductForm
     /** @return list<Tab> */
     private static function tagTabs(): array
     {
-        if ( ! TagIntegration::isAvailable()) {
+        $tagFields = self::tagFields();
+
+        if ([] === $tagFields) {
             return [];
         }
 
         return [
             Tab::make('tags')
                 ->icon(Heroicon::OutlinedTag)
-                ->label(__('vendra-product::attributes.tags'))
-                ->schema([
-                    Select::make('tags')
-                        ->columnSpanFull()
-                        ->label(__('vendra-product::attributes.tags'))
-                        ->multiple()
-                        ->preload()
-                        ->relationship('tags', 'name'),
-                ]),
+                ->label(__('vendra-support::attributes.tags'))
+                ->schema($tagFields),
         ];
     }
+
 }

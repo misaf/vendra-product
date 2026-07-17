@@ -62,6 +62,7 @@ final class ProductCategory extends Model implements HasMedia, Sortable, ShouldL
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;
+    public const string MEDIA_COLLECTION = 'products/categories';
 
     /**
      * @var list<string>

@@ -13,6 +13,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\Size;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\Layout\Component as LayoutComponent;
@@ -22,6 +23,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\QueryBuilder\Constraints\BooleanConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Filament\Tables\Table;
 use Illuminate\Support\Number;
 use Livewire\Component as Livewire;
@@ -42,11 +44,11 @@ final class ProductCategoryTable
         $columns = [
             TextColumn::make('row')
                 ->label('#')
-                ->rowIndex(),
+                ->rowIndex()->sortable(),
 
             SpatieMediaLibraryImageColumn::make('image')
                 ->alignCenter()
-                ->collection('products/categories')
+                ->collection(ProductCategory::MEDIA_COLLECTION)
                 ->conversion('thumb-table')
                 ->defaultImageUrl(function (ProductCategory $record, Livewire $livewire): string {
                     return static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire));
@@ -57,10 +59,10 @@ final class ProductCategoryTable
 
             BadgeableColumn::make('name')
                 ->alignStart()
-                // ->description(function (Livewire $livewire, ProductCategory $record): string {
-                //     return $record->getTranslation('description', $livewire->activeLocale);
-                // })
-                ->icon('heroicon-m-folder-plus')
+                ->description(function (Livewire $livewire, ProductCategory $record): string {
+                    return static::translatedAttribute($record, 'description', $livewire);
+                })
+                ->icon(Heroicon::FolderPlus)
                 ->label(__('vendra-product::attributes.name'))
                 ->suffixBadges([
                     Badge::make('count')
@@ -75,7 +77,7 @@ final class ProductCategoryTable
 
             ToggleColumn::make('status')
                 ->label(__('vendra-product::attributes.status'))
-                ->onIcon('heroicon-m-bolt'),
+                ->onIcon(Heroicon::Bolt),
 
             TextColumn::make('created_at')
                 ->alignCenter()
@@ -84,7 +86,7 @@ final class ProductCategoryTable
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
                 ->toggleable(isToggledHiddenByDefault: true)
-                ->unless(
+                ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
                     fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
@@ -97,7 +99,7 @@ final class ProductCategoryTable
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()
                 ->toggleable(isToggledHiddenByDefault: true)
-                ->unless(
+                ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
                     fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
@@ -112,6 +114,8 @@ final class ProductCategoryTable
                         ->constraints([
                             BooleanConstraint::make('status')
                                 ->label(__('vendra-product::attributes.status')),
+
+                            NumberConstraint::make('position'),
                         ]),
                 ],
                 layout: FiltersLayout::AboveContentCollapsible,
@@ -130,7 +134,7 @@ final class ProductCategoryTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort(column: 'position', direction: 'desc')
+            ->defaultSort(column: 'id', direction: 'desc')
             ->reorderable(column: 'position', direction: 'desc');
     }
 }
