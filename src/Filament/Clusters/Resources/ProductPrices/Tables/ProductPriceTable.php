@@ -33,7 +33,7 @@ final class ProductPriceTable
         $columns = [
             TextColumn::make('row')
                 ->label('#')
-                ->rowIndex()->sortable(),
+                ->rowIndex()->sortable(['id']),
 
             TextColumn::make('price')
                 ->alignStart()
