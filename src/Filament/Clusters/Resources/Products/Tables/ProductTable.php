@@ -15,6 +15,7 @@ use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\Layout\Component as LayoutComponent;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\SpatieTagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -54,7 +55,8 @@ final class ProductTable
         $columns = [
             TextColumn::make('row')
                 ->label('#')
-                ->rowIndex()->sortable(['id']),
+                ->rowIndex()
+                ->sortable(['id']),
 
             SpatieMediaLibraryImageColumn::make('image')
                 ->alignCenter()
@@ -158,9 +160,9 @@ final class ProductTable
         }
 
         if (TagIntegration::isAvailable()) {
-            $columns[] = TextColumn::make('tags.name')
-                ->badge()
+            $columns[] = SpatieTagsColumn::make('tags')
                 ->label(__('vendra-support::attributes.tags'))
+                ->type(Product::TAG_TYPE)
                 ->toggleable();
         }
 

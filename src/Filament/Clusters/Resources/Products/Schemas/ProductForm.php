@@ -9,6 +9,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Tabs;
@@ -23,14 +24,13 @@ use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
-use Misaf\VendraSupport\Filament\Concerns\InteractsWithTagFields;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
 use Misaf\VendraSupport\Support\AttributeIntegration;
+use Misaf\VendraSupport\Support\TagIntegration;
 use Misaf\VendraSupport\Support\TenantAwareness;
 
 final class ProductForm
 {
-    use InteractsWithTagFields;
     use InteractsWithTranslatedFormFields;
 
     public static function configure(Schema $schema): Schema
@@ -162,7 +162,7 @@ final class ProductForm
                                     ]),
                             ]),
                         ...self::attributeTabs(),
-                        ...self::tagTabs(),
+                        ...self::tagTab(),
                         Tab::make('photos')
                             ->icon(Heroicon::OutlinedPhoto)
                             ->label(__('vendra-product::attributes.photos'))
@@ -225,11 +225,9 @@ final class ProductForm
     }
 
     /** @return list<Tab> */
-    private static function tagTabs(): array
+    private static function tagTab(): array
     {
-        $tagFields = self::tagFields();
-
-        if ([] === $tagFields) {
+        if ( ! TagIntegration::isAvailable()) {
             return [];
         }
 
@@ -237,7 +235,12 @@ final class ProductForm
             Tab::make('tags')
                 ->icon(Heroicon::OutlinedTag)
                 ->label(__('vendra-support::attributes.tags'))
-                ->schema($tagFields),
+                ->schema([
+                    SpatieTagsInput::make('tags')
+                        ->label(__('vendra-support::attributes.tags'))
+                        ->type(Product::TAG_TYPE)
+                        ->reorderable(),
+                ]),
         ];
     }
 
