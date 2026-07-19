@@ -25,8 +25,10 @@ use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint\Operators\IsRelatedToOperator;
 use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
-use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
@@ -71,7 +73,28 @@ final class ProductTable
 
             TextColumn::make('name')
                 ->alignStart()
-                ->label(__('vendra-product::attributes.name')),
+                ->label(__('vendra-product::attributes.name'))
+                ->description(function (Product $record, Livewire $livewire): View {
+                    $productCategory = $record->productCategory;
+                    $stockThreshold = $record->getAttribute('stock_threshold');
+                    $badges = [
+                        __('vendra-product::attributes.quantity') . ': ' . Number::format($record->quantity),
+                        __('vendra-product::attributes.stock_threshold') . ': ' . (
+                            is_numeric($stockThreshold) ? Number::format((int) $stockThreshold) : '—'
+                        ),
+                    ];
+
+                    if (null !== $productCategory) {
+                        array_unshift(
+                            $badges,
+                            static::translatedAttribute($productCategory, 'name', $livewire),
+                        );
+                    }
+
+                    return view('vendra-product::filament.tables.columns.product-badges', [
+                        'badges' => $badges,
+                    ]);
+                }),
 
             TextColumn::make('slug')
                 ->alignStart()
@@ -95,14 +118,6 @@ final class ProductTable
                 ->label(__('vendra-product::attributes.price'))
                 ->state(fn(Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
                 ->action(SetColumnPriceAction::make()),
-
-            TextColumn::make('quantity')
-                ->label(__('vendra-product::attributes.quantity'))
-                ->numeric(),
-
-            TextColumn::make('stock_threshold')
-                ->label(__('vendra-product::attributes.stock_threshold'))
-                ->numeric(),
 
             ToggleColumn::make('in_stock')
                 ->label(__('vendra-product::attributes.in_stock'))
@@ -130,7 +145,6 @@ final class ProductTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
@@ -143,7 +157,6 @@ final class ProductTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
@@ -167,6 +180,7 @@ final class ProductTable
         }
 
         return $table
+            ->modifyQueryUsing(fn(Builder $query): Builder => $query->with('productCategory'))
             ->columns($columns)
             ->filters(
                 [
@@ -232,19 +246,6 @@ final class ProductTable
                 ]),
             ])
             ->defaultSort(column: 'id', direction: 'desc')
-            ->reorderable(column: 'position', direction: 'desc')
-            ->defaultGroup(
-                Group::make('productCategory.name')
-                    ->label(__('vendra-product::navigation.product_category'))
-                    ->getTitleFromRecordUsing(function (Product $record, Livewire $livewire): string {
-                        $productCategory = $record->productCategory;
-
-                        if (null === $productCategory) {
-                            return '';
-                        }
-
-                        return static::translatedAttribute($productCategory, 'name', $livewire);
-                    })
-            );
+            ->reorderable(column: 'position', direction: 'desc');
     }
 }

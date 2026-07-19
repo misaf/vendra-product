@@ -47,7 +47,6 @@ final class ProductPriceTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
@@ -60,7 +59,6 @@ final class ProductPriceTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),

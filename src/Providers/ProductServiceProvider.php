@@ -12,6 +12,7 @@ use Misaf\VendraProduct\Console\Commands\SeedCommand;
 use Misaf\VendraProduct\ProductPlugin;
 use Misaf\VendraSupport\Filament\Concerns\ResolvesConfiguredPanels;
 use Misaf\VendraSupport\Support\TenantSeeders;
+use Misaf\VendraSupport\Support\TenantTableRegistry;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -26,6 +27,7 @@ final class ProductServiceProvider extends PackageServiceProvider
             ->name('vendra-product')
             ->hasConfigFile()
             ->hasTranslations()
+            ->hasViews()
             ->hasMigrations([
                 'create_products_table',
             ])
@@ -48,6 +50,7 @@ final class ProductServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        $this->app->make(TenantTableRegistry::class)->register('product_categories', 'products');
         $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
 
         AboutCommand::add('Vendra Product', fn() => ['Version' => InstalledVersions::getPrettyVersion('misaf/vendra-product')]);

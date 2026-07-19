@@ -16,6 +16,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\EditProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ViewProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas\ProductForm;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas\ProductInfolist;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Tables\ProductTable;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
@@ -83,6 +84,11 @@ final class ProductResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return ProductForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ProductInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

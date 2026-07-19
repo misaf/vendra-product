@@ -15,6 +15,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\Edit
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\ListProductCategories;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\ViewProductCategory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas\ProductCategoryForm;
+use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas\ProductCategoryInfolist;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Tables\ProductCategoryTable;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\RelationManagers\ProductRelationManager;
 use Misaf\VendraProduct\Models\ProductCategory;
@@ -83,6 +84,11 @@ final class ProductCategoryResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return ProductCategoryForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ProductCategoryInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

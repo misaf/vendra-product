@@ -9,12 +9,11 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Number;
 use LaraZeus\SpatieTranslatable\Resources\RelationManagers\Concerns\Translatable;
 use Livewire\Attributes\Reactive;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
-use Misaf\VendraProduct\Models\Product;
+use Misaf\VendraProduct\Models\ProductCategory;
 
 final class ProductRelationManager extends RelationManager
 {
@@ -25,6 +24,8 @@ final class ProductRelationManager extends RelationManager
 
     protected static string $relationship = 'products';
 
+    protected static bool $isBadgeDeferred = true;
+
     protected static bool $isLazy = false;
 
     public static function getModelLabel(): string
@@ -32,9 +33,14 @@ final class ProductRelationManager extends RelationManager
         return __('vendra-product::navigation.product');
     }
 
+    public static function getPluralModelLabel(): string
+    {
+        return __('vendra-product::navigation.products');
+    }
+
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return __('vendra-product::navigation.product');
+        return __('vendra-product::navigation.products');
     }
 
     public function isReadOnly(): bool
@@ -44,10 +50,11 @@ final class ProductRelationManager extends RelationManager
 
     public static function getBadge(Model $ownerRecord, string $pageClass): string
     {
-        /** @var Collection<int, Product> $products */
-        $products = $ownerRecord->getRelation('products') ?? collect();
+        if ( ! $ownerRecord instanceof ProductCategory) {
+            return (string) Number::format(0);
+        }
 
-        return (string) Number::format($products->count());
+        return (string) Number::format($ownerRecord->products()->count());
     }
 
     public function form(Schema $schema): Schema

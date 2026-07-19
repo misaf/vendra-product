@@ -25,6 +25,7 @@ use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\QueryBuilder\Constraints\BooleanConstraint;
 use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
 use Livewire\Component as Livewire;
 use Misaf\VendraProduct\Models\ProductCategory;
@@ -67,9 +68,10 @@ final class ProductCategoryTable
                 ->label(__('vendra-product::attributes.name'))
                 ->suffixBadges([
                     Badge::make('count')
-                        ->label(fn(ProductCategory $record): string => (string) Number::format($record->products()->count()))
+                        ->label(fn(ProductCategory $record): string => (string) Number::format(static::integerAttribute($record, 'products_count')))
                         ->size(Size::Small),
-                ]),
+                ])
+                ->suffix(''),
 
             TextColumn::make('slug')
                 ->alignStart()
@@ -86,7 +88,6 @@ final class ProductCategoryTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
@@ -99,7 +100,6 @@ final class ProductCategoryTable
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()
-                ->toggleable(isToggledHiddenByDefault: true)
                 ->when(
                     app()->isLocale('fa'),
                     fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
@@ -108,6 +108,7 @@ final class ProductCategoryTable
         ];
 
         return $table
+            ->modifyQueryUsing(fn(Builder $query): Builder => $query->withCount('products'))
             ->columns($columns)
             ->filters(
                 [

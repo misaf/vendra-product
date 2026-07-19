@@ -1,6 +1,8 @@
 {
     "name": "misaf/vendra-product",
     "description": "The product module for the Vendra framework",
+    "license": "MIT",
+    "type": "vendra-module",
     "keywords": [
         "laravel",
         "filamentphp",
@@ -8,8 +10,6 @@
         "vendra",
         "product"
     ],
-    "homepage": "https://github.com/misaf/vendra-product",
-    "license": "MIT",
     "authors": [
         {
             "name": "Ehsan Mahmoodi",
@@ -17,7 +17,11 @@
             "role": "Developer"
         }
     ],
-    "type": "vendra-module",
+    "homepage": "https://github.com/misaf/vendra-product",
+    "support": {
+        "issues": "https://github.com/misaf/vendra-product/issues",
+        "source": "https://github.com/misaf/vendra-product"
+    },
     "require": {
         "php": "^8.3",
         "awcodes/filament-badgeable-column": "^4.0",
@@ -51,6 +55,13 @@
         "pestphp/pest-plugin-type-coverage": "^4.0.4",
         "phpstan/extension-installer": "^1.4.3"
     },
+    "suggest": {
+        "misaf/vendra-attribute": "Install this in the host application to manage reusable attributes and product attribute values.",
+        "misaf/vendra-currency": "Install this in the host application to manage active currencies used by product pricing forms and demo seeders.",
+        "misaf/vendra-tagger": "Install this in the host application to assign typed tags to products."
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Misaf\\VendraProduct\\": "src/",
@@ -62,6 +73,16 @@
             "Misaf\\VendraProduct\\Database\\Factories\\": "database/factories/",
             "Misaf\\VendraProduct\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
@@ -76,26 +97,5 @@
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage"
     },
-    "suggest": {
-        "misaf/vendra-attribute": "Install this in the host application to manage reusable attributes and product attribute values.",
-        "misaf/vendra-currency": "Install this in the host application to manage active currencies used by product pricing forms and demo seeders.",
-        "misaf/vendra-tagger": "Install this in the host application to assign typed tags to products."
-    },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true,
-            "phpstan/extension-installer": true
-        },
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "support": {
-        "issues": "https://github.com/misaf/vendra-product/issues",
-        "source": "https://github.com/misaf/vendra-product"
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "$schema": "https://getcomposer.org/schema.json"
 }
