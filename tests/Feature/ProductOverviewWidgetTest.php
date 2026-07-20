@@ -10,7 +10,6 @@ use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
 use Misaf\VendraProduct\Filament\Widgets\ProductOverviewWidget;
 use Misaf\VendraProduct\ProductPlugin;
-use Misaf\VendraTenant\Database\Factories\TenantFactory;
 
 use function Pest\Livewire\livewire;
 
@@ -32,8 +31,8 @@ it('shows the product overview widget on the product list page', function (): vo
 });
 
 it('shows tenant-scoped product inventory metrics', function (): void {
-    $tenant = TenantFactory::new()->enabled()->createOne();
-    $tenant->makeCurrent();
+    $tenant = createTestTenant();
+    switchToTestTenant($tenant);
 
     $category = ProductCategoryFactory::new()->createOne();
 
@@ -46,8 +45,8 @@ it('shows tenant-scoped product inventory metrics', function (): void {
         ->forCategory($category)
         ->create(['in_stock' => false]);
 
-    $otherTenant = TenantFactory::new()->enabled()->createOne();
-    $otherTenant->makeCurrent();
+    $otherTenant = createTestTenant();
+    switchToTestTenant($otherTenant);
 
     $otherCategory = ProductCategoryFactory::new()->createOne();
 
@@ -56,7 +55,7 @@ it('shows tenant-scoped product inventory metrics', function (): void {
         ->count(4)
         ->create(['in_stock' => true]);
 
-    $tenant->makeCurrent();
+    switchToTestTenant($tenant);
 
     livewire(ProductOverviewWidget::class)
         ->assertSeeInOrder([
