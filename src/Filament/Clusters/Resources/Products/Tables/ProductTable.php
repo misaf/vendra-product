@@ -96,6 +96,11 @@ final class ProductTable
                     ]);
                 }),
 
+            TextColumn::make('description')
+                ->label(__('vendra-product::attributes.description'))
+                ->state(fn(Product $record, Livewire $livewire): string => static::translatedAttribute($record, 'description', $livewire))
+                ->toggleable(isToggledHiddenByDefault: true),
+
             TextColumn::make('slug')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.slug'))

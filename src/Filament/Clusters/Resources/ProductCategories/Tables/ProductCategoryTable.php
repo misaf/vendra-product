@@ -61,10 +61,6 @@ final class ProductCategoryTable
 
             BadgeableColumn::make('name')
                 ->alignStart()
-                ->description(function (Livewire $livewire, ProductCategory $record): string {
-                    return static::translatedAttribute($record, 'description', $livewire);
-                })
-                ->icon(Heroicon::FolderPlus)
                 ->label(__('vendra-product::attributes.name'))
                 ->suffixBadges([
                     Badge::make('count')
@@ -72,6 +68,11 @@ final class ProductCategoryTable
                         ->size(Size::Small),
                 ])
                 ->suffix(''),
+
+            TextColumn::make('description')
+                ->label(__('vendra-product::attributes.description'))
+                ->state(fn(ProductCategory $record, Livewire $livewire): string => static::translatedAttribute($record, 'description', $livewire))
+                ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('slug')
                 ->alignStart()

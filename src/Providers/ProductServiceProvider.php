@@ -53,7 +53,7 @@ final class ProductServiceProvider extends PackageServiceProvider
         $this->app->make(TenantTableRegistry::class)->register('product_categories', 'products');
         $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
 
-        AboutCommand::add('Vendra Product', fn() => ['Version' => InstalledVersions::getPrettyVersion('misaf/vendra-product')]);
+        AboutCommand::add('Vendra Product', fn(): array => ['Version' => InstalledVersions::getPrettyVersion('misaf/vendra-product')]);
     }
 
 
