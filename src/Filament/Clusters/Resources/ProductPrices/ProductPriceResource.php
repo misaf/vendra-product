@@ -13,7 +13,6 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductPrices\Schemas\Produc
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductPrices\Tables\ProductPriceTable;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
-
 use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
 
 final class ProductPriceResource extends Resource

@@ -6,7 +6,6 @@ use Awcodes\BadgeableColumn\Components\BadgeableColumn;
 use Filament\Facades\Filament;
 use Filament\Tables\Columns\TextColumn;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
-use Misaf\VendraPermission\Tests\Support\PermissionModuleTestContext;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\ListProductCategories;
@@ -16,7 +15,7 @@ use Misaf\VendraProduct\Models\Product;
 use function Pest\Livewire\livewire;
 
 beforeEach(function (): void {
-    PermissionModuleTestContext::setUpFilamentAdminContext();
+    setUpFilamentSuperAdminTestContext();
 
     Filament::getPanel('admin')->plugin(
         SpatieTranslatablePlugin::make()->defaultLocales(['en', 'de']),

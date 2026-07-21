@@ -66,7 +66,7 @@ return new class () extends Migration {
             $table->softDeletesTz();
 
             $table->index(TenantSchema::tenantIndex(['product_category_id']));
-            $table->index(TenantSchema::tenantIndex(['token']));
+            $table->unique(TenantSchema::tenantIndex(['token']));
             $table->index(TenantSchema::tenantIndex(['quantity']));
             $table->index(TenantSchema::tenantIndex(['stock_threshold']));
             $table->index(TenantSchema::tenantIndex(['in_stock']));

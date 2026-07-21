@@ -14,7 +14,6 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicatePr
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
-use RuntimeException;
 
 final class EditProduct extends EditRecord
 {
@@ -58,11 +57,14 @@ final class EditProduct extends EditRecord
         $latestProductPrice = $record->latestProductPrice()->first();
 
         if ( ! $latestProductPrice) {
-            throw new RuntimeException('Product price is required before editing this product.');
+            return $data;
         }
 
         $data['currency_code'] = $latestProductPrice->currency_code;
-        $data['price'] = $latestProductPrice->price->getAmount();
+        $data['price'] = ProductPrice::toMajorUnits(
+            $latestProductPrice->currency_code,
+            (int) $latestProductPrice->price->getAmount(),
+        );
 
         return $data;
     }
@@ -86,7 +88,7 @@ final class EditProduct extends EditRecord
 
         $this->pricingData = [
             'currency_code' => $currencyCode,
-            'price'         => (int) $price,
+            'price'         => ProductPrice::toMinorUnits($currencyCode, (float) $price),
         ];
 
         unset($data['currency_code'], $data['price']);
@@ -96,12 +98,12 @@ final class EditProduct extends EditRecord
 
     protected function afterSave(): void
     {
+        if (null === $this->pricingData) {
+            return;
+        }
+
         /** @var Product $record */
         $record = $this->getRecord();
-
-        if (null === $this->pricingData) {
-            throw new RuntimeException('Pricing data is missing after save operation.');
-        }
 
         $record->productPrices()->firstOrCreate(
             [

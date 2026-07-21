@@ -39,13 +39,13 @@ it('defines policy permissions for the product resource', function (): void {
 it('defines policy permissions for the product category resource', function (): void {
     $permissions = array_column(ProductCategoryPolicyEnum::cases(), 'value');
 
-    expect($permissions)->toHaveCount(12);
+    expect($permissions)->toHaveCount(11);
 });
 
 it('defines policy permissions for the product price resource', function (): void {
     $permissions = array_column(ProductPricePolicyEnum::cases(), 'value');
 
-    expect($permissions)->toHaveCount(11);
+    expect($permissions)->toHaveCount(10);
 });
 
 it('uses kebab-case permission names scoped per model', function (): void {

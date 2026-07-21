@@ -69,7 +69,9 @@ final class SetPriceAction extends BulkAction
                 throw new InvalidArgumentException('Invalid price provided.');
             }
 
-            $this->process(static function (Collection $records) use ($currencyCode, $price): void {
+            $priceMinorUnits = ProductPrice::toMinorUnits($currencyCode, (float) $price);
+
+            $this->process(static function (Collection $records) use ($currencyCode, $priceMinorUnits): void {
                 foreach ($records as $record) {
                     if ( ! $record instanceof Product) {
                         continue;
@@ -77,7 +79,7 @@ final class SetPriceAction extends BulkAction
 
                     $record->productPrices()->create([
                         'currency_code' => $currencyCode,
-                        'price'         => $price,
+                        'price'         => $priceMinorUnits,
                     ]);
                 }
             });

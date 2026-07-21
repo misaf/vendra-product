@@ -10,6 +10,7 @@ use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
+use Misaf\VendraProduct\Models\ProductPrice;
 use RuntimeException;
 
 final class CreateProduct extends CreateRecord
@@ -50,7 +51,7 @@ final class CreateProduct extends CreateRecord
 
         $this->pricingData = [
             'currency_code' => $currencyCode,
-            'price'         => (int) $price,
+            'price'         => ProductPrice::toMinorUnits($currencyCode, (float) $price),
         ];
 
         unset($data['currency_code'], $data['price']);

@@ -39,9 +39,11 @@ final class SetColumnPriceAction
                     ->stripCharacters(','),
             ])
             ->action(function (Product $record, array $data): void {
+                $currencyCode = (string) $data['currency_code'];
+
                 $record->productPrices()->create([
-                    'currency_code' => $data['currency_code'],
-                    'price'         => $data['price'],
+                    'currency_code' => $currencyCode,
+                    'price'         => ProductPrice::toMinorUnits($currencyCode, (float) $data['price']),
                 ]);
             });
     }

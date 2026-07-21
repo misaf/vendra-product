@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas;
 
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -19,10 +19,14 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
+use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas\ProductCategoryForm;
 use Misaf\VendraProduct\Models\Product;
+use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
 use Misaf\VendraSupport\Support\AttributeIntegration;
@@ -47,11 +51,13 @@ final class ProductForm
                                 Select::make('product_category_id')
                                     ->columnSpanFull()
                                     ->label(__('vendra-product::navigation.product_category'))
+                                    ->live()
                                     ->native(false)
                                     ->preload()
                                     ->relationship('productCategory', 'name')
                                     ->required()
-                                    ->searchable(),
+                                    ->searchable()
+                                    ->createOptionForm(fn(Schema $schema): Schema => ProductCategoryForm::configure($schema)),
 
                                 TextInput::make('name')
                                     ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state): void {
@@ -144,7 +150,7 @@ final class ProductForm
                                     ->displayFormat('Y-m-d H:i')
                                     ->firstDayOfWeek(6)
                                     ->label(__('vendra-product::attributes.availability_date'))
-                                    ->maxDate(now())
+                                    ->minDate(now())
                                     ->native(false)
                                     ->seconds(false)
                                     ->visible(fn(Get $get): bool => true === $get->boolean('available_soon')),
@@ -196,30 +202,25 @@ final class ProductForm
                 ->icon(Heroicon::OutlinedListBullet)
                 ->label(__('vendra-product::attributes.attributes'))
                 ->schema([
-                    Repeater::make('attributeValues')
-                        ->relationship()
-                        ->addActionLabel(__('vendra-product::attributes.add_attribute_value'))
-                        ->columnSpanFull()
-                        ->columns(3)
-                        ->defaultItems(0)
-                        ->label(__('vendra-product::attributes.attributes'))
-                        ->orderColumn('position')
-                        ->reorderable()
-                        ->schema([
-                            Select::make('attribute_id')
-                                ->label(__('vendra-product::attributes.attribute'))
-                                ->native(false)
-                                ->options(fn(): array => AttributeIntegration::options())
-                                ->preload()
-                                ->required()
-                                ->searchable(),
+                    CheckboxList::make('selectedAttributeValues')
+                        ->relationship(
+                            titleAttribute: 'value',
+                            modifyQueryUsing: fn(Builder $query, Get $get): Builder => $query
+                                ->with('attribute')
+                                ->where('attributable_type', (new ProductCategory())->getMorphClass())
+                                ->where('attributable_id', $get->integer('product_category_id'))
+                                ->orderBy('position'),
+                        )
+                        ->bulkToggleable()
+                        ->columns(2)
+                        ->getOptionLabelFromRecordUsing(function (Model $record): string {
+                            $attributeName = (string) $record->getAttribute('attribute')?->getAttribute('name');
+                            $value = (string) $record->getAttribute('value');
 
-                            TextInput::make('value')
-                                ->columnSpan(2)
-                                ->label(__('vendra-product::attributes.attribute_value'))
-                                ->maxLength(2048)
-                                ->required(),
-                        ]),
+                            return '' === $attributeName ? $value : "{$attributeName}: {$value}";
+                        })
+                        ->helperText(__('vendra-product::attributes.attribute_values_from_category'))
+                        ->label(__('vendra-product::attributes.attributes')),
                 ]),
         ];
     }
@@ -243,5 +244,4 @@ final class ProductForm
                 ]),
         ];
     }
-
 }

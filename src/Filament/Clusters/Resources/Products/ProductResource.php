@@ -10,7 +10,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
-use Misaf\VendraProduct\Filament\Clusters\Resources\ProductPrices\RelationManagers\ProductPriceRelationManager;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\CreateProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\EditProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
@@ -20,7 +19,6 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas\ProductInfo
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Tables\ProductTable;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
-
 use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
 
 final class ProductResource extends Resource
@@ -57,13 +55,6 @@ final class ProductResource extends Resource
         return __('vendra-product::navigation.products');
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            // ProductPriceRelationManager::class,
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
@@ -76,7 +67,7 @@ final class ProductResource extends Resource
 
     public static function getDefaultTranslatableLocale(): string
     {
-        $locale = static::getTranslatableLocales()[0] ?? app()->getLocale();
+        $locale = self::getTranslatableLocales()[0] ?? app()->getLocale();
 
         return is_string($locale) && '' !== $locale ? $locale : 'en';
     }

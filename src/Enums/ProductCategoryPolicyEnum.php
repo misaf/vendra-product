@@ -12,7 +12,6 @@ enum ProductCategoryPolicyEnum: string
     case ForceDelete = 'force-delete-product-category';
     case ForceDeleteAny = 'force-delete-any-product-category';
     case Reorder = 'reorder-product-category';
-    case Replicate = 'replicate-product-category';
     case Restore = 'restore-product-category';
     case RestoreAny = 'restore-any-product-category';
     case Update = 'update-product-category';

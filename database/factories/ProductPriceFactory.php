@@ -35,10 +35,10 @@ final class ProductPriceFactory extends Factory
     }
 
     /**
-     * @param  object{iso_code: string}  $currency
+     * @param  object{code: string}  $currency
      */
     public function forCurrency(object $currency): static
     {
-        return $this->forCurrencyCode($currency->iso_code);
+        return $this->forCurrencyCode($currency->code);
     }
 }

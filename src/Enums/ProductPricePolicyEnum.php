@@ -11,7 +11,6 @@ enum ProductPricePolicyEnum: string
     case DeleteAny = 'delete-any-product-price';
     case ForceDelete = 'force-delete-product-price';
     case ForceDeleteAny = 'force-delete-any-product-price';
-    case Replicate = 'replicate-product-price';
     case Restore = 'restore-product-price';
     case RestoreAny = 'restore-any-product-price';
     case Update = 'update-product-price';

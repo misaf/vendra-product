@@ -16,6 +16,9 @@ use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\Layout\Component as LayoutComponent;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\SpatieTagsColumn;
+use Filament\Tables\Columns\Summarizers\Average;
+use Filament\Tables\Columns\Summarizers\Range;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -98,7 +101,7 @@ final class ProductTable
 
             TextColumn::make('description')
                 ->label(__('vendra-product::attributes.description'))
-                ->state(fn(Product $record, Livewire $livewire): string => static::translatedAttribute($record, 'description', $livewire))
+                ->state(fn(Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
                 ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('slug')
@@ -122,7 +125,8 @@ final class ProductTable
             TextColumn::make('latestProductPrice.price')
                 ->label(__('vendra-product::attributes.price'))
                 ->state(fn(Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
-                ->action(SetColumnPriceAction::make()),
+                ->action(SetColumnPriceAction::make())
+                ->summarize([Sum::make(), Average::make(), Range::make()]),
 
             ToggleColumn::make('in_stock')
                 ->label(__('vendra-product::attributes.in_stock'))
@@ -170,9 +174,9 @@ final class ProductTable
         ];
 
         if (AttributeIntegration::isAvailable()) {
-            $columns[] = TextColumn::make('attribute_values_count')
+            $columns[] = TextColumn::make('selected_attribute_values_count')
                 ->badge()
-                ->counts('attributeValues')
+                ->counts('selectedAttributeValues')
                 ->label(__('vendra-product::attributes.attributes'))
                 ->toggleable(isToggledHiddenByDefault: true);
         }
@@ -185,6 +189,10 @@ final class ProductTable
         }
 
         return $table
+            ->description(__('vendra-product::tables.description.products'))
+            ->emptyStateHeading(__('vendra-product::tables.empty_state.heading.products'))
+            ->emptyStateDescription(__('vendra-product::tables.empty_state.description.products'))
+            ->emptyStateIcon(Heroicon::OutlinedCube)
             ->modifyQueryUsing(fn(Builder $query): Builder => $query->with('productCategory'))
             ->columns($columns)
             ->filters(

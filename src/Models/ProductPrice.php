@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
 use Misaf\VendraSupport\Contracts\ShouldLogActivity;
 use Misaf\VendraSupport\Support\CurrencyIntegration;
+use Money\Currency;
 use Money\Exception\UnknownCurrencyException;
 use Throwable;
 use Znck\Eloquent\Relations;
@@ -92,6 +93,31 @@ final class ProductPrice extends Model implements ShouldLogActivity
         $defaultCurrencyCode = self::defaultCurrencyCode();
 
         return [$defaultCurrencyCode => $defaultCurrencyCode];
+    }
+
+    /**
+     * The number of minor units in one major unit of the currency (100 for
+     * USD); currencies without a known ISO subunit are treated as having none.
+     */
+    public static function minorUnitsPerMajorUnit(string $currencyCode): int
+    {
+        try {
+            return 10 ** Money::getCurrencies()->subunitFor(new Currency(Str::upper($currencyCode)));
+        } catch (Throwable) {
+            return 1;
+        }
+    }
+
+    public static function toMinorUnits(string $currencyCode, float|int|string $amount): int
+    {
+        return (int) round((float) $amount * self::minorUnitsPerMajorUnit($currencyCode));
+    }
+
+    public static function toMajorUnits(string $currencyCode, int $minorUnits): float|int
+    {
+        $factor = self::minorUnitsPerMajorUnit($currencyCode);
+
+        return 1 === $factor ? $minorUnits : $minorUnits / $factor;
     }
 
     public static function supportsCurrencyCode(string $currencyCode): bool

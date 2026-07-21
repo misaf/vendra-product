@@ -20,7 +20,6 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Tables\Pro
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\RelationManagers\ProductRelationManager;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
-
 use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
 
 final class ProductCategoryResource extends Resource
@@ -76,7 +75,7 @@ final class ProductCategoryResource extends Resource
 
     public static function getDefaultTranslatableLocale(): string
     {
-        $locale = static::getTranslatableLocales()[0] ?? app()->getLocale();
+        $locale = self::getTranslatableLocales()[0] ?? app()->getLocale();
 
         return is_string($locale) && '' !== $locale ? $locale : 'en';
     }

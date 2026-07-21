@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct\Observers;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Support\AttributeIntegration;
 
 final class ProductCategoryObserver implements ShouldQueue
 {
@@ -18,5 +19,9 @@ final class ProductCategoryObserver implements ShouldQueue
     {
         $productCategory->productPrices()->delete();
         $productCategory->products()->delete();
+
+        if (null !== AttributeIntegration::valueModel()) {
+            $productCategory->attributeValues()->delete();
+        }
     }
 }

@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -56,10 +58,9 @@ use Spatie\Translatable\HasTranslations;
 #[Hidden(['tenant_id'])]
 #[ObservedBy([ProductObserver::class])]
 #[UseFactory(ProductFactory::class)]
-final class Product extends Model implements HasMedia, Sortable, ShouldLogActivity
+final class Product extends Model implements HasMedia, ShouldLogActivity, Sortable
 {
     use BelongsToTenant;
-
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
@@ -72,7 +73,9 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;
+
     public const string TAG_TYPE = 'product';
+
     public const string MEDIA_COLLECTION = 'products';
 
     /**
@@ -120,21 +123,68 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
 
     protected static function booted(): void
     {
-        self::creating(function (self $product): string {
-            return $product->token = self::generateToken();
+        self::creating(function (self $product): void {
+            $product->token = self::generateToken();
+        });
+
+        self::updated(function (self $product): void {
+            if ($product->wasChanged('product_category_id')) {
+                $product->detachStaleAttributeValueSelections();
+            }
+        });
+
+        self::forceDeleting(function (self $product): void {
+            if (null !== AttributeIntegration::valueModel()) {
+                $product->selectedAttributeValues()->detach();
+            }
         });
     }
 
+    /**
+     * Selections must always belong to the product's current category; when
+     * the category changes, drop selections pointing at any other owner.
+     */
+    private function detachStaleAttributeValueSelections(): void
+    {
+        if (null === AttributeIntegration::valueModel()) {
+            return;
+        }
+
+        $selectedAttributeValues = $this->selectedAttributeValues();
+
+        $staleAttributeValueIds = $selectedAttributeValues
+            ->where(function (Builder $query): void {
+                $query
+                    ->where('attributable_type', '!=', (new ProductCategory())->getMorphClass())
+                    ->orWhere('attributable_id', '!=', $this->product_category_id);
+            })
+            ->pluck($selectedAttributeValues->getRelated()->getQualifiedKeyName());
+
+        if ($staleAttributeValueIds->isNotEmpty()) {
+            $this->selectedAttributeValues()->detach($staleAttributeValueIds->all());
+        }
+    }
+
+    /**
+     * Generate a random token, retrying on collision. The tenant-scoped unique
+     * index on `token` remains the final guard if every attempt collides.
+     */
     private static function generateToken(): string
     {
         $tokenCharacters = self::tokenCharacters();
         $tokenLength = self::tokenLength();
         $maxIndex = mb_strlen($tokenCharacters) - 1;
 
-        $token = '';
+        for ($attempt = 0; $attempt < 10; $attempt++) {
+            $token = '';
 
-        for ($i = 0; $i < $tokenLength; $i++) {
-            $token .= $tokenCharacters[random_int(0, $maxIndex)];
+            for ($i = 0; $i < $tokenLength; $i++) {
+                $token .= $tokenCharacters[random_int(0, $maxIndex)];
+            }
+
+            if ( ! self::withTrashed()->where('token', $token)->exists()) {
+                return $token;
+            }
         }
 
         return $token;
@@ -192,8 +242,13 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
         return $this->media();
     }
 
-    /** @return MorphMany<Model, $this> */
-    public function attributeValues(): MorphMany
+    /**
+     * Attribute values are owned by the product category; products inherit
+     * the values assigned to their category.
+     *
+     * @return HasMany<Model, $this>
+     */
+    public function attributeValues(): HasMany
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
@@ -201,13 +256,32 @@ final class Product extends Model implements HasMedia, Sortable, ShouldLogActivi
             throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
         }
 
-        return $this->morphMany(
-            $attributeValueModel,
-            'attributable',
-            'attributable_type',
-            'attributable_id',
-            $this->getKeyName(),
-        );
+        return $this
+            ->hasMany($attributeValueModel, 'attributable_id', 'product_category_id')
+            ->where('attributable_type', (new ProductCategory())->getMorphClass());
+    }
+
+    /**
+     * The attribute values this product selected from its category's set.
+     *
+     * @return MorphToMany<Model, $this>
+     */
+    public function selectedAttributeValues(): MorphToMany
+    {
+        $attributeValueModel = AttributeIntegration::valueModel();
+
+        if (null === $attributeValueModel) {
+            throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
+        }
+
+        return $this
+            ->morphToMany(
+                $attributeValueModel,
+                'selectable',
+                'attribute_value_selections',
+                relatedPivotKey: 'attribute_value_id',
+            )
+            ->withTimestamps();
     }
 
     protected function tagType(): string

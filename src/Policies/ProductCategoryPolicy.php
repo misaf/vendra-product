@@ -9,7 +9,6 @@ use Misaf\VendraSupport\Concerns\AuthorizesCreateAbilities;
 use Misaf\VendraSupport\Concerns\AuthorizesDeleteAbilities;
 use Misaf\VendraSupport\Concerns\AuthorizesForceDeleteAbilities;
 use Misaf\VendraSupport\Concerns\AuthorizesReorderAbilities;
-use Misaf\VendraSupport\Concerns\AuthorizesReplicateAbilities;
 use Misaf\VendraSupport\Concerns\AuthorizesRestoreAbilities;
 use Misaf\VendraSupport\Concerns\AuthorizesSandboxMode;
 use Misaf\VendraSupport\Concerns\AuthorizesUpdateAbilities;
@@ -22,7 +21,6 @@ final class ProductCategoryPolicy
     use AuthorizesDeleteAbilities;
     use AuthorizesForceDeleteAbilities;
     use AuthorizesReorderAbilities;
-    use AuthorizesReplicateAbilities;
     use AuthorizesRestoreAbilities;
     use AuthorizesSandboxMode;
     use AuthorizesUpdateAbilities;

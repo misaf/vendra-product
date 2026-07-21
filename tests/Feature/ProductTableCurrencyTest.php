@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
-use Misaf\VendraPermission\Tests\Support\PermissionModuleTestContext;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
@@ -14,7 +13,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
 use function Pest\Livewire\livewire;
 
 it('renders legacy prices with unsupported currency codes', function (): void {
-    PermissionModuleTestContext::setUpFilamentAdminContext();
+    setUpFilamentSuperAdminTestContext();
     app(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
     Filament::bootCurrentPanel();
 

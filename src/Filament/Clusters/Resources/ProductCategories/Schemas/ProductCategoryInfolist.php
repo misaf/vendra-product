@@ -4,36 +4,59 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas;
 
-use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Filament\Concerns\RendersRichContent;
+use Misaf\VendraSupport\Support\AttributeIntegration;
 
 final class ProductCategoryInfolist
 {
+    use RendersRichContent;
+
     public static function configure(Schema $schema): Schema
     {
+        /** @var list<Component> $components */
+        $components = [
+            TextEntry::make('name')->label(__('vendra-product::attributes.name')),
+            TextEntry::make('slug')->label(__('vendra-product::attributes.slug')),
+            IconEntry::make('status')
+                ->boolean()
+                ->label(__('vendra-product::attributes.status')),
+            TextEntry::make('description')
+                ->columnSpanFull()
+                ->formatStateUsing(fn(array|string|null $state): string => self::renderRichContent($state))
+                ->html()
+                ->label(__('vendra-product::attributes.description')),
+            SpatieMediaLibraryImageEntry::make('image')
+                ->collection(ProductCategory::MEDIA_COLLECTION)
+                ->columnSpanFull()
+                ->label(__('vendra-product::attributes.image')),
+            self::dateEntry('created_at'),
+            self::dateEntry('updated_at'),
+        ];
+
+        if (AttributeIntegration::isAvailable()) {
+            $components[] = RepeatableEntry::make('attributeValues')
+                ->state(fn(ProductCategory $record): Collection => $record->attributeValues()->with('attribute')->get())
+                ->columnSpanFull()
+                ->columns(2)
+                ->label(__('vendra-product::attributes.attributes'))
+                ->schema([
+                    TextEntry::make('attribute.name')
+                        ->label(__('vendra-product::attributes.attribute')),
+                    TextEntry::make('value')
+                        ->label(__('vendra-product::attributes.attribute_value')),
+                ]);
+        }
+
         return $schema
-            ->components([
-                TextEntry::make('name')->label(__('vendra-product::attributes.name')),
-                TextEntry::make('slug')->label(__('vendra-product::attributes.slug')),
-                IconEntry::make('status')
-                    ->boolean()
-                    ->label(__('vendra-product::attributes.status')),
-                TextEntry::make('description')
-                    ->columnSpanFull()
-                    ->formatStateUsing(fn(array|string|null $state): RichContentRenderer => self::renderRichContent($state))
-                    ->html()
-                    ->label(__('vendra-product::attributes.description')),
-                SpatieMediaLibraryImageEntry::make('image')
-                    ->collection(ProductCategory::MEDIA_COLLECTION)
-                    ->columnSpanFull()
-                    ->label(__('vendra-product::attributes.image')),
-                self::dateEntry('created_at'),
-                self::dateEntry('updated_at'),
-            ])
+            ->components($components)
             ->columns(2);
     }
 
@@ -46,21 +69,5 @@ final class ProductCategoryInfolist
                 fn(TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
                 fn(TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
             );
-    }
-
-    /** @param array<array-key, mixed>|string|null $state */
-    private static function renderRichContent(array|string|null $state): RichContentRenderer
-    {
-        if ( ! is_array($state)) {
-            return RichContentRenderer::make($state);
-        }
-
-        $content = [];
-
-        foreach ($state as $key => $value) {
-            $content[(string) $key] = $value;
-        }
-
-        return RichContentRenderer::make($content);
     }
 }

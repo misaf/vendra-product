@@ -10,9 +10,13 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\Layout\Component as LayoutComponent;
+use Filament\Tables\Columns\Summarizers\Average;
+use Filament\Tables\Columns\Summarizers\Range;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
@@ -39,7 +43,8 @@ final class ProductPriceTable
             TextColumn::make('price')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.price'))
-                ->state(fn(ProductPrice $record): string => $record->formattedPrice()),
+                ->state(fn(ProductPrice $record): string => $record->formattedPrice())
+                ->summarize([Sum::make(), Average::make(), Range::make()]),
 
             TextColumn::make('created_at')
                 ->alignCenter()
@@ -67,6 +72,10 @@ final class ProductPriceTable
         ];
 
         return $table
+            ->description(__('vendra-product::tables.description.product_prices'))
+            ->emptyStateHeading(__('vendra-product::tables.empty_state.heading.product_prices'))
+            ->emptyStateDescription(__('vendra-product::tables.empty_state.description.product_prices'))
+            ->emptyStateIcon(Heroicon::OutlinedCurrencyDollar)
             ->columns($columns)
             ->filters(
                 [

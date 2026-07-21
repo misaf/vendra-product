@@ -15,10 +15,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use LogicException;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Observers\ProductCategoryObserver;
 use Misaf\VendraSupport\Contracts\ShouldLogActivity;
+use Misaf\VendraSupport\Support\AttributeIntegration;
 use Misaf\VendraSupport\Traits\BelongsToTenant;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -46,22 +48,22 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 #[Hidden(['tenant_id'])]
 #[ObservedBy([ProductCategoryObserver::class])]
 #[UseFactory(ProductCategoryFactory::class)]
-final class ProductCategory extends Model implements HasMedia, Sortable, ShouldLogActivity
+final class ProductCategory extends Model implements HasMedia, ShouldLogActivity, Sortable
 {
     use BelongsToTenant;
-
     use HasDefaultMediaConversions, InteractsWithMedia {
         HasDefaultMediaConversions::registerMediaConversions insteadof InteractsWithMedia;
     }
+
     /** @use HasFactory<ProductCategoryFactory> */
     use HasFactory;
 
     use HasRecursiveRelationships;
-
     use HasTranslatableSlug;
     use HasTranslations;
     use SoftDeletes;
     use SortableTrait;
+
     public const string MEDIA_COLLECTION = 'products/categories';
 
     /**
@@ -102,6 +104,20 @@ final class ProductCategory extends Model implements HasMedia, Sortable, ShouldL
     }
 
     /**
+     * Attribute values reference this category through a morph without a
+     * foreign key, so hard deletes must clean them up explicitly. Soft-delete
+     * cascades live in the queued {@see ProductCategoryObserver}.
+     */
+    protected static function booted(): void
+    {
+        self::forceDeleting(function (self $productCategory): void {
+            if (null !== AttributeIntegration::valueModel()) {
+                $productCategory->attributeValues()->forceDelete();
+            }
+        });
+    }
+
+    /**
      * @return HasMany<Product, $this>
      */
     public function products(): HasMany
@@ -123,6 +139,24 @@ final class ProductCategory extends Model implements HasMedia, Sortable, ShouldL
     public function multimedia(): MorphMany
     {
         return $this->media();
+    }
+
+    /** @return MorphMany<Model, $this> */
+    public function attributeValues(): MorphMany
+    {
+        $attributeValueModel = AttributeIntegration::valueModel();
+
+        if (null === $attributeValueModel) {
+            throw new LogicException('Install misaf/vendra-attribute to use product category attribute values.');
+        }
+
+        return $this->morphMany(
+            $attributeValueModel,
+            'attributable',
+            'attributable_type',
+            'attributable_id',
+            $this->getKeyName(),
+        );
     }
 
     public function getSlugOptions(): SlugOptions
