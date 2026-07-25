@@ -34,9 +34,10 @@ php artisan vendor:publish --tag=vendra-product-migrations
 php artisan migrate
 ```
 
-Optional translations publish:
+Optional configuration and translations:
 
 ```bash
+php artisan vendor:publish --tag=vendra-product-config
 php artisan vendor:publish --tag=vendra-product-translations
 ```
 
@@ -122,6 +123,7 @@ Resources are available in the `Products` cluster on the `admin` panel:
 
 ```bash
 composer test
+composer analyse
 ```
 
 ## License
