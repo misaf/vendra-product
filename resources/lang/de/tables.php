@@ -9,12 +9,12 @@ return [
         'products'           => 'Verwalten Sie Ihren Produktkatalog, Bestand und Preise.',
     ],
     'empty_state' => [
-        'description' => [
+        'description'        => [
             'product_categories' => 'Erstellen Sie Ihre erste Kategorie, um Ihre Produkte zu organisieren.',
             'product_prices'     => 'Legen Sie Preise für Ihre Produkte fest, um sie zum Kauf verfügbar zu machen.',
             'products'           => 'Erstellen Sie Ihr erstes Produkt, um Ihren Katalog aufzubauen.',
         ],
-        'heading' => [
+        'heading'            => [
             'product_categories' => 'Noch keine Produktkategorien',
             'product_prices'     => 'Noch keine Produktpreise',
             'products'           => 'Noch keine Produkte',

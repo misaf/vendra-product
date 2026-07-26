@@ -28,6 +28,7 @@ return [
     'slug_helper_text'               => 'Eine eindeutige Kennung für die URL. Leer lassen, um sie automatisch aus dem Namen zu generieren.',
     'status'                         => 'Status',
     'stock_threshold'                => 'Lagerbestandsschwelle',
+    'stock_threshold_helper_text'    => 'Die Mindestmenge, bei der eine Benachrichtigung ausgelöst wird.',
     'tenant_id'                      => 'Mandant',
     'token'                          => 'Token',
     'updated_at'                     => 'Aktualisiert am',

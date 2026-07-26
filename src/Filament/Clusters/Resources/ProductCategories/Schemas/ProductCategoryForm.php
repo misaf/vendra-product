@@ -33,7 +33,9 @@ final class ProductCategoryForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state): void {
+                    ->afterStateUpdated(function (Livewire $livewire, Get $get, Set $set, ?string $old, ?string $state): void {
+                        $livewire->validateOnly('data.name');
+
                         if (($get->string('slug', isNullable: true) ?? '') === Str::slug($old ?? '')) {
                             $set('slug', Str::slug($state ?? ''));
                         }
@@ -42,6 +44,7 @@ final class ProductCategoryForm
                     ->columnSpan(['lg' => 1])
                     ->label(__('vendra-product::attributes.name'))
                     ->live(onBlur: true)
+                    ->maxLength(255)
                     ->required()
                     ->unique(
                         column: fn(Livewire $livewire): string => 'name->' . self::activeFormLocale($livewire),
@@ -54,6 +57,8 @@ final class ProductCategoryForm
                     ->columnSpan(['lg' => 1])
                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                     ->label(__('vendra-product::attributes.slug'))
+                    ->live(onBlur: true)
+                    ->maxLength(255)
                     ->required()
                     ->unique(
                         column: fn(Livewire $livewire): string => 'slug->' . self::activeFormLocale($livewire),
@@ -68,10 +73,12 @@ final class ProductCategoryForm
                     ->required(),
 
                 SpatieMediaLibraryFileUpload::make('image')
+                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.image'))
                     ->collection(ProductCategory::MEDIA_COLLECTION)
                     ->columnSpanFull()
                     ->image()
                     ->label(__('vendra-product::attributes.image'))
+                    ->live()
                     ->panelLayout('grid')
                     ->responsiveImages(),
 
@@ -80,6 +87,7 @@ final class ProductCategoryForm
                     ->columnSpanFull()
                     ->default(false)
                     ->label(__('vendra-product::attributes.status'))
+                    ->live()
                     ->onIcon(Heroicon::Bolt)
                     ->required()
                     ->rules([

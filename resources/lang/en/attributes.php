@@ -28,6 +28,7 @@ return [
     'slug_helper_text'               => 'A unique identifier for the URL. Leave empty to auto-generate from the name.',
     'status'                         => 'Status',
     'stock_threshold'                => 'Stock Threshold',
+    'stock_threshold_helper_text'    => 'The minimum quantity before low-stock notification is triggered.',
     'tenant_id'                      => 'Tenant',
     'token'                          => 'Token',
     'updated_at'                     => 'Updated At',

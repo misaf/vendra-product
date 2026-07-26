@@ -9,12 +9,12 @@ return [
         'products'           => 'Manage your product catalog, inventory, and pricing.',
     ],
     'empty_state' => [
-        'description' => [
+        'description'        => [
             'product_categories' => 'Create your first category to organize your products.',
             'product_prices'     => 'Set prices for your products to make them available for purchase.',
             'products'           => 'Create your first product to start building your catalog.',
         ],
-        'heading' => [
+        'heading'            => [
             'product_categories' => 'No product categories yet',
             'product_prices'     => 'No product prices yet',
             'products'           => 'No products yet',
