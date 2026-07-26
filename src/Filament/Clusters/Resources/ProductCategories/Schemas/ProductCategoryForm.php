@@ -124,7 +124,7 @@ final class ProductCategoryForm
                         ->hiddenLabel()
                         ->orderColumn('position')
                         ->reorderable()
-                        ->rule(self::distinctAttributeValuePairsRule())
+                        ->rule(fn(): Closure => self::distinctAttributeValuePairsRule())
                         ->schema([
                             Select::make('attribute_id')
                                 ->label(__('vendra-product::attributes.attribute'))

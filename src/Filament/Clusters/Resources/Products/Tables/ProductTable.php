@@ -77,11 +77,14 @@ final class ProductTable
             TextColumn::make('name')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.name'))
+                ->icon(Heroicon::Tag)
                 ->description(function (Product $record, Livewire $livewire): View {
                     $productCategory = $record->productCategory;
                     $stockThreshold = $record->getAttribute('stock_threshold');
                     $badges = [
-                        __('vendra-product::attributes.quantity') . ': ' . Number::format($record->quantity),
+                        __('vendra-product::attributes.quantity') . ': ' . (
+                            is_numeric($record->quantity) ? Number::format((int) $record->quantity) : '—'
+                        ),
                         __('vendra-product::attributes.stock_threshold') . ': ' . (
                             is_numeric($stockThreshold) ? Number::format((int) $stockThreshold) : '—'
                         ),
@@ -101,12 +104,14 @@ final class ProductTable
 
             TextColumn::make('description')
                 ->label(__('vendra-product::attributes.description'))
+                ->icon(Heroicon::DocumentText)
                 ->state(fn(Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
                 ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('slug')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.slug'))
+                ->icon(Heroicon::Link)
                 ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('token')
@@ -120,6 +125,7 @@ final class ProductTable
                     return Str::of($state)->split(3)->implode(' ');
                 })
                 ->label(__('vendra-product::attributes.token'))
+                ->icon(Heroicon::Key)
                 ->searchable(isGlobal: true),
 
             TextColumn::make('latestProductPrice.price')

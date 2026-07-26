@@ -37,6 +37,18 @@ it('renders the create product category page under strict authorization', functi
         ->assertOk();
 });
 
+it('validates the product category form without failing to evaluate the attribute values rule', function (): void {
+    livewire(CreateProductCategory::class)
+        ->fillForm([
+            'name'        => 'Test Category',
+            'slug'        => 'test-category',
+            'description' => 'A description for the category.',
+            'status'      => true,
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+});
+
 it('renders the edit product category page under strict authorization', function (): void {
     Filament::getPanel('admin')->strictAuthorization();
 

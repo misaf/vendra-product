@@ -63,6 +63,7 @@ final class ProductCategoryTable
             BadgeableColumn::make('name')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.name'))
+                ->icon(Heroicon::Tag)
                 ->suffixBadges([
                     Badge::make('count')
                         ->label(fn(ProductCategory $record): string => (string) Number::format(self::integerAttribute($record, 'products_count')))
@@ -72,12 +73,14 @@ final class ProductCategoryTable
 
             TextColumn::make('description')
                 ->label(__('vendra-product::attributes.description'))
+                ->icon(Heroicon::DocumentText)
                 ->state(fn(ProductCategory $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
                 ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('slug')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.slug'))
+                ->icon(Heroicon::Link)
                 ->toggleable(isToggledHiddenByDefault: true),
 
             ToggleColumn::make('status')

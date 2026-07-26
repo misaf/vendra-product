@@ -29,3 +29,16 @@ it('renders legacy prices with unsupported currency codes', function (): void {
         ->call('loadTable')
         ->assertSee('19,900 KS');
 });
+
+it('renders the products table when a product has no quantity', function (): void {
+    setUpFilamentSuperAdminTestContext();
+    app(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
+    Filament::bootCurrentPanel();
+
+    $category = ProductCategoryFactory::new()->createOne();
+    ProductFactory::new()->forCategory($category)->create(['quantity' => null]);
+
+    livewire(ListProducts::class)
+        ->call('loadTable')
+        ->assertOk();
+});
