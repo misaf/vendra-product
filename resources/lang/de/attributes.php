@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'active'                         => 'Aktiv',
     'add_attribute_value'            => 'Attributwert hinzufügen',
     'attribute'                      => 'Attribut',
     'attribute_value'                => 'Attributwert',
@@ -26,7 +27,6 @@ return [
     'quantity'                       => 'Menge',
     'slug'                           => 'Slug',
     'slug_helper_text'               => 'Eine eindeutige Kennung für die URL. Leer lassen, um sie automatisch aus dem Namen zu generieren.',
-    'status'                         => 'Status',
     'stock_threshold'                => 'Lagerbestandsschwelle',
     'stock_threshold_helper_text'    => 'Die Mindestmenge, bei der eine Benachrichtigung ausgelöst wird.',
     'tenant_id'                      => 'Mandant',

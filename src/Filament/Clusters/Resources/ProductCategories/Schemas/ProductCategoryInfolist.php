@@ -25,9 +25,9 @@ final class ProductCategoryInfolist
         $components = [
             TextEntry::make('name')->label(__('vendra-product::attributes.name')),
             TextEntry::make('slug')->label(__('vendra-product::attributes.slug')),
-            IconEntry::make('status')
+            IconEntry::make('active')
                 ->boolean()
-                ->label(__('vendra-product::attributes.status')),
+                ->label(__('vendra-product::attributes.active')),
             TextEntry::make('description')
                 ->columnSpanFull()
                 ->formatStateUsing(fn(array|string|null $state): string => self::renderRichContent($state))

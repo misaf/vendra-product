@@ -15,7 +15,7 @@
       "de": "Tragbare Computer für private und berufliche Nutzung",
       "fa": "کامپیوترهای قابل حمل برای استفاده شخصی و حرفه‌ای"
     },
-    "status": true,
+    "active": true,
     "products": [
       {
         "name": {
@@ -146,7 +146,7 @@
       "de": "Stationäre Computer für Zuhause und Büro",
       "fa": "کامپیوترهای ثابت مناسب استفاده خانگی و اداری"
     },
-    "status": true,
+    "active": true,
     "products": [
       {
         "name": {
@@ -277,7 +277,7 @@
       "de": "Einzelne Komponenten zum Zusammenstellen oder Aufrüsten von PCs",
       "fa": "قطعات جداگانه برای ساخت یا ارتقای کامپیوتر"
     },
-    "status": true,
+    "active": true,
     "products": [
       {
         "name": {
@@ -408,7 +408,7 @@
       "de": "Externe Geräte wie Tastaturen, Mäuse und Monitore",
       "fa": "دستگاه‌های جانبی مانند کیبورد، ماوس و مانیتورها"
     },
-    "status": true,
+    "active": true,
     "products": [
       {
         "name": {

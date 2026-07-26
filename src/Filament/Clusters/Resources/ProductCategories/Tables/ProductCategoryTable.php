@@ -83,13 +83,11 @@ final class ProductCategoryTable
                 ->icon(Heroicon::Link)
                 ->toggleable(isToggledHiddenByDefault: true),
 
-            ToggleColumn::make('status')
-                ->label(__('vendra-product::attributes.status'))
+            ToggleColumn::make('active')
+                ->label(__('vendra-product::attributes.active'))
                 ->onIcon(Heroicon::Bolt),
 
             TextColumn::make('created_at')
-                ->alignCenter()
-                ->badge()
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
@@ -100,8 +98,6 @@ final class ProductCategoryTable
                 ),
 
             TextColumn::make('updated_at')
-                ->alignCenter()
-                ->badge()
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()
@@ -131,8 +127,8 @@ final class ProductCategoryTable
                 [
                     QueryBuilder::make()
                         ->constraints([
-                            BooleanConstraint::make('status')
-                                ->label(__('vendra-product::attributes.status')),
+                            BooleanConstraint::make('active')
+                                ->label(__('vendra-product::attributes.active')),
 
                             NumberConstraint::make('position'),
                         ]),

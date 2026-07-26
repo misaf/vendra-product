@@ -19,10 +19,14 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas\ProductInfo
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Tables\ProductTable;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedGlobalSearch;
 use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
 
 final class ProductResource extends Resource
 {
+    use InteractsWithTranslatedGlobalSearch {
+        getGloballySearchableAttributes as getTranslatedGloballySearchableAttributes;
+    }
     use Translatable;
 
     protected static ?string $model = Product::class;
@@ -34,6 +38,25 @@ final class ProductResource extends Resource
     protected static ?string $slug = 'products';
 
     protected static ?string $cluster = CatalogCluster::class;
+
+    /**
+     * @return array<int, string>
+     */
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            ...static::getTranslatedGloballySearchableAttributes(),
+            'token',
+        ];
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected static function translatableGlobalSearchAttributes(): array
+    {
+        return ['name', 'slug'];
+    }
 
     public static function getBreadcrumb(): string
     {

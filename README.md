@@ -54,7 +54,7 @@ $category = ProductCategory::query()->create([
     'name' => ['en' => 'Beverages'],
     'description' => ['en' => 'Cold and hot drinks'],
     'slug' => ['en' => 'beverages'],
-    'status' => true,
+    'active' => true,
 ]);
 ```
 

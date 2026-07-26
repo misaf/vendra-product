@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'active'                         => 'فعال',
     'add_attribute_value'            => 'افزودن مقدار ویژگی',
     'attribute'                      => 'ویژگی',
     'attribute_value'                => 'مقدار ویژگی',
@@ -26,7 +27,6 @@ return [
     'quantity'                       => 'تعداد',
     'slug'                           => 'نامک',
     'slug_helper_text'               => 'شناسه یکتای URL. برای تولید خودکار از نام، خالی بگذارید.',
-    'status'                         => 'وضعیت',
     'stock_threshold'                => 'حد آستانه موجودی',
     'stock_threshold_helper_text'    => 'حداقل مقدار موجودی که در صورت رسیدن به آن اعلان هشدار ارسال می‌شود.',
     'tenant_id'                      => 'مستاجر',

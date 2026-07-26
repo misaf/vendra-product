@@ -43,7 +43,7 @@ it('validates the product category form without failing to evaluate the attribut
             'name'        => 'Test Category',
             'slug'        => 'test-category',
             'description' => 'A description for the category.',
-            'status'      => true,
+            'active'      => true,
         ])
         ->call('create')
         ->assertHasNoFormErrors();

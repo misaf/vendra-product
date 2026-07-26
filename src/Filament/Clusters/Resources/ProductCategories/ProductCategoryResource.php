@@ -20,10 +20,12 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Tables\Pro
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\RelationManagers\ProductRelationManager;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Filament\Clusters\CatalogCluster;
+use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedGlobalSearch;
 use Misaf\VendraSupport\Filament\Navigation\NavigationPriority;
 
 final class ProductCategoryResource extends Resource
 {
+    use InteractsWithTranslatedGlobalSearch;
     use Translatable;
 
     protected static ?string $model = ProductCategory::class;
@@ -35,6 +37,14 @@ final class ProductCategoryResource extends Resource
     protected static ?string $slug = 'product-categories';
 
     protected static ?string $cluster = CatalogCluster::class;
+
+    /**
+     * @return array<int, string>
+     */
+    protected static function translatableGlobalSearchAttributes(): array
+    {
+        return ['name', 'slug'];
+    }
 
     public static function getBreadcrumb(): string
     {

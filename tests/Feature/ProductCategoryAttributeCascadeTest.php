@@ -22,7 +22,7 @@ function createCategoryAttributeValueForCascadeTest(ProductCategory $productCate
     $attributeId = DB::table('attributes')->insertGetId([
         'name'       => 'Material ' . fake()->unique()->word(),
         'position'   => 1,
-        'status'     => true,
+        'active'     => true,
         'tenant_id'  => currentTestTenant()?->getKey(),
         'created_at' => now(),
         'updated_at' => now(),

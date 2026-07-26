@@ -53,7 +53,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     name: non-empty-array<string, string>,
      *     description: non-empty-array<string, string>,
      *     slug: non-empty-array<string, string>,
-     *     status: bool,
+     *     active: bool,
      *     products: list<array{
      *         name: non-empty-array<string, string>,
      *         description: non-empty-array<string, string>,
@@ -70,7 +70,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
             'name'        => $data['name'],
             'description' => $data['description'],
             'slug'        => $data['slug'],
-            'status'      => $data['status'],
+            'active'      => $data['active'],
         ]);
 
         foreach ($data['products'] as $productRecord) {
@@ -107,7 +107,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     name: non-empty-array<string, string>,
      *     description: non-empty-array<string, string>,
      *     slug: non-empty-array<string, string>,
-     *     status: bool,
+     *     active: bool,
      *     products: list<array{
      *         name: non-empty-array<string, string>,
      *         description: non-empty-array<string, string>,
@@ -124,7 +124,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
          *     name: non-empty-array<string, string>,
          *     description: non-empty-array<string, string>,
          *     slug: non-empty-array<string, string>,
-         *     status: bool,
+         *     active: bool,
          *     products: list<array{
          *         name: non-empty-array<string, string>,
          *         description: non-empty-array<string, string>,
@@ -144,7 +144,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 'description.*'                            => ['required', 'string'],
                 'slug'                                     => ['required', 'array', 'min:1'],
                 'slug.*'                                   => ['required', 'string'],
-                'status'                                   => ['required', 'boolean'],
+                'active'                                   => ['required', 'boolean'],
                 'products'                                 => ['required', 'array', 'list'],
                 'products.*'                               => ['required', 'array:name,description,slug,in_stock,available_soon,productPrices'],
                 'products.*.name'                          => ['required', 'array', 'min:1'],

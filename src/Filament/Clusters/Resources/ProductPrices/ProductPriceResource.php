@@ -27,6 +27,8 @@ final class ProductPriceResource extends Resource
 
     protected static ?string $cluster = CatalogCluster::class;
 
+    protected static bool $isGloballySearchable = false;
+
     protected static bool $isScopedToTenant = false;
 
     public static function getBreadcrumb(): string

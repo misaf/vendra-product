@@ -47,8 +47,6 @@ final class ProductPriceTable
                 ->summarize([Sum::make(), Average::make(), Range::make()]),
 
             TextColumn::make('created_at')
-                ->alignCenter()
-                ->badge()
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.created_at'))
                 ->sinceTooltip()
@@ -59,8 +57,6 @@ final class ProductPriceTable
                 ),
 
             TextColumn::make('updated_at')
-                ->alignCenter()
-                ->badge()
                 ->extraCellAttributes(['dir' => 'ltr'])
                 ->label(__('vendra-product::attributes.updated_at'))
                 ->sinceTooltip()

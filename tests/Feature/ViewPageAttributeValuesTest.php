@@ -31,7 +31,7 @@ function createCategoryAttributeValueForViewTest(ProductCategory $productCategor
     $attributeId = DB::table('attributes')->insertGetId([
         'name'       => 'Weight',
         'position'   => 1,
-        'status'     => true,
+        'active'     => true,
         'tenant_id'  => currentTestTenant()?->getKey(),
         'created_at' => now(),
         'updated_at' => now(),
