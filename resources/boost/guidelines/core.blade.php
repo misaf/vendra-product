@@ -2,8 +2,6 @@
 
 The `misaf/vendra-product` package owns products, product categories, and pricing and the Filament admin UI for products, categories, and prices.
 
-### Standards
-
 ### Translatable Persistence
 
 - Making a persisted model field translatable is an explicit domain choice unless this package already requires it.
