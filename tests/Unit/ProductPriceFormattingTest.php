@@ -6,7 +6,7 @@ use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Contracts\CurrencyResolver;
 
 it('filters unsupported currency options and falls back to the configured currency', function (): void {
-    app()->instance(CurrencyResolver::class, new class () implements CurrencyResolver {
+    app()->instance(CurrencyResolver::class, new class implements CurrencyResolver {
         public function available(): bool
         {
             return true;

@@ -16,7 +16,7 @@ it('persists morph types through stable aliases instead of class names', functio
 });
 
 it('keeps attribute integration disabled without an attribute provider', function (): void {
-    app()->instance(AttributeResolver::class, new class () implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
         public function available(): bool
         {
             return false;
@@ -41,7 +41,7 @@ it('keeps attribute integration disabled without an attribute provider', functio
 });
 
 it('resolves category attribute values through the shared contract', function (): void {
-    app()->instance(AttributeResolver::class, new class () implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
         public function available(): bool
         {
             return true;
@@ -65,7 +65,7 @@ it('resolves category attribute values through the shared contract', function ()
 });
 
 it('inherits product attribute values from the product category', function (): void {
-    app()->instance(AttributeResolver::class, new class () implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
         public function available(): bool
         {
             return true;
@@ -94,7 +94,7 @@ it('inherits product attribute values from the product category', function (): v
 });
 
 it('selects attribute values through the attribute_value_selections pivot', function (): void {
-    app()->instance(AttributeResolver::class, new class () implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
         public function available(): bool
         {
             return true;
