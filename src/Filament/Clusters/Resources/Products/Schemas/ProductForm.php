@@ -133,7 +133,8 @@ final class ProductForm
                                     ->columnSpan(['lg' => 1])
                                     ->label(__('vendra-product::attributes.quantity'))
                                     ->live(onBlur: true)
-                                    ->numeric(),
+                                    ->numeric()
+                                    ->required(),
 
                                 TextInput::make('stock_threshold')
                                     ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.stock_threshold'))

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Awcodes\BadgeableColumn\Components\BadgeableColumn;
 use Filament\Facades\Filament;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Number;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
@@ -32,7 +33,7 @@ it('sorts the products table by every sortable column following the stored value
         ->toSortByEverySortableColumn([$first, $second]);
 });
 
-it('renders the product badges below its name without lazy loading', function (?int $stockThreshold, string $formattedStockThreshold): void {
+it('renders the product badges below its name without lazy loading', function (?int $stockThreshold): void {
     $productCategory = ProductCategoryFactory::new()->createOne([
         'name' => [
             'en' => 'English category',
@@ -49,15 +50,18 @@ it('renders the product badges below its name without lazy loading', function (?
         ->call('loadTable')
         ->assertTableColumnExists(
             'name',
-            function (TextColumn $column) use ($formattedStockThreshold): bool {
+            function (TextColumn $column) use ($stockThreshold): bool {
                 $record = $column->getRecord();
                 $description = (string) $column->getDescriptionBelow();
+                $formattedStockThreshold = is_numeric($stockThreshold)
+                    ? Number::format($stockThreshold)
+                    : '—';
 
                 return $record instanceof Product
                     && $record->relationLoaded('productCategory')
                     && 3 === mb_substr_count($description, 'fi-badge-label-ctn')
                     && str_contains($description, 'German category')
-                    && str_contains($description, __('vendra-product::attributes.quantity') . ': 7')
+                    && str_contains($description, __('vendra-product::attributes.quantity') . ': ' . Number::format(7))
                     && str_contains($description, __('vendra-product::attributes.stock_threshold') . ': ' . $formattedStockThreshold);
             },
             $product,
@@ -65,8 +69,8 @@ it('renders the product badges below its name without lazy loading', function (?
         ->assertTableColumnDoesNotExist('quantity')
         ->assertTableColumnDoesNotExist('stock_threshold');
 })->with([
-    'numeric stock threshold' => [3, '3'],
-    'no stock threshold'      => [null, '—'],
+    'numeric stock threshold' => [3],
+    'no stock threshold'      => [null],
 ]);
 
 it('sorts the product categories table by every sortable column following the stored values', function (): void {

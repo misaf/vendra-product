@@ -51,8 +51,7 @@ return new class () extends Migration {
                 ->nullable();
             $table->json('slug');
             $table->string('token');
-            $table->integer('quantity')
-                ->nullable();
+            $table->integer('quantity');
             $table->integer('stock_threshold')
                 ->nullable();
             $table->boolean('in_stock')
