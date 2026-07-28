@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Policies;
 
 use Misaf\VendraProduct\Enums\ProductPricePolicyEnum;
-use Misaf\VendraSupport\Concerns\AuthorizesCreateAbilities;
-use Misaf\VendraSupport\Concerns\AuthorizesDeleteAbilities;
-use Misaf\VendraSupport\Concerns\AuthorizesForceDeleteAbilities;
-use Misaf\VendraSupport\Concerns\AuthorizesRestoreAbilities;
-use Misaf\VendraSupport\Concerns\AuthorizesSandboxMode;
-use Misaf\VendraSupport\Concerns\AuthorizesUpdateAbilities;
-use Misaf\VendraSupport\Concerns\AuthorizesViewAbilities;
-use Misaf\VendraSupport\Concerns\ResolvesPolicyPermissions;
+use Misaf\VendraSupport\Authorization\AuthorizesCreateAbilities;
+use Misaf\VendraSupport\Authorization\AuthorizesDeleteAbilities;
+use Misaf\VendraSupport\Authorization\AuthorizesForceDeleteAbilities;
+use Misaf\VendraSupport\Authorization\AuthorizesRestoreAbilities;
+use Misaf\VendraSupport\Authorization\AuthorizesSandboxMode;
+use Misaf\VendraSupport\Authorization\AuthorizesUpdateAbilities;
+use Misaf\VendraSupport\Authorization\AuthorizesViewAbilities;
+use Misaf\VendraSupport\Authorization\ResolvesPolicyPermissions;
 
 final class ProductPricePolicy
 {

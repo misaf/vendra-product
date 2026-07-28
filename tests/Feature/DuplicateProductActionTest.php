@@ -10,9 +10,9 @@ use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\EditProduct;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
-use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\TagIntegration;
-use Misaf\VendraSupport\Support\TenantAwareness;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\TagIntegration;
+use Misaf\VendraSupport\Tenancy\TenantAwareness;
 
 use function Pest\Livewire\livewire;
 

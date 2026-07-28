@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Contracts\AttributeResolver;
-use Misaf\VendraSupport\Support\AttributeIntegration;
 
 it('persists morph types through stable aliases instead of class names', function (): void {
     expect((new Product())->getMorphClass())->toBe('product')

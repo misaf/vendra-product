@@ -13,9 +13,9 @@ use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraProduct\Models\Product;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Filament\Concerns\RendersRichContent;
-use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\TagIntegration;
 
 final class ProductInfolist
 {

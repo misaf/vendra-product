@@ -28,10 +28,10 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas\Pr
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
-use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\TagIntegration;
-use Misaf\VendraSupport\Support\TenantAwareness;
+use Misaf\VendraSupport\Tenancy\TenantAwareness;
 
 final class ProductForm
 {

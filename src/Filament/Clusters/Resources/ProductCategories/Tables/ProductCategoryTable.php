@@ -29,9 +29,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
 use Livewire\Component as Livewire;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
-use Misaf\VendraSupport\Support\AttributeIntegration;
 
 final class ProductCategoryTable
 {

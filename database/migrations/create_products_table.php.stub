@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use Misaf\VendraSupport\Support\TenantSchema;
+use Misaf\VendraSupport\Tenancy\TenantSchema;
 
 return new class () extends Migration {
     public function up(): void

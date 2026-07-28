@@ -7,7 +7,7 @@ use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Observers\ProductCategoryObserver;
-use Misaf\VendraSupport\Support\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 
 beforeEach(function (): void {
     makeCurrentTestTenant();

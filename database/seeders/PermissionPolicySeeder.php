@@ -8,7 +8,7 @@ use Misaf\VendraProduct\Enums\ProductCategoryPolicyEnum;
 use Misaf\VendraProduct\Enums\ProductPolicyEnum;
 use Misaf\VendraProduct\Enums\ProductPricePolicyEnum;
 use Misaf\VendraProduct\ProductPlugin;
-use Misaf\VendraSupport\Database\Seeders\PermissionPolicySeeder as BasePermissionPolicySeeder;
+use Misaf\VendraSupport\Tenancy\Database\Seeders\PermissionPolicySeeder as BasePermissionPolicySeeder;
 
 final class PermissionPolicySeeder extends BasePermissionPolicySeeder
 {

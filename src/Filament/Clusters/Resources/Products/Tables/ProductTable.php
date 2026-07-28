@@ -42,10 +42,10 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAct
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
-use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\TagIntegration;
 
 final class ProductTable
 {

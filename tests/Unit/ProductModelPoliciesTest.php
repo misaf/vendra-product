@@ -9,7 +9,7 @@ use Misaf\VendraProduct\Enums\ProductPricePolicyEnum;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
-use Misaf\VendraSupport\Traits\BelongsToTenant;
+use Misaf\VendraSupport\Tenancy\BelongsToTenant;
 
 it('applies shared tenant ownership and soft deletes to product models', function (): void {
     expect(class_uses_recursive(Product::class))->toContain(BelongsToTenant::class, SoftDeletes::class)

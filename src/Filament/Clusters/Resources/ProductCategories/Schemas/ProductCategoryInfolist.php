@@ -12,8 +12,8 @@ use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraProduct\Models\ProductCategory;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Filament\Concerns\RendersRichContent;
-use Misaf\VendraSupport\Support\AttributeIntegration;
 
 final class ProductCategoryInfolist
 {

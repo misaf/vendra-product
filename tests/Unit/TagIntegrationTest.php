@@ -6,9 +6,9 @@ namespace Misaf\VendraProduct\Tests\Unit;
 
 use LogicException;
 use Misaf\VendraProduct\Models\Product;
+use Misaf\VendraSupport\Capabilities\EloquentTagResolver;
+use Misaf\VendraSupport\Capabilities\NullTagResolver;
 use Misaf\VendraSupport\Contracts\TagResolver;
-use Misaf\VendraSupport\Support\EloquentTagResolver;
-use Misaf\VendraSupport\Support\NullTagResolver;
 use Misaf\VendraSupport\Support\TagRelationship;
 
 it('keeps product tags unavailable without a tag provider', function (): void {

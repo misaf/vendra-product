@@ -11,7 +11,7 @@ use Misaf\VendraProduct\Database\Factories\ProductPriceFactory;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
-use Misaf\VendraSupport\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
+use Misaf\VendraSupport\Tenancy\Database\Seeders\DemoContentSeeder as BaseDemoContentSeeder;
 
 final class DemoContentSeeder extends BaseDemoContentSeeder
 {

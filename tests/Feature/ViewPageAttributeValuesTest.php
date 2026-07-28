@@ -10,7 +10,7 @@ use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\ViewProductCategory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ViewProduct;
 use Misaf\VendraProduct\Models\ProductCategory;
-use Misaf\VendraSupport\Support\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 
 use function Pest\Livewire\livewire;
 

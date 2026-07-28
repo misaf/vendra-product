@@ -10,8 +10,8 @@ use Illuminate\Support\Str;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
-use Misaf\VendraSupport\Support\AttributeIntegration;
-use Misaf\VendraSupport\Support\TagIntegration;
+use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 final class DuplicateProductAction extends ReplicateAction
