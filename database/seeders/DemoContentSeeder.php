@@ -20,7 +20,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
         $this->currentTenantOrNull();
 
         ProductCategoryFactory::new()
-            ->enabled()
+            ->active()
             ->count(4)
             ->create()
             ->each(fn(ProductCategory $productCategory): mixed => ProductFactory::new()
