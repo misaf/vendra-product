@@ -113,7 +113,7 @@ Without Tagger, Product continues working without tag queries or tag UI.
 
 ## Filament
 
-Resources are available in the `Products` cluster on the `admin` panel:
+Resources are available in the shared `Catalog` cluster on the `admin` panel:
 
 - Product Categories
 - Products
