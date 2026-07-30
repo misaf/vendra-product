@@ -12,6 +12,7 @@ use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
+use Misaf\VendraSupport\Tenancy\TenantAwareness;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 final class DuplicateProductAction extends ReplicateAction
@@ -107,6 +108,13 @@ final class DuplicateProductAction extends ReplicateAction
         $originalRecord = $this->getRecord();
         if (null !== $originalRecord && $originalRecord->exists) {
             $query->whereKeyNot($originalRecord->getKey());
+
+            if (TenantAwareness::enabled()) {
+                $query->where(
+                    $originalRecord->qualifyColumn('tenant_id'),
+                    $originalRecord->getAttribute('tenant_id'),
+                );
+            }
         }
 
         $query->where(function (Builder $query) use ($column, $translations): void {
