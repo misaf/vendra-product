@@ -16,7 +16,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
 use function Pest\Livewire\livewire;
 
 beforeEach(function (): void {
-    setUpFilamentSuperAdminTestContext();
+    setUpFilamentAdminTestContext();
 
     Filament::getPanel('admin')->plugin(
         SpatieTranslatablePlugin::make()->defaultLocales(['en', 'de']),

@@ -13,7 +13,7 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
 use function Pest\Livewire\livewire;
 
 it('renders legacy prices with unsupported currency codes', function (): void {
-    setUpFilamentSuperAdminTestContext();
+    setUpFilamentAdminTestContext();
     app(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
     Filament::bootCurrentPanel();
 
@@ -31,7 +31,7 @@ it('renders legacy prices with unsupported currency codes', function (): void {
 });
 
 it('renders the products table when a product has no stock', function (): void {
-    setUpFilamentSuperAdminTestContext();
+    setUpFilamentAdminTestContext();
     app(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
     Filament::bootCurrentPanel();
 
