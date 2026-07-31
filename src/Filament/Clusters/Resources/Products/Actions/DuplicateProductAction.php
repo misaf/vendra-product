@@ -12,6 +12,7 @@ use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
+use Misaf\VendraSupport\Tenancy\Scopes\TenantScope;
 use Misaf\VendraSupport\Tenancy\TenantAwareness;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -108,13 +109,18 @@ final class DuplicateProductAction extends ReplicateAction
         $originalRecord = $this->getRecord();
         if (null !== $originalRecord && $originalRecord->exists) {
             $query->whereKeyNot($originalRecord->getKey());
+        }
 
-            if (TenantAwareness::enabled()) {
-                $query->where(
-                    $originalRecord->qualifyColumn('tenant_id'),
-                    $originalRecord->getAttribute('tenant_id'),
-                );
-            }
+        // Anchor collision detection to a single tenant explicitly rather than
+        // relying on the ambient tenant global scope, which may point at a
+        // different tenant while the action runs. The replica always belongs to
+        // the source record's tenant, so scope the lookup to that same tenant.
+        if (TenantAwareness::enabled()) {
+            $tenantId = $originalRecord?->getAttribute('tenant_id') ?? TenantAwareness::currentId();
+
+            $query
+                ->withoutGlobalScope(TenantScope::class)
+                ->where((new Product())->qualifyColumn('tenant_id'), $tenantId);
         }
 
         $query->where(function (Builder $query) use ($column, $translations): void {
