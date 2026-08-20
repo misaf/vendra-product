@@ -14,6 +14,7 @@ use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Tenancy\Scopes\TenantScope;
 use Misaf\VendraSupport\Tenancy\TenantAwareness;
+use Misaf\VendraSupport\Tenancy\TenantSchema;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 final class DuplicateProductAction extends ReplicateAction
@@ -116,11 +117,12 @@ final class DuplicateProductAction extends ReplicateAction
         // different tenant while the action runs. The replica always belongs to
         // the source record's tenant, so scope the lookup to that same tenant.
         if (TenantAwareness::enabled()) {
-            $tenantId = $originalRecord?->getAttribute('tenant_id') ?? TenantAwareness::currentId();
+            $tenantColumn = TenantSchema::column();
+            $tenantId = $originalRecord?->getAttribute($tenantColumn) ?? TenantAwareness::currentId();
 
             $query
                 ->withoutGlobalScope(TenantScope::class)
-                ->where((new Product())->qualifyColumn('tenant_id'), $tenantId);
+                ->where((new Product())->qualifyColumn($tenantColumn), $tenantId);
         }
 
         $query->where(function (Builder $query) use ($column, $translations): void {
