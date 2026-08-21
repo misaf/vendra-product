@@ -8,6 +8,7 @@ use Composer\InstalledVersions;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Console\AboutCommand;
+use Misaf\VendraProduct\Console\Commands\ResyncProductDescriptionsCommand;
 use Misaf\VendraProduct\Console\Commands\SeedCommand;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
@@ -33,7 +34,10 @@ final class ProductServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_products_table',
             ])
-            ->hasCommands(SeedCommand::class)
+            ->hasCommands([
+                ResyncProductDescriptionsCommand::class,
+                SeedCommand::class,
+            ])
             ->hasInstallCommand(function (InstallCommand $command): void {
                 $command->askToStarRepoOnGitHub('misaf/vendra-product');
             });

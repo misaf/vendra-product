@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
 use LogicException;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
+use Misaf\VendraProduct\Observers\ProductCategoryLifecycleObserver;
 use Misaf\VendraProduct\Observers\ProductCategoryObserver;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Contracts\ShouldLogActivity;
@@ -46,7 +47,7 @@ use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
  */
 #[Fillable(['name', 'description', 'slug', 'position', 'active'])]
 #[Hidden(['tenant_id'])]
-#[ObservedBy([ProductCategoryObserver::class])]
+#[ObservedBy([ProductCategoryObserver::class, ProductCategoryLifecycleObserver::class])]
 #[UseFactory(ProductCategoryFactory::class)]
 final class ProductCategory extends Model implements HasMedia, ShouldLogActivity, Sortable
 {
@@ -108,14 +109,6 @@ final class ProductCategory extends Model implements HasMedia, ShouldLogActivity
      * foreign key, so hard deletes must clean them up explicitly. Soft-delete
      * cascades live in the queued {@see ProductCategoryObserver}.
      */
-    protected static function booted(): void
-    {
-        self::forceDeleting(function (self $productCategory): void {
-            if (null !== AttributeIntegration::valueModel()) {
-                $productCategory->attributeValues()->forceDelete();
-            }
-        });
-    }
 
     /**
      * @return HasMany<Product, $this>

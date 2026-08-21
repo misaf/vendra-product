@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Config;
 use LogicException;
 use Misaf\VendraMultimedia\Concerns\HasDefaultMediaConversions;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
+use Misaf\VendraProduct\Observers\ProductLifecycleObserver;
 use Misaf\VendraProduct\Observers\ProductObserver;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\HasOptionalTags;
@@ -56,7 +57,7 @@ use Spatie\Translatable\HasTranslations;
  */
 #[Fillable(['product_category_id', 'name', 'description', 'slug', 'quantity', 'stock_threshold', 'in_stock', 'position', 'available_soon', 'availability_date'])]
 #[Hidden(['tenant_id'])]
-#[ObservedBy([ProductObserver::class])]
+#[ObservedBy([ProductObserver::class, ProductLifecycleObserver::class])]
 #[UseFactory(ProductFactory::class)]
 final class Product extends Model implements HasMedia, ShouldLogActivity, Sortable
 {
@@ -126,25 +127,17 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
         self::creating(function (self $product): void {
             $product->token = self::generateToken();
         });
-
-        self::updated(function (self $product): void {
-            if ($product->wasChanged('product_category_id')) {
-                $product->detachStaleAttributeValueSelections();
-            }
-        });
-
-        self::forceDeleting(function (self $product): void {
-            if (null !== AttributeIntegration::valueModel()) {
-                $product->selectedAttributeValues()->detach();
-            }
-        });
     }
 
     /**
      * Selections must always belong to the product's current category; when
      * the category changes, drop selections pointing at any other owner.
      */
-    private function detachStaleAttributeValueSelections(): void
+    /**
+     * Public because ProductLifecycleObserver drives it; a private method was
+     * only reachable while this ran in a same-class `booted()` closure.
+     */
+    public function detachStaleAttributeValueSelections(): void
     {
         if (null === AttributeIntegration::valueModel()) {
             return;
