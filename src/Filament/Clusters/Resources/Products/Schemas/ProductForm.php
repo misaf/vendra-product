@@ -194,6 +194,7 @@ final class ProductForm
                                     ->image()
                                     ->label(__('vendra-product::attributes.image'))
                                     ->live()
+                                    ->imageEditor()
                                     ->multiple()
                                     ->panelLayout('grid')
                                     ->responsiveImages(),

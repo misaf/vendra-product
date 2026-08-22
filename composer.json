@@ -19,7 +19,7 @@
     ],
     "type": "vendra-module",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "awcodes/filament-badgeable-column": "^4.0",
         "cknow/laravel-money": "^8.5",
         "lara-zeus/spatie-translatable": "^2.0.1",
@@ -30,23 +30,6 @@
         "spatie/laravel-package-tools": "^1.93.1",
         "spatie/laravel-sluggable": "^4.0.2",
         "staudenmeir/laravel-adjacency-list": "^1.26.1"
-    },
-    "require-dev": {
-        "fakerphp/faker": "^1.24.1",
-        "larastan/larastan": "^3.10.0",
-        "laravel/boost": "^2.4.12",
-        "laravel/pint": "^1.29.3",
-        "misaf/vendra-currency": "self.version",
-        "misaf/vendra-testing": "self.version",
-        "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^8.9.4",
-        "orchestra/testbench": "^11.1",
-        "pestphp/pest": "^5.0",
-        "pestphp/pest-plugin-arch": "^5.0",
-        "pestphp/pest-plugin-laravel": "^5.0",
-        "pestphp/pest-plugin-profanity": "^5.0",
-        "pestphp/pest-plugin-type-coverage": "^5.0",
-        "phpstan/extension-installer": "^1.4.3"
     },
     "autoload": {
         "psr-4": {
@@ -66,12 +49,6 @@
                 "Misaf\\VendraProduct\\Providers\\ProductServiceProvider"
             ]
         }
-    },
-    "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
-        "format": "vendor/bin/pint",
-        "test": "vendor/bin/pest --parallel",
-        "test-coverage": "vendor/bin/pest --coverage"
     },
     "suggest": {
         "misaf/vendra-attribute": "Install this in the host application to manage reusable attributes and product attribute values.",
