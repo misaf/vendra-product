@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\VendraProduct\Tests\Unit;
+namespace Misaf\VendraProduct\Tests\Feature;
 
 use LogicException;
 use Misaf\VendraProduct\Models\Product;
