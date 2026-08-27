@@ -9,6 +9,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\CreateProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\EditProduct;
@@ -56,6 +58,18 @@ final class ProductResource extends Resource
     protected static function translatableGlobalSearchAttributes(): array
     {
         return ['name', 'slug'];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        $product = self::product($record);
+
+        return [
+            __('vendra-product::attributes.token') => $product->token,
+        ];
     }
 
     public static function getBreadcrumb(): string
@@ -108,5 +122,14 @@ final class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return ProductTable::configure($table);
+    }
+
+    private static function product(Model $record): Product
+    {
+        if ( ! $record instanceof Product) {
+            throw new InvalidArgumentException('Product resources require a Product record.');
+        }
+
+        return $record;
     }
 }

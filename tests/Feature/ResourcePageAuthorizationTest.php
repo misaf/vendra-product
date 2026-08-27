@@ -12,11 +12,13 @@ use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\List
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Pages\ViewProductCategory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\CreateProduct;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ListProducts;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 
 use function Pest\Livewire\livewire;
 
 beforeEach(function (): void {
     setUpFilamentAdminTestContext();
+    app()->setLocale('en');
 
     Filament::getPanel('admin')->plugin(
         SpatieTranslatablePlugin::make()->defaultLocales(['en', 'de']),
@@ -87,4 +89,44 @@ it('renders the reorderable product categories table under strict authorization'
         ->assertOk()
         ->call('loadTable')
         ->assertCanSeeTableRecords([$productCategory]);
+});
+
+it('globally searches translated product identifiers within the current tenant', function (): void {
+    $tenant = currentTestTenant();
+    $product = ProductFactory::new()->createOne([
+        'name' => ['en' => 'Searchable Rose', 'de' => 'Durchsuchbare Rose'],
+        'slug' => ['en' => 'searchable-rose', 'de' => 'durchsuchbare-rose'],
+    ]);
+
+    $otherTenant = createTestTenant();
+    Filament::setTenant($otherTenant);
+    switchToTestTenant($otherTenant);
+    ProductFactory::new()->createOne([
+        'name' => ['en' => 'Other Tenant Product'],
+        'slug' => ['en' => 'other-tenant-product'],
+    ]);
+    Filament::setTenant($tenant);
+    switchToTestTenant($tenant);
+    app()->setLocale('en');
+
+    $nameResults = ProductResource::getGlobalSearchResults('Searchable Rose');
+    $tokenResults = ProductResource::getGlobalSearchResults($product->token);
+
+    expect(ProductResource::getGloballySearchableAttributes())->toBe([
+        'name->en',
+        'slug->en',
+        'token',
+    ])
+        ->and($nameResults)->toHaveCount(1)
+        ->and($tokenResults)->toHaveCount(1);
+
+    $nameResult = $nameResults->sole();
+    $tokenResult = $tokenResults->sole();
+
+    expect($nameResult->title)->toBe('Searchable Rose')
+        ->and($tokenResult->title)->toBe('Searchable Rose')
+        ->and($tokenResult->details)->toBe([
+            __('vendra-product::attributes.token') => $product->token,
+        ])
+        ->and(ProductResource::getGlobalSearchResults('Other Tenant Product'))->toBeEmpty();
 });
