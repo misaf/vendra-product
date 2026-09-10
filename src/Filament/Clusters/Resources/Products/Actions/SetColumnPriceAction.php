@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
+use Illuminate\Support\Arr;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -39,11 +40,11 @@ final class SetColumnPriceAction
                     ->stripCharacters(','),
             ])
             ->action(function (Product $record, array $data): void {
-                $currencyCode = (string) $data['currency_code'];
+                $currencyCode = (string) Arr::get($data, 'currency_code');
 
                 $record->productPrices()->create([
                     'currency_code' => $currencyCode,
-                    'price' => ProductPrice::toMinorUnits($currencyCode, (float) $data['price']),
+                    'price' => ProductPrice::toMinorUnits($currencyCode, (float) Arr::get($data, 'price')),
                 ]);
             });
     }

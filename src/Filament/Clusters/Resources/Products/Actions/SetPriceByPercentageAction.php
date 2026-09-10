@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
+use Illuminate\Support\Arr;
 use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Forms\Components\TextInput;
@@ -43,11 +44,9 @@ final class SetPriceByPercentageAction extends BulkAction
         ]);
 
         $this->action(function (array $data): void {
-            $percent = $data['percent'] ?? null;
+            $percent = Arr::get($data, 'percent', null);
 
-            if (! is_numeric($percent)) {
-                throw new InvalidArgumentException('Invalid percent provided.');
-            }
+            throw_unless(is_numeric($percent), InvalidArgumentException::class, 'Invalid percent provided.');
 
             $this->process(static function (Collection $records) use ($percent): void {
                 foreach ($records as $record) {

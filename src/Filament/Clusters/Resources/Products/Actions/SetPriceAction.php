@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
+use Illuminate\Support\Arr;
 use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Forms\Components\Select;
@@ -58,16 +59,12 @@ final class SetPriceAction extends BulkAction
         ]);
 
         $this->action(function (array $data): void {
-            $currencyCode = $data['currency_code'] ?? null;
-            $price = $data['price'] ?? null;
+            $currencyCode = Arr::get($data, 'currency_code', null);
+            $price = Arr::get($data, 'price', null);
 
-            if (! is_string($currencyCode) || $currencyCode === '') {
-                throw new InvalidArgumentException('Invalid currency code provided.');
-            }
+            throw_if(! is_string($currencyCode) || $currencyCode === '', InvalidArgumentException::class, 'Invalid currency code provided.');
 
-            if (! is_numeric($price)) {
-                throw new InvalidArgumentException('Invalid price provided.');
-            }
+            throw_unless(is_numeric($price), InvalidArgumentException::class, 'Invalid price provided.');
 
             $priceMinorUnits = ProductPrice::toMinorUnits($currencyCode, (float) $price);
 

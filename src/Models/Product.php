@@ -245,9 +245,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
-        if ($attributeValueModel === null) {
-            throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
-        }
+        throw_if($attributeValueModel === null, LogicException::class, 'Install misaf/vendra-attribute to use product attribute values.');
 
         return $this
             ->hasMany($attributeValueModel, 'attributable_id', 'product_category_id')
@@ -263,9 +261,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
-        if ($attributeValueModel === null) {
-            throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
-        }
+        throw_if($attributeValueModel === null, LogicException::class, 'Install misaf/vendra-attribute to use product attribute values.');
 
         return $this
             ->morphToMany(

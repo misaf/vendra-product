@@ -55,5 +55,5 @@ it('reaches its owning store through the generic tenant relation', function (): 
      */
     expect($product->tenant()->getForeignKeyName())->toBe(TenantSchema::column())
         ->and($product->tenant->getKey())->toBe($store?->getKey())
-        ->and($product->tenant)->toBeInstanceOf(app(TenantResolver::class)->modelClass());
+        ->and($product->tenant)->toBeInstanceOf(resolve(TenantResolver::class)->modelClass());
 })->skip(fn (): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');

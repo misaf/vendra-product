@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Database\Seeders;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Misaf\VendraProduct\Database\Factories\ProductCategoryFactory;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
@@ -66,14 +67,14 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      */
     private function handleSeedFixtureRecord(array $data): void
     {
-        $productCategory = ProductCategory::create([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'slug' => $data['slug'],
-            'active' => $data['active'],
+        $productCategory = ProductCategory::query()->create([
+            'name' => Arr::get($data, 'name'),
+            'description' => Arr::get($data, 'description'),
+            'slug' => Arr::get($data, 'slug'),
+            'active' => Arr::get($data, 'active'),
         ]);
 
-        foreach ($data['products'] as $productRecord) {
+        foreach (Arr::get($data, 'products') as $productRecord) {
             $this->handleProductFixtureRecord($productCategory, $productRecord);
         }
     }
@@ -91,14 +92,14 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
     private function handleProductFixtureRecord(ProductCategory $productCategory, array $productRecord): void
     {
         $product = $productCategory->products()->create([
-            'name' => $productRecord['name'],
-            'description' => $productRecord['description'],
-            'slug' => $productRecord['slug'],
-            'in_stock' => $productRecord['in_stock'],
-            'available_soon' => $productRecord['available_soon'],
+            'name' => Arr::get($productRecord, 'name'),
+            'description' => Arr::get($productRecord, 'description'),
+            'slug' => Arr::get($productRecord, 'slug'),
+            'in_stock' => Arr::get($productRecord, 'in_stock'),
+            'available_soon' => Arr::get($productRecord, 'available_soon'),
         ]);
 
-        $product->productPrices()->createMany($productRecord['productPrices']);
+        $product->productPrices()->createMany(Arr::get($productRecord, 'productPrices'));
     }
 
     /**

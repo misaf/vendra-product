@@ -139,9 +139,7 @@ final class ProductCategory extends Model implements HasMedia, ShouldLogActivity
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
-        if ($attributeValueModel === null) {
-            throw new LogicException('Install misaf/vendra-attribute to use product category attribute values.');
-        }
+        throw_if($attributeValueModel === null, LogicException::class, 'Install misaf/vendra-attribute to use product category attribute values.');
 
         return $this->morphMany(
             $attributeValueModel,

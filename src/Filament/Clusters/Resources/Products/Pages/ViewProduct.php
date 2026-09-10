@@ -48,9 +48,7 @@ final class ViewProduct extends ViewRecord
         /** @var ProductPrice|null $latestProductPrice */
         $latestProductPrice = $record->latestProductPrice()->first();
 
-        if (! $latestProductPrice) {
-            throw new RuntimeException('Product price is required before viewing this product.');
-        }
+        throw_unless($latestProductPrice, RuntimeException::class, 'Product price is required before viewing this product.');
 
         $data['currency_code'] = $latestProductPrice->currency_code;
         $data['price'] = $latestProductPrice->price->getAmount();

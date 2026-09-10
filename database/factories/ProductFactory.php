@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Database\Factories;
 
+use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Tenancy\TenantAwareness;
@@ -28,7 +28,7 @@ final class ProductFactory extends Factory
             'stock_threshold' => fake()->randomElement([null, 10, 20]),
             'in_stock' => fake()->boolean(90),
             'available_soon' => fake()->boolean(10),
-            'availability_date' => fake()->dateTimeBetween(Carbon::now(), Carbon::now()->addDays(30)),
+            'availability_date' => fake()->dateTimeBetween(Date::now(), Date::now()->addDays(30)),
         ];
     }
 

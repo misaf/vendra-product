@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -91,8 +92,8 @@ it('inherits product attribute values from the product category', function (): v
         ->and($attributeValues->getForeignKeyName())->toBe('attributable_id')
         ->and($attributeValues->getLocalKeyName())->toBe('product_category_id')
         ->and(collect($attributeValues->getQuery()->getQuery()->wheres)->contains(
-            fn (array $where): bool => 'attributable_type' === ($where['column'] ?? null)
-                && (new ProductCategory)->getMorphClass() === ($where['value'] ?? null),
+            fn (array $where): bool => 'attributable_type' === (Arr::get($where, 'column', null))
+                && (new ProductCategory)->getMorphClass() === (Arr::get($where, 'value', null)),
         ))->toBeTrue();
 });
 

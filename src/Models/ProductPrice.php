@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Models;
 
+use Znck\Eloquent\Traits\BelongsToThrough;
 use Cknow\Money\Casts\MoneyIntegerCast;
 use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -24,7 +25,6 @@ use Money\Currency;
 use Money\Exception\UnknownCurrencyException;
 use Throwable;
 use Znck\Eloquent\Relations;
-use Znck\Eloquent\Traits;
 
 /**
  * @property int $id
@@ -43,7 +43,7 @@ final class ProductPrice extends Model implements ShouldLogActivity
     use HasFactory;
 
     use SoftDeletes;
-    use Traits\BelongsToThrough;
+    use BelongsToThrough;
 
     /**
      * @return array<string, string>

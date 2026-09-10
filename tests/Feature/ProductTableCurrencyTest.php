@@ -14,7 +14,7 @@ use function Pest\Livewire\livewire;
 
 it('renders legacy prices with unsupported currency codes', function (): void {
     setUpFilamentAdminTestContext();
-    app(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
+    resolve(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
     Filament::bootCurrentPanel();
 
     $category = ProductCategoryFactory::new()->createOne();
@@ -32,7 +32,7 @@ it('renders legacy prices with unsupported currency codes', function (): void {
 
 it('renders the products table when a product has no stock', function (): void {
     setUpFilamentAdminTestContext();
-    app(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
+    resolve(PanelRegistry::class)->getDefault()->plugin(SpatieTranslatablePlugin::make());
     Filament::bootCurrentPanel();
 
     $category = ProductCategoryFactory::new()->createOne();

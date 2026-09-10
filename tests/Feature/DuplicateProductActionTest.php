@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Arr;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\DB;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
@@ -39,7 +40,7 @@ it('creates a duplicate with a copy suffix', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->getTranslations('name'))->toBe([
@@ -69,24 +70,24 @@ it('increments the suffix when a previous duplicate exists', function (): void {
     livewire(EditProduct::class, ['record' => $product->getKey()])
         ->callAction('replicate');
 
-    $duplicates = Product::whereKeyNot($product->getKey())
+    $duplicates = Product::query()->whereKeyNot($product->getKey())
         ->orderBy('id')
         ->get();
 
     expect($duplicates)->toHaveCount(2)
-        ->and($duplicates[0]->getTranslations('name'))->toBe([
+        ->and(Arr::get($duplicates, 0)->getTranslations('name'))->toBe([
             'en' => 'T-Shirt Copy',
             'de' => 'T-Shirt Copy',
         ])
-        ->and($duplicates[0]->getTranslations('slug'))->toBe([
+        ->and(Arr::get($duplicates, 0)->getTranslations('slug'))->toBe([
             'en' => 't-shirt-copy',
             'de' => 't-shirt-copy',
         ])
-        ->and($duplicates[1]->getTranslations('name'))->toBe([
+        ->and(Arr::get($duplicates, 1)->getTranslations('name'))->toBe([
             'en' => 'T-Shirt Copy 2',
             'de' => 'T-Shirt Copy 2',
         ])
-        ->and($duplicates[1]->getTranslations('slug'))->toBe([
+        ->and(Arr::get($duplicates, 1)->getTranslations('slug'))->toBe([
             'en' => 't-shirt-copy-2',
             'de' => 't-shirt-copy-2',
         ]);
@@ -112,7 +113,7 @@ it('increments the suffix when a product with the copy name already exists', fun
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())
+    $duplicate = Product::query()->whereKeyNot($product->getKey())
         ->where('name->en', 'T-Shirt Copy 2')
         ->first();
 
@@ -135,7 +136,7 @@ it('duplicates prices', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->productPrices()->count())->toBe(1)
@@ -181,7 +182,7 @@ it('ignores colliding names on other tenants when suffixing the duplicate', func
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->getTranslations('name'))->toBe([
@@ -218,7 +219,7 @@ it('duplicates selected attribute values', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->selectedAttributeValues()->allRelatedIds()->all())->toBe([$attributeValue->getKey()])
@@ -234,7 +235,7 @@ it('duplicates tags', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
 
     $tagKeyName = $product->tags()->getRelated()->getQualifiedKeyName();
 
@@ -256,7 +257,7 @@ it('generates a new token for the duplicate', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->token)->not->toBe($product->token);

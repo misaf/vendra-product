@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages;
 
+use Illuminate\Support\Arr;
 use Filament\Resources\Pages\CreateRecord;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
@@ -38,16 +39,12 @@ final class CreateProduct extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $currencyCode = $data['currency_code'] ?? null;
-        $price = $data['price'] ?? null;
+        $currencyCode = Arr::get($data, 'currency_code', null);
+        $price = Arr::get($data, 'price', null);
 
-        if (! is_string($currencyCode) || $currencyCode === '') {
-            throw new InvalidArgumentException('Invalid currency code provided.');
-        }
+        throw_if(! is_string($currencyCode) || $currencyCode === '', InvalidArgumentException::class, 'Invalid currency code provided.');
 
-        if (! is_numeric($price)) {
-            throw new InvalidArgumentException('Invalid price provided.');
-        }
+        throw_unless(is_numeric($price), InvalidArgumentException::class, 'Invalid price provided.');
 
         $this->pricingData = [
             'currency_code' => $currencyCode,
@@ -64,9 +61,7 @@ final class CreateProduct extends CreateRecord
         /** @var Product|null $record */
         $record = $this->getRecord();
 
-        if ($record === null || $this->pricingData === null) {
-            throw new RuntimeException('Product or pricing data is missing after create operation.');
-        }
+        throw_if($record === null || $this->pricingData === null, RuntimeException::class, 'Product or pricing data is missing after create operation.');
 
         $record->productPrices()->create($this->pricingData);
     }

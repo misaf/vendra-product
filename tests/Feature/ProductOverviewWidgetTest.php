@@ -22,8 +22,8 @@ it('registers the product overview widget on the product panel', function (): vo
 });
 
 it('shows the product overview widget on the product list page', function (): void {
-    $headerWidgets = (new ReflectionMethod(ListProducts::class, 'getHeaderWidgets'))
-        ->invoke(app(ListProducts::class));
+    $headerWidgets = new ReflectionMethod(ListProducts::class, 'getHeaderWidgets')
+        ->invoke(resolve(ListProducts::class));
 
     expect($headerWidgets)->toBe([
         ProductOverviewWidget::class,
@@ -71,8 +71,8 @@ it('shows tenant-scoped product inventory metrics', function (): void {
         ]);
 
     /** @var array<int, Stat> $stats */
-    $stats = (new ReflectionMethod(ProductOverviewWidget::class, 'getStats'))
-        ->invoke(app(ProductOverviewWidget::class));
+    $stats = new ReflectionMethod(ProductOverviewWidget::class, 'getStats')
+        ->invoke(resolve(ProductOverviewWidget::class));
 
     expect(array_map(
         static fn (Stat $stat): mixed => $stat->getIcon(),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products;
 
+use Illuminate\Support\Arr;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -104,7 +105,7 @@ final class ProductResource extends Resource
 
     public static function getDefaultTranslatableLocale(): string
     {
-        $locale = self::getTranslatableLocales()[0] ?? app()->getLocale();
+        $locale = Arr::get(self::getTranslatableLocales(), 0, app()->getLocale());
 
         return is_string($locale) && $locale !== '' ? $locale : 'en';
     }
@@ -126,9 +127,7 @@ final class ProductResource extends Resource
 
     private static function product(Model $record): Product
     {
-        if (! $record instanceof Product) {
-            throw new InvalidArgumentException('Product resources require a Product record.');
-        }
+        throw_unless($record instanceof Product, InvalidArgumentException::class, 'Product resources require a Product record.');
 
         return $record;
     }

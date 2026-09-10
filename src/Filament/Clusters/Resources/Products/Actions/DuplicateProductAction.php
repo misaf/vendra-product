@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
+use Illuminate\Support\Arr;
 use Filament\Actions\ReplicateAction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
@@ -54,12 +55,12 @@ final class DuplicateProductAction extends ReplicateAction
     {
         $transformed = [];
 
-        $name = $this->ensureUniqueTranslatedValue('name', $this->duplicateTranslations($data['name'] ?? null, ' Copy'));
+        $name = $this->ensureUniqueTranslatedValue('name', $this->duplicateTranslations(Arr::get($data, 'name', null), ' Copy'));
         if ($name !== []) {
             $transformed['name'] = $name;
         }
 
-        $slug = $this->ensureUniqueTranslatedValue('slug', $this->duplicateTranslations($data['slug'] ?? null, '-copy', slug: true), slug: true);
+        $slug = $this->ensureUniqueTranslatedValue('slug', $this->duplicateTranslations(Arr::get($data, 'slug', null), '-copy', slug: true), slug: true);
         if ($slug !== []) {
             $transformed['slug'] = $slug;
         }
@@ -148,13 +149,7 @@ final class DuplicateProductAction extends ReplicateAction
      */
     private function translatedValueTaken(array $candidate, array $existing): bool
     {
-        foreach ($candidate as $locale => $value) {
-            if (isset($existing[$locale][$value])) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($candidate, fn($value, $locale) => isset($existing[$locale][$value]));
     }
 
     /**

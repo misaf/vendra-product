@@ -53,12 +53,8 @@ it('uses kebab-case permission names scoped per model', function (): void {
     $categoryPermissions = array_column(ProductCategoryPolicyEnum::cases(), 'value');
     $pricePermissions = array_column(ProductPricePolicyEnum::cases(), 'value');
 
-    expect($productPermissions)->toHaveCount(count(array_unique($productPermissions)))
-        ->each->toMatch('/^[a-z]+(-[a-z]+)*$/');
-
-    expect($categoryPermissions)->toHaveCount(count(array_unique($categoryPermissions)))
-        ->each->toMatch('/^[a-z]+(-[a-z]+)*$/');
-
-    expect($pricePermissions)->toHaveCount(count(array_unique($pricePermissions)))
-        ->each->toMatch('/^[a-z]+(-[a-z]+)*$/');
+    expect($productPermissions)->toHaveSameSize(array_unique($productPermissions))
+        ->each->toMatch('/^[a-z]+(-[a-z]+)*$/')
+        ->and($categoryPermissions)->toHaveSameSize(array_unique($categoryPermissions))->each->toMatch('/^[a-z]+(-[a-z]+)*$/')
+        ->and($pricePermissions)->toHaveSameSize(array_unique($pricePermissions))->each->toMatch('/^[a-z]+(-[a-z]+)*$/');
 });

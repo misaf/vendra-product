@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas;
 
+use Illuminate\Support\Arr;
 use Closure;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -163,7 +164,7 @@ final class ProductCategoryForm
                     continue;
                 }
 
-                $pairs[] = ($item['attribute_id'] ?? '').'|'.mb_trim((string) ($item['value'] ?? ''));
+                $pairs[] = (Arr::get($item, 'attribute_id', '')).'|'.mb_trim((string) (Arr::get($item, 'value', '')));
             }
 
             if (count($pairs) !== count(array_unique($pairs))) {

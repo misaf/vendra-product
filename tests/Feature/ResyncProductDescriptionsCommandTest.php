@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Arr;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Models\Product;
 
@@ -23,19 +24,19 @@ it('converts legacy localized HTML descriptions to Tiptap JSON', function (): vo
 
     $description = $product->fresh()->getTranslations('description');
 
-    expect($description['en'])
+    expect(Arr::get($description, 'en'))
         ->toMatchArray(['type' => 'doc'])
-        ->and($description['en']['content'][0])
+        ->and(Arr::get($description, 'en.content.0'))
         ->toMatchArray(['type' => 'paragraph'])
-        ->and($description['en']['content'][0]['content'][1])
+        ->and(Arr::get($description, 'en.content.0.content.1'))
         ->toMatchArray([
             'type' => 'text',
             'text' => 'world',
             'marks' => [['type' => 'bold']],
         ])
-        ->and($description['fa']['content'][0])
+        ->and(Arr::get($description, 'fa.content.0'))
         ->toMatchArray(['type' => 'heading'])
-        ->and($description['fa']['content'][0]['attrs']['level'])->toBe(2);
+        ->and(Arr::get($description, 'fa.content.0.attrs.level'))->toBe(2);
 });
 
 it('preserves Tiptap descriptions and converts soft-deleted products', function (): void {
@@ -53,8 +54,8 @@ it('preserves Tiptap descriptions and converts soft-deleted products', function 
 
     $this->artisan('vendra-product:resync-descriptions')->assertSuccessful();
 
-    expect($syncedProduct->fresh()->getTranslations('description')['en'])->toBe($tiptapDescription)
-        ->and(Product::query()->withoutGlobalScopes()->findOrFail($deletedProduct->getKey())->getTranslations('description')['en'])
+    expect(Arr::get($syncedProduct->fresh()->getTranslations('description'), 'en'))->toBe($tiptapDescription)
+        ->and(Arr::get(Product::query()->withoutGlobalScopes()->findOrFail($deletedProduct->getKey())->getTranslations('description'), 'en'))
         ->toMatchArray(['type' => 'doc']);
 });
 

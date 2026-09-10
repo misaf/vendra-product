@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages;
 
+use Illuminate\Support\Arr;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
@@ -75,16 +76,12 @@ final class EditProduct extends EditRecord
             return $data;
         }
 
-        $currencyCode = $data['currency_code'] ?? null;
-        $price = $data['price'] ?? null;
+        $currencyCode = Arr::get($data, 'currency_code', null);
+        $price = Arr::get($data, 'price', null);
 
-        if (! is_string($currencyCode) || $currencyCode === '') {
-            throw new InvalidArgumentException('Invalid currency code provided.');
-        }
+        throw_if(! is_string($currencyCode) || $currencyCode === '', InvalidArgumentException::class, 'Invalid currency code provided.');
 
-        if (! is_numeric($price)) {
-            throw new InvalidArgumentException('Invalid price provided.');
-        }
+        throw_unless(is_numeric($price), InvalidArgumentException::class, 'Invalid price provided.');
 
         $this->pricingData = [
             'currency_code' => $currencyCode,
@@ -107,8 +104,8 @@ final class EditProduct extends EditRecord
 
         $record->productPrices()->firstOrCreate(
             [
-                'currency_code' => $this->pricingData['currency_code'],
-                'price' => $this->pricingData['price'],
+                'currency_code' => Arr::get($this->pricingData, 'currency_code'),
+                'price' => Arr::get($this->pricingData, 'price'),
             ]
         );
     }

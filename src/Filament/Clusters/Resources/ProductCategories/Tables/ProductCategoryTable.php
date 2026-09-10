@@ -53,9 +53,7 @@ final class ProductCategoryTable
                 ->alignCenter()
                 ->collection(ProductCategory::MEDIA_COLLECTION)
                 ->conversion('thumb-table')
-                ->defaultImageUrl(function (ProductCategory $record, Livewire $livewire): string {
-                    return static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire));
-                })
+                ->defaultImageUrl(fn(ProductCategory $record, Livewire $livewire): string => static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire)))
                 ->extraImgAttributes(['class' => 'saturate-50', 'loading' => 'lazy'])
                 ->label(__('vendra-product::attributes.image'))
                 ->stacked(),

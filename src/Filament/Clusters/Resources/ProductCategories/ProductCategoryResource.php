@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories;
 
+use Illuminate\Support\Arr;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -85,7 +86,7 @@ final class ProductCategoryResource extends Resource
 
     public static function getDefaultTranslatableLocale(): string
     {
-        $locale = self::getTranslatableLocales()[0] ?? app()->getLocale();
+        $locale = Arr::get(self::getTranslatableLocales(), 0, app()->getLocale());
 
         return is_string($locale) && $locale !== '' ? $locale : 'en';
     }

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Arr;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Schema;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
@@ -43,5 +44,5 @@ it('does not allow a null product quantity in the database', function (): void {
 
     expect($quantityColumn)
         ->not->toBeNull()
-        ->and($quantityColumn['nullable'])->toBeFalse();
+        ->and(Arr::get($quantityColumn, 'nullable'))->toBeFalse();
 });
