@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
-use Illuminate\Support\Arr;
 use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Forms\Components\Select;
@@ -12,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;

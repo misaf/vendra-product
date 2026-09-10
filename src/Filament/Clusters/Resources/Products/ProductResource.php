@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products;
 
-use Illuminate\Support\Arr;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\CreateProduct;

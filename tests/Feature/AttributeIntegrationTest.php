@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;

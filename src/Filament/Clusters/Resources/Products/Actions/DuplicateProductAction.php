@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
-use Illuminate\Support\Arr;
 use Filament\Actions\ReplicateAction;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
@@ -149,7 +149,7 @@ final class DuplicateProductAction extends ReplicateAction
      */
     private function translatedValueTaken(array $candidate, array $existing): bool
     {
-        return array_any($candidate, fn($value, $locale) => isset($existing[$locale][$value]));
+        return array_any($candidate, fn ($value, $locale) => isset($existing[$locale][$value]));
     }
 
     /**

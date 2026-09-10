@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Database\Factories;
 
-use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Tenancy\TenantAwareness;

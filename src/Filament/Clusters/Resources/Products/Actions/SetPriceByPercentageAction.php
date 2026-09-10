@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
-use Illuminate\Support\Arr;
 use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Misaf\VendraProduct\Models\Product;
 

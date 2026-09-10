@@ -67,7 +67,7 @@ final class ProductTable
                 ->alignCenter()
                 ->collection(Product::MEDIA_COLLECTION)
                 ->conversion('thumb-table')
-                ->defaultImageUrl(fn(Product $record, Livewire $livewire): string => static::defaultAvatarImageUrl(static::translatedAttribute($record, 'name', $livewire)))
+                ->defaultImageUrl(fn (Product $record, Livewire $livewire): string => self::defaultAvatarImageUrl(self::translatedAttribute($record, 'name', $livewire)))
                 ->extraImgAttributes(['class' => 'saturate-50', 'loading' => 'lazy'])
                 ->label(__('vendra-product::attributes.image'))
                 ->stacked(),
@@ -119,7 +119,7 @@ final class ProductTable
                 ->copyMessage(__('vendra-product::messages.token_copied'))
                 ->copyMessageDuration(1500)
                 ->extraCellAttributes(['dir' => 'ltr'])
-                ->formatStateUsing(fn(string $state): string => Str::of($state)->split(3)->implode(' '))
+                ->formatStateUsing(fn (string $state): string => Str::of($state)->split(3)->implode(' '))
                 ->label(__('vendra-product::attributes.token'))
                 ->icon(Heroicon::Key)
                 ->searchable(isGlobal: true),
@@ -201,7 +201,7 @@ final class ProductTable
                                 ->label(__('vendra-product::navigation.product_category'))
                                 ->selectable(
                                     IsRelatedToOperator::make()
-                                        ->getOptionLabelFromRecordUsing(fn(ProductCategory $record, Livewire $livewire): string => static::translatedAttribute($record, 'name', $livewire))
+                                        ->getOptionLabelFromRecordUsing(fn (ProductCategory $record, Livewire $livewire): string => self::translatedAttribute($record, 'name', $livewire))
                                         ->preload()
                                         ->searchable()
                                         ->titleAttribute('name'),

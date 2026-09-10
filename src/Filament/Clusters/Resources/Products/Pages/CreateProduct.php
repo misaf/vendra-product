@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages;
 
-use Illuminate\Support\Arr;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;
