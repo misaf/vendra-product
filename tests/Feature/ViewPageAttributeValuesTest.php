@@ -29,17 +29,17 @@ beforeEach(function (): void {
 function createCategoryAttributeValueForViewTest(ProductCategory $productCategory): mixed
 {
     $attributeId = DB::table('attributes')->insertGetId([
-        'name'       => 'Weight',
-        'position'   => 1,
-        'active'     => true,
-        'tenant_id'  => currentTestTenant()?->getKey(),
+        'name' => 'Weight',
+        'position' => 1,
+        'active' => true,
+        'tenant_id' => currentTestTenant()?->getKey(),
         'created_at' => now(),
         'updated_at' => now(),
     ]);
 
     return $productCategory->attributeValues()->create([
         'attribute_id' => $attributeId,
-        'value'        => '42',
+        'value' => '42',
     ]);
 }
 
@@ -52,7 +52,7 @@ it('renders the product category view page including attribute values', function
         ->assertOk()
         ->assertSee('Weight')
         ->assertSee('42');
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
 
 it('renders the product view page including selected attribute values', function (): void {
     $productCategory = ProductCategoryFactory::new()->create();
@@ -66,4 +66,4 @@ it('renders the product view page including selected attribute values', function
         ->assertOk()
         ->assertSee('Weight')
         ->assertSee('42');
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');

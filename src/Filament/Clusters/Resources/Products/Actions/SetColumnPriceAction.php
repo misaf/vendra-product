@@ -20,10 +20,10 @@ final class SetColumnPriceAction
             ->schema([
                 Select::make('currency_code')
                     ->columnSpanFull()
-                    ->default(fn(): string => ProductPrice::defaultCurrencyCode())
+                    ->default(fn (): string => ProductPrice::defaultCurrencyCode())
                     ->label(__('vendra-product::attributes.currency'))
                     ->native(false)
-                    ->options(fn(): array => ProductPrice::currencyOptions())
+                    ->options(fn (): array => ProductPrice::currencyOptions())
                     ->preload()
                     ->required()
                     ->searchable(),
@@ -43,7 +43,7 @@ final class SetColumnPriceAction
 
                 $record->productPrices()->create([
                     'currency_code' => $currencyCode,
-                    'price'         => ProductPrice::toMinorUnits($currencyCode, (float) $data['price']),
+                    'price' => ProductPrice::toMinorUnits($currencyCode, (float) $data['price']),
                 ]);
             });
     }

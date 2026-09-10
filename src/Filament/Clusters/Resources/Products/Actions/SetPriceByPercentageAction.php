@@ -45,19 +45,19 @@ final class SetPriceByPercentageAction extends BulkAction
         $this->action(function (array $data): void {
             $percent = $data['percent'] ?? null;
 
-            if ( ! is_numeric($percent)) {
+            if (! is_numeric($percent)) {
                 throw new InvalidArgumentException('Invalid percent provided.');
             }
 
             $this->process(static function (Collection $records) use ($percent): void {
                 foreach ($records as $record) {
-                    if ( ! $record instanceof Product) {
+                    if (! $record instanceof Product) {
                         continue;
                     }
 
                     $latestProductPrice = $record->latestProductPrice;
 
-                    if (null === $latestProductPrice) {
+                    if ($latestProductPrice === null) {
                         continue;
                     }
 
@@ -71,7 +71,7 @@ final class SetPriceByPercentageAction extends BulkAction
 
                     $record->productPrices()->create([
                         'currency_code' => $latestProductPrice->currency_code,
-                        'price'         => (int) round($newPrice),
+                        'price' => (int) round($newPrice),
                     ]);
                 }
             });

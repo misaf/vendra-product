@@ -27,7 +27,7 @@ final class ProductLifecycleObserver
 
     public function forceDeleting(Product $product): void
     {
-        if (null !== AttributeIntegration::valueModel()) {
+        if (AttributeIntegration::valueModel() !== null) {
             $product->selectedAttributeValues()->detach();
         }
     }

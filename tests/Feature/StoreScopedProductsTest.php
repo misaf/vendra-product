@@ -23,7 +23,7 @@ it('owns products through the configured tenant foreign key', function (): void 
     expect(TenantSchema::column())->toBe('tenant_id')
         ->and(Schema::hasColumn('products', TenantSchema::column()))->toBeTrue()
         ->and(TenantSchema::hasTenantColumn('products'))->toBeTrue();
-})->skip(fn(): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
+})->skip(fn (): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
 
 it('returns only the current store products', function (): void {
     $storeA = currentTestTenant();
@@ -42,7 +42,7 @@ it('returns only the current store products', function (): void {
         ->and(Product::query()->withoutGlobalScopes()->count())->toBe(2)
         ->and($first->getAttribute(TenantSchema::column()))->toBe($storeA?->getKey())
         ->and($second->getAttribute(TenantSchema::column()))->toBe($storeB?->getKey());
-})->skip(fn(): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
+})->skip(fn (): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
 
 it('reaches its owning store through the generic tenant relation', function (): void {
     $store = currentTestTenant();
@@ -56,4 +56,4 @@ it('reaches its owning store through the generic tenant relation', function (): 
     expect($product->tenant()->getForeignKeyName())->toBe(TenantSchema::column())
         ->and($product->tenant->getKey())->toBe($store?->getKey())
         ->and($product->tenant)->toBeInstanceOf(app(TenantResolver::class)->modelClass());
-})->skip(fn(): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
+})->skip(fn (): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');

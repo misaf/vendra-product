@@ -18,20 +18,20 @@ final class ProductPriceFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id'    => Product::factory(),
+            'product_id' => Product::factory(),
             'currency_code' => fake()->randomElement(array_keys(ProductPrice::currencyOptions())),
-            'price'         => fake()->randomElement([9900, 14900, 19900, 24900, 49900, 99900]),
+            'price' => fake()->randomElement([9900, 14900, 19900, 24900, 49900, 99900]),
         ];
     }
 
     public function forProduct(Product $product): static
     {
-        return $this->state(fn() => ['product_id' => $product->id]);
+        return $this->state(fn () => ['product_id' => $product->id]);
     }
 
     public function forCurrencyCode(string $currencyCode): static
     {
-        return $this->state(fn() => ['currency_code' => $currencyCode]);
+        return $this->state(fn () => ['currency_code' => $currencyCode]);
     }
 
     /**

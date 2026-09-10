@@ -37,13 +37,13 @@ final class DuplicateProductAction extends ReplicateAction
 
         $this->excludeAttributes(['position', 'token']);
 
-        $this->mutateRecordDataUsing(fn(array $data): array => $this->mutateReplicaData($data));
+        $this->mutateRecordDataUsing(fn (array $data): array => $this->mutateReplicaData($data));
 
         $this->after(function (Product $record, Product $replica): void {
             $this->duplicateRelations($record, $replica);
         });
 
-        $this->successRedirectUrl(fn(Product $replica): string => ProductResource::getUrl('edit', ['record' => $replica]));
+        $this->successRedirectUrl(fn (Product $replica): string => ProductResource::getUrl('edit', ['record' => $replica]));
     }
 
     /**
@@ -55,12 +55,12 @@ final class DuplicateProductAction extends ReplicateAction
         $transformed = [];
 
         $name = $this->ensureUniqueTranslatedValue('name', $this->duplicateTranslations($data['name'] ?? null, ' Copy'));
-        if ([] !== $name) {
+        if ($name !== []) {
             $transformed['name'] = $name;
         }
 
         $slug = $this->ensureUniqueTranslatedValue('slug', $this->duplicateTranslations($data['slug'] ?? null, '-copy', slug: true), slug: true);
-        if ([] !== $slug) {
+        if ($slug !== []) {
             $transformed['slug'] = $slug;
         }
 
@@ -73,7 +73,7 @@ final class DuplicateProductAction extends ReplicateAction
      */
     private function ensureUniqueTranslatedValue(string $column, array $translations, bool $slug = false): array
     {
-        if ([] === $translations) {
+        if ($translations === []) {
             return $translations;
         }
 
@@ -108,7 +108,7 @@ final class DuplicateProductAction extends ReplicateAction
         $query = Product::withTrashed();
 
         $originalRecord = $this->getRecord();
-        if (null !== $originalRecord && $originalRecord->exists) {
+        if ($originalRecord !== null && $originalRecord->exists) {
             $query->whereKeyNot($originalRecord->getKey());
         }
 
@@ -122,12 +122,12 @@ final class DuplicateProductAction extends ReplicateAction
 
             $query
                 ->withoutGlobalScope(TenantScope::class)
-                ->where((new Product())->qualifyColumn($tenantColumn), $tenantId);
+                ->where((new Product)->qualifyColumn($tenantColumn), $tenantId);
         }
 
         $query->where(function (Builder $query) use ($column, $translations): void {
             foreach ($translations as $locale => $value) {
-                $query->orWhere("{$column}->{$locale}", 'like', addcslashes($value, '\\%_') . '%');
+                $query->orWhere("{$column}->{$locale}", 'like', addcslashes($value, '\\%_').'%');
             }
         });
 
@@ -162,20 +162,20 @@ final class DuplicateProductAction extends ReplicateAction
      */
     private function duplicateTranslations(mixed $translations, string $suffix, bool $slug = false): array
     {
-        if ( ! is_array($translations)) {
+        if (! is_array($translations)) {
             return [];
         }
 
         $duplicatedTranslations = [];
 
         foreach ($translations as $locale => $translation) {
-            if ( ! is_string($locale) || ! is_string($translation) || '' === $translation) {
+            if (! is_string($locale) || ! is_string($translation) || $translation === '') {
                 continue;
             }
 
             $duplicatedTranslations[$locale] = $slug
-                ? Str::slug($translation . $suffix)
-                : $translation . $suffix;
+                ? Str::slug($translation.$suffix)
+                : $translation.$suffix;
         }
 
         return $duplicatedTranslations;
@@ -193,9 +193,9 @@ final class DuplicateProductAction extends ReplicateAction
     {
         $record->productPrices()
             ->get()
-            ->each(fn(ProductPrice $productPrice): ProductPrice => $replica->productPrices()->create([
+            ->each(fn (ProductPrice $productPrice): ProductPrice => $replica->productPrices()->create([
                 'currency_code' => $productPrice->currency_code,
-                'price'         => (int) $productPrice->price->getAmount(),
+                'price' => (int) $productPrice->price->getAmount(),
             ]));
     }
 
@@ -204,12 +204,12 @@ final class DuplicateProductAction extends ReplicateAction
         $record->media()
             ->where('collection_name', Product::MEDIA_COLLECTION)
             ->get()
-            ->each(fn(Media $media): Media => $media->copy($replica, $media->collection_name, $media->disk));
+            ->each(fn (Media $media): Media => $media->copy($replica, $media->collection_name, $media->disk));
     }
 
     private function duplicateAttributeValueSelections(Product $record, Product $replica): void
     {
-        if (null === AttributeIntegration::valueModel()) {
+        if (AttributeIntegration::valueModel() === null) {
             return;
         }
 
@@ -222,7 +222,7 @@ final class DuplicateProductAction extends ReplicateAction
 
     private function duplicateTags(Product $record, Product $replica): void
     {
-        if ( ! TagIntegration::isAvailable()) {
+        if (! TagIntegration::isAvailable()) {
             return;
         }
 

@@ -33,13 +33,13 @@ final class InStockAction extends BulkAction
         $this->action(function (): void {
             $this->process(static function (Collection $records): void {
                 foreach ($records as $record) {
-                    if ( ! $record instanceof Product) {
+                    if (! $record instanceof Product) {
                         continue;
                     }
 
                     $record->update([
-                        'in_stock'          => true,
-                        'available_soon'    => false,
+                        'in_stock' => true,
+                        'available_soon' => false,
                         'availability_date' => null,
                     ]);
                 }

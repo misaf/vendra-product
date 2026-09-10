@@ -47,13 +47,13 @@ final class ProductCategoryForm
                     ->maxLength(255)
                     ->required()
                     ->unique(
-                        column: fn(Livewire $livewire): string => 'name->' . self::activeFormLocale($livewire),
-                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                        column: fn (Livewire $livewire): string => 'name->'.self::activeFormLocale($livewire),
+                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
                             ->withoutTrashed(),
                     ),
 
                 TextInput::make('slug')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.slug'))
+                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.slug'))
                     ->columnSpan(['lg' => 1])
                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                     ->label(__('vendra-product::attributes.slug'))
@@ -61,8 +61,8 @@ final class ProductCategoryForm
                     ->maxLength(255)
                     ->required()
                     ->unique(
-                        column: fn(Livewire $livewire): string => 'slug->' . self::activeFormLocale($livewire),
-                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                        column: fn (Livewire $livewire): string => 'slug->'.self::activeFormLocale($livewire),
+                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
                             ->withoutTrashed(),
                     ),
 
@@ -73,7 +73,7 @@ final class ProductCategoryForm
                     ->required(),
 
                 SpatieMediaLibraryFileUpload::make('image')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.image'))
+                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.image'))
                     ->collection(ProductCategory::MEDIA_COLLECTION)
                     ->columnSpanFull()
                     ->image()
@@ -83,7 +83,7 @@ final class ProductCategoryForm
                     ->responsiveImages(),
 
                 Toggle::make('active')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.active'))
+                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.active'))
                     ->columnSpanFull()
                     ->default(false)
                     ->label(__('vendra-product::attributes.active'))
@@ -106,7 +106,7 @@ final class ProductCategoryForm
      */
     private static function attributeComponents(): array
     {
-        if ( ! AttributeIntegration::isAvailable()) {
+        if (! AttributeIntegration::isAvailable()) {
             return [];
         }
 
@@ -124,12 +124,12 @@ final class ProductCategoryForm
                         ->hiddenLabel()
                         ->orderColumn('position')
                         ->reorderable()
-                        ->rule(fn(): Closure => self::distinctAttributeValuePairsRule())
+                        ->rule(fn (): Closure => self::distinctAttributeValuePairsRule())
                         ->schema([
                             Select::make('attribute_id')
                                 ->label(__('vendra-product::attributes.attribute'))
                                 ->native(false)
-                                ->options(fn(): array => AttributeIntegration::options())
+                                ->options(fn (): array => AttributeIntegration::options())
                                 ->preload()
                                 ->required()
                                 ->searchable(),
@@ -152,18 +152,18 @@ final class ProductCategoryForm
     private static function distinctAttributeValuePairsRule(): Closure
     {
         return function (string $attribute, mixed $value, Closure $fail): void {
-            if ( ! is_array($value)) {
+            if (! is_array($value)) {
                 return;
             }
 
             $pairs = [];
 
             foreach ($value as $item) {
-                if ( ! is_array($item)) {
+                if (! is_array($item)) {
                     continue;
                 }
 
-                $pairs[] = ($item['attribute_id'] ?? '') . '|' . mb_trim((string) ($item['value'] ?? ''));
+                $pairs[] = ($item['attribute_id'] ?? '').'|'.mb_trim((string) ($item['value'] ?? ''));
             }
 
             if (count($pairs) !== count(array_unique($pairs))) {

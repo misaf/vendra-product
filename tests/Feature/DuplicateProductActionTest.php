@@ -32,7 +32,7 @@ it('creates a duplicate with a copy suffix', function (): void {
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 1500,
+        'price' => 1500,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])
@@ -60,7 +60,7 @@ it('increments the suffix when a previous duplicate exists', function (): void {
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 1500,
+        'price' => 1500,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])
@@ -105,7 +105,7 @@ it('increments the suffix when a product with the copy name already exists', fun
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 1500,
+        'price' => 1500,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])
@@ -128,7 +128,7 @@ it('duplicates prices', function (): void {
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 2500,
+        'price' => 2500,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])
@@ -147,7 +147,7 @@ it('duplicates relations without affecting the original record', function (): vo
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 1000,
+        'price' => 1000,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])
@@ -192,24 +192,24 @@ it('ignores colliding names on other tenants when suffixing the duplicate', func
             'en' => 't-shirt-copy',
             'de' => 't-shirt-copy',
         ]);
-})->skip(fn(): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
+})->skip(fn (): bool => ! TenantAwareness::enabled(), 'tenancy is not enabled');
 
 it('duplicates selected attribute values', function (): void {
     $productCategory = ProductCategoryFactory::new()->create();
     $product = ProductFactory::new()->forCategory($productCategory)->create();
 
     $attributeId = DB::table('attributes')->insertGetId([
-        'name'       => 'Weight',
-        'position'   => 1,
-        'active'     => true,
-        'tenant_id'  => currentTestTenant()?->getKey(),
+        'name' => 'Weight',
+        'position' => 1,
+        'active' => true,
+        'tenant_id' => currentTestTenant()?->getKey(),
         'created_at' => now(),
         'updated_at' => now(),
     ]);
 
     $attributeValue = $productCategory->attributeValues()->create([
         'attribute_id' => $attributeId,
-        'value'        => '42',
+        'value' => '42',
     ]);
 
     $product->selectedAttributeValues()->attach($attributeValue->getKey());
@@ -223,7 +223,7 @@ it('duplicates selected attribute values', function (): void {
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->selectedAttributeValues()->allRelatedIds()->all())->toBe([$attributeValue->getKey()])
         ->and($product->selectedAttributeValues()->allRelatedIds()->all())->toBe([$attributeValue->getKey()]);
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
 
 it('duplicates tags', function (): void {
     $product = ProductFactory::new()->create();
@@ -242,14 +242,14 @@ it('duplicates tags', function (): void {
         ->and($duplicate->tags()->pluck($tagKeyName)->sort()->values()->all())
         ->toBe($product->tags()->pluck($tagKeyName)->sort()->values()->all())
         ->and($duplicate->tags()->count())->toBe(2);
-})->skip(fn(): bool => ! TagIntegration::isAvailable(), 'no tag provider is installed');
+})->skip(fn (): bool => ! TagIntegration::isAvailable(), 'no tag provider is installed');
 
 it('generates a new token for the duplicate', function (): void {
     $product = ProductFactory::new()->create();
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 1000,
+        'price' => 1000,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])

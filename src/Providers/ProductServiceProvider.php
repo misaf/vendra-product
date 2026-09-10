@@ -46,7 +46,7 @@ final class ProductServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         Panel::configureUsing(function (Panel $panel): void {
-            if ( ! $this->shouldRegisterOnPanel($panel->getId(), 'vendra-product')) {
+            if (! $this->shouldRegisterOnPanel($panel->getId(), 'vendra-product')) {
                 return;
             }
 
@@ -62,13 +62,13 @@ final class ProductServiceProvider extends PackageServiceProvider
          * model class never orphans stored rows.
          */
         Relation::morphMap([
-            'product'          => Product::class,
+            'product' => Product::class,
             'product_category' => ProductCategory::class,
         ]);
 
         $this->app->make(TenantTableRegistry::class)->register('product_categories', 'products');
         $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
 
-        AboutCommand::add('Vendra Product', fn(): array => ['Version' => InstalledVersions::getPrettyVersion('misaf/vendra-product')]);
+        AboutCommand::add('Vendra Product', fn (): array => ['Version' => InstalledVersions::getPrettyVersion('misaf/vendra-product')]);
     }
 }

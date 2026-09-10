@@ -22,13 +22,13 @@ final class ProductFactory extends Factory
     {
         return [
             'product_category_id' => ProductCategory::factory(),
-            'name'                => ['en' => fake()->sentences(1, true)],
-            'description'         => ['en' => fake()->realTextBetween(100, 200)],
-            'quantity'            => fake()->numberBetween(1, 10),
-            'stock_threshold'     => fake()->randomElement([null, 10, 20]),
-            'in_stock'            => fake()->boolean(90),
-            'available_soon'      => fake()->boolean(10),
-            'availability_date'   => fake()->dateTimeBetween(Carbon::now(), Carbon::now()->addDays(30)),
+            'name' => ['en' => fake()->sentences(1, true)],
+            'description' => ['en' => fake()->realTextBetween(100, 200)],
+            'quantity' => fake()->numberBetween(1, 10),
+            'stock_threshold' => fake()->randomElement([null, 10, 20]),
+            'in_stock' => fake()->boolean(90),
+            'available_soon' => fake()->boolean(10),
+            'availability_date' => fake()->dateTimeBetween(Carbon::now(), Carbon::now()->addDays(30)),
         ];
     }
 
@@ -37,18 +37,18 @@ final class ProductFactory extends Factory
      */
     public function forTenant(Model|int $tenant): static
     {
-        if ( ! TenantAwareness::enabled()) {
+        if (! TenantAwareness::enabled()) {
             return $this;
         }
 
-        return $this->state(fn(): array => [
+        return $this->state(fn (): array => [
             'tenant_id' => $tenant instanceof Model ? $tenant->getKey() : $tenant,
         ]);
     }
 
     public function forCategory(ProductCategory $productCategory): static
     {
-        return $this->state(fn(): array => [
+        return $this->state(fn (): array => [
             'product_category_id' => $productCategory->id,
         ]);
     }

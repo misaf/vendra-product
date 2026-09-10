@@ -66,7 +66,7 @@ final class ProductCategoryTable
                 ->icon(Heroicon::Tag)
                 ->suffixBadges([
                     Badge::make('count')
-                        ->label(fn(ProductCategory $record): string => (string) Number::format(self::integerAttribute($record, 'products_count')))
+                        ->label(fn (ProductCategory $record): string => (string) Number::format(self::integerAttribute($record, 'products_count')))
                         ->size(Size::Small),
                 ])
                 ->suffix(''),
@@ -74,7 +74,7 @@ final class ProductCategoryTable
             TextColumn::make('description')
                 ->label(__('vendra-product::attributes.description'))
                 ->icon(Heroicon::DocumentText)
-                ->state(fn(ProductCategory $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
+                ->state(fn (ProductCategory $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
                 ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('slug')
@@ -93,8 +93,8 @@ final class ProductCategoryTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
 
             TextColumn::make('updated_at')
@@ -103,8 +103,8 @@ final class ProductCategoryTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
         ];
 
@@ -121,7 +121,7 @@ final class ProductCategoryTable
             ->emptyStateHeading(__('vendra-product::tables.empty_state.heading.product_categories'))
             ->emptyStateDescription(__('vendra-product::tables.empty_state.description.product_categories'))
             ->emptyStateIcon(Heroicon::OutlinedSquares2x2)
-            ->modifyQueryUsing(fn(Builder $query): Builder => $query->withCount('products'))
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->withCount('products'))
             ->columns($columns)
             ->filters(
                 [

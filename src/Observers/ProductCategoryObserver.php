@@ -20,7 +20,7 @@ final class ProductCategoryObserver implements ShouldQueue
         $productCategory->productPrices()->delete();
         $productCategory->products()->delete();
 
-        if (null !== AttributeIntegration::valueModel()) {
+        if (AttributeIntegration::valueModel() !== null) {
             $productCategory->attributeValues()->delete();
         }
     }

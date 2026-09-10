@@ -23,12 +23,12 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
             ->active()
             ->count(4)
             ->create()
-            ->each(fn(ProductCategory $productCategory): mixed => ProductFactory::new()
+            ->each(fn (ProductCategory $productCategory): mixed => ProductFactory::new()
                 ->forCategory($productCategory)
                 ->count(2)
                 ->create()
-                ->each(fn(Product $product): array => array_map(
-                    fn(string $currencyCode): ProductPrice => ProductPriceFactory::new()
+                ->each(fn (Product $product): array => array_map(
+                    fn (string $currencyCode): ProductPrice => ProductPriceFactory::new()
                         ->forProduct($product)
                         ->forCurrencyCode($currencyCode)
                         ->createOne(),
@@ -67,10 +67,10 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
     private function handleSeedFixtureRecord(array $data): void
     {
         $productCategory = ProductCategory::create([
-            'name'        => $data['name'],
+            'name' => $data['name'],
             'description' => $data['description'],
-            'slug'        => $data['slug'],
-            'active'      => $data['active'],
+            'slug' => $data['slug'],
+            'active' => $data['active'],
         ]);
 
         foreach ($data['products'] as $productRecord) {
@@ -91,10 +91,10 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
     private function handleProductFixtureRecord(ProductCategory $productCategory, array $productRecord): void
     {
         $product = $productCategory->products()->create([
-            'name'           => $productRecord['name'],
-            'description'    => $productRecord['description'],
-            'slug'           => $productRecord['slug'],
-            'in_stock'       => $productRecord['in_stock'],
+            'name' => $productRecord['name'],
+            'description' => $productRecord['description'],
+            'slug' => $productRecord['slug'],
+            'in_stock' => $productRecord['in_stock'],
             'available_soon' => $productRecord['available_soon'],
         ]);
 
@@ -138,27 +138,27 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
         $validated = Validator::make(
             data: $record,
             rules: [
-                'name'                                     => ['required', 'array', 'min:1'],
-                'name.*'                                   => ['required', 'string'],
-                'description'                              => ['required', 'array', 'min:1'],
-                'description.*'                            => ['required', 'string'],
-                'slug'                                     => ['required', 'array', 'min:1'],
-                'slug.*'                                   => ['required', 'string'],
-                'active'                                   => ['required', 'boolean'],
-                'products'                                 => ['required', 'array', 'list'],
-                'products.*'                               => ['required', 'array:name,description,slug,in_stock,available_soon,productPrices'],
-                'products.*.name'                          => ['required', 'array', 'min:1'],
-                'products.*.name.*'                        => ['required', 'string'],
-                'products.*.description'                   => ['required', 'array', 'min:1'],
-                'products.*.description.*'                 => ['required', 'string'],
-                'products.*.slug'                          => ['required', 'array', 'min:1'],
-                'products.*.slug.*'                        => ['required', 'string'],
-                'products.*.in_stock'                      => ['required', 'boolean'],
-                'products.*.available_soon'                => ['required', 'boolean'],
-                'products.*.productPrices'                 => ['required', 'array', 'list'],
-                'products.*.productPrices.*'               => ['required', 'array:currency_code,price'],
+                'name' => ['required', 'array', 'min:1'],
+                'name.*' => ['required', 'string'],
+                'description' => ['required', 'array', 'min:1'],
+                'description.*' => ['required', 'string'],
+                'slug' => ['required', 'array', 'min:1'],
+                'slug.*' => ['required', 'string'],
+                'active' => ['required', 'boolean'],
+                'products' => ['required', 'array', 'list'],
+                'products.*' => ['required', 'array:name,description,slug,in_stock,available_soon,productPrices'],
+                'products.*.name' => ['required', 'array', 'min:1'],
+                'products.*.name.*' => ['required', 'string'],
+                'products.*.description' => ['required', 'array', 'min:1'],
+                'products.*.description.*' => ['required', 'string'],
+                'products.*.slug' => ['required', 'array', 'min:1'],
+                'products.*.slug.*' => ['required', 'string'],
+                'products.*.in_stock' => ['required', 'boolean'],
+                'products.*.available_soon' => ['required', 'boolean'],
+                'products.*.productPrices' => ['required', 'array', 'list'],
+                'products.*.productPrices.*' => ['required', 'array:currency_code,price'],
                 'products.*.productPrices.*.currency_code' => ['required', 'string', 'alpha:ascii', 'size:3'],
-                'products.*.productPrices.*.price'         => ['required', 'numeric'],
+                'products.*.productPrices.*.price' => ['required', 'numeric'],
             ],
         )->validate();
 

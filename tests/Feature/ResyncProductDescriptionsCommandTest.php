@@ -29,8 +29,8 @@ it('converts legacy localized HTML descriptions to Tiptap JSON', function (): vo
         ->toMatchArray(['type' => 'paragraph'])
         ->and($description['en']['content'][0]['content'][1])
         ->toMatchArray([
-            'type'  => 'text',
-            'text'  => 'world',
+            'type' => 'text',
+            'text' => 'world',
             'marks' => [['type' => 'bold']],
         ])
         ->and($description['fa']['content'][0])
@@ -40,9 +40,9 @@ it('converts legacy localized HTML descriptions to Tiptap JSON', function (): vo
 
 it('preserves Tiptap descriptions and converts soft-deleted products', function (): void {
     $tiptapDescription = [
-        'type'    => 'doc',
+        'type' => 'doc',
         'content' => [[
-            'type'    => 'paragraph',
+            'type' => 'paragraph',
             'content' => [['type' => 'text', 'text' => 'Already synced']],
         ]],
     ];

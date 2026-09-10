@@ -42,10 +42,10 @@ it('renders the create product category page under strict authorization', functi
 it('validates the product category form without failing to evaluate the attribute values rule', function (): void {
     livewire(CreateProductCategory::class)
         ->fillForm([
-            'name'        => 'Test Category',
-            'slug'        => 'test-category',
+            'name' => 'Test Category',
+            'slug' => 'test-category',
             'description' => 'A description for the category.',
-            'active'      => true,
+            'active' => true,
         ])
         ->call('create')
         ->assertHasNoFormErrors();

@@ -41,7 +41,7 @@ it('renders the product badges below its name without lazy loading', function (?
         ],
     ]);
     $product = ProductFactory::new()->forCategory($productCategory)->createOne([
-        'quantity'        => 7,
+        'quantity' => 7,
         'stock_threshold' => $stockThreshold,
     ]);
 
@@ -59,10 +59,10 @@ it('renders the product badges below its name without lazy loading', function (?
 
                 return $record instanceof Product
                     && $record->relationLoaded('productCategory')
-                    && 3 === mb_substr_count($description, 'fi-badge-label-ctn')
+                    && mb_substr_count($description, 'fi-badge-label-ctn') === 3
                     && str_contains($description, 'German category')
-                    && str_contains($description, __('vendra-product::attributes.quantity') . ': ' . Number::format(7))
-                    && str_contains($description, __('vendra-product::attributes.stock_threshold') . ': ' . $formattedStockThreshold);
+                    && str_contains($description, __('vendra-product::attributes.quantity').': '.Number::format(7))
+                    && str_contains($description, __('vendra-product::attributes.stock_threshold').': '.$formattedStockThreshold);
             },
             $product,
         )
@@ -70,7 +70,7 @@ it('renders the product badges below its name without lazy loading', function (?
         ->assertTableColumnDoesNotExist('stock_threshold');
 })->with([
     'numeric stock threshold' => [3],
-    'no stock threshold'      => [null],
+    'no stock threshold' => [null],
 ]);
 
 it('sorts the product categories table by every sortable column following the stored values', function (): void {

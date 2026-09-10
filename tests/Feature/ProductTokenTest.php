@@ -26,7 +26,7 @@ it('rejects duplicate tokens at the database level', function (): void {
     $second = ProductFactory::new()->create();
 
     expect(
-        fn(): int => DB::table('products')
+        fn (): int => DB::table('products')
             ->where('id', $second->getKey())
             ->update(['token' => $first->token]),
     )->toThrow(QueryException::class);
@@ -37,5 +37,5 @@ it('falls back to the unique constraint when the token space is exhausted', func
 
     ProductFactory::new()->create();
 
-    expect(fn() => ProductFactory::new()->create())->toThrow(QueryException::class);
+    expect(fn () => ProductFactory::new()->create())->toThrow(QueryException::class);
 });

@@ -20,17 +20,17 @@ beforeEach(function (): void {
 function createCategoryAttributeValueForCascadeTest(ProductCategory $productCategory): mixed
 {
     $attributeId = DB::table('attributes')->insertGetId([
-        'name'       => 'Material ' . fake()->unique()->word(),
-        'position'   => 1,
-        'active'     => true,
-        'tenant_id'  => currentTestTenant()?->getKey(),
+        'name' => 'Material '.fake()->unique()->word(),
+        'position' => 1,
+        'active' => true,
+        'tenant_id' => currentTestTenant()?->getKey(),
         'created_at' => now(),
         'updated_at' => now(),
     ]);
 
     return $productCategory->attributeValues()->create([
         'attribute_id' => $attributeId,
-        'value'        => fake()->unique()->word(),
+        'value' => fake()->unique()->word(),
     ]);
 }
 
@@ -39,11 +39,11 @@ it('soft deletes the category attribute values alongside products and prices', f
     $attributeValue = createCategoryAttributeValueForCascadeTest($productCategory);
 
     $productCategory->delete();
-    (new ProductCategoryObserver())->deleted($productCategory);
+    (new ProductCategoryObserver)->deleted($productCategory);
 
     expect($productCategory->attributeValues()->count())->toBe(0)
         ->and($productCategory->attributeValues()->withTrashed()->whereKey($attributeValue->getKey())->exists())->toBeTrue();
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
 
 it('hard deletes the category attribute values when the category is force deleted', function (): void {
     $productCategory = ProductCategoryFactory::new()->create();
@@ -52,7 +52,7 @@ it('hard deletes the category attribute values when the category is force delete
     $productCategory->forceDelete();
 
     expect(DB::table('attribute_values')->where('id', $attributeValue->getKey())->exists())->toBeFalse();
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
 
 it('detaches selections from the old category when a product moves to another category', function (): void {
     $oldCategory = ProductCategoryFactory::new()->create();
@@ -65,7 +65,7 @@ it('detaches selections from the old category when a product moves to another ca
     $product->update(['product_category_id' => $newCategory->getKey()]);
 
     expect($product->selectedAttributeValues()->count())->toBe(0);
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
 
 it('detaches selections when a product is force deleted', function (): void {
     $productCategory = ProductCategoryFactory::new()->create();
@@ -77,7 +77,7 @@ it('detaches selections when a product is force deleted', function (): void {
     $product->forceDelete();
 
     expect(DB::table('attribute_value_selections')->where('attribute_value_id', $attributeValue->getKey())->exists())->toBeFalse();
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
 
 it('cleans up selections when a category is force deleted and its attribute values are destroyed', function (): void {
     $productCategory = ProductCategoryFactory::new()->create();
@@ -89,4 +89,4 @@ it('cleans up selections when a category is force deleted and its attribute valu
     $productCategory->forceDelete();
 
     expect(DB::table('attribute_value_selections')->where('attribute_value_id', $attributeValue->getKey())->exists())->toBeFalse();
-})->skip(fn(): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');
+})->skip(fn (): bool => ! AttributeIntegration::isAvailable(), 'vendra-attribute is not installed');

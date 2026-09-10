@@ -43,7 +43,7 @@ final class ProductPriceTable
             TextColumn::make('price')
                 ->alignStart()
                 ->label(__('vendra-product::attributes.price'))
-                ->state(fn(ProductPrice $record): string => $record->formattedPrice())
+                ->state(fn (ProductPrice $record): string => $record->formattedPrice())
                 ->summarize([Sum::make(), Average::make(), Range::make()]),
 
             TextColumn::make('created_at')
@@ -52,8 +52,8 @@ final class ProductPriceTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
 
             TextColumn::make('updated_at')
@@ -62,8 +62,8 @@ final class ProductPriceTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
         ];
 

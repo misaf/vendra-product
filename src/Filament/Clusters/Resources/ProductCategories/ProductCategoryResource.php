@@ -76,10 +76,10 @@ final class ProductCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => ListProductCategories::route('/'),
+            'index' => ListProductCategories::route('/'),
             'create' => CreateProductCategory::route('/create'),
-            'view'   => ViewProductCategory::route('/{record}'),
-            'edit'   => EditProductCategory::route('/{record}/edit'),
+            'view' => ViewProductCategory::route('/{record}'),
+            'edit' => EditProductCategory::route('/{record}/edit'),
         ];
     }
 
@@ -87,7 +87,7 @@ final class ProductCategoryResource extends Resource
     {
         $locale = self::getTranslatableLocales()[0] ?? app()->getLocale();
 
-        return is_string($locale) && '' !== $locale ? $locale : 'en';
+        return is_string($locale) && $locale !== '' ? $locale : 'en';
     }
 
     public static function form(Schema $schema): Schema

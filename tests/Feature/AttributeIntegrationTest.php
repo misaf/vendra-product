@@ -11,12 +11,13 @@ use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Contracts\AttributeResolver;
 
 it('persists morph types through stable aliases instead of class names', function (): void {
-    expect((new Product())->getMorphClass())->toBe('product')
-        ->and((new ProductCategory())->getMorphClass())->toBe('product_category');
+    expect((new Product)->getMorphClass())->toBe('product')
+        ->and((new ProductCategory)->getMorphClass())->toBe('product_category');
 });
 
 it('keeps attribute integration disabled without an attribute provider', function (): void {
-    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver
+    {
         public function available(): bool
         {
             return false;
@@ -34,14 +35,15 @@ it('keeps attribute integration disabled without an attribute provider', functio
     });
 
     expect(AttributeIntegration::isAvailable())->toBeFalse()
-        ->and(fn() => (new Product())->attributeValues())
+        ->and(fn () => (new Product)->attributeValues())
         ->toThrow(LogicException::class)
-        ->and(fn() => (new ProductCategory())->attributeValues())
+        ->and(fn () => (new ProductCategory)->attributeValues())
         ->toThrow(LogicException::class);
 });
 
 it('resolves category attribute values through the shared contract', function (): void {
-    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver
+    {
         public function available(): bool
         {
             return true;
@@ -60,12 +62,13 @@ it('resolves category attribute values through the shared contract', function ()
 
     expect(AttributeIntegration::isAvailable())->toBeTrue()
         ->and(AttributeIntegration::options())->toBe([1 => 'Weight (kg)'])
-        ->and((new ProductCategory())->attributeValues())->toBeInstanceOf(MorphMany::class)
-        ->and((new ProductCategory())->attributeValues()->getRelated())->toBeInstanceOf(Product::class);
+        ->and((new ProductCategory)->attributeValues())->toBeInstanceOf(MorphMany::class)
+        ->and((new ProductCategory)->attributeValues()->getRelated())->toBeInstanceOf(Product::class);
 });
 
 it('inherits product attribute values from the product category', function (): void {
-    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver
+    {
         public function available(): bool
         {
             return true;
@@ -82,19 +85,20 @@ it('inherits product attribute values from the product category', function (): v
         }
     });
 
-    $attributeValues = (new Product())->attributeValues();
+    $attributeValues = (new Product)->attributeValues();
 
     expect($attributeValues)->toBeInstanceOf(HasMany::class)
         ->and($attributeValues->getForeignKeyName())->toBe('attributable_id')
         ->and($attributeValues->getLocalKeyName())->toBe('product_category_id')
         ->and(collect($attributeValues->getQuery()->getQuery()->wheres)->contains(
-            fn(array $where): bool => 'attributable_type' === ($where['column'] ?? null)
-                && (new ProductCategory())->getMorphClass() === ($where['value'] ?? null),
+            fn (array $where): bool => 'attributable_type' === ($where['column'] ?? null)
+                && (new ProductCategory)->getMorphClass() === ($where['value'] ?? null),
         ))->toBeTrue();
 });
 
 it('selects attribute values through the attribute_value_selections pivot', function (): void {
-    app()->instance(AttributeResolver::class, new class implements AttributeResolver {
+    app()->instance(AttributeResolver::class, new class implements AttributeResolver
+    {
         public function available(): bool
         {
             return true;
@@ -111,7 +115,7 @@ it('selects attribute values through the attribute_value_selections pivot', func
         }
     });
 
-    $selectedAttributeValues = (new Product())->selectedAttributeValues();
+    $selectedAttributeValues = (new Product)->selectedAttributeValues();
 
     expect($selectedAttributeValues)->toBeInstanceOf(MorphToMany::class)
         ->and($selectedAttributeValues->getTable())->toBe('attribute_value_selections')

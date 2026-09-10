@@ -34,7 +34,7 @@ final class ProductInfolist
                 ->label(__('vendra-product::attributes.token')),
             TextEntry::make('latestProductPrice')
                 ->label(__('vendra-product::attributes.price'))
-                ->state(fn(Product $record): ?string => $record->latestProductPrice?->formattedPrice()),
+                ->state(fn (Product $record): ?string => $record->latestProductPrice?->formattedPrice()),
             TextEntry::make('quantity')->label(__('vendra-product::attributes.quantity')),
             TextEntry::make('stock_threshold')->label(__('vendra-product::attributes.stock_threshold')),
             IconEntry::make('available_soon')
@@ -46,7 +46,7 @@ final class ProductInfolist
                 ->label(__('vendra-product::attributes.in_stock')),
             TextEntry::make('description')
                 ->columnSpanFull()
-                ->formatStateUsing(fn(array|string|null $state): string => self::renderRichContent($state))
+                ->formatStateUsing(fn (array|string|null $state): string => self::renderRichContent($state))
                 ->html()
                 ->label(__('vendra-product::attributes.description')),
             SpatieMediaLibraryImageEntry::make('image')
@@ -59,7 +59,7 @@ final class ProductInfolist
 
         if (AttributeIntegration::isAvailable()) {
             $components[] = RepeatableEntry::make('selectedAttributeValues')
-                ->state(fn(Product $record): Collection => $record->selectedAttributeValues()->with('attribute')->get())
+                ->state(fn (Product $record): Collection => $record->selectedAttributeValues()->with('attribute')->get())
                 ->columnSpanFull()
                 ->columns(2)
                 ->label(__('vendra-product::attributes.attributes'))
@@ -89,8 +89,8 @@ final class ProductInfolist
             ->label(__("vendra-product::attributes.{$name}"))
             ->when(
                 app()->isLocale('fa'),
-                fn(TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                fn(TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
+                fn (TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                fn (TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
             );
     }
 }

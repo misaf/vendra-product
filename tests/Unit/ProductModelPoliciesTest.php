@@ -21,13 +21,13 @@ it('does not apply tenant ownership to the tenant-agnostic product price model',
 });
 
 it('defines translatable fields on product models', function (): void {
-    expect((new Product())->translatable)->toBe(['name', 'description', 'slug'])
-        ->and((new ProductCategory())->translatable)->toBe(['name', 'description', 'slug']);
+    expect((new Product)->translatable)->toBe(['name', 'description', 'slug'])
+        ->and((new ProductCategory)->translatable)->toBe(['name', 'description', 'slug']);
 });
 
 it('hides the tenant association from product serialization', function (): void {
-    expect((new Product())->getHidden())->toContain('tenant_id')
-        ->and((new ProductCategory())->getHidden())->toContain('tenant_id');
+    expect((new Product)->getHidden())->toContain('tenant_id')
+        ->and((new ProductCategory)->getHidden())->toContain('tenant_id');
 });
 
 it('defines policy permissions for the product resource', function (): void {

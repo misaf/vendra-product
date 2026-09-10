@@ -84,7 +84,7 @@ final class ProductCategory extends Model implements HasMedia, ShouldLogActivity
      * @var array{order_column_name: string, sort_when_creating: bool}
      */
     public array $sortable = [
-        'order_column_name'  => 'position',
+        'order_column_name' => 'position',
         'sort_when_creating' => true,
     ];
 
@@ -94,13 +94,13 @@ final class ProductCategory extends Model implements HasMedia, ShouldLogActivity
     protected function casts(): array
     {
         return [
-            'id'          => 'integer',
-            'tenant_id'   => 'integer',
-            'name'        => 'array',
+            'id' => 'integer',
+            'tenant_id' => 'integer',
+            'name' => 'array',
             'description' => 'array',
-            'slug'        => 'array',
-            'position'    => 'integer',
-            'active'      => 'boolean',
+            'slug' => 'array',
+            'position' => 'integer',
+            'active' => 'boolean',
         ];
     }
 
@@ -139,7 +139,7 @@ final class ProductCategory extends Model implements HasMedia, ShouldLogActivity
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
-        if (null === $attributeValueModel) {
+        if ($attributeValueModel === null) {
             throw new LogicException('Install misaf/vendra-attribute to use product category attribute values.');
         }
 

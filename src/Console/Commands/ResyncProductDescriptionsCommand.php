@@ -36,7 +36,7 @@ final class ResyncProductDescriptionsCommand extends Command
                     $convertedProducts++;
                     $convertedTranslations += count(array_filter(
                         $description,
-                        fn(mixed $translation, int|string $locale): bool => $translation !== ($originalDescription[$locale] ?? null),
+                        fn (mixed $translation, int|string $locale): bool => $translation !== ($originalDescription[$locale] ?? null),
                         ARRAY_FILTER_USE_BOTH,
                     ));
 
@@ -66,7 +66,7 @@ final class ResyncProductDescriptionsCommand extends Command
     private function resyncTranslations(array $translations): array
     {
         foreach ($translations as $locale => $translation) {
-            if ( ! is_string($translation) || blank($translation)) {
+            if (! is_string($translation) || blank($translation)) {
                 continue;
             }
 

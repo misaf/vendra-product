@@ -49,7 +49,7 @@ final class ProductForm
                             ->label(__('vendra-product::attributes.general'))
                             ->schema([
                                 Select::make('product_category_id')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.product_category_id'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.product_category_id'))
                                     ->columnSpanFull()
                                     ->label(__('vendra-product::navigation.product_category'))
                                     ->live()
@@ -58,7 +58,7 @@ final class ProductForm
                                     ->relationship('productCategory', 'name')
                                     ->required()
                                     ->searchable()
-                                    ->createOptionForm(fn(Schema $schema): Schema => ProductCategoryForm::configure($schema)),
+                                    ->createOptionForm(fn (Schema $schema): Schema => ProductCategoryForm::configure($schema)),
 
                                 TextInput::make('name')
                                     ->afterStateUpdated(function (Livewire $livewire, Get $get, Set $set, ?string $old, ?string $state): void {
@@ -75,13 +75,13 @@ final class ProductForm
                                     ->maxLength(255)
                                     ->required()
                                     ->unique(
-                                        column: fn(Livewire $livewire): string => 'name->' . self::activeFormLocale($livewire),
-                                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                                        column: fn (Livewire $livewire): string => 'name->'.self::activeFormLocale($livewire),
+                                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
                                             ->withoutTrashed(),
                                     ),
 
                                 TextInput::make('slug')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.slug'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.slug'))
                                     ->columnSpan(['lg' => 1])
                                     ->helperText(__('vendra-product::attributes.slug_helper_text'))
                                     ->label(__('vendra-product::attributes.slug'))
@@ -89,8 +89,8 @@ final class ProductForm
                                     ->maxLength(255)
                                     ->required()
                                     ->unique(
-                                        column: fn(Livewire $livewire): string => 'slug->' . self::activeFormLocale($livewire),
-                                        modifyRuleUsing: fn(Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
+                                        column: fn (Livewire $livewire): string => 'slug->'.self::activeFormLocale($livewire),
+                                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
                                             ->withoutTrashed(),
                                     ),
 
@@ -106,19 +106,19 @@ final class ProductForm
                             ->label(__('vendra-product::attributes.pricing'))
                             ->schema([
                                 Select::make('currency_code')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.currency_code'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.currency_code'))
                                     ->columnSpan(['lg' => 1])
-                                    ->default(fn(): string => ProductPrice::defaultCurrencyCode())
+                                    ->default(fn (): string => ProductPrice::defaultCurrencyCode())
                                     ->label(__('vendra-product::attributes.currency'))
                                     ->live()
                                     ->native(false)
-                                    ->options(fn(): array => ProductPrice::currencyOptions())
+                                    ->options(fn (): array => ProductPrice::currencyOptions())
                                     ->preload()
                                     ->required()
                                     ->searchable(),
 
                                 TextInput::make('price')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.price'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.price'))
                                     ->autofocus()
                                     ->columnSpan(['lg' => 1])
                                     ->label(__('vendra-product::attributes.price'))
@@ -129,7 +129,7 @@ final class ProductForm
                                     ->stripCharacters(','),
 
                                 TextInput::make('quantity')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.quantity'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.quantity'))
                                     ->columnSpan(['lg' => 1])
                                     ->label(__('vendra-product::attributes.quantity'))
                                     ->live(onBlur: true)
@@ -137,7 +137,7 @@ final class ProductForm
                                     ->required(),
 
                                 TextInput::make('stock_threshold')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.stock_threshold'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.stock_threshold'))
                                     ->columnSpan(['lg' => 1])
                                     ->helperText(__('vendra-product::attributes.stock_threshold_helper_text'))
                                     ->label(__('vendra-product::attributes.stock_threshold'))
@@ -145,7 +145,7 @@ final class ProductForm
                                     ->numeric(),
 
                                 Toggle::make('available_soon')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.available_soon'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.available_soon'))
                                     ->columnSpan(['lg' => 1])
                                     ->default(false)
                                     ->label(__('vendra-product::attributes.available_soon'))
@@ -157,7 +157,7 @@ final class ProductForm
                                     ]),
 
                                 DateTimePicker::make('availability_date')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.availability_date'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.availability_date'))
                                     ->closeOnDateSelection()
                                     ->columnSpan(['lg' => 1])
                                     ->displayFormat('Y-m-d H:i')
@@ -167,10 +167,10 @@ final class ProductForm
                                     ->minDate(now())
                                     ->native(false)
                                     ->seconds(false)
-                                    ->visible(fn(Get $get): bool => true === $get->boolean('available_soon')),
+                                    ->visible(fn (Get $get): bool => $get->boolean('available_soon') === true),
 
                                 Toggle::make('in_stock')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.in_stock'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.in_stock'))
                                     ->columnSpanFull()
                                     ->default(false)
                                     ->label(__('vendra-product::attributes.in_stock'))
@@ -188,7 +188,7 @@ final class ProductForm
                             ->label(__('vendra-product::attributes.photos'))
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('image')
-                                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.image'))
+                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.image'))
                                     ->collection(Product::MEDIA_COLLECTION)
                                     ->columnSpanFull()
                                     ->image()
@@ -209,7 +209,7 @@ final class ProductForm
     /** @return list<Tab> */
     private static function attributeTabs(): array
     {
-        if ( ! AttributeIntegration::isAvailable()) {
+        if (! AttributeIntegration::isAvailable()) {
             return [];
         }
 
@@ -220,12 +220,12 @@ final class ProductForm
                 ->label(__('vendra-product::attributes.attributes'))
                 ->schema([
                     CheckboxList::make('selectedAttributeValues')
-                        ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.selectedAttributeValues'))
+                        ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.selectedAttributeValues'))
                         ->relationship(
                             titleAttribute: 'value',
-                            modifyQueryUsing: fn(Builder $query, Get $get): Builder => $query
+                            modifyQueryUsing: fn (Builder $query, Get $get): Builder => $query
                                 ->with('attribute')
-                                ->where('attributable_type', (new ProductCategory())->getMorphClass())
+                                ->where('attributable_type', (new ProductCategory)->getMorphClass())
                                 ->where('attributable_id', $get->integer('product_category_id'))
                                 ->orderBy('position'),
                         )
@@ -235,7 +235,7 @@ final class ProductForm
                             $attributeName = (string) $record->getAttribute('attribute')?->getAttribute('name');
                             $value = (string) $record->getAttribute('value');
 
-                            return '' === $attributeName ? $value : "{$attributeName}: {$value}";
+                            return $attributeName === '' ? $value : "{$attributeName}: {$value}";
                         })
                         ->helperText(__('vendra-product::attributes.attribute_values_from_category'))
                         ->label(__('vendra-product::attributes.attributes'))
@@ -247,7 +247,7 @@ final class ProductForm
     /** @return list<Tab> */
     private static function tagTab(): array
     {
-        if ( ! TagIntegration::isAvailable()) {
+        if (! TagIntegration::isAvailable()) {
             return [];
         }
 
@@ -257,7 +257,7 @@ final class ProductForm
                 ->label(__('vendra-support::attributes.tags'))
                 ->schema([
                     SpatieTagsInput::make('tags')
-                        ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.tags'))
+                        ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.tags'))
                         ->label(__('vendra-support::attributes.tags'))
                         ->live()
                         ->type(Product::TAG_TYPE)

@@ -25,12 +25,12 @@ it('requires a product quantity', function (): void {
     livewire(CreateProduct::class)
         ->fillForm([
             'product_category_id' => $productCategory->getKey(),
-            'name'                => 'Product without quantity',
-            'slug'                => 'product-without-quantity',
-            'description'         => 'A product that must have a quantity.',
-            'currency_code'       => ProductPrice::defaultCurrencyCode(),
-            'price'               => 100,
-            'quantity'            => null,
+            'name' => 'Product without quantity',
+            'slug' => 'product-without-quantity',
+            'description' => 'A product that must have a quantity.',
+            'currency_code' => ProductPrice::defaultCurrencyCode(),
+            'price' => 100,
+            'quantity' => null,
         ])
         ->call('create')
         ->assertHasFormErrors(['quantity' => 'required'])

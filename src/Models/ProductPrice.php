@@ -51,10 +51,10 @@ final class ProductPrice extends Model implements ShouldLogActivity
     protected function casts(): array
     {
         return [
-            'id'            => 'integer',
-            'product_id'    => 'integer',
+            'id' => 'integer',
+            'product_id' => 'integer',
             'currency_code' => 'string',
-            'price'         => MoneyIntegerCast::class . ':currency_code',
+            'price' => MoneyIntegerCast::class.':currency_code',
         ];
     }
 
@@ -86,7 +86,7 @@ final class ProductPrice extends Model implements ShouldLogActivity
             }
         }
 
-        if ([] !== $options) {
+        if ($options !== []) {
             return $options;
         }
 
@@ -117,7 +117,7 @@ final class ProductPrice extends Model implements ShouldLogActivity
     {
         $factor = self::minorUnitsPerMajorUnit($currencyCode);
 
-        return 1 === $factor ? $minorUnits : $minorUnits / $factor;
+        return $factor === 1 ? $minorUnits : $minorUnits / $factor;
     }
 
     public static function supportsCurrencyCode(string $currencyCode): bool
@@ -136,7 +136,7 @@ final class ProductPrice extends Model implements ShouldLogActivity
 
             return $this->price->format();
         } catch (UnknownCurrencyException) {
-            return Number::format((int) $this->price->getAmount(), locale: 'en') . ' ' . $this->currency_code;
+            return Number::format((int) $this->price->getAmount(), locale: 'en').' '.$this->currency_code;
         }
     }
 
@@ -146,7 +146,7 @@ final class ProductPrice extends Model implements ShouldLogActivity
     protected function currencyCode(): Attribute
     {
         return Attribute::make(
-            set: fn(string $value): string => Str::upper($value),
+            set: fn (string $value): string => Str::upper($value),
         );
     }
 

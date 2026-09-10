@@ -18,7 +18,7 @@ final class ListProductCategories extends ListRecords
 
     public function getBreadcrumb(): string
     {
-        return self::$breadcrumb ?? __('filament-panels::resources/pages/list-records.breadcrumb') . ' ' . __('vendra-product::navigation.product_category');
+        return self::$breadcrumb ?? __('filament-panels::resources/pages/list-records.breadcrumb').' '.__('vendra-product::navigation.product_category');
     }
 
     protected function getHeaderActions(): array

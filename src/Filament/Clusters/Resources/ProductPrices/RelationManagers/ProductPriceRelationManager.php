@@ -43,7 +43,7 @@ final class ProductPriceRelationManager extends RelationManager
 
     public static function getBadge(Model $ownerRecord, string $pageClass): string
     {
-        if ( ! $ownerRecord instanceof Product) {
+        if (! $ownerRecord instanceof Product) {
             return (string) Number::format(0);
         }
 

@@ -26,7 +26,7 @@ final class CreateProduct extends CreateRecord
 
     public function getBreadcrumb(): string
     {
-        return self::$breadcrumb ?? __('filament-panels::resources/pages/create-record.breadcrumb') . ' ' . __('vendra-product::navigation.product');
+        return self::$breadcrumb ?? __('filament-panels::resources/pages/create-record.breadcrumb').' '.__('vendra-product::navigation.product');
     }
 
     protected function getHeaderActions(): array
@@ -41,17 +41,17 @@ final class CreateProduct extends CreateRecord
         $currencyCode = $data['currency_code'] ?? null;
         $price = $data['price'] ?? null;
 
-        if ( ! is_string($currencyCode) || '' === $currencyCode) {
+        if (! is_string($currencyCode) || $currencyCode === '') {
             throw new InvalidArgumentException('Invalid currency code provided.');
         }
 
-        if ( ! is_numeric($price)) {
+        if (! is_numeric($price)) {
             throw new InvalidArgumentException('Invalid price provided.');
         }
 
         $this->pricingData = [
             'currency_code' => $currencyCode,
-            'price'         => ProductPrice::toMinorUnits($currencyCode, (float) $price),
+            'price' => ProductPrice::toMinorUnits($currencyCode, (float) $price),
         ];
 
         unset($data['currency_code'], $data['price']);
@@ -64,7 +64,7 @@ final class CreateProduct extends CreateRecord
         /** @var Product|null $record */
         $record = $this->getRecord();
 
-        if (null === $record || null === $this->pricingData) {
+        if ($record === null || $this->pricingData === null) {
             throw new RuntimeException('Product or pricing data is missing after create operation.');
         }
 

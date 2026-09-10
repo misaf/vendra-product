@@ -17,7 +17,7 @@ final class ProductCategoryLifecycleObserver
 {
     public function forceDeleting(ProductCategory $productCategory): void
     {
-        if (null !== AttributeIntegration::valueModel()) {
+        if (AttributeIntegration::valueModel() !== null) {
             $productCategory->attributeValues()->forceDelete();
         }
     }

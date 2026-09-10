@@ -24,13 +24,13 @@ it('rejects availability dates in the past for products available soon', functio
     livewire(CreateProduct::class)
         ->fillForm([
             'product_category_id' => $productCategory->getKey(),
-            'name'                => 'Upcoming product',
-            'slug'                => 'upcoming-product',
-            'description'         => 'A product that arrives later.',
-            'currency_code'       => ProductPrice::defaultCurrencyCode(),
-            'price'               => 100,
-            'available_soon'      => true,
-            'availability_date'   => now()->subDay()->format('Y-m-d H:i:s'),
+            'name' => 'Upcoming product',
+            'slug' => 'upcoming-product',
+            'description' => 'A product that arrives later.',
+            'currency_code' => ProductPrice::defaultCurrencyCode(),
+            'price' => 100,
+            'available_soon' => true,
+            'availability_date' => now()->subDay()->format('Y-m-d H:i:s'),
         ])
         ->call('create')
         ->assertHasFormErrors(['availability_date']);

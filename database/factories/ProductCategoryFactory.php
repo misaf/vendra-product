@@ -19,9 +19,9 @@ final class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'        => ['en' => fake()->sentences(1, true)],
+            'name' => ['en' => fake()->sentences(1, true)],
             'description' => ['en' => fake()->realTextBetween(100, 200)],
-            'active'      => fake()->boolean(80),
+            'active' => fake()->boolean(80),
         ];
     }
 
@@ -30,22 +30,22 @@ final class ProductCategoryFactory extends Factory
      */
     public function forTenant(Model|int $tenant): static
     {
-        if ( ! TenantAwareness::enabled()) {
+        if (! TenantAwareness::enabled()) {
             return $this;
         }
 
-        return $this->state(fn(): array => [
+        return $this->state(fn (): array => [
             'tenant_id' => $tenant instanceof Model ? $tenant->getKey() : $tenant,
         ]);
     }
 
     public function active(): static
     {
-        return $this->state(fn(): array => ['active' => true]);
+        return $this->state(fn (): array => ['active' => true]);
     }
 
     public function inactive(): static
     {
-        return $this->state(fn(): array => ['active' => false]);
+        return $this->state(fn (): array => ['active' => false]);
     }
 }

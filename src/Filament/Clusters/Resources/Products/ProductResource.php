@@ -47,7 +47,7 @@ final class ProductResource extends Resource
     public static function getGloballySearchableAttributes(): array
     {
         return [
-            ...static::getTranslatedGloballySearchableAttributes(),
+            ...self::getTranslatedGloballySearchableAttributes(),
             'token',
         ];
     }
@@ -95,10 +95,10 @@ final class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => ListProducts::route('/'),
+            'index' => ListProducts::route('/'),
             'create' => CreateProduct::route('/create'),
-            'view'   => ViewProduct::route('/{record}'),
-            'edit'   => EditProduct::route('/{record}/edit'),
+            'view' => ViewProduct::route('/{record}'),
+            'edit' => EditProduct::route('/{record}/edit'),
         ];
     }
 
@@ -106,7 +106,7 @@ final class ProductResource extends Resource
     {
         $locale = self::getTranslatableLocales()[0] ?? app()->getLocale();
 
-        return is_string($locale) && '' !== $locale ? $locale : 'en';
+        return is_string($locale) && $locale !== '' ? $locale : 'en';
     }
 
     public static function form(Schema $schema): Schema
@@ -126,7 +126,7 @@ final class ProductResource extends Resource
 
     private static function product(Model $record): Product
     {
-        if ( ! $record instanceof Product) {
+        if (! $record instanceof Product) {
             throw new InvalidArgumentException('Product resources require a Product record.');
         }
 

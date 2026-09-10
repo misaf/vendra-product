@@ -82,15 +82,15 @@ final class ProductTable
                     $productCategory = $record->productCategory;
                     $stockThreshold = $record->getAttribute('stock_threshold');
                     $badges = [
-                        __('vendra-product::attributes.quantity') . ': ' . (
+                        __('vendra-product::attributes.quantity').': '.(
                             is_numeric($record->quantity) ? Number::format((int) $record->quantity) : '—'
                         ),
-                        __('vendra-product::attributes.stock_threshold') . ': ' . (
+                        __('vendra-product::attributes.stock_threshold').': '.(
                             is_numeric($stockThreshold) ? Number::format((int) $stockThreshold) : '—'
                         ),
                     ];
 
-                    if (null !== $productCategory) {
+                    if ($productCategory !== null) {
                         array_unshift(
                             $badges,
                             static::translatedAttribute($productCategory, 'name', $livewire),
@@ -105,7 +105,7 @@ final class ProductTable
             TextColumn::make('description')
                 ->label(__('vendra-product::attributes.description'))
                 ->icon(Heroicon::DocumentText)
-                ->state(fn(Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
+                ->state(fn (Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
                 ->toggleable(isToggledHiddenByDefault: true),
 
             TextColumn::make('slug')
@@ -130,7 +130,7 @@ final class ProductTable
 
             TextColumn::make('latestProductPrice.price')
                 ->label(__('vendra-product::attributes.price'))
-                ->state(fn(Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
+                ->state(fn (Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
                 ->action(SetColumnPriceAction::make())
                 ->summarize([Sum::make(), Average::make(), Range::make()]),
 
@@ -150,8 +150,8 @@ final class ProductTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
 
             TextColumn::make('created_at')
@@ -160,8 +160,8 @@ final class ProductTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
 
             TextColumn::make('updated_at')
@@ -170,8 +170,8 @@ final class ProductTable
                 ->sinceTooltip()
                 ->when(
                     app()->isLocale('fa'),
-                    fn(TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn(TextColumn $column) => $column->dateTime('Y-m-d H:i')
+                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
         ];
 
@@ -195,7 +195,7 @@ final class ProductTable
             ->emptyStateHeading(__('vendra-product::tables.empty_state.heading.products'))
             ->emptyStateDescription(__('vendra-product::tables.empty_state.description.products'))
             ->emptyStateIcon(Heroicon::OutlinedCube)
-            ->modifyQueryUsing(fn(Builder $query): Builder => $query->with('productCategory'))
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('productCategory'))
             ->columns($columns)
             ->filters(
                 [

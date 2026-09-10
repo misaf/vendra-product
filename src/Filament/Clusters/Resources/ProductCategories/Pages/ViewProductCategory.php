@@ -18,7 +18,7 @@ final class ViewProductCategory extends ViewRecord
 
     public function getBreadcrumb(): string
     {
-        return self::$breadcrumb ?? __('filament-panels::resources/pages/view-record.breadcrumb') . ' ' . __('vendra-product::navigation.product_category');
+        return self::$breadcrumb ?? __('filament-panels::resources/pages/view-record.breadcrumb').' '.__('vendra-product::navigation.product_category');
     }
 
     protected function getHeaderActions(): array

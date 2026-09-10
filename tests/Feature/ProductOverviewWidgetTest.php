@@ -75,7 +75,7 @@ it('shows tenant-scoped product inventory metrics', function (): void {
         ->invoke(app(ProductOverviewWidget::class));
 
     expect(array_map(
-        static fn(Stat $stat): mixed => $stat->getIcon(),
+        static fn (Stat $stat): mixed => $stat->getIcon(),
         $stats,
     ))->each->toBe(Heroicon::OutlinedSquares2x2);
 });

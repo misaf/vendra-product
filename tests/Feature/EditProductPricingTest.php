@@ -25,7 +25,7 @@ it('remains editable for products that do not have a price row yet', function ()
         ->assertOk()
         ->fillForm([
             'currency_code' => ProductPrice::defaultCurrencyCode(),
-            'price'         => 1500,
+            'price' => 1500,
         ])
         ->call('save')
         ->assertHasNoFormErrors();
@@ -38,7 +38,7 @@ it('reuses the existing price row when pricing is unchanged', function (): void 
 
     $product->productPrices()->create([
         'currency_code' => ProductPrice::defaultCurrencyCode(),
-        'price'         => 1500,
+        'price' => 1500,
     ]);
 
     livewire(EditProduct::class, ['record' => $product->getKey()])

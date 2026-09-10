@@ -22,7 +22,7 @@ final class ViewProduct extends ViewRecord
 
     public function getBreadcrumb(): string
     {
-        return self::$breadcrumb ?? __('filament-panels::resources/pages/view-record.breadcrumb') . ' ' . __('vendra-product::navigation.product');
+        return self::$breadcrumb ?? __('filament-panels::resources/pages/view-record.breadcrumb').' '.__('vendra-product::navigation.product');
     }
 
     protected function getHeaderActions(): array
@@ -38,7 +38,7 @@ final class ViewProduct extends ViewRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        if ( ! array_key_exists('product_category_id', $data)) {
+        if (! array_key_exists('product_category_id', $data)) {
             return $data;
         }
 
@@ -48,7 +48,7 @@ final class ViewProduct extends ViewRecord
         /** @var ProductPrice|null $latestProductPrice */
         $latestProductPrice = $record->latestProductPrice()->first();
 
-        if ( ! $latestProductPrice) {
+        if (! $latestProductPrice) {
             throw new RuntimeException('Product price is required before viewing this product.');
         }
 

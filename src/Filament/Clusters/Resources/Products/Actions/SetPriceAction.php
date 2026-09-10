@@ -38,10 +38,10 @@ final class SetPriceAction extends BulkAction
         $this->schema([
             Select::make('currency_code')
                 ->columnSpanFull()
-                ->default(fn(): string => ProductPrice::defaultCurrencyCode())
+                ->default(fn (): string => ProductPrice::defaultCurrencyCode())
                 ->label(__('vendra-product::attributes.currency'))
                 ->native(false)
-                ->options(fn(): array => ProductPrice::currencyOptions())
+                ->options(fn (): array => ProductPrice::currencyOptions())
                 ->preload()
                 ->required()
                 ->searchable(),
@@ -61,11 +61,11 @@ final class SetPriceAction extends BulkAction
             $currencyCode = $data['currency_code'] ?? null;
             $price = $data['price'] ?? null;
 
-            if ( ! is_string($currencyCode) || '' === $currencyCode) {
+            if (! is_string($currencyCode) || $currencyCode === '') {
                 throw new InvalidArgumentException('Invalid currency code provided.');
             }
 
-            if ( ! is_numeric($price)) {
+            if (! is_numeric($price)) {
                 throw new InvalidArgumentException('Invalid price provided.');
             }
 
@@ -73,13 +73,13 @@ final class SetPriceAction extends BulkAction
 
             $this->process(static function (Collection $records) use ($currencyCode, $priceMinorUnits): void {
                 foreach ($records as $record) {
-                    if ( ! $record instanceof Product) {
+                    if (! $record instanceof Product) {
                         continue;
                     }
 
                     $record->productPrices()->create([
                         'currency_code' => $currencyCode,
-                        'price'         => $priceMinorUnits,
+                        'price' => $priceMinorUnits,
                     ]);
                 }
             });

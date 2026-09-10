@@ -30,7 +30,7 @@ final class ProductCategoryInfolist
                 ->label(__('vendra-product::attributes.active')),
             TextEntry::make('description')
                 ->columnSpanFull()
-                ->formatStateUsing(fn(array|string|null $state): string => self::renderRichContent($state))
+                ->formatStateUsing(fn (array|string|null $state): string => self::renderRichContent($state))
                 ->html()
                 ->label(__('vendra-product::attributes.description')),
             SpatieMediaLibraryImageEntry::make('image')
@@ -43,7 +43,7 @@ final class ProductCategoryInfolist
 
         if (AttributeIntegration::isAvailable()) {
             $components[] = RepeatableEntry::make('attributeValues')
-                ->state(fn(ProductCategory $record): Collection => $record->attributeValues()->with('attribute')->get())
+                ->state(fn (ProductCategory $record): Collection => $record->attributeValues()->with('attribute')->get())
                 ->columnSpanFull()
                 ->columns(2)
                 ->label(__('vendra-product::attributes.attributes'))
@@ -66,8 +66,8 @@ final class ProductCategoryInfolist
             ->label(__("vendra-product::attributes.{$name}"))
             ->when(
                 app()->isLocale('fa'),
-                fn(TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                fn(TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
+                fn (TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
+                fn (TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
             );
     }
 }

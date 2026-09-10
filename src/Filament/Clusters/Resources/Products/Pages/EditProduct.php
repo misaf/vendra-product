@@ -28,7 +28,7 @@ final class EditProduct extends EditRecord
 
     public function getBreadcrumb(): string
     {
-        return self::$breadcrumb ?? __('filament-panels::resources/pages/edit-record.breadcrumb') . ' ' . __('vendra-product::navigation.product');
+        return self::$breadcrumb ?? __('filament-panels::resources/pages/edit-record.breadcrumb').' '.__('vendra-product::navigation.product');
     }
 
     protected function getHeaderActions(): array
@@ -46,7 +46,7 @@ final class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        if ( ! array_key_exists('product_category_id', $data)) {
+        if (! array_key_exists('product_category_id', $data)) {
             return $data;
         }
 
@@ -56,7 +56,7 @@ final class EditProduct extends EditRecord
         /** @var ProductPrice|null $latestProductPrice */
         $latestProductPrice = $record->latestProductPrice()->first();
 
-        if ( ! $latestProductPrice) {
+        if (! $latestProductPrice) {
             return $data;
         }
 
@@ -71,24 +71,24 @@ final class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if ( ! array_key_exists('currency_code', $data) && ! array_key_exists('price', $data)) {
+        if (! array_key_exists('currency_code', $data) && ! array_key_exists('price', $data)) {
             return $data;
         }
 
         $currencyCode = $data['currency_code'] ?? null;
         $price = $data['price'] ?? null;
 
-        if ( ! is_string($currencyCode) || '' === $currencyCode) {
+        if (! is_string($currencyCode) || $currencyCode === '') {
             throw new InvalidArgumentException('Invalid currency code provided.');
         }
 
-        if ( ! is_numeric($price)) {
+        if (! is_numeric($price)) {
             throw new InvalidArgumentException('Invalid price provided.');
         }
 
         $this->pricingData = [
             'currency_code' => $currencyCode,
-            'price'         => ProductPrice::toMinorUnits($currencyCode, (float) $price),
+            'price' => ProductPrice::toMinorUnits($currencyCode, (float) $price),
         ];
 
         unset($data['currency_code'], $data['price']);
@@ -98,7 +98,7 @@ final class EditProduct extends EditRecord
 
     protected function afterSave(): void
     {
-        if (null === $this->pricingData) {
+        if ($this->pricingData === null) {
             return;
         }
 
@@ -108,7 +108,7 @@ final class EditProduct extends EditRecord
         $record->productPrices()->firstOrCreate(
             [
                 'currency_code' => $this->pricingData['currency_code'],
-                'price'         => $this->pricingData['price'],
+                'price' => $this->pricingData['price'],
             ]
         );
     }

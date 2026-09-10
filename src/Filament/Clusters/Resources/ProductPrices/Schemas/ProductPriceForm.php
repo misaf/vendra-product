@@ -18,19 +18,19 @@ final class ProductPriceForm
         return $schema
             ->components([
                 Select::make('currency_code')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.currency_code'))
+                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.currency_code'))
                     ->columnSpanFull()
-                    ->default(fn(): string => ProductPrice::defaultCurrencyCode())
+                    ->default(fn (): string => ProductPrice::defaultCurrencyCode())
                     ->label(__('vendra-product::attributes.currency'))
                     ->live()
                     ->native(false)
-                    ->options(fn(): array => ProductPrice::currencyOptions())
+                    ->options(fn (): array => ProductPrice::currencyOptions())
                     ->preload()
                     ->required()
                     ->searchable(),
 
                 TextInput::make('price')
-                    ->afterStateUpdated(fn(Livewire $livewire) => $livewire->validateOnly('data.price'))
+                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.price'))
                     ->autofocus()
                     ->columnSpanFull()
                     ->label(__('vendra-product::attributes.price'))

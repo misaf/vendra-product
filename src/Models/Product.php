@@ -96,7 +96,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
      * @var array{order_column_name: string, sort_when_creating: bool}
      */
     public array $sortable = [
-        'order_column_name'  => 'position',
+        'order_column_name' => 'position',
         'sort_when_creating' => true,
     ];
 
@@ -106,19 +106,19 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     protected function casts(): array
     {
         return [
-            'id'                  => 'integer',
-            'tenant_id'           => 'integer',
+            'id' => 'integer',
+            'tenant_id' => 'integer',
             'product_category_id' => 'integer',
-            'name'                => 'array',
-            'description'         => 'array',
-            'slug'                => 'array',
-            'token'               => 'string',
-            'quantity'            => 'integer',
-            'stock_threshold'     => 'integer',
-            'in_stock'            => 'boolean',
-            'position'            => 'integer',
-            'available_soon'      => 'boolean',
-            'availability_date'   => 'datetime',
+            'name' => 'array',
+            'description' => 'array',
+            'slug' => 'array',
+            'token' => 'string',
+            'quantity' => 'integer',
+            'stock_threshold' => 'integer',
+            'in_stock' => 'boolean',
+            'position' => 'integer',
+            'available_soon' => 'boolean',
+            'availability_date' => 'datetime',
         ];
     }
 
@@ -139,7 +139,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
      */
     public function detachStaleAttributeValueSelections(): void
     {
-        if (null === AttributeIntegration::valueModel()) {
+        if (AttributeIntegration::valueModel() === null) {
             return;
         }
 
@@ -148,7 +148,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
         $staleAttributeValueIds = $selectedAttributeValues
             ->where(function (Builder $query): void {
                 $query
-                    ->where('attributable_type', '!=', (new ProductCategory())->getMorphClass())
+                    ->where('attributable_type', '!=', (new ProductCategory)->getMorphClass())
                     ->orWhere('attributable_id', '!=', $this->product_category_id);
             })
             ->pluck($selectedAttributeValues->getRelated()->getQualifiedKeyName());
@@ -175,7 +175,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
                 $token .= $tokenCharacters[random_int(0, $maxIndex)];
             }
 
-            if ( ! self::withTrashed()->where('token', $token)->exists()) {
+            if (! self::withTrashed()->where('token', $token)->exists()) {
                 return $token;
             }
         }
@@ -187,7 +187,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     {
         $tokenCharacters = Config::string('vendra-product.token_generator_characters', '123456789');
 
-        return '' === $tokenCharacters ? '123456789' : $tokenCharacters;
+        return $tokenCharacters === '' ? '123456789' : $tokenCharacters;
     }
 
     private static function tokenLength(): int
@@ -245,13 +245,13 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
-        if (null === $attributeValueModel) {
+        if ($attributeValueModel === null) {
             throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
         }
 
         return $this
             ->hasMany($attributeValueModel, 'attributable_id', 'product_category_id')
-            ->where('attributable_type', (new ProductCategory())->getMorphClass());
+            ->where('attributable_type', (new ProductCategory)->getMorphClass());
     }
 
     /**
@@ -263,7 +263,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     {
         $attributeValueModel = AttributeIntegration::valueModel();
 
-        if (null === $attributeValueModel) {
+        if ($attributeValueModel === null) {
             throw new LogicException('Install misaf/vendra-attribute to use product attribute values.');
         }
 
