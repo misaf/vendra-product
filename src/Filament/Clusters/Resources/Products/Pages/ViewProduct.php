@@ -8,7 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\ViewRecord\Concerns\Translatable;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
@@ -30,7 +30,7 @@ final class ViewProduct extends ViewRecord
         return [
             EditAction::make(),
 
-            DuplicateProductAction::make(),
+            DuplicateProductTableAction::make(),
 
             LocaleSwitcher::make(),
         ];

@@ -13,6 +13,7 @@ use Filament\Support\RawJs;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
+use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 
@@ -74,10 +75,7 @@ final class SetPriceAction extends BulkAction
                         continue;
                     }
 
-                    $record->productPrices()->create([
-                        'currency_code' => $currencyCode,
-                        'price' => $priceMinorUnits,
-                    ]);
+                    resolve(SetProductPriceAction::class)->execute($record, $currencyCode, $priceMinorUnits);
                 }
             });
 

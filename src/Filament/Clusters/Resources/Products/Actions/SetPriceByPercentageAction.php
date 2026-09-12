@@ -11,6 +11,7 @@ use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
+use Misaf\VendraProduct\Actions\ApplyProductPricePercentageAction;
 use Misaf\VendraProduct\Models\Product;
 
 final class SetPriceByPercentageAction extends BulkAction
@@ -54,24 +55,7 @@ final class SetPriceByPercentageAction extends BulkAction
                         continue;
                     }
 
-                    $latestProductPrice = $record->latestProductPrice;
-
-                    if ($latestProductPrice === null) {
-                        continue;
-                    }
-
-                    $latestPriceAmount = (int) $latestProductPrice->price->getAmount();
-
-                    if ($percent < 0) {
-                        $newPrice = $latestPriceAmount * (1 - abs((int) $percent) / 100);
-                    } else {
-                        $newPrice = $latestPriceAmount * (1 + (float) $percent / 100);
-                    }
-
-                    $record->productPrices()->create([
-                        'currency_code' => $latestProductPrice->currency_code,
-                        'price' => (int) round($newPrice),
-                    ]);
+                    resolve(ApplyProductPricePercentageAction::class)->execute($record, (float) $percent);
                 }
             });
 

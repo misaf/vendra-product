@@ -8,6 +8,7 @@ use Filament\Actions\BulkAction;
 use Filament\Actions\Concerns\CanCustomizeProcess;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Collection;
+use Misaf\VendraProduct\Actions\SetProductStockAction;
 use Misaf\VendraProduct\Models\Product;
 
 final class InStockAction extends BulkAction
@@ -37,11 +38,7 @@ final class InStockAction extends BulkAction
                         continue;
                     }
 
-                    $record->update([
-                        'in_stock' => true,
-                        'available_soon' => false,
-                        'availability_date' => null,
-                    ]);
+                    resolve(SetProductStockAction::class)->execute($record, true);
                 }
             });
 

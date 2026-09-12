@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
@@ -37,7 +37,7 @@ final class EditProduct extends EditRecord
         return [
             ViewAction::make(),
 
-            DuplicateProductAction::make(),
+            DuplicateProductTableAction::make(),
 
             DeleteAction::make(),
 

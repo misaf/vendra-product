@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetColumnPriceAction;
@@ -236,7 +236,7 @@ final class ProductTable
 
                     EditAction::make(),
 
-                    DuplicateProductAction::make(),
+                    DuplicateProductTableAction::make(),
 
                     DeleteAction::make(),
                 ]),

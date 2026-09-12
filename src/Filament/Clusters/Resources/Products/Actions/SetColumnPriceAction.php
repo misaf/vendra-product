@@ -9,6 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\RawJs;
 use Illuminate\Support\Arr;
+use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 
@@ -42,10 +43,11 @@ final class SetColumnPriceAction
             ->action(function (Product $record, array $data): void {
                 $currencyCode = (string) Arr::get($data, 'currency_code');
 
-                $record->productPrices()->create([
-                    'currency_code' => $currencyCode,
-                    'price' => ProductPrice::toMinorUnits($currencyCode, (float) Arr::get($data, 'price')),
-                ]);
+                resolve(SetProductPriceAction::class)->execute(
+                    $record,
+                    $currencyCode,
+                    ProductPrice::toMinorUnits($currencyCode, (float) Arr::get($data, 'price')),
+                );
             });
     }
 }
