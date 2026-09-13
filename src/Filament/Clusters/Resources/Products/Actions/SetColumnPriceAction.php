@@ -37,6 +37,7 @@ final class SetColumnPriceAction
                     ->live(onBlur: true)
                     ->mask(RawJs::make('$money($input)'))
                     ->numeric()
+                    ->minValue(0)
                     ->required()
                     ->stripCharacters(','),
             ])

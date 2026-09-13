@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Actions;
 
-use Illuminate\Support\Facades\Validator;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 
@@ -12,13 +11,12 @@ final readonly class ApplyProductPricePercentageAction
 {
     public function __construct(private SetProductPriceAction $setProductPrice) {}
 
+    /**
+     * The caller keeps the percentage at or above -100 so the new price is
+     * never negative.
+     */
     public function execute(Product $product, float $percent): ?ProductPrice
     {
-        Validator::make(
-            ['percent' => $percent],
-            ['percent' => ['required', 'numeric']],
-        )->validate();
-
         $latestProductPrice = $product->latestProductPrice;
 
         if (! $latestProductPrice instanceof ProductPrice) {

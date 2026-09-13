@@ -34,9 +34,7 @@ final class DuplicateProductTableAction extends ReplicateAction
         $this->mutateRecordDataUsing(function (array $data): array {
             $record = $this->getRecord();
 
-            if (! $record instanceof Product) {
-                throw new InvalidArgumentException('Duplicate action requires a product record.');
-            }
+            throw_unless($record instanceof Product, InvalidArgumentException::class, 'Duplicate action requires a product record.');
 
             return resolve(BuildProductReplicaDataAction::class)->execute($record, $data);
         });

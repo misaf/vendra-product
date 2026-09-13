@@ -55,6 +55,7 @@ final class SetPriceAction extends BulkAction
                 ->live(onBlur: true)
                 ->mask(RawJs::make('$money($input)'))
                 ->numeric()
+                ->minValue(0)
                 ->required()
                 ->stripCharacters(','),
         ]);

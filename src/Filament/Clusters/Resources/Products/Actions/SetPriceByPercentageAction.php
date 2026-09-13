@@ -40,6 +40,7 @@ final class SetPriceByPercentageAction extends BulkAction
                 ->columnSpanFull()
                 ->label(__('vendra-product::actions.percentage'))
                 ->numeric()
+                ->minValue(-100)
                 ->required()
                 ->stripCharacters(','),
         ]);
