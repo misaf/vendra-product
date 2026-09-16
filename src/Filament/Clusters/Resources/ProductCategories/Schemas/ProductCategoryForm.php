@@ -6,7 +6,6 @@ namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Sche
 
 use Closure;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -16,6 +15,7 @@ use Illuminate\Support\Arr;
 use Misaf\VendraMultimedia\Filament\Forms\Components\ModelImageUpload;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Filament\Forms\Components\DescriptionRichEditor;
 use Misaf\VendraSupport\Filament\Forms\Components\IsActiveToggle;
 use Misaf\VendraSupport\Filament\Forms\Components\SluggableNameInput;
 use Misaf\VendraSupport\Filament\Forms\Components\SlugInput;
@@ -32,11 +32,7 @@ final class ProductCategoryForm
                 SlugInput::make()
                     ->uniqueWithinTenant(perLocale: true),
 
-                RichEditor::make('description')
-                    ->columnSpanFull()
-                    ->json()
-                    ->label(__('vendra-product::attributes.description'))
-                    ->required(),
+                DescriptionRichEditor::make(),
 
                 ModelImageUpload::make()
                     ->collection(ProductCategory::MEDIA_COLLECTION),

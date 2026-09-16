@@ -14,9 +14,12 @@ use Misaf\VendraMultimedia\Filament\Infolists\Components\ModelImageEntry;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
+use Misaf\VendraSupport\Filament\Infolists\Components\CreatedAtEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\DateTimeEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\DescriptionEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\NameEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\SlugEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\UpdatedAtEntry;
 use Misaf\VendraTagger\Filament\Infolists\Components\ModelTagsEntry;
 
 final class ProductInfolist
@@ -40,7 +43,8 @@ final class ProductInfolist
             IconEntry::make('available_soon')
                 ->boolean()
                 ->label(__('vendra-product::attributes.available_soon')),
-            self::dateEntry('availability_date'),
+            DateTimeEntry::make('availability_date')
+                ->label(__('vendra-product::attributes.availability_date')),
             IconEntry::make('in_stock')
                 ->boolean()
                 ->label(__('vendra-product::attributes.in_stock')),
@@ -48,8 +52,8 @@ final class ProductInfolist
                 ->richContent(),
             ModelImageEntry::make()
                 ->collection(Product::MEDIA_COLLECTION),
-            self::dateEntry('created_at'),
-            self::dateEntry('updated_at'),
+            CreatedAtEntry::make(),
+            UpdatedAtEntry::make(),
         ];
 
         if (AttributeIntegration::isAvailable()) {
@@ -74,16 +78,5 @@ final class ProductInfolist
         return $schema
             ->components($components)
             ->columns(2);
-    }
-
-    private static function dateEntry(string $name): TextEntry
-    {
-        return TextEntry::make($name)
-            ->label(__("vendra-product::attributes.{$name}"))
-            ->when(
-                app()->isLocale('fa'),
-                fn (TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                fn (TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
-            );
     }
 }

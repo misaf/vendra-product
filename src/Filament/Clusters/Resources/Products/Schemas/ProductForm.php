@@ -6,7 +6,6 @@ namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas;
 
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -26,6 +25,7 @@ use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
+use Misaf\VendraSupport\Filament\Forms\Components\DescriptionRichEditor;
 use Misaf\VendraSupport\Filament\Forms\Components\SluggableNameInput;
 use Misaf\VendraSupport\Filament\Forms\Components\SlugInput;
 use Misaf\VendraTagger\Filament\Forms\Components\ModelTagsInput;
@@ -61,11 +61,7 @@ final class ProductForm
                                 SlugInput::make()
                                     ->uniqueWithinTenant(perLocale: true),
 
-                                RichEditor::make('description')
-                                    ->columnSpanFull()
-                                    ->json()
-                                    ->label(__('vendra-product::attributes.description'))
-                                    ->required(),
+                                DescriptionRichEditor::make(),
                             ]),
                         Tab::make('pricing')
                             ->columns(2)

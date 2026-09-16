@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraMultimedia\Filament\Infolists\Components\ModelImageEntry;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
+use Misaf\VendraSupport\Filament\Infolists\Components\CreatedAtEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\DescriptionEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\IsActiveEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\NameEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\SlugEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\UpdatedAtEntry;
 
 final class ProductCategoryInfolist
 {
@@ -30,8 +32,8 @@ final class ProductCategoryInfolist
                 ->richContent(),
             ModelImageEntry::make()
                 ->collection(ProductCategory::MEDIA_COLLECTION),
-            self::dateEntry('created_at'),
-            self::dateEntry('updated_at'),
+            CreatedAtEntry::make(),
+            UpdatedAtEntry::make(),
         ];
 
         if (AttributeIntegration::isAvailable()) {
@@ -51,16 +53,5 @@ final class ProductCategoryInfolist
         return $schema
             ->components($components)
             ->columns(2);
-    }
-
-    private static function dateEntry(string $name): TextEntry
-    {
-        return TextEntry::make($name)
-            ->label(__("vendra-product::attributes.{$name}"))
-            ->when(
-                app()->isLocale('fa'),
-                fn (TextEntry $entry): TextEntry => $entry->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                fn (TextEntry $entry): TextEntry => $entry->dateTime('Y-m-d H:i'),
-            );
     }
 }

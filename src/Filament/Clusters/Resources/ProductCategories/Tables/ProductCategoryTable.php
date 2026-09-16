@@ -20,7 +20,6 @@ use Filament\Tables\Columns\Layout\Component as LayoutComponent;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
-use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
@@ -31,11 +30,13 @@ use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Filament\Tables\Columns\CreatedAtColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\DescriptionColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\IsActiveToggleColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\RowIndexColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\SlugColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\UpdatedAtColumn;
 use Misaf\VendraSupport\Filament\Tables\Filters\QueryBuilder\Constraints\IsActiveConstraint;
+use Misaf\VendraSupport\Filament\Tables\Filters\QueryBuilder\Constraints\PositionConstraint;
 
 final class ProductCategoryTable
 {
@@ -65,11 +66,8 @@ final class ProductCategoryTable
                 ])
                 ->suffix(''),
 
-            TextColumn::make('description')
-                ->label(__('vendra-product::attributes.description'))
-                ->icon(Heroicon::DocumentText)
-                ->state(fn (ProductCategory $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
-                ->toggleable(isToggledHiddenByDefault: true),
+            DescriptionColumn::make()
+                ->state(fn (ProductCategory $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire)),
 
             SlugColumn::make(),
 
@@ -101,7 +99,7 @@ final class ProductCategoryTable
                         ->constraints([
                             IsActiveConstraint::make(),
 
-                            NumberConstraint::make('position'),
+                            PositionConstraint::make(),
                         ]),
                 ],
                 layout: FiltersLayout::AboveContentCollapsible,

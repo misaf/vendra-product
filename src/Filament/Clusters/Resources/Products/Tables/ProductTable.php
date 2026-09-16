@@ -46,9 +46,12 @@ use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Filament\Tables\Columns\CreatedAtColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\DescriptionColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\NameColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\RowIndexColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\SlugColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\UpdatedAtColumn;
+use Misaf\VendraSupport\Filament\Tables\Filters\QueryBuilder\Constraints\PositionConstraint;
 use Misaf\VendraTagger\Filament\Tables\Columns\ModelTagsColumn;
 
 final class ProductTable
@@ -68,10 +71,7 @@ final class ProductTable
                 ->collection(Product::MEDIA_COLLECTION)
                 ->defaultImageUrl(fn (Product $record, Livewire $livewire): string => self::defaultAvatarImageUrl(self::translatedAttribute($record, 'name', $livewire))),
 
-            TextColumn::make('name')
-                ->alignStart()
-                ->label(__('vendra-product::attributes.name'))
-                ->icon(Heroicon::Tag)
+            NameColumn::make()
                 ->description(function (Product $record, Livewire $livewire): View {
                     $productCategory = $record->productCategory;
                     $stockThreshold = $record->getAttribute('stock_threshold');
@@ -96,11 +96,8 @@ final class ProductTable
                     ]);
                 }),
 
-            TextColumn::make('description')
-                ->label(__('vendra-product::attributes.description'))
-                ->icon(Heroicon::DocumentText)
-                ->state(fn (Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
-                ->toggleable(isToggledHiddenByDefault: true),
+            DescriptionColumn::make()
+                ->state(fn (Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire)),
 
             SlugColumn::make(),
 
@@ -199,7 +196,7 @@ final class ProductTable
                             BooleanConstraint::make('available_soon')
                                 ->label(__('vendra-product::attributes.available_soon')),
 
-                            NumberConstraint::make('position'),
+                            PositionConstraint::make(),
                         ]),
                 ],
                 layout: FiltersLayout::AboveContentCollapsible,
