@@ -13,26 +13,23 @@ use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraMultimedia\Filament\Infolists\Components\ModelImageEntry;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
-use Misaf\VendraSupport\Filament\Concerns\RendersRichContent;
+use Misaf\VendraSupport\Filament\Infolists\Components\DescriptionEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\NameEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\SlugEntry;
 
 final class ProductCategoryInfolist
 {
-    use RendersRichContent;
-
     public static function configure(Schema $schema): Schema
     {
         /** @var list<Component> $components */
         $components = [
-            TextEntry::make('name')->label(__('vendra-product::attributes.name')),
-            TextEntry::make('slug')->label(__('vendra-product::attributes.slug')),
+            NameEntry::make(),
+            SlugEntry::make(),
             IconEntry::make('active')
                 ->boolean()
                 ->label(__('vendra-product::attributes.active')),
-            TextEntry::make('description')
-                ->columnSpanFull()
-                ->formatStateUsing(fn (array|string|null $state): string => self::renderRichContent($state))
-                ->html()
-                ->label(__('vendra-product::attributes.description')),
+            DescriptionEntry::make()
+                ->richContent(),
             ModelImageEntry::make()
                 ->collection(ProductCategory::MEDIA_COLLECTION),
             self::dateEntry('created_at'),

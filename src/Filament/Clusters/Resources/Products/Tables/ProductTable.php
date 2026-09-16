@@ -47,6 +47,7 @@ use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Filament\Tables\Columns\CreatedAtColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\RowIndexColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\SlugColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\UpdatedAtColumn;
 use Misaf\VendraTagger\Filament\Tables\Columns\ModelTagsColumn;
 
@@ -101,11 +102,7 @@ final class ProductTable
                 ->state(fn (Product $record, Livewire $livewire): string => self::translatedAttribute($record, 'description', $livewire))
                 ->toggleable(isToggledHiddenByDefault: true),
 
-            TextColumn::make('slug')
-                ->alignStart()
-                ->label(__('vendra-product::attributes.slug'))
-                ->icon(Heroicon::Link)
-                ->toggleable(isToggledHiddenByDefault: true),
+            SlugColumn::make(),
 
             TextColumn::make('token')
                 ->alignCenter()

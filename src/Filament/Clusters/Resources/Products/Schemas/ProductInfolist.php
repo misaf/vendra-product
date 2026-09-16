@@ -14,21 +14,21 @@ use Misaf\VendraMultimedia\Filament\Infolists\Components\ModelImageEntry;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
-use Misaf\VendraSupport\Filament\Concerns\RendersRichContent;
+use Misaf\VendraSupport\Filament\Infolists\Components\DescriptionEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\NameEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\SlugEntry;
 use Misaf\VendraTagger\Filament\Infolists\Components\ModelTagsEntry;
 
 final class ProductInfolist
 {
-    use RendersRichContent;
-
     public static function configure(Schema $schema): Schema
     {
         /** @var list<Component> $components */
         $components = [
             TextEntry::make('productCategory.name')
                 ->label(__('vendra-product::navigation.product_category')),
-            TextEntry::make('name')->label(__('vendra-product::attributes.name')),
-            TextEntry::make('slug')->label(__('vendra-product::attributes.slug')),
+            NameEntry::make(),
+            SlugEntry::make(),
             TextEntry::make('token')
                 ->copyable()
                 ->label(__('vendra-product::attributes.token')),
@@ -44,11 +44,8 @@ final class ProductInfolist
             IconEntry::make('in_stock')
                 ->boolean()
                 ->label(__('vendra-product::attributes.in_stock')),
-            TextEntry::make('description')
-                ->columnSpanFull()
-                ->formatStateUsing(fn (array|string|null $state): string => self::renderRichContent($state))
-                ->html()
-                ->label(__('vendra-product::attributes.description')),
+            DescriptionEntry::make()
+                ->richContent(),
             ModelImageEntry::make()
                 ->collection(Product::MEDIA_COLLECTION),
             self::dateEntry('created_at'),

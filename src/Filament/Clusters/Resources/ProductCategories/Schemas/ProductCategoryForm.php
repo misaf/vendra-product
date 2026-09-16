@@ -10,62 +10,27 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Unique;
-use Livewire\Component as Livewire;
 use Misaf\VendraMultimedia\Filament\Forms\Components\ModelImageUpload;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
-use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
-use Misaf\VendraSupport\Filament\Forms\Components\ActiveToggle;
-use Misaf\VendraSupport\Tenancy\TenantAwareness;
+use Misaf\VendraSupport\Filament\Forms\Components\IsActiveToggle;
+use Misaf\VendraSupport\Filament\Forms\Components\SluggableNameInput;
+use Misaf\VendraSupport\Filament\Forms\Components\SlugInput;
 
 final class ProductCategoryForm
 {
-    use InteractsWithTranslatedFormFields;
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->afterStateUpdated(function (Livewire $livewire, Get $get, Set $set, ?string $old, ?string $state): void {
-                        $livewire->validateOnly('data.name');
+                SluggableNameInput::make()
+                    ->uniqueWithinTenant(perLocale: true),
 
-                        if (($get->string('slug', isNullable: true) ?? '') === Str::slug($old ?? '')) {
-                            $set('slug', Str::slug($state ?? ''));
-                        }
-                    })
-                    ->autofocus()
-                    ->columnSpan(['lg' => 1])
-                    ->label(__('vendra-product::attributes.name'))
-                    ->live(onBlur: true)
-                    ->maxLength(255)
-                    ->required()
-                    ->unique(
-                        column: fn (Livewire $livewire): string => 'name->'.self::activeFormLocale($livewire),
-                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
-                            ->withoutTrashed(),
-                    ),
-
-                TextInput::make('slug')
-                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.slug'))
-                    ->columnSpan(['lg' => 1])
-                    ->helperText(__('vendra-product::attributes.slug_helper_text'))
-                    ->label(__('vendra-product::attributes.slug'))
-                    ->live(onBlur: true)
-                    ->maxLength(255)
-                    ->required()
-                    ->unique(
-                        column: fn (Livewire $livewire): string => 'slug->'.self::activeFormLocale($livewire),
-                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
-                            ->withoutTrashed(),
-                    ),
+                SlugInput::make()
+                    ->uniqueWithinTenant(perLocale: true),
 
                 RichEditor::make('description')
                     ->columnSpanFull()
@@ -76,7 +41,7 @@ final class ProductCategoryForm
                 ModelImageUpload::make()
                     ->collection(ProductCategory::MEDIA_COLLECTION),
 
-                ActiveToggle::make()
+                IsActiveToggle::make()
                     ->default(false),
 
                 ...self::attributeComponents(),

@@ -13,14 +13,11 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Support\RawJs;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
 use Misaf\VendraMultimedia\Filament\Forms\Components\ModelImageUpload;
 use Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas\ProductCategoryForm;
@@ -29,14 +26,12 @@ use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraProduct\Models\ProductPrice;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
-use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
-use Misaf\VendraSupport\Tenancy\TenantAwareness;
+use Misaf\VendraSupport\Filament\Forms\Components\SluggableNameInput;
+use Misaf\VendraSupport\Filament\Forms\Components\SlugInput;
 use Misaf\VendraTagger\Filament\Forms\Components\ModelTagsInput;
 
 final class ProductForm
 {
-    use InteractsWithTranslatedFormFields;
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -60,39 +55,11 @@ final class ProductForm
                                     ->searchable()
                                     ->createOptionForm(fn (Schema $schema): Schema => ProductCategoryForm::configure($schema)),
 
-                                TextInput::make('name')
-                                    ->afterStateUpdated(function (Livewire $livewire, Get $get, Set $set, ?string $old, ?string $state): void {
-                                        $livewire->validateOnly('data.name');
+                                SluggableNameInput::make()
+                                    ->uniqueWithinTenant(perLocale: true),
 
-                                        if (($get->string('slug', isNullable: true) ?? '') === Str::slug($old ?? '')) {
-                                            $set('slug', Str::slug($state ?? ''));
-                                        }
-                                    })
-                                    ->autofocus()
-                                    ->columnSpan(['lg' => 1])
-                                    ->label(__('vendra-product::attributes.name'))
-                                    ->live(onBlur: true)
-                                    ->maxLength(255)
-                                    ->required()
-                                    ->unique(
-                                        column: fn (Livewire $livewire): string => 'name->'.self::activeFormLocale($livewire),
-                                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
-                                            ->withoutTrashed(),
-                                    ),
-
-                                TextInput::make('slug')
-                                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.slug'))
-                                    ->columnSpan(['lg' => 1])
-                                    ->helperText(__('vendra-product::attributes.slug_helper_text'))
-                                    ->label(__('vendra-product::attributes.slug'))
-                                    ->live(onBlur: true)
-                                    ->maxLength(255)
-                                    ->required()
-                                    ->unique(
-                                        column: fn (Livewire $livewire): string => 'slug->'.self::activeFormLocale($livewire),
-                                        modifyRuleUsing: fn (Unique $rule): Unique => TenantAwareness::constrainUniqueRule($rule)
-                                            ->withoutTrashed(),
-                                    ),
+                                SlugInput::make()
+                                    ->uniqueWithinTenant(perLocale: true),
 
                                 RichEditor::make('description')
                                     ->columnSpanFull()
