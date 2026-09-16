@@ -6,16 +6,16 @@ namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\RepeatableEntry;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
-use Filament\Infolists\Components\SpatieTagsEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Collection;
+use Misaf\VendraMultimedia\Filament\Infolists\Components\ModelImageEntry;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Filament\Concerns\RendersRichContent;
+use Misaf\VendraTagger\Filament\Infolists\Components\ModelTagsEntry;
 
 final class ProductInfolist
 {
@@ -49,10 +49,8 @@ final class ProductInfolist
                 ->formatStateUsing(fn (array|string|null $state): string => self::renderRichContent($state))
                 ->html()
                 ->label(__('vendra-product::attributes.description')),
-            SpatieMediaLibraryImageEntry::make('image')
-                ->collection(Product::MEDIA_COLLECTION)
-                ->columnSpanFull()
-                ->label(__('vendra-product::attributes.image')),
+            ModelImageEntry::make()
+                ->collection(Product::MEDIA_COLLECTION),
             self::dateEntry('created_at'),
             self::dateEntry('updated_at'),
         ];
@@ -72,9 +70,7 @@ final class ProductInfolist
         }
 
         if (TagIntegration::isAvailable()) {
-            $components[] = SpatieTagsEntry::make('tags')
-                ->columnSpanFull()
-                ->label(__('vendra-support::attributes.tags'))
+            $components[] = ModelTagsEntry::make()
                 ->type(Product::TAG_TYPE);
         }
 

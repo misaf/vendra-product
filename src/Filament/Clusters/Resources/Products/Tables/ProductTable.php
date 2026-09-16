@@ -14,8 +14,6 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\Layout\Component as LayoutComponent;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Tables\Columns\SpatieTagsColumn;
 use Filament\Tables\Columns\Summarizers\Average;
 use Filament\Tables\Columns\Summarizers\Range;
 use Filament\Tables\Columns\Summarizers\Sum;
@@ -34,6 +32,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
+use Misaf\VendraMultimedia\Filament\Tables\Columns\ModelImageColumn;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
@@ -46,6 +45,10 @@ use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
+use Misaf\VendraSupport\Filament\Tables\Columns\CreatedAtColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\RowIndexColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\UpdatedAtColumn;
+use Misaf\VendraTagger\Filament\Tables\Columns\ModelTagsColumn;
 
 final class ProductTable
 {
@@ -58,19 +61,11 @@ final class ProductTable
          * @var array<int, Column|ColumnGroup|LayoutComponent> $columns
          */
         $columns = [
-            TextColumn::make('row')
-                ->label('#')
-                ->rowIndex()
-                ->sortable(['id']),
+            RowIndexColumn::make(),
 
-            SpatieMediaLibraryImageColumn::make('image')
-                ->alignCenter()
+            ModelImageColumn::make()
                 ->collection(Product::MEDIA_COLLECTION)
-                ->conversion('thumb-table')
-                ->defaultImageUrl(fn (Product $record, Livewire $livewire): string => self::defaultAvatarImageUrl(self::translatedAttribute($record, 'name', $livewire)))
-                ->extraImgAttributes(['class' => 'saturate-50', 'loading' => 'lazy'])
-                ->label(__('vendra-product::attributes.image'))
-                ->stacked(),
+                ->defaultImageUrl(fn (Product $record, Livewire $livewire): string => self::defaultAvatarImageUrl(self::translatedAttribute($record, 'name', $livewire))),
 
             TextColumn::make('name')
                 ->alignStart()
@@ -150,25 +145,9 @@ final class ProductTable
                     fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
                 ),
 
-            TextColumn::make('created_at')
-                ->extraCellAttributes(['dir' => 'ltr'])
-                ->label(__('vendra-product::attributes.created_at'))
-                ->sinceTooltip()
-                ->when(
-                    app()->isLocale('fa'),
-                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
-                ),
+            CreatedAtColumn::make(),
 
-            TextColumn::make('updated_at')
-                ->extraCellAttributes(['dir' => 'ltr'])
-                ->label(__('vendra-product::attributes.updated_at'))
-                ->sinceTooltip()
-                ->when(
-                    app()->isLocale('fa'),
-                    fn (TextColumn $column) => $column->jalaliDateTime('Y-m-d H:i', latinNumbers: true),
-                    fn (TextColumn $column) => $column->dateTime('Y-m-d H:i')
-                ),
+            UpdatedAtColumn::make(),
         ];
 
         if (AttributeIntegration::isAvailable()) {
@@ -180,10 +159,8 @@ final class ProductTable
         }
 
         if (TagIntegration::isAvailable()) {
-            $columns[] = SpatieTagsColumn::make('tags')
-                ->label(__('vendra-support::attributes.tags'))
-                ->type(Product::TAG_TYPE)
-                ->toggleable();
+            $columns[] = ModelTagsColumn::make()
+                ->type(Product::TAG_TYPE);
         }
 
         return $table

@@ -8,7 +8,6 @@ use Closure;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
@@ -19,6 +18,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 use Livewire\Component as Livewire;
+use Misaf\VendraMultimedia\Filament\Forms\Components\ModelImageUpload;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedFormFields;
@@ -73,15 +73,8 @@ final class ProductCategoryForm
                     ->label(__('vendra-product::attributes.description'))
                     ->required(),
 
-                SpatieMediaLibraryFileUpload::make('image')
-                    ->afterStateUpdated(fn (Livewire $livewire) => $livewire->validateOnly('data.image'))
-                    ->collection(ProductCategory::MEDIA_COLLECTION)
-                    ->columnSpanFull()
-                    ->image()
-                    ->label(__('vendra-product::attributes.image'))
-                    ->live()
-                    ->panelLayout('grid')
-                    ->responsiveImages(),
+                ModelImageUpload::make()
+                    ->collection(ProductCategory::MEDIA_COLLECTION),
 
                 ActiveToggle::make()
                     ->default(false),
