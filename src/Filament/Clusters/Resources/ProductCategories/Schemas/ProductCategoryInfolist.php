@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductCategories\Schemas;
 
-use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Component;
@@ -14,6 +13,7 @@ use Misaf\VendraMultimedia\Filament\Infolists\Components\ModelImageEntry;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 use Misaf\VendraSupport\Filament\Infolists\Components\DescriptionEntry;
+use Misaf\VendraSupport\Filament\Infolists\Components\IsActiveEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\NameEntry;
 use Misaf\VendraSupport\Filament\Infolists\Components\SlugEntry;
 
@@ -25,9 +25,7 @@ final class ProductCategoryInfolist
         $components = [
             NameEntry::make(),
             SlugEntry::make(),
-            IconEntry::make('active')
-                ->boolean()
-                ->label(__('vendra-product::attributes.active')),
+            IsActiveEntry::make(),
             DescriptionEntry::make()
                 ->richContent(),
             ModelImageEntry::make()
