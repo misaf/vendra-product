@@ -15,6 +15,9 @@ use Misaf\VendraProduct\Models\ProductPrice;
 #[UseModel(ProductPrice::class)]
 final class ProductPriceFactory extends Factory
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [

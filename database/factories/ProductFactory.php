@@ -18,6 +18,9 @@ use Misaf\VendraSupport\Tenancy\TenantAwareness;
 #[UseModel(Product::class)]
 final class ProductFactory extends Factory
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
