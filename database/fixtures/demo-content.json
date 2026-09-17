@@ -33,6 +33,7 @@
           "de": "Kompaktes und leistungsstarkes Ultrabook mit Intel-i7-Prozessor und 16 GB RAM",
           "fa": "اولترابوک جمع‌وجور و قدرتمند با پردازنده Intel i7 و رم 16 گیگابایت"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -70,6 +71,7 @@
           "de": "Leistungsstarkes Notebook mit Apple M2 Max Chip, ideal für Kreativprofis",
           "fa": "لپ‌تاپ با عملکرد بالا و تراشه Apple M2 Max، مناسب برای حرفه‌ای‌های خلاق"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -107,6 +109,7 @@
           "de": "Leichtes Business-Notebook mit robustem Gehäuse, langer Akkulaufzeit und Sicherheitsfunktionen für Unternehmen",
           "fa": "لپ‌تاپ سبک تجاری با بدنه مقاوم، عمر باتری طولانی و قابلیت‌های امنیتی سازمانی"
         },
+        "quantity": 7,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -164,6 +167,7 @@
           "de": "Gaming-Desktop mit NVIDIA RTX 3060 und Intel-i5-Prozessor",
           "fa": "کامپیوتر رومیزی مخصوص بازی با کارت گرافیک NVIDIA RTX 3060 و پردازنده Intel i5"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -201,6 +205,7 @@
           "de": "All-in-One-Desktop mit M1-Chip und 4,5K-Retina-Display",
           "fa": "کامپیوتر رومیزی همه‌کاره با تراشه M1 و نمایشگر Retina با رزولوشن 4.5K"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -238,6 +243,7 @@
           "de": "Kompakter Desktop-PC für Büroarbeitsplätze, Empfangsbereiche und Umgebungen mit wenig Platz",
           "fa": "کامپیوتر رومیزی جمع‌وجور برای میزهای اداری، بخش پذیرش و محیط‌هایی با فضای محدود"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -295,6 +301,7 @@
           "de": "High-End-Grafikkarte für Gaming und Rendering",
           "fa": "کارت گرافیک رده بالا برای بازی و رندرینگ"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -332,6 +339,7 @@
           "de": "Hochgeschwindigkeits-Speichermodul für Desktop- und Gaming-PCs",
           "fa": "ماژول حافظه پرسرعت برای کامپیوترهای رومیزی و گیمینگ"
         },
+        "quantity": 95,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -369,6 +377,7 @@
           "de": "Schnelles NVMe-Speicherlaufwerk für Betriebssysteme, Anwendungen und große Projektdateien",
           "fa": "درایو ذخیره‌سازی سریع NVMe برای سیستم‌عامل، برنامه‌ها و فایل‌های حجیم پروژه"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -426,6 +435,7 @@
           "de": "Ergonomische kabellose Maus mit anpassbaren Tasten",
           "fa": "ماوس بی‌سیم ارگونومیک با دکمه‌های قابل تنظیم"
         },
+        "quantity": 50,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -463,6 +473,7 @@
           "de": "Hochauflösender Monitor mit kräftigen Farben und großen Betrachtungswinkeln",
           "fa": "مانیتور با رزولوشن بالا، رنگ‌های زنده و زاویه دید گسترده"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -500,6 +511,7 @@
           "de": "Tenkeyless-Mechaniktastatur mit kabelloser Verbindung und angenehmem Tippgefühl",
           "fa": "کیبورد مکانیکال بدون بخش عددی با اتصال بی‌سیم و حس تایپ راحت"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -537,6 +549,7 @@
           "de": "Tragbarer USB-C-Hub mit HDMI, USB-Anschlüssen, Kartenleser und Power-Delivery-Unterstützung",
           "fa": "هاب USB-C قابل حمل با HDMI، درگاه‌های USB، کارت‌خوان و پشتیبانی از شارژ Power Delivery"
         },
+        "quantity": 7,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -574,6 +587,7 @@
           "de": "Full-HD-Webcam mit Autofokus und Stereomikrofonen für Meetings und Streaming",
           "fa": "وب‌کم Full HD با فوکوس خودکار و میکروفون استریو برای جلسات و استریم"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -611,6 +625,7 @@
           "de": "Leichte Gaming-Maus mit präzisem optischem Sensor und ergonomischer Form",
           "fa": "ماوس گیمینگ سبک با حسگر نوری دقیق و طراحی ارگونومیک"
         },
+        "quantity": 60,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -648,6 +663,7 @@
           "de": "Glattes Stoff-Mauspad für präzises Tracking und den täglichen Einsatz am Schreibtisch",
           "fa": "ماوس‌پد پارچه‌ای نرم برای ردیابی دقیق و استفاده روزمره روی میز"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -685,6 +701,7 @@
           "de": "Kompakte externe SSD für schnelle Backups, Dateiübertragungen und mobile Projektspeicherung",
           "fa": "اس‌اس‌دی اکسترنال جمع‌وجور برای بکاپ سریع، انتقال فایل و ذخیره پروژه‌ها"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -722,6 +739,7 @@
           "de": "Schnelle Speicherkarte für Kameras, Content-Erstellung und zuverlässige Medienspeicherung",
           "fa": "کارت حافظه پرسرعت برای دوربین‌ها، تولید محتوا و ذخیره مطمئن رسانه"
         },
+        "quantity": 95,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -759,6 +777,7 @@
           "de": "Kabel mit hoher Bandbreite für Displays, Docks, externe Laufwerke und schnelles Laden",
           "fa": "کابل پرسرعت برای نمایشگرها، داک‌ها، درایوهای اکسترنال و شارژ سریع"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -796,6 +815,7 @@
           "de": "Professionelle Dockingstation mit mehreren Display-, Netzwerk-, Audio- und USB-Anschlüssen",
           "fa": "داک حرفه‌ای با چندین اتصال نمایشگر، شبکه، صدا و USB"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -833,6 +853,7 @@
           "de": "Kabellose Kopfhörer mit Geräuschunterdrückung für konzentriertes Arbeiten, Reisen und hochwertigen Klang",
           "fa": "هدفون بی‌سیم با حذف نویز برای تمرکز، سفر و صدای باکیفیت"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -870,6 +891,7 @@
           "de": "Tragbarer Konferenzlautsprecher mit klarer Sprachaufnahme für Besprechungsräume und Remote-Anrufe",
           "fa": "اسپیکرفون قابل حمل با دریافت صدای شفاف برای جلسات و تماس‌های کاری"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -907,6 +929,7 @@
           "de": "Anpassbares Steuerpad für Streaming, Tastenkürzel, Automatisierung und Content-Workflows",
           "fa": "کنترل‌پد قابل تنظیم برای استریم، میانبرها، اتوماسیون و فرایندهای تولید محتوا"
         },
+        "quantity": 7,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -944,6 +967,7 @@
           "de": "Kompaktes Grafiktablett für Illustration, Retusche, Notizen und kreative Arbeit",
           "fa": "تبلت طراحی جمع‌وجور برای تصویرسازی، ویرایش، یادداشت و کارهای خلاقانه"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -981,6 +1005,7 @@
           "de": "Am Monitor befestigte Schreibtischleuchte zur Reduzierung von Blendung und Verbesserung der Arbeitsplatzbeleuchtung",
           "fa": "چراغ رومیزی نصب‌شونده روی مانیتور برای کاهش بازتاب نور و بهبود روشنایی محیط کار"
         },
+        "quantity": 60,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1018,6 +1043,7 @@
           "de": "Verstellbarer Monitorarm für ergonomische Positionierung und aufgeräumtere Schreibtische",
           "fa": "بازوی قابل تنظیم مانیتور برای موقعیت ارگونومیک و میز کار مرتب‌تر"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1055,6 +1081,7 @@
           "de": "Notstromversorgung zum Schutz von Desktop-PCs, Netzwerkgeräten und Peripherie vor Stromausfällen",
           "fa": "منبع برق پشتیبان برای محافظت از کامپیوتر، تجهیزات شبکه و لوازم جانبی در برابر قطعی برق"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1092,6 +1119,7 @@
           "de": "Wi-Fi-6-Router für schnellere drahtlose Netzwerke in Zuhause und kleinen Büros",
           "fa": "روتر Wi-Fi 6 برای شبکه بی‌سیم سریع‌تر در خانه و دفاتر کوچک"
         },
+        "quantity": 95,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1129,6 +1157,7 @@
           "de": "Unmanaged Gigabit-Switch mit acht Ports zur stabilen Erweiterung kabelgebundener Netzwerke",
           "fa": "سوئیچ گیگابیتی هشت پورت بدون مدیریت برای توسعه پایدار شبکه کابلی"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1166,6 +1195,7 @@
           "de": "Kompakter WLAN-Access-Point für zuverlässige Funkabdeckung in Büros und Geschäften",
           "fa": "اکسس پوینت وای‌فای جمع‌وجور برای پوشش بی‌سیم پایدار در دفاتر و فروشگاه‌ها"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -1203,6 +1233,7 @@
           "de": "USB-Mikrofon mit mehreren Richtcharakteristiken für Podcasts, Meetings und Sprachaufnahmen",
           "fa": "میکروفون USB با چند الگوی دریافت صدا برای پادکست، جلسه و ضبط صدا"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1240,6 +1271,7 @@
           "de": "Hybridmikrofon mit USB und XLR für hochwertige Sprachaufnahmen und Studio-Workflows",
           "fa": "میکروفون ترکیبی USB و XLR برای صدای گفتاری باکیفیت و فرایندهای استودیویی"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1277,6 +1309,7 @@
           "de": "Kompaktes Audiointerface für Mikrofone, Instrumente, Streaming und Aufnahmen",
           "fa": "کارت صدای جمع‌وجور برای میکروفون، ساز، استریم و ضبط"
         },
+        "quantity": 7,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1314,6 +1347,7 @@
           "de": "Verstellbarer Studio-Gelenkarm für Mikrofone in Streaming- und Aufnahme-Setups",
           "fa": "بازوی قابل تنظیم استودیویی برای میکروفون در چیدمان‌های استریم و ضبط"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1351,6 +1385,7 @@
           "de": "Große RGB-Schreibtischmatte mit glatter Oberfläche für Tastatur, Maus und Schutz des Arbeitsplatzes",
           "fa": "زیرانداز بزرگ RGB با سطح نرم برای کیبورد، ماوس و محافظت از میز کار"
         },
+        "quantity": 60,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1388,6 +1423,7 @@
           "de": "4K-Webcam mit HDR, Windows-Hello-Unterstützung und professioneller Videoqualität",
           "fa": "وب‌کم 4K با HDR، پشتیبانی از Windows Hello و کیفیت ویدیویی حرفه‌ای"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -1425,6 +1461,7 @@
           "de": "Farbgenauer Monitor für Designer, Editoren und professionelle Kreativteams",
           "fa": "مانیتور با دقت رنگ بالا برای طراحان، تدوین‌گران و تیم‌های خلاق حرفه‌ای"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1462,6 +1499,7 @@
           "de": "Ultrawide-Display für Multitasking, Timelines, Dashboards und produktive Workflows",
           "fa": "نمایشگر فوق عریض برای چندوظیفگی، تایم‌لاین‌ها، داشبوردها و کارهای بهره‌وری"
         },
+        "quantity": 95,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1499,6 +1537,7 @@
           "de": "Smarte Lightbar für stimmungsvolle Arbeitsplatzbeleuchtung und Beleuchtung neben dem Bildschirm",
           "fa": "نوار نور هوشمند برای نورپردازی محیط کار و روشنایی کنار نمایشگر"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1536,6 +1575,7 @@
           "de": "Premium-Funktastatur mit Kreativ-Drehregler und komfortablen flachen Tasten",
           "fa": "کیبورد بی‌سیم پریمیوم با کنترل چرخشی خلاقانه و کلیدهای کم‌ارتفاع راحت"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -1573,6 +1613,7 @@
           "de": "Kabelloses Multi-Touch-Trackpad für Gestennavigation und präzise Desktop-Steuerung",
           "fa": "ترک‌پد بی‌سیم چندلمسی برای کنترل دقیق دسکتاپ و ناوبری حرکتی"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1610,6 +1651,7 @@
           "de": "Dockingstation für Surface-Geräte mit Display-, USB-, Ethernet- und Ladeanschlüssen",
           "fa": "داک مخصوص دستگاه‌های Surface با درگاه‌های نمایشگر، USB، اترنت و شارژ"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1647,6 +1689,7 @@
           "de": "Aluminium-Laptopständer für bessere Haltung, Luftzirkulation und Schreibtischorganisation",
           "fa": "پایه آلومینیومی لپ‌تاپ برای وضعیت بهتر بدن، تهویه و نظم میز کار"
         },
+        "quantity": 7,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1684,6 +1727,7 @@
           "de": "Minimalistischer Laptopständer, der den Bildschirm erhöht und einen ergonomischen Arbeitsplatz unterstützt",
           "fa": "پایه مینیمال لپ‌تاپ که نمایشگر را بالاتر می‌آورد و محیط کار ارگونومیک‌تری ایجاد می‌کند"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1721,6 +1765,7 @@
           "de": "Blickschutzfilter, der seitliche Sichtwinkel bei Laptops in öffentlichen oder gemeinsam genutzten Bereichen begrenzt",
           "fa": "فیلتر حریم خصوصی برای محدود کردن زاویه دید جانبی لپ‌تاپ در فضاهای عمومی یا مشترک"
         },
+        "quantity": 60,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1758,6 +1803,7 @@
           "de": "Hardware-Sicherheitsschlüssel für stärkeren Kontoschutz und Multi-Faktor-Authentifizierung",
           "fa": "کلید امنیتی سخت‌افزاری برای محافظت قوی‌تر از حساب و احراز هویت چندمرحله‌ای"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1795,6 +1841,7 @@
           "de": "Tintentankdrucker für wirtschaftlichen Dokumentendruck, Scannen und Homeoffice-Nutzung",
           "fa": "پرینتر مخزن‌دار برای چاپ اقتصادی اسناد، اسکن و استفاده در دفتر خانگی"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1832,6 +1879,7 @@
           "de": "Kompakter kabelloser Dokumentenscanner für Belege, Verträge und Büro unterlagen",
           "fa": "اسکنر اسناد بی‌سیم و جمع‌وجور برای رسیدها، قراردادها و مدارک اداری"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -1869,6 +1917,7 @@
           "de": "Flacher schlanker Scanner für Dokumente, Fotos und alltägliche Digitalisierungsaufgaben",
           "fa": "اسکنر تخت باریک برای اسناد، عکس‌ها و کارهای روزمره دیجیتال‌سازی"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1906,6 +1955,7 @@
           "de": "NAS mit zwei Einschüben für gemeinsame Dateien, Backups und Daten-Workflows kleiner Unternehmen",
           "fa": "ذخیره‌ساز شبکه دو کشویی برای فایل‌های مشترک، بکاپ و جریان کاری داده در کسب‌وکارهای کوچک"
         },
+        "quantity": 50,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1943,6 +1993,7 @@
           "de": "Zuverlässige Festplatte für NAS-Systeme, Backups und dauerhaft aktive Speicher-Workloads",
           "fa": "هارد قابل اعتماد مخصوص سیستم‌های NAS، بکاپ و ذخیره‌سازی مداوم"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -1980,6 +2031,7 @@
           "de": "Tragbare Festplatte für tägliche Backups, Archive und Offline-Dateispeicherung",
           "fa": "هارد قابل حمل برای بکاپ روزمره، آرشیو و ذخیره‌سازی آفلاین فایل‌ها"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2017,6 +2069,7 @@
           "de": "Gaming-Monitor mit hoher Bildwiederholrate für kompetitives Spielen und reaktionsschnelle Desktop-Nutzung",
           "fa": "مانیتور گیمینگ با نرخ نوسازی بالا مناسب بازی رقابتی و کاربری سریع دسکتاپ"
         },
+        "quantity": 7,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2054,6 +2107,7 @@
           "de": "Komfortables Gaming-Headset mit virtuellem Surround-Sound und abnehmbarem Mikrofon",
           "fa": "هدست گیمینگ راحت با صدای فراگیر مجازی و میکروفون جداشدنی"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2091,6 +2145,7 @@
           "de": "Esports-Headset mit klarem Mikrofon, leichtem Rahmen und immersivem Klang",
           "fa": "هدست ورزش‌های الکترونیک با میکروفون شفاف، بدنه سبک و صدای فراگیر"
         },
+        "quantity": 60,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -2128,6 +2183,7 @@
           "de": "Ergonomische Trackball-Maus für präzise Cursorsteuerung und weniger Handgelenkbewegung",
           "fa": "ماوس ترک‌بال ارگونومیک برای کنترل دقیق نشانگر و کاهش حرکت مچ دست"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2165,6 +2221,7 @@
           "de": "Vertikale ergonomische Maus für natürliche Handhaltung und täglichen Komfort",
           "fa": "ماوس عمودی ارگونومیک برای حالت طبیعی دست و راحتی روزانه"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2202,6 +2259,7 @@
           "de": "Kompaktes USB-C-Netzteil für kompatible Laptops, Tablets und mobile Workstations",
           "fa": "آداپتور برق USB-C جمع‌وجور برای لپ‌تاپ‌ها، تبلت‌ها و ورک‌استیشن‌های سازگار"
         },
+        "quantity": 95,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2239,6 +2297,7 @@
           "de": "Leistungsstarkes Ladegerät für Laptops, Tablets, Smartphones und mehrere USB-C-Geräte",
           "fa": "شارژر پرقدرت برای لپ‌تاپ، تبلت، موبایل و چند دستگاه USB-C"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2276,6 +2335,7 @@
           "de": "Zuverlässiges HDMI-Kabel für Monitore, Projektoren, Mediengeräte und Bürodisplays",
           "fa": "کابل HDMI مطمئن برای مانیتورها، پروژکتورها، دستگاه‌های رسانه‌ای و نمایشگرهای اداری"
         },
+        "quantity": 50,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2313,6 +2373,7 @@
           "de": "DisplayPort-Kabel für hochauflösende Monitore und Workstations mit mehreren Displays",
           "fa": "کابل DisplayPort برای مانیتورهای با رزولوشن بالا و ایستگاه‌های کاری چندنمایشگره"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2350,6 +2411,7 @@
           "de": "USB-Verlängerungskabel für Peripheriegeräte, Webcams, externe Laufwerke und Desktop-Setups",
           "fa": "کابل افزایش طول USB برای لوازم جانبی، وب‌کم‌ها، درایوهای اکسترنال و میز کار"
         },
+        "quantity": 40,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2387,6 +2449,7 @@
           "de": "Kabelloses Business-Headset mit aktiver Geräuschunterdrückung und klaren Anrufsteuerungen",
           "fa": "هدست بی‌سیم تجاری با حذف نویز فعال و کنترل‌های شفاف تماس"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -2424,6 +2487,7 @@
           "de": "Kabelloses Büro-Headset für klare Gespräche, lange Meetings und hybrides Arbeiten",
           "fa": "هدست اداری بی‌سیم برای تماس‌های شفاف، جلسات طولانی و کار ترکیبی"
         },
+        "quantity": 25,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2461,6 +2525,7 @@
           "de": "Kompaktes Capture-Gerät zum Aufnehmen und Streamen von Konsolen- oder Kameravideo",
           "fa": "دستگاه کپچر جمع‌وجور برای ضبط و استریم ویدیو از کنسول یا دوربین"
         },
+        "quantity": 60,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2498,6 +2563,7 @@
           "de": "HDMI-Capture-Adapter, um Kameras in hochwertige Webcams zu verwandeln",
           "fa": "آداپتور کپچر HDMI برای تبدیل دوربین‌ها به وب‌کم باکیفیت"
         },
+        "quantity": 18,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2535,6 +2601,7 @@
           "de": "Modulare smarte Lichtpaneele für kreative Arbeitsplätze, Studios und Gaming-Räume",
           "fa": "پنل‌های نور هوشمند ماژولار برای محیط‌های کاری خلاق، استودیوها و اتاق‌های بازی"
         },
+        "quantity": 3,
         "in_stock": true,
         "available_soon": true,
         "productPrices": [
@@ -2572,6 +2639,7 @@
           "de": "Anpassbare Steuerkonsole für Schnitt, Streaming, Produktivität und kreative Anwendungen",
           "fa": "کنسول کنترل قابل تنظیم برای تدوین، استریم، بهره‌وری و برنامه‌های خلاقانه"
         },
+        "quantity": 0,
         "in_stock": false,
         "available_soon": true,
         "productPrices": [
@@ -2609,6 +2677,7 @@
           "de": "Webcam mit adaptivem Lichtsensor für klares Video bei wechselnden Lichtverhältnissen",
           "fa": "وب‌کم با حسگر نور تطبیقی برای تصویر شفاف در شرایط نوری متغیر"
         },
+        "quantity": 33,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2646,6 +2715,7 @@
           "de": "Wiederaufladbare kabellose Maus mit präzisem Tracking und Verbindung zu mehreren Geräten",
           "fa": "ماوس بی‌سیم شارژی با ردیابی دقیق و اتصال چنددستگاهی"
         },
+        "quantity": 50,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [
@@ -2683,6 +2753,7 @@
           "de": "Schlanke Bluetooth-Tastatur für kompakte Schreibtische, Tablets und mobile Arbeitsplätze",
           "fa": "کیبورد بلوتوث باریک برای میزهای کوچک، تبلت‌ها و محیط‌های کاری قابل حمل"
         },
+        "quantity": 12,
         "in_stock": true,
         "available_soon": false,
         "productPrices": [

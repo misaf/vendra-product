@@ -36,6 +36,12 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
     }
 
     /**
+     * Fixtures are keyed on the translated slug of the record's first locale
+     * (the generated `token` is not reproducible), so a repeated run of the
+     * same fixture file updates nothing and inserts nothing. Store
+     * provisioning retries the whole seed list on failure, so a partial run
+     * has to be safe to repeat.
+     *
      * @param  list<array<string, mixed>>  $records
      */
     protected function seedFixtures(array $records): void
@@ -55,6 +61,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *         name: non-empty-array<string, string>,
      *         description: non-empty-array<string, string>,
      *         slug: non-empty-array<string, string>,
+     *         quantity: int,
      *         in_stock: bool,
      *         available_soon: bool,
      *         productPrices: list<array{currency_code: string, price: int|float}>
@@ -63,12 +70,18 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      */
     private function handleSeedFixtureRecord(array $data): void
     {
-        $productCategory = ProductCategory::query()->create([
-            'name' => Arr::get($data, 'name'),
-            'description' => Arr::get($data, 'description'),
-            'slug' => Arr::get($data, 'slug'),
-            'active' => Arr::get($data, 'active'),
-        ]);
+        $slug = Arr::get($data, 'slug');
+        $locale = array_key_first($slug);
+
+        $productCategory = ProductCategory::query()
+            ->where('slug->'.$locale, $slug[$locale])
+            ->first()
+            ?? ProductCategory::query()->create([
+                'name' => Arr::get($data, 'name'),
+                'description' => Arr::get($data, 'description'),
+                'slug' => Arr::get($data, 'slug'),
+                'active' => Arr::get($data, 'active'),
+            ]);
 
         foreach (Arr::get($data, 'products') as $productRecord) {
             $this->handleProductFixtureRecord($productCategory, $productRecord);
@@ -80,6 +93,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *     name: non-empty-array<string, string>,
      *     description: non-empty-array<string, string>,
      *     slug: non-empty-array<string, string>,
+     *     quantity: int,
      *     in_stock: bool,
      *     available_soon: bool,
      *     productPrices: list<array{currency_code: string, price: int|float}>
@@ -87,15 +101,38 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      */
     private function handleProductFixtureRecord(ProductCategory $productCategory, array $productRecord): void
     {
-        $product = $productCategory->products()->create([
-            'name' => Arr::get($productRecord, 'name'),
-            'description' => Arr::get($productRecord, 'description'),
-            'slug' => Arr::get($productRecord, 'slug'),
-            'in_stock' => Arr::get($productRecord, 'in_stock'),
-            'available_soon' => Arr::get($productRecord, 'available_soon'),
-        ]);
+        $slug = Arr::get($productRecord, 'slug');
+        $locale = array_key_first($slug);
 
-        $product->productPrices()->createMany(Arr::get($productRecord, 'productPrices'));
+        $product = $productCategory->products()
+            ->where('slug->'.$locale, $slug[$locale])
+            ->first()
+            ?? $productCategory->products()->create([
+                'name' => Arr::get($productRecord, 'name'),
+                'description' => Arr::get($productRecord, 'description'),
+                'slug' => Arr::get($productRecord, 'slug'),
+                'quantity' => Arr::get($productRecord, 'quantity'),
+                'in_stock' => Arr::get($productRecord, 'in_stock'),
+                'available_soon' => Arr::get($productRecord, 'available_soon'),
+            ]);
+
+        foreach (Arr::get($productRecord, 'productPrices') as $productPriceRecord) {
+            $this->handleProductPriceFixtureRecord($product, $productPriceRecord);
+        }
+    }
+
+    /**
+     * A product carries at most one price per currency, so the currency code is
+     * the natural key within the product.
+     *
+     * @param  array{currency_code: string, price: int|float}  $productPriceRecord
+     */
+    private function handleProductPriceFixtureRecord(Product $product, array $productPriceRecord): void
+    {
+        $product->productPrices()->firstOrCreate(
+            ['currency_code' => Arr::get($productPriceRecord, 'currency_code')],
+            ['price' => Arr::get($productPriceRecord, 'price')],
+        );
     }
 
     /**
@@ -109,6 +146,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
      *         name: non-empty-array<string, string>,
      *         description: non-empty-array<string, string>,
      *         slug: non-empty-array<string, string>,
+     *         quantity: int,
      *         in_stock: bool,
      *         available_soon: bool,
      *         productPrices: list<array{currency_code: string, price: int|float}>
@@ -126,6 +164,7 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
          *         name: non-empty-array<string, string>,
          *         description: non-empty-array<string, string>,
          *         slug: non-empty-array<string, string>,
+         *         quantity: int,
          *         in_stock: bool,
          *         available_soon: bool,
          *         productPrices: list<array{currency_code: string, price: int|float}>
@@ -143,13 +182,14 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
                 'slug.*' => ['required', 'string'],
                 'active' => ['required', 'boolean'],
                 'products' => ['required', 'array', 'list'],
-                'products.*' => ['required', 'array:name,description,slug,in_stock,available_soon,productPrices'],
+                'products.*' => ['required', 'array:name,description,slug,quantity,in_stock,available_soon,productPrices'],
                 'products.*.name' => ['required', 'array', 'min:1'],
                 'products.*.name.*' => ['required', 'string'],
                 'products.*.description' => ['required', 'array', 'min:1'],
                 'products.*.description.*' => ['required', 'string'],
                 'products.*.slug' => ['required', 'array', 'min:1'],
                 'products.*.slug.*' => ['required', 'string'],
+                'products.*.quantity' => ['required', 'integer', 'min:0'],
                 'products.*.in_stock' => ['required', 'boolean'],
                 'products.*.available_soon' => ['required', 'boolean'],
                 'products.*.productPrices' => ['required', 'array', 'list'],
