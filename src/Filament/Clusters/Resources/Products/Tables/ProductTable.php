@@ -18,7 +18,6 @@ use Filament\Tables\Columns\Summarizers\Average;
 use Filament\Tables\Columns\Summarizers\Range;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\QueryBuilder\Constraints\BooleanConstraint;
@@ -47,6 +46,7 @@ use Misaf\VendraSupport\Filament\Concerns\HasDefaultAvatarImageUrl;
 use Misaf\VendraSupport\Filament\Concerns\InteractsWithTranslatedTableRecords;
 use Misaf\VendraSupport\Filament\Tables\Columns\CreatedAtColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\DescriptionColumn;
+use Misaf\VendraSupport\Filament\Tables\Columns\IsActiveToggleColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\NameColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\RowIndexColumn;
 use Misaf\VendraSupport\Filament\Tables\Columns\SlugColumn;
@@ -119,13 +119,11 @@ final class ProductTable
                 ->action(SetColumnPriceAction::make())
                 ->summarize([Sum::make(), Average::make(), Range::make()]),
 
-            ToggleColumn::make('in_stock')
-                ->label(__('vendra-product::attributes.in_stock'))
-                ->onIcon(Heroicon::Bolt),
+            IsActiveToggleColumn::make('in_stock')
+                ->label(__('vendra-product::attributes.in_stock')),
 
-            ToggleColumn::make('available_soon')
-                ->label(__('vendra-product::attributes.available_soon'))
-                ->onIcon(Heroicon::Bolt),
+            IsActiveToggleColumn::make('available_soon')
+                ->label(__('vendra-product::attributes.available_soon')),
 
             TextColumn::make('availability_date')
                 ->alignCenter()
