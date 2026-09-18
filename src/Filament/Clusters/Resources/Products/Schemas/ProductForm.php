@@ -210,7 +210,7 @@ final class ProductForm
         return [
             Tab::make('tags')
                 ->icon(Heroicon::OutlinedTag)
-                ->label(__('vendra-support::attributes.tags'))
+                ->label(__('vendra-tagger::attributes.tags'))
                 ->schema([
                     ModelTagsInput::make()
                         ->type(Product::TAG_TYPE)
