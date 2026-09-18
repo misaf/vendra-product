@@ -40,7 +40,7 @@ it('creates a duplicate with a copy suffix', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->latest('id')->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->getTranslations('name'))->toBe([
@@ -136,7 +136,7 @@ it('duplicates prices', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->latest('id')->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->productPrices()->count())->toBe(1)
@@ -182,7 +182,7 @@ it('ignores colliding names on other tenants when suffixing the duplicate', func
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->latest('id')->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->getTranslations('name'))->toBe([
@@ -219,7 +219,7 @@ it('duplicates selected attribute values', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->latest('id')->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->selectedAttributeValues()->allRelatedIds()->all())->toBe([$attributeValue->getKey()])
@@ -235,7 +235,7 @@ it('duplicates tags', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->latest('id')->first();
 
     $tagKeyName = $product->tags()->getRelated()->getQualifiedKeyName();
 
@@ -257,7 +257,7 @@ it('generates a new token for the duplicate', function (): void {
         ->callAction('replicate')
         ->assertNotified();
 
-    $duplicate = Product::query()->whereKeyNot($product->getKey())->first();
+    $duplicate = Product::query()->whereKeyNot($product->getKey())->latest('id')->first();
 
     expect($duplicate)->not->toBeNull()
         ->and($duplicate->token)->not->toBe($product->token);
