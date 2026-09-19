@@ -12,8 +12,7 @@ final readonly class ApplyProductPricePercentageAction
     public function __construct(private SetProductPriceAction $setProductPrice) {}
 
     /**
-     * The caller keeps the percentage at or above -100 so the new price is
-     * never negative.
+     * The caller keeps the percentage at or above -100.
      */
     public function execute(Product $product, float $percent): ?ProductPrice
     {

@@ -8,10 +8,9 @@ use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
 
 /**
- * The synchronous half of ProductCategory's lifecycle. `forceDeleting` has to
- * reach the attribute values while the category row is still present, so it
- * cannot live in the queued ProductCategoryObserver alongside the soft-delete
- * cascade.
+ * The synchronous product category hooks that cannot run on the queue.
+ *
+ * `forceDeleting` removes the attribute values while the category still exists.
  */
 final class ProductCategoryLifecycleObserver
 {

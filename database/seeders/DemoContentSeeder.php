@@ -38,11 +38,9 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
     }
 
     /**
-     * Fixtures are keyed on the translated slug of the record's first locale
-     * (the generated `token` is not reproducible), so a repeated run of the
-     * same fixture file updates nothing and inserts nothing. Store
-     * provisioning retries the whole seed list on failure, so a partial run
-     * has to be safe to repeat.
+     * Seed the fixtures idempotently, keyed on the first locale's slug.
+     *
+     * Store provisioning retries the whole seed list, so a partial run must be repeatable.
      *
      * @param  list<array<string, mixed>>  $records
      */
@@ -124,9 +122,6 @@ final class DemoContentSeeder extends BaseDemoContentSeeder
     }
 
     /**
-     * A product carries at most one price per currency, so the currency code is
-     * the natural key within the product.
-     *
      * @param  array{currency_code: string, price: int|float}  $productPriceRecord
      */
     private function handleProductPriceFixtureRecord(Product $product, array $productPriceRecord): void

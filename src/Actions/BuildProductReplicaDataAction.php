@@ -65,9 +65,6 @@ final class BuildProductReplicaDataAction
     }
 
     /**
-     * Fetch every existing translation of the column that could collide with the
-     * base translations or any counter-suffixed variant of them, in one query.
-     *
      * @param  array<string, string>  $translations
      * @return array<string, array<string, true>>
      */
@@ -75,11 +72,7 @@ final class BuildProductReplicaDataAction
     {
         $query = Product::withTrashed()->whereKeyNot($product->getKey());
 
-        // Anchor collision detection to the source record's tenant explicitly
-        // rather than relying on the ambient tenant global scope, which may
-        // point at a different tenant while the action runs. The replica always
-        // belongs to the source record's tenant, so scope the lookup to that
-        // same tenant.
+        // Scope to the source record's tenant, which may differ from the current one.
         if (TenantAwareness::enabled()) {
             $tenantColumn = TenantSchema::column();
             $tenantId = $product->getAttribute($tenantColumn) ?? TenantAwareness::currentId();

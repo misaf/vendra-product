@@ -10,8 +10,7 @@ use Misaf\VendraProduct\Models\ProductPrice;
 final class SetProductPriceAction
 {
     /**
-     * The caller validates a supported currency and a non-negative price; the
-     * model stores the currency code uppercased.
+     * The caller validates a supported currency and a non-negative price.
      */
     public function execute(Product $product, string $currencyCode, int $priceMinorUnits): ProductPrice
     {

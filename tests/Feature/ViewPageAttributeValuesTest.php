@@ -23,8 +23,7 @@ beforeEach(function (): void {
 });
 
 /**
- * Creates an attribute value on the category without importing the optional
- * attribute package, keeping this module decoupled from its provider.
+ * Create an attribute value without importing the optional attribute package.
  */
 function createCategoryAttributeValueForViewTest(ProductCategory $productCategory): mixed
 {

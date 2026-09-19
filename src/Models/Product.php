@@ -85,13 +85,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     public array $translatable = ['name', 'description', 'slug'];
 
     /**
-     * Pin sortable behavior regardless of the global `eloquent-sortable`
-     * configuration values: order on the `position` column and always assign
-     * the next position when creating.
-     *
-     * Note: `ignore_timestamps` cannot be pinned here because the package reads
-     * it directly from config (no per-model override), and it already defaults
-     * to `false` both in config and in the package.
+     * Pin the sortable behavior regardless of the global config.
      *
      * @var array{order_column_name: string, sort_when_creating: bool}
      */
@@ -129,14 +123,6 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
         });
     }
 
-    /**
-     * Selections must always belong to the product's current category; when
-     * the category changes, drop selections pointing at any other owner.
-     */
-    /**
-     * Public because ProductLifecycleObserver drives it; a private method was
-     * only reachable while this ran in a same-class `booted()` closure.
-     */
     public function detachStaleAttributeValueSelections(): void
     {
         if (AttributeIntegration::valueModel() === null) {
@@ -158,10 +144,6 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
         }
     }
 
-    /**
-     * Generate a random token, retrying on collision. The tenant-scoped unique
-     * index on `token` remains the final guard if every attempt collides.
-     */
     private static function generateToken(): string
     {
         $tokenCharacters = self::tokenCharacters();
@@ -236,8 +218,7 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     }
 
     /**
-     * Attribute values are owned by the product category; products inherit
-     * the values assigned to their category.
+     * Get the attribute values inherited from the product's category.
      *
      * @return HasMany<Model, $this>
      */
@@ -253,8 +234,6 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
     }
 
     /**
-     * The attribute values this product selected from its category's set.
-     *
      * @return MorphToMany<Model, $this>
      */
     public function selectedAttributeValues(): MorphToMany

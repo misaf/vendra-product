@@ -97,8 +97,7 @@ final class ProductPrice extends Model implements ShouldLogActivity
     }
 
     /**
-     * The number of minor units in one major unit of the currency (100 for
-     * USD); currencies without a known ISO subunit are treated as having none.
+     * Get the minor units per major unit, such as 100 for USD, or 1 if unknown.
      */
     public static function minorUnitsPerMajorUnit(string $currencyCode): int
     {

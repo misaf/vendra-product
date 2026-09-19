@@ -56,11 +56,7 @@ final class ProductServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        /**
-         * Stable aliases keep persisted morph columns (attribute value owners,
-         * selections, media) decoupled from the model FQCNs, so relocating a
-         * model class never orphans stored rows.
-         */
+        // Stable aliases, so moving a model class never orphans stored morph rows.
         Relation::morphMap([
             'product' => Product::class,
             'product_category' => ProductCategory::class,

@@ -45,8 +45,7 @@ final class ProductCategoryForm
     }
 
     /**
-     * Attribute values assigned here are inherited by every product in this
-     * category.
+     * Build the attribute value fields, which every product in the category inherits.
      *
      * @return list<Section>
      */
@@ -91,9 +90,7 @@ final class ProductCategoryForm
     }
 
     /**
-     * The repeater must not contain the same attribute/value pair twice; the
-     * tenant-scoped unique guard on `attribute_values` enforces the same rule
-     * at the database level.
+     * Reject a repeated attribute and value pair, mirroring the unique index.
      */
     private static function distinctAttributeValuePairsRule(): Closure
     {
