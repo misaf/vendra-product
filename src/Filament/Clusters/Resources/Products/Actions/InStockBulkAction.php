@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Misaf\VendraProduct\Actions\SetProductStockAction;
 use Misaf\VendraProduct\Models\Product;
 
-final class OutOfStockAction extends BulkAction
+final class InStockBulkAction extends BulkAction
 {
     use CanCustomizeProcess;
 
@@ -19,17 +19,17 @@ final class OutOfStockAction extends BulkAction
     {
         parent::setUp();
 
-        $this->label(__('vendra-product::actions.out_of_stock'));
+        $this->label(__('vendra-product::actions.in_stock'));
 
         $this->successNotificationTitle(__('filament-actions::edit.single.notifications.saved.title'));
 
         $this->color('primary');
 
-        $this->icon(Heroicon::OutlinedArchiveBoxXMark);
+        $this->icon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->requiresConfirmation();
 
-        $this->modalIcon(Heroicon::OutlinedArchiveBoxXMark);
+        $this->modalIcon(Heroicon::OutlinedArchiveBoxArrowDown);
 
         $this->action(function (): void {
             $this->process(static function (Collection $records): void {
@@ -38,7 +38,7 @@ final class OutOfStockAction extends BulkAction
                         continue;
                     }
 
-                    resolve(SetProductStockAction::class)->execute($record, false);
+                    resolve(SetProductStockAction::class)->execute($record, true);
                 }
             });
 
@@ -50,6 +50,6 @@ final class OutOfStockAction extends BulkAction
 
     public static function getDefaultName(): string
     {
-        return 'outOfStock';
+        return 'inStock';
     }
 }

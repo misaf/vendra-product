@@ -13,11 +13,18 @@ use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 
-final class SetColumnPriceAction
+final class SetPriceTableAction extends Action
 {
-    public static function make(): Action
+    public static function getDefaultName(): string
     {
-        return Action::make('setPrice')
+        return 'setPrice';
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this
             ->requiresConfirmation()
             ->schema([
                 Select::make('currency_code')

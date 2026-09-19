@@ -14,7 +14,7 @@ use InvalidArgumentException;
 use Misaf\VendraProduct\Actions\ApplyProductPricePercentageAction;
 use Misaf\VendraProduct\Models\Product;
 
-final class SetPriceByPercentageAction extends BulkAction
+final class SetPriceByPercentageBulkAction extends BulkAction
 {
     use CanCustomizeProcess;
 

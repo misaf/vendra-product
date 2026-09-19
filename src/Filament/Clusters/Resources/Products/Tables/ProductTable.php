@@ -33,11 +33,11 @@ use Illuminate\Support\Str;
 use Livewire\Component as Livewire;
 use Misaf\VendraMultimedia\Filament\Tables\Columns\ModelImageColumn;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockAction;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockAction;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetColumnPriceAction;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceAction;
-use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\InStockBulkAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\OutOfStockBulkAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceBulkAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceByPercentageBulkAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\SetPriceTableAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
 use Misaf\VendraSupport\Capabilities\AttributeIntegration;
@@ -116,7 +116,7 @@ final class ProductTable
             TextColumn::make('latestProductPrice.price')
                 ->label(__('vendra-product::attributes.price'))
                 ->state(fn (Product $record): string => $record->latestProductPrice?->formattedPrice() ?? '')
-                ->action(SetColumnPriceAction::make())
+                ->action(SetPriceTableAction::make())
                 ->summarize([Sum::make(), Average::make(), Range::make()]),
 
             IsActiveToggleColumn::make('in_stock')
@@ -212,13 +212,13 @@ final class ProductTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    InStockAction::make(),
+                    InStockBulkAction::make(),
 
-                    OutOfStockAction::make(),
+                    OutOfStockBulkAction::make(),
 
-                    SetPriceAction::make(),
+                    SetPriceBulkAction::make(),
 
-                    SetPriceByPercentageAction::make(),
+                    SetPriceByPercentageBulkAction::make(),
 
                     DeleteBulkAction::make(),
                 ]),

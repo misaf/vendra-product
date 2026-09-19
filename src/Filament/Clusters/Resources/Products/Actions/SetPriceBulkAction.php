@@ -17,7 +17,7 @@ use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
 
-final class SetPriceAction extends BulkAction
+final class SetPriceBulkAction extends BulkAction
 {
     use CanCustomizeProcess;
 
