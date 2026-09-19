@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
 use Filament\Actions\ReplicateAction;
-use InvalidArgumentException;
-use Misaf\VendraProduct\Actions\BuildProductReplicaDataAction;
-use Misaf\VendraProduct\Actions\DuplicateProductRelationsAction;
+use Misaf\VendraProduct\Actions\DuplicateProductAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 
@@ -18,29 +16,16 @@ final class DuplicateProductTableAction extends ReplicateAction
         parent::setUp();
 
         $this->label(__('vendra-product::actions.duplicate'));
-
         $this->modalHeading(__('vendra-product::actions.duplicate_product'));
-
         $this->modalSubmitActionLabel(__('vendra-product::actions.duplicate'));
-
         $this->successNotificationTitle(__('vendra-product::messages.product_duplicated'));
-
         $this->authorize('replicate');
-
         $this->requiresConfirmation();
 
-        $this->excludeAttributes(['position', 'token']);
+        $this->action(function (Product $record): void {
+            $this->replica = resolve(DuplicateProductAction::class)->execute($record);
 
-        $this->mutateRecordDataUsing(function (array $data): array {
-            $record = $this->getRecord();
-
-            throw_unless($record instanceof Product, InvalidArgumentException::class, 'Duplicate action requires a product record.');
-
-            return resolve(BuildProductReplicaDataAction::class)->execute($record, $data);
-        });
-
-        $this->after(function (Product $record, Product $replica): void {
-            resolve(DuplicateProductRelationsAction::class)->execute($record, $replica);
+            $this->success();
         });
 
         $this->successRedirectUrl(fn (Product $replica): string => ProductResource::getUrl('edit', ['record' => $replica]));

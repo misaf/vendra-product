@@ -125,6 +125,10 @@ product's last unit switches `in_stock` off. Restocking never switches it back
 on, so the merchant re-enables the product. Restocking also returns stock to
 deleted products.
 
+Duplicate a product with `DuplicateProductAction`. It gives the copy a name
+and slug no other product in the tenant uses, and copies its prices, media,
+attribute selections, and tags in one transaction.
+
 ### Optional tags
 
 Install `misaf/vendra-tagger` in the host application to enable the Tags tab and table column automatically. Product does not require or import Tagger or Spatie Tags; both packages communicate through the `TagResolver` contract in `misaf/vendra-support`.
