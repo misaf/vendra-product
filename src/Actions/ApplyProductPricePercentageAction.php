@@ -24,11 +24,7 @@ final readonly class ApplyProductPricePercentageAction
 
         $latestPriceAmount = (int) $latestProductPrice->price->getAmount();
 
-        if ($percent < 0) {
-            $newPrice = $latestPriceAmount * (1 - abs((int) $percent) / 100);
-        } else {
-            $newPrice = $latestPriceAmount * (1 + $percent / 100);
-        }
+        $newPrice = $latestPriceAmount * (1 + $percent / 100);
 
         return $this->setProductPrice->execute(
             $product,

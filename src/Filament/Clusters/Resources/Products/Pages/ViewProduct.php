@@ -10,9 +10,6 @@ use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\ViewRecord\Concerns\Translatable;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
-use Misaf\VendraProduct\Models\Product;
-use Misaf\VendraProduct\Models\ProductPrice;
-use RuntimeException;
 
 final class ViewProduct extends ViewRecord
 {
@@ -34,25 +31,5 @@ final class ViewProduct extends ViewRecord
 
             LocaleSwitcher::make(),
         ];
-    }
-
-    protected function mutateFormDataBeforeFill(array $data): array
-    {
-        if (! array_key_exists('product_category_id', $data)) {
-            return $data;
-        }
-
-        /** @var Product $record */
-        $record = $this->getRecord();
-
-        /** @var ProductPrice|null $latestProductPrice */
-        $latestProductPrice = $record->latestProductPrice()->first();
-
-        throw_unless($latestProductPrice, RuntimeException::class, 'Product price is required before viewing this product.');
-
-        $data['currency_code'] = $latestProductPrice->currency_code;
-        $data['price'] = $latestProductPrice->price->getAmount();
-
-        return $data;
     }
 }

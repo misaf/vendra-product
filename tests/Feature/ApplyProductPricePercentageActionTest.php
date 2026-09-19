@@ -39,6 +39,19 @@ it('lowers the latest price by a negative percent', function (): void {
         ->and((int) $price?->price->getAmount())->toBe(900);
 });
 
+it('keeps the fraction of a negative percent', function (): void {
+    $product = ProductFactory::new()->create();
+
+    $product->productPrices()->create([
+        'currency_code' => ProductPrice::defaultCurrencyCode(),
+        'price' => 10000,
+    ]);
+
+    $price = resolve(ApplyProductPricePercentageAction::class)->execute($product, -12.5);
+
+    expect((int) $price?->price->getAmount())->toBe(8750);
+});
+
 it('returns null when the product has no price yet', function (): void {
     $product = ProductFactory::new()->create();
 

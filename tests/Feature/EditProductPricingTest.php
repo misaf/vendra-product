@@ -6,6 +6,7 @@ use Filament\Facades\Filament;
 use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
 use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\EditProduct;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages\ViewProduct;
 use Misaf\VendraProduct\Models\ProductPrice;
 
 use function Pest\Livewire\livewire;
@@ -46,4 +47,11 @@ it('reuses the existing price row when pricing is unchanged', function (): void 
         ->assertHasNoFormErrors();
 
     expect($product->productPrices()->count())->toBe(1);
+});
+
+it('opens the view page for a product without a price row', function (): void {
+    $product = ProductFactory::new()->create();
+
+    livewire(ViewProduct::class, ['record' => $product->getKey()])
+        ->assertOk();
 });
