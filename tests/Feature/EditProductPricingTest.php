@@ -55,3 +55,18 @@ it('opens the view page for a product without a price row', function (): void {
     livewire(ViewProduct::class, ['record' => $product->getKey()])
         ->assertOk();
 });
+
+it('records a price changed back to an earlier value as the latest price', function (): void {
+    $product = ProductFactory::new()->create();
+    $currencyCode = ProductPrice::defaultCurrencyCode();
+
+    foreach ([1500, 1600, 1500] as $price) {
+        livewire(EditProduct::class, ['record' => $product->getKey()])
+            ->fillForm(['currency_code' => $currencyCode, 'price' => $price])
+            ->call('save')
+            ->assertHasNoFormErrors();
+    }
+
+    expect((int) $product->latestProductPrice()->first()?->price->getAmount())
+        ->toBe(ProductPrice::toMinorUnits($currencyCode, 1500));
+});

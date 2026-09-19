@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;
+use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\DuplicateProductTableAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
@@ -101,12 +102,15 @@ final class EditProduct extends EditRecord
 
         /** @var Product $record */
         $record = $this->getRecord();
+        $currencyCode = Arr::get($this->pricingData, 'currency_code');
+        $price = Arr::get($this->pricingData, 'price');
 
-        $record->productPrices()->firstOrCreate(
-            [
-                'currency_code' => Arr::get($this->pricingData, 'currency_code'),
-                'price' => Arr::get($this->pricingData, 'price'),
-            ]
-        );
+        $latestProductPrice = $record->latestProductPrice()->first();
+
+        if ($latestProductPrice?->currency_code === $currencyCode && (int) $latestProductPrice->price->getAmount() === $price) {
+            return;
+        }
+
+        resolve(SetProductPriceAction::class)->execute($record, $currencyCode, $price);
     }
 }

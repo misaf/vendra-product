@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;
+use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
@@ -63,6 +64,6 @@ final class CreateProduct extends CreateRecord
 
         throw_if($record === null || $this->pricingData === null, RuntimeException::class, 'Product or pricing data is missing after create operation.');
 
-        $record->productPrices()->create($this->pricingData);
+        resolve(SetProductPriceAction::class)->execute($record, Arr::get($this->pricingData, 'currency_code'), Arr::get($this->pricingData, 'price'));
     }
 }
