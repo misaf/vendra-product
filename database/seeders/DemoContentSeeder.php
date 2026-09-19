@@ -16,6 +16,8 @@ use Misaf\VendraSupport\Tenancy\Database\Seeders\DemoContentSeeder as BaseDemoCo
 
 final class DemoContentSeeder extends BaseDemoContentSeeder
 {
+    protected const array FACTORIES = [ProductCategoryFactory::class, ProductFactory::class, ProductPriceFactory::class];
+
     protected function seedFactories(): void
     {
         ProductCategoryFactory::new()

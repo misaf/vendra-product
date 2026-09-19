@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Process;
 use Misaf\VendraProduct\Database\Seeders\DemoContentSeeder;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductCategory;
@@ -36,4 +37,46 @@ it('stocks each product at the quantity its fixture declares', function (): void
 
     expect(Product::query()->where('slug->en', 'dell-xps-13')->sole()->quantity)->toBe(12)
         ->and(Product::query()->where('slug->en', 'apple-imac-24')->sole()->quantity)->toBe(0);
+});
+
+it('seeds bundled fixtures in a local application without package factory autoloading', function (): void {
+    $result = Process::path(base_path())->env([
+        'APP_ENV' => 'testing',
+        'DB_CONNECTION' => 'sqlite',
+        'DB_DATABASE' => ':memory:',
+        'CACHE_STORE' => 'array',
+        'QUEUE_CONNECTION' => 'sync',
+        'SESSION_DRIVER' => 'array',
+    ])->run([PHP_BINARY, '-r', <<<'PHP'
+        $loader = require 'vendor/autoload.php';
+        $app = require 'bootstrap/app.php';
+        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        makeCurrentTestTenant();
+        $app->detectEnvironment(fn () => 'local');
+
+        $productionLoader = new Composer\Autoload\ClassLoader;
+        $factoryNamespace = 'Misaf\\VendraProduct\\Database\\Factories\\';
+        foreach ($loader->getPrefixesPsr4() as $namespace => $paths) {
+            if ($namespace !== $factoryNamespace) {
+                $productionLoader->setPsr4($namespace, $paths);
+            }
+        }
+        $productionLoader->addClassMap(array_filter(
+            $loader->getClassMap(),
+            fn ($class) => ! str_starts_with($class, $factoryNamespace),
+            ARRAY_FILTER_USE_KEY,
+        ));
+        $loader->unregister();
+        $productionLoader->register();
+
+        if (class_exists(Misaf\VendraProduct\Database\Factories\ProductFactory::class)) {
+            throw new RuntimeException('The consumer simulation still autoloads product factories.');
+        }
+        resolve(Misaf\VendraProduct\Database\Seeders\DemoContentSeeder::class)->run();
+        echo Misaf\VendraProduct\Models\Product::query()->where('slug->en', 'dell-xps-13')->sole()->quantity;
+        PHP]);
+
+    expect($result->exitCode())->toBe(0, $result->errorOutput().$result->output())
+        ->and(trim($result->output()))->toBe('12');
 });
