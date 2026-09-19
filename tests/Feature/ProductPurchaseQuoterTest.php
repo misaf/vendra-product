@@ -55,6 +55,16 @@ it('quotes each request in the currency and keeps the request keys', function ()
         ->and(Arr::get($quotes, 'c')->unitAmount)->toBe(4800);
 });
 
+it('quotes the newest price in the currency after a repricing', function (): void {
+    $product = purchasableProduct(usdPrice: 5000);
+    ProductPriceFactory::new()->forProduct($product)->createOne(['currency_code' => 'USD', 'price' => 4000]);
+    ProductPriceFactory::new()->forProduct($product)->createOne(['currency_code' => 'EUR', 'price' => 3000]);
+
+    $quote = Arr::get(resolve(ProductPurchaseQuoter::class)->quote([new ProductPurchaseRequest($product->id, 1)], 'USD'), 0);
+
+    expect($quote->unitAmount)->toBe(4000);
+});
+
 it('refuses a product that cannot be bought', function (Closure $product, int $quantity, ProductPurchaseRefusalEnum $refusal): void {
     $quotes = resolve(ProductPurchaseQuoter::class)->quote([new ProductPurchaseRequest($product()->id, $quantity)], 'USD');
 

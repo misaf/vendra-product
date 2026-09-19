@@ -112,7 +112,8 @@ $quote = $quotes['line-1']; // ProductPurchaseQuote, or a ProductPurchaseRefusal
 The quoter loads every requested product in one query and keeps the request
 keys. A product can be bought when its category is active, it is in stock with
 enough quantity, and it has a price in the currency; otherwise the result is
-`Unavailable`, `OutOfStock`, or `PriceMissing`. It checks stock but never
+`Unavailable`, `OutOfStock`, or `PriceMissing`. Prices are history, so the
+newest price in the currency applies, matching `latestProductPrice`. It checks stock but never
 takes it, and knows nothing about carts or orders.
 
 Take and return stock with `DeductProductStockAction` and

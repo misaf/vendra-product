@@ -15,6 +15,8 @@ use Misaf\VendraProduct\Models\ProductPrice;
 /**
  * A product can be bought when its category is active, it is in stock with
  * enough quantity for the request, and it has a price in the currency.
+ * Prices are kept as history, so the newest one in the currency applies, as
+ * `latestProductPrice` shows it.
  *
  * Stock is only checked, never reserved; the caller owns any locking.
  */
@@ -76,7 +78,7 @@ final readonly class ProductPurchaseQuoter
         }
 
         return Product::query()
-            ->with(['productPrices' => fn (Builder $query) => $query->where('currency_code', $currencyCode)])
+            ->with(['productPrices' => fn (Builder $query) => $query->where('currency_code', $currencyCode)->latest('id')])
             ->whereHas('productCategory', fn (Builder $query) => $query->where('active', true))
             ->whereKey($productIds)
             ->get()
