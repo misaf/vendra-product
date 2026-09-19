@@ -95,6 +95,35 @@ $products = Product::query()
     ->get();
 ```
 
+Quote purchases for a checkout:
+
+```php
+use Misaf\VendraProduct\Data\ProductPurchaseQuote;
+use Misaf\VendraProduct\Data\ProductPurchaseRequest;
+use Misaf\VendraProduct\Services\ProductPurchaseQuoter;
+
+$quotes = app(ProductPurchaseQuoter::class)->quote([
+    'line-1' => new ProductPurchaseRequest(productId: $product->id, quantity: 2),
+], 'USD');
+
+$quote = $quotes['line-1']; // ProductPurchaseQuote, or a ProductPurchaseRefusalEnum case
+```
+
+The quoter loads every requested product in one query and keeps the request
+keys. A product can be bought when its category is active, it is in stock with
+enough quantity, and it has a price in the currency; otherwise the result is
+`Unavailable`, `OutOfStock`, or `PriceMissing`. It checks stock but never
+takes it, and knows nothing about carts or orders.
+
+Take and return stock with `DeductProductStockAction` and
+`RestockProductsAction`, both keyed by product id. Deduction locks the products
+in id order, rechecks `in_stock` and the quantity under the lock, and takes
+nothing when any product falls short, throwing
+`InsufficientProductStockException` with that product's id. Taking a
+product's last unit switches `in_stock` off. Restocking never switches it back
+on, so the merchant re-enables the product. Restocking also returns stock to
+deleted products.
+
 ### Optional tags
 
 Install `misaf/vendra-tagger` in the host application to enable the Tags tab and table column automatically. Product does not require or import Tagger or Spatie Tags; both packages communicate through the `TagResolver` contract in `misaf/vendra-support`.

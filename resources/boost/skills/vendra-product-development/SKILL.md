@@ -1,6 +1,6 @@
 ---
 name: vendra-product-development
-description: "Create, modify, review, or test the Vendra Product package in packages/vendra-product. Use for Product, ProductCategory, ProductPrice, translated catalog data, media and optional product tags, observers, migrations, factories, seeders, policies, Filament resources, configuration, translations, package wiring, and the vendra-product-api boundary."
+description: "Create, modify, review, or test the Vendra Product package in packages/vendra-product. Use for Product, ProductCategory, ProductPrice, ProductPurchaseQuoter, DeductProductStockAction, RestockProductsAction, translated catalog data, media and optional product tags, observers, migrations, factories, seeders, policies, Filament resources, configuration, translations, package wiring, and the vendra-product-api boundary."
 ---
 
 # Vendra Product
@@ -36,6 +36,8 @@ Treat `packages/vendra-product` as the source of product domain behavior and Fil
 - Keep domain models, factories, seeders, policies, observers, console commands, Filament classes, config, migrations, translations, and tests inside this module.
 - Do not place product domain code in the host app unless the host app is only integrating the module.
 - Keep API serialization and API Platform route behavior out of this module; use `vendra-product-api` for that.
+- Purchase eligibility and catalog pricing live in `Services\ProductPurchaseQuoter`, which batches its product query and returns typed `ProductPurchaseQuote` results or `ProductPurchaseRefusalEnum` cases. It must not import cart, order, or API types.
+- Stock moves only through `Actions\DeductProductStockAction` (locked in id order, all or nothing, `InsufficientProductStockException`, `in_stock` off with the last unit; restocking never turns it back on) and `Actions\RestockProductsAction`.
 - Keep cross-module dependencies explicit in `composer.json`; do not introduce a dependency without approval.
 - Tag-consuming models must use `Misaf\VendraSupport\Capabilities\HasOptionalTags` as the single source of their `tags()` relationship and pivot metadata. Keep the package tag-agnostic: define a stable package-owned tag type, use `TagIntegration` for availability and UI integration, never import the concrete Vendra Tagger model/provider or define the relationship through Spatie `HasTags`, and list Tagger only under Composer `suggest`.
 
