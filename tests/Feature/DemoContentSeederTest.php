@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Process;
 use Misaf\VendraProduct\Database\Seeders\DemoContentSeeder;
 use Misaf\VendraProduct\Models\Product;
@@ -12,7 +13,7 @@ it('seeds its demo fixtures again without duplicating rows', function (): void {
     app()->detectEnvironment(fn (): string => 'production');
     makeCurrentTestTenant();
 
-    resolve(DemoContentSeeder::class)->run();
+    Artisan::call('db:seed', ['--class' => DemoContentSeeder::class, '--force' => true]);
 
     $productCategories = ProductCategory::query()->count();
     $products = Product::query()->count();
@@ -22,7 +23,7 @@ it('seeds its demo fixtures again without duplicating rows', function (): void {
         ->and($products)->toBeGreaterThan(0)
         ->and($productPrices)->toBeGreaterThan(0);
 
-    resolve(DemoContentSeeder::class)->run();
+    Artisan::call('db:seed', ['--class' => DemoContentSeeder::class, '--force' => true]);
 
     expect(ProductCategory::query()->count())->toBe($productCategories)
         ->and(Product::query()->count())->toBe($products)
@@ -33,7 +34,7 @@ it('stocks each product at the quantity its fixture declares', function (): void
     app()->detectEnvironment(fn (): string => 'production');
     makeCurrentTestTenant();
 
-    resolve(DemoContentSeeder::class)->run();
+    Artisan::call('db:seed', ['--class' => DemoContentSeeder::class, '--force' => true]);
 
     expect(Product::query()->where('slug->en', 'dell-xps-13')->sole()->quantity)->toBe(12)
         ->and(Product::query()->where('slug->en', 'apple-imac-24')->sole()->quantity)->toBe(0);
@@ -73,7 +74,7 @@ it('seeds bundled fixtures in a local application without package factory autolo
         if (class_exists(Misaf\VendraProduct\Database\Factories\ProductFactory::class)) {
             throw new RuntimeException('The consumer simulation still autoloads product factories.');
         }
-        resolve(Misaf\VendraProduct\Database\Seeders\DemoContentSeeder::class)->run();
+        Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => Misaf\VendraProduct\Database\Seeders\DemoContentSeeder::class, '--force' => true], new Symfony\Component\Console\Output\NullOutput);
         echo Misaf\VendraProduct\Models\Product::query()->where('slug->en', 'dell-xps-13')->sole()->quantity;
         PHP]);
 
