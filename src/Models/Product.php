@@ -51,7 +51,7 @@ use Spatie\Translatable\HasTranslations;
  * @property bool $in_stock
  * @property int $position
  * @property bool $available_soon
- * @property Carbon $availability_date
+ * @property Carbon|null $availability_date
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
