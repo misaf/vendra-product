@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\ProductPrices\RelationManagers;
 
+use BackedEnum;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Number;
@@ -16,6 +18,8 @@ use Misaf\VendraProduct\Models\Product;
 final class ProductPriceRelationManager extends RelationManager
 {
     protected static string $relationship = 'productPrices';
+
+    protected static string|BackedEnum|null $icon = Heroicon::OutlinedCurrencyDollar;
 
     protected static bool $isBadgeDeferred = true;
 
