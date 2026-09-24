@@ -57,6 +57,10 @@ final class DuplicateProductAction
         return $transformed;
     }
 
+    /**
+     * @param  array<string, string>  $translations
+     * @return array<string, string>
+     */
     private function ensureUniqueTranslatedValue(Product $product, string $column, array $translations, bool $slug = false): array
     {
         if ($translations === []) {
@@ -110,7 +114,9 @@ final class DuplicateProductAction
 
         foreach ($query->get([$column]) as $existingProduct) {
             foreach ($existingProduct->getTranslations($column) as $locale => $value) {
-                $existing[$locale][$value] = true;
+                if (is_string($locale) && is_string($value)) {
+                    $existing[$locale][$value] = true;
+                }
             }
         }
 

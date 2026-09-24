@@ -64,6 +64,8 @@ final class CreateProduct extends CreateRecord
 
         throw_if($record === null || $this->pricingData === null, RuntimeException::class, 'Product or pricing data is missing after create operation.');
 
-        resolve(SetProductPriceAction::class)->execute($record, Arr::get($this->pricingData, 'currency_code'), Arr::get($this->pricingData, 'price'));
+        ['currency_code' => $currencyCode, 'price' => $price] = $this->pricingData;
+
+        resolve(SetProductPriceAction::class)->execute($record, $currencyCode, $price);
     }
 }

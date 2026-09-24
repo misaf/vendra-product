@@ -76,9 +76,7 @@ final class ProductTable
                     $productCategory = $record->productCategory;
                     $stockThreshold = $record->getAttribute('stock_threshold');
                     $badges = [
-                        __('vendra-product::attributes.quantity').': '.(
-                            is_numeric($record->quantity) ? Number::format((int) $record->quantity) : '—'
-                        ),
+                        __('vendra-product::attributes.quantity').': '.Number::format($record->quantity),
                         __('vendra-product::attributes.stock_threshold').': '.(
                             is_numeric($stockThreshold) ? Number::format((int) $stockThreshold) : '—'
                         ),

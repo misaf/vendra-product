@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Tests\Feature;
 
 use LogicException;
+use Misaf\VendraProduct\Database\Factories\ProductFactory;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraSupport\Capabilities\EloquentTagResolver;
 use Misaf\VendraSupport\Capabilities\NullTagResolver;
+use Misaf\VendraSupport\Capabilities\TagIntegration;
 use Misaf\VendraSupport\Contracts\TagResolver;
 use Misaf\VendraSupport\Support\TagRelationship;
 
@@ -38,3 +40,14 @@ it('builds a typed polymorphic tag relation through the support contract', funct
             'boolean' => 'and',
         ]);
 });
+
+it('syncs a single tag name', function (): void {
+    makeCurrentTestTenant();
+
+    $product = ProductFactory::new()->create();
+
+    $product->syncTags('Summer');
+
+    expect($product->tags()->count())->toBe(1)
+        ->and($product->tags()->first()?->getAttribute('name'))->toBe('Summer');
+})->skip(fn (): bool => ! TagIntegration::isAvailable(), 'no tag provider is installed');

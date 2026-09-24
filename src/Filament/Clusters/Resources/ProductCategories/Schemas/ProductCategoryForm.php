@@ -106,7 +106,14 @@ final class ProductCategoryForm
                     continue;
                 }
 
-                $pairs[] = (Arr::get($item, 'attribute_id', '')).'|'.mb_trim((string) (Arr::get($item, 'value', '')));
+                $attributeId = Arr::get($item, 'attribute_id', '');
+                $itemValue = Arr::get($item, 'value', '');
+
+                if (! is_scalar($attributeId) || ! is_scalar($itemValue)) {
+                    continue;
+                }
+
+                $pairs[] = $attributeId.'|'.mb_trim((string) $itemValue);
             }
 
             if (count($pairs) !== count(array_unique($pairs))) {

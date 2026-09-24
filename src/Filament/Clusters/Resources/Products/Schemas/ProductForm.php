@@ -188,8 +188,11 @@ final class ProductForm
                         ->bulkToggleable()
                         ->columns(2)
                         ->getOptionLabelFromRecordUsing(function (Model $record): string {
-                            $attributeName = (string) $record->getAttribute('attribute')?->getAttribute('name');
-                            $value = (string) $record->getAttribute('value');
+                            $attribute = $record->getAttribute('attribute');
+                            $attributeName = $attribute instanceof Model ? $attribute->getAttribute('name') : null;
+                            $attributeName = is_string($attributeName) ? $attributeName : '';
+                            $value = $record->getAttribute('value');
+                            $value = is_scalar($value) ? (string) $value : '';
 
                             return $attributeName === '' ? $value : "{$attributeName}: {$value}";
                         })

@@ -101,8 +101,14 @@ final class ProductPrice extends Model implements ShouldLogActivity
      */
     public static function minorUnitsPerMajorUnit(string $currencyCode): int
     {
+        $currencyCode = Str::upper($currencyCode);
+
+        if ($currencyCode === '') {
+            return 1;
+        }
+
         try {
-            return 10 ** Money::getCurrencies()->subunitFor(new Currency(Str::upper($currencyCode)));
+            return 10 ** Money::getCurrencies()->subunitFor(new Currency($currencyCode));
         } catch (Throwable) {
             return 1;
         }

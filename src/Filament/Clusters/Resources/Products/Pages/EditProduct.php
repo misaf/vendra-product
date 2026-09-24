@@ -102,12 +102,11 @@ final class EditProduct extends EditRecord
 
         /** @var Product $record */
         $record = $this->getRecord();
-        $currencyCode = Arr::get($this->pricingData, 'currency_code');
-        $price = Arr::get($this->pricingData, 'price');
+        ['currency_code' => $currencyCode, 'price' => $price] = $this->pricingData;
 
         $latestProductPrice = $record->latestProductPrice()->first();
 
-        if ($latestProductPrice?->currency_code === $currencyCode && (int) $latestProductPrice->price->getAmount() === $price) {
+        if ($latestProductPrice instanceof ProductPrice && $latestProductPrice->currency_code === $currencyCode && (int) $latestProductPrice->price->getAmount() === $price) {
             return;
         }
 

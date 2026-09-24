@@ -9,6 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\RawJs;
 use Illuminate\Support\Arr;
+use InvalidArgumentException;
 use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
@@ -49,12 +50,15 @@ final class SetPriceTableAction extends Action
                     ->stripCharacters(','),
             ])
             ->action(function (Product $record, array $data): void {
-                $currencyCode = (string) Arr::get($data, 'currency_code');
+                $currencyCode = Arr::string($data, 'currency_code');
+                $price = Arr::get($data, 'price');
+
+                throw_unless(is_numeric($price), InvalidArgumentException::class, 'Invalid price provided.');
 
                 resolve(SetProductPriceAction::class)->execute(
                     $record,
                     $currencyCode,
-                    ProductPrice::toMinorUnits($currencyCode, (float) Arr::get($data, 'price')),
+                    ProductPrice::toMinorUnits($currencyCode, (float) $price),
                 );
             });
     }
