@@ -7,6 +7,7 @@ namespace Misaf\VendraProduct\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -114,6 +115,26 @@ final class Product extends Model implements HasMedia, ShouldLogActivity, Sortab
             'available_soon' => 'boolean',
             'availability_date' => 'datetime',
         ];
+    }
+
+    /**
+     * @param  Builder<self>  $query
+     * @return Builder<self>
+     */
+    #[Scope]
+    protected function inStock(Builder $query): Builder
+    {
+        return $query->where('in_stock', true);
+    }
+
+    /**
+     * @param  Builder<self>  $query
+     * @return Builder<self>
+     */
+    #[Scope]
+    protected function outOfStock(Builder $query): Builder
+    {
+        return $query->where('in_stock', false);
     }
 
     protected static function booted(): void

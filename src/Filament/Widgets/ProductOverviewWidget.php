@@ -34,13 +34,13 @@ final class ProductOverviewWidget extends StatsOverviewWidget
             ->perDay()
             ->count();
 
-        $inStockProducts = Product::query()->where('in_stock', true);
+        $inStockProducts = Product::query()->inStock();
         $inStockTrend = Trend::query(clone $inStockProducts)
             ->between($startDate, $endDate)
             ->perDay()
             ->count();
 
-        $outOfStockProducts = Product::query()->where('in_stock', false);
+        $outOfStockProducts = Product::query()->outOfStock();
         $outOfStockTrend = Trend::query(clone $outOfStockProducts)
             ->between($startDate, $endDate)
             ->perDay()
