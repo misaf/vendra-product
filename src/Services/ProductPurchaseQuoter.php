@@ -79,7 +79,7 @@ final readonly class ProductPurchaseQuoter
 
         return Product::query()
             ->with(['productPrices' => fn (Builder $query) => $query->where('currency_code', $currencyCode)->latest('id')])
-            ->whereHas('productCategory', fn (Builder $query) => $query->where('active', true))
+            ->whereHas('productCategory', fn (Builder $query) => $query->active())
             ->whereKey($productIds)
             ->get()
             ->keyBy('id');
