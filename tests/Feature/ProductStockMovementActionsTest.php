@@ -68,3 +68,23 @@ it('returns stock, including to a deleted product', function (): void {
     expect($product->fresh()?->quantity)->toBe(3)
         ->and($deleted->fresh()?->quantity)->toBe(3);
 });
+
+it('rejects nonpositive stock deductions before changing any product', function (int $quantity): void {
+    $first = ProductFactory::new()->createOne(['in_stock' => true, 'quantity' => 5]);
+    $second = ProductFactory::new()->createOne(['in_stock' => true, 'quantity' => 5]);
+
+    expect(fn () => resolve(DeductProductStockAction::class)->execute([$first->id => 2, $second->id => $quantity]))
+        ->toThrow(InvalidArgumentException::class)
+        ->and($first->fresh()?->quantity)->toBe(5)
+        ->and($second->fresh()?->quantity)->toBe(5);
+})->with([0, -1]);
+
+it('rejects nonpositive restocks before changing any product', function (int $quantity): void {
+    $first = ProductFactory::new()->createOne(['quantity' => 5]);
+    $second = ProductFactory::new()->createOne(['quantity' => 5]);
+
+    expect(fn () => resolve(RestockProductsAction::class)->execute([$first->id => 2, $second->id => $quantity]))
+        ->toThrow(InvalidArgumentException::class)
+        ->and($first->fresh()?->quantity)->toBe(5)
+        ->and($second->fresh()?->quantity)->toBe(5);
+})->with([0, -1]);

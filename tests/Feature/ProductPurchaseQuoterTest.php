@@ -88,3 +88,8 @@ it('loads every requested product with a fixed number of queries', function (): 
 
     expect(DB::getQueryLog())->toHaveCount(2);
 });
+
+it('rejects a nonpositive purchase request', function (int $quantity): void {
+    expect(fn () => new ProductPurchaseRequest(1, $quantity))
+        ->toThrow(InvalidArgumentException::class);
+})->with([0, -1]);

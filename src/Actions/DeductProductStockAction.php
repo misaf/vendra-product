@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Misaf\VendraProduct\Actions;
 
 use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 use Misaf\VendraProduct\Exceptions\InsufficientProductStockException;
 use Misaf\VendraProduct\Models\Product;
 
@@ -26,6 +27,10 @@ final class DeductProductStockAction
     {
         if ($quantities === []) {
             return;
+        }
+
+        foreach ($quantities as $quantity) {
+            throw_if($quantity < 1, InvalidArgumentException::class, 'Quantity must be positive.');
         }
 
         DB::transaction(function () use ($quantities): void {
