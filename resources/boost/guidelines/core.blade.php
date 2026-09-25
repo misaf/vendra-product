@@ -15,6 +15,7 @@ The `misaf/vendra-product` package owns products, product categories, and pricin
 - Apply this only to Vendra platform packages listed under `require`; never extend it to `require-dev`, `suggest`, incidental implementation dependencies, or third-party packages. Removing or replacing an exposed dependency is a breaking change; keep `self.version` alignment across the Vendra package graph.
 
 - Register every table whose migration calls `TenantSchema::addTenantColumn()` with `TenantTableRegistry` in this package's service provider, preserving configured table names and connections, so `vendra-tenant:enable {tenant}` can retrofit schemas migrated before tenancy was enabled.
+- Creating a product counts against the store plan's `PlanLimit::ProductsPerStore`: the provider registers the `TenantUsageRegistry` counter, `ProductLifecycleObserver::creating` refuses a product past the limit on every path, `CreateProduct` shows the refusal as a notification, and `Actions\Concerns\DisablesAtProductLimit` disables `CreateProductPageAction` and `DuplicateProductTableAction` with the refusal as a tooltip at the cap. `ProductLifecycleObserver::created()` reports each add with `recordAdded()`.
 
 - Keep product domain code inside `packages/vendra-product` using the `Misaf\VendraProduct` namespace.
 - Use this package for models, migrations, factories, seeders, policies, permission enums, observers, Filament resources, translations, config, and package bootstrapping.

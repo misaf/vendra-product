@@ -7,6 +7,7 @@ Tenant-aware product management for Vendra applications.
 - Product categories
 - Products
 - Product prices per currency
+- A per-store product cap from the reseller's plan (`products_per_store`)
 - Filament resources on the `admin` panel
 
 ## Requirements

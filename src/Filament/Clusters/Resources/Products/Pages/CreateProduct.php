@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages;
 
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Support\Exceptions\Halt;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
@@ -13,6 +15,9 @@ use Misaf\VendraProduct\Actions\SetProductPriceAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 use Misaf\VendraProduct\Models\ProductPrice;
+use Misaf\VendraSupport\Contracts\TenantEntitlements;
+use Misaf\VendraSupport\Enums\PlanLimit;
+use Misaf\VendraSupport\Exceptions\EntitlementExceededException;
 use RuntimeException;
 
 final class CreateProduct extends CreateRecord
@@ -36,6 +41,23 @@ final class CreateProduct extends CreateRecord
         return [
             LocaleSwitcher::make(),
         ];
+    }
+
+    /**
+     * @throws Halt
+     */
+    protected function beforeCreate(): void
+    {
+        try {
+            resolve(TenantEntitlements::class)->assertCanAdd(PlanLimit::ProductsPerStore);
+        } catch (EntitlementExceededException $exception) {
+            Notification::make()
+                ->danger()
+                ->title($exception->getMessage())
+                ->send();
+
+            throw new Halt;
+        }
     }
 
     protected function mutateFormDataBeforeCreate(array $data): array

@@ -6,11 +6,14 @@ namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions;
 
 use Filament\Actions\ReplicateAction;
 use Misaf\VendraProduct\Actions\DuplicateProductAction;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\Concerns\DisablesAtProductLimit;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Models\Product;
 
 final class DuplicateProductTableAction extends ReplicateAction
 {
+    use DisablesAtProductLimit;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -21,6 +24,7 @@ final class DuplicateProductTableAction extends ReplicateAction
         $this->successNotificationTitle(__('vendra-product::messages.product_duplicated'));
         $this->authorize('replicate');
         $this->requiresConfirmation();
+        $this->disableAtProductLimit();
 
         $this->action(function (Product $record): void {
             $this->replica = resolve(DuplicateProductAction::class)->execute($record);

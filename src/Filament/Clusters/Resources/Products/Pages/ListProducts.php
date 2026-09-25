@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Misaf\VendraProduct\Filament\Clusters\Resources\Products\Pages;
 
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;
+use Misaf\VendraProduct\Filament\Clusters\Resources\Products\Actions\CreateProductPageAction;
 use Misaf\VendraProduct\Filament\Clusters\Resources\Products\ProductResource;
 use Misaf\VendraProduct\Filament\Widgets\ProductOverviewWidget;
 
@@ -44,7 +44,7 @@ final class ListProducts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateProductPageAction::make(),
 
             LocaleSwitcher::make(),
         ];
