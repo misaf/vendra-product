@@ -38,10 +38,10 @@ final class ProductServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_products_table',
             ])
-            ->hasCommands([
+            ->hasConsoleCommands(
                 ResyncProductDescriptionsCommand::class,
                 SeedCommand::class,
-            ])
+            )
             ->hasInstallCommand(function (InstallCommand $command): void {
                 $command->askToStarRepoOnGitHub('misaf/vendra-product');
             });
@@ -67,7 +67,7 @@ final class ProductServiceProvider extends PackageServiceProvider
         ]);
 
         $this->app->make(TenantTableRegistry::class)->register('product_categories', 'products');
-        $this->app->make(TenantSeeders::class)->register('vendra-product:seed', priority: 40);
+        $this->app->make(TenantSeeders::class)->register(SeedCommand::class, priority: 40);
         $this->app->make(TenantUsageRegistry::class)->register(
             PlanLimit::ProductsPerStore,
             // Every tenant scope is dropped, since the tenant is given rather than current.
